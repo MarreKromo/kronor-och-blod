@@ -32,6 +32,8 @@ Statusen nedan avser dokumenterade delpaket; fullständiga system är inte färd
 - [x] KB-03.6.3 steg 1: Hem – Mitt liv, datum, nästa dag, lokal dagshistorik; GitHub och användarrapporterat Safari PASS.
 - [x] KB-03.6.3 steg 2: båda kalenderknapparna kopplade till gemensam dagshändelse, GitHub PASS; Safari-skärmbilder visar dag 22 och dagshistorik.
 - [ ] KB-03.6.3 kompletterande regressionstest: båda knapparnas loggning och sparning efter omladdning, separat bekräftelse.
+- [ ] **IMP-025 – utökat karaktärsskapande:** fem designsteg (identitet, uppväxt, familj, förflutet, ambition) och frivillig biografi; konsekvenser för startkunskaper, kontakter, resurser och berättelse utan låsta livsvägar. En vanlig uppväxt ska vara lika spelbar som ett dramatiskt förflutet.
+- [ ] **IMP-025 – säker implementation:** planera stabilt karaktärs-ID och migration före nya sparfält; skapa stegvis mobilformulär och förhandsvisning, testa ny/gammal karaktär, omladdning och Ragnhilds introduktion. Levande familje-NPC:er är framtida system, inte del av första paketet.
 - [ ] **IMP-024 – berättelsegenomgång före KB-03.6.4:** Ragnhilds mysterium blir ett stort frivilligt introduktionsuppdrag, inte hela huvudberättelsen. Först design av motiv, dramatik, förgreningar, konsekvenser och bryggan till huvudberättelsen; därefter implementation och tester.
 - [ ] KB-03.6.4 första riktiga dagshändelser: begränsad händelsepool, sparade beslut, inga oavsiktliga upprepningar; kravspecifikation och test först.
 - [ ] IMP-023 kompakt dagshistorik: korta vanliga dagar, tydliga viktiga händelser, bevarad historik.

@@ -62,9 +62,16 @@ Uppdaterad: 2026-10-20
 - Dagshändelser (KB-03.6.4) skjuts efter berättelsegenomgången. Befintliga sparningar får inte raderas eller skrivas över utan säker migrationsplan.
 - Den nuvarande tekniska implementationen behålls tills en ersättningsplan är granskad och testad.
 
+## 2026-10-20 – IMP-025, karaktärens egen bakgrund
+- Beslut: alternativ C för berättelsen – personlig öppning som kan leda till större maktkonflikt, utan obligatoriskt hjälteöde.
+- IMP-025 föreslagen och specificerad: identitet, uppväxt, familj, förflutet, ambition och frivillig biografi.
+- Bakgrundsval ska ge startförutsättningar och alternativa berättelseingångar; vanlig uppväxt är fullvärdig och ingen livsväg låses.
+- Första paketet är design och säker datamodell, inte levande familje-NPC:er. IMP-024 och IMP-025 ska samordnas innan kodändringar.
+- GitHub-verifiering av detta dokumentationspaket återstår tills användaren committat det.
+
 ## Aktuellt läge
-Aktivt paket: IMP-024 – planering av introduktionsuppdraget med Ragnhild.
-Nästa exakta steg: verifiera IMP-024 i backlog/roadmap/daily log på GitHub, därefter ta fram och granska berättelsens struktur innan kodändringar.
+Aktivt paket: IMP-025 – dokumentera karaktärsskaparens design och samordna med IMP-024.
+Nästa exakta steg: ersätt de tre befintliga dokumenten med IMP-025-paketet och GitHub-verifiera; därefter specificera valens konkreta startvärden och säker sparmigrering innan kodändringar.
 Tester som återstår: båda kalenderknapparna, daglogg efter omladdning, befintlig karaktär/berättelse, relation −1 och samtliga undersökningsval.
 Kända risker: ingen stabil unik karaktärsidentitet eller riktig sparfilsmigration. IMP-023 är planerad, inte implementerad.
 

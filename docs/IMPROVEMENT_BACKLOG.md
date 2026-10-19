@@ -1,5 +1,5 @@
 # SVERIGE: Kronor & Blod – Improvement Backlog
-Version: 1.2
+Version: 1.3
 Datum: 2026-10-20
 Status: LEVANDE PLANERINGSDOKUMENT – inga punkter markeras som implementerade utan verifiering.
 
@@ -67,9 +67,18 @@ Status: `IDÉ`, `PLANERAD`, `PÅGÅR`, `TESTAS`, `PASS`, `PARKERAD`.
 
 **Beslut 2026-10-20:** Prioritera IMP-024 före KB-03.6.4 dagshändelser. Skilj huvudberättelse, sidouppdrag och vardagshändelser; dagshändelser får inte automatiskt flytta fram huvuduppdraget. Historisk trovärdighet och Ragnhilds roll ska granskas innan dialog skrivs om. IMP-024 är ännu inte implementerad.
 
+## F. Utökat karaktärsskapande – IMP-025
+| ID | Prioritet | Status | Förbättring | Godkännandekriterium |
+| --- | --- | --- | --- | --- |
+| IMP-025 | P1 | PLANERAD | **Skapa egen bakgrund:** identitet, uppväxt, familjesituation, tidigare livshändelse, ambition och frivillig biografitext. Strukturerade val påverkar startkunskaper, resurser, kontakter och berättelseöppningar utan att låsa framtida livsväg. En vanlig trygg uppväxt ska vara ett fullvärdigt alternativ. | Designspecifikation godkänd; alla fyra befintliga bakgrunder kan mappas; val sparas och laddas utan dataförlust; tydlig förhandsvisning; Ragnhild kan introduceras utan påtvingad familjehemlighet; äldre sparningar migreras eller hanteras säkert. |
+
+**Designprincip:** Du skapar ditt förflutna. Dina handlingar skapar din framtid. Familjemedlemmar ska inte utlovas som levande NPC:er innan NPC-systemet finns. Fri biografitext är rollspelsinformation, inte en automatisk källa till spelregler. Startfördelar ska balanseras och historiska förhållanden år 1250 faktagranskas.
+
+**Första genomförandepaketet:** kravspecifikation och datamodell, därefter sparning och formulär i små steg. Före ändring av befintliga karaktärsdata: unikt karaktärs-ID, backup/migrationsstrategi och regressionstest. IMP-024 och IMP-025 designas tillsammans; ingen av dem är ännu implementerad.
+
 ## Utvecklingsordning
 1. Avsluta och GitHub-verifiera dokumentation för KB-03.6 och detta backlog-dokument.
-2. Gör berättelsegenomgången IMP-024 före nya dagshändelser; därefter små implementationer och regressionstester enligt KB-03.6.1.
+2. Designa IMP-025 (bakgrundsval) tillsammans med IMP-024 (introduktion), före nya dagshändelser. Därefter små implementationer och regressionstester enligt KB-03.6.1.
 3. Separat arbete med stabila karaktärs-ID:n och sparningar.
 4. Genomför en **egen kart- och UI-designgenomgång** innan större visuell implementation.
 5. Bygg vidare på större spelmekanik, med förbättringsrunda efter varje större funktion.
