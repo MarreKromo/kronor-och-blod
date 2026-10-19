@@ -1,0 +1,171 @@
+// KB-03.5 – Första mötet. Separat från tidigare berättelsesparning.
+(function () {
+  'use strict';
+  const character = window.KB_CHARACTER;
+  const story = document.querySelector('.kb-story');
+  if (!character || !story) return;
+
+  const KEY = 'kronor-och-blod.encounter.v1';
+  const STORY_KEY = 'kronor-och-blod.story.v1';
+  const npc = 'Ragnhild';
+  const openings = {
+    follow: 'Vid gränden väntar en kvinna i mörk mantel. ”Du följde efter pojken. Det var modigt – eller dumdristigt.” Hon presenterar sig som Ragnhild.',
+    ring: 'En kvinna knackar försiktigt på. När hon ser silverringen stannar hon upp. ”Du har undersökt den. Då förstår du kanske att någon ljuger.” Hon heter Ragnhild.',
+    help: 'Din bekant leder dig till en kvinna vid namn Ragnhild. ”Du sökte hjälp i stället för att springa ensam. Det säger mig något om dig”, säger hon.'
+  };
+  const responses = {
+    trust: {
+      label: 'Visa Ragnhild ringen och be om sanningen',
+      title: 'Ett förtroende',
+      body: 'Ragnhild vänder försiktigt ringen mellan fingrarna. ”Den tillhörde någon som försvann efter en resa mot Varnhem. Jag kan berätta mer – men inte här.”',
+      relation: 1,
+      flag: 'visade_ringen'
+    },
+    bargain: {
+      label: 'Kräv något i utbyte mot din hjälp',
+      title: 'Ett pris för sanningen',
+      body: 'Ragnhild drar åt manteln. ”Du tänker som en köpman. Jag kan ordna arbete, men jag glömmer inte att du satte ett pris på mitt förtroende.”',
+      relation: -1,
+      flag: 'kravde_ersattning'
+    },
+    guard: {
+      label: 'Behåll ringen och fråga vem hon arbetar för',
+      title: 'En försiktig allians',
+      body: '”Klokt att inte lita på främlingar”, svarar Ragnhild. ”Men om du vill veta vem som förde bort mannen måste vi snart tala igen.”',
+      relation: 0,
+      flag: 'bevarade_hemligheten'
+    }
+  };
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .kb-encounter {
+      max-width: 1050px;
+      margin: 12px auto;
+      padding: 20px;
+      background: linear-gradient(145deg, #30372e, #1a251e);
+      border: 1px solid #b29861;
+      color: #f2e7ce;
+    }
+    .kb-encounter h2 { margin: 9px 0; font-size: 26px; }
+    .kb-encounter p { line-height: 1.65; }
+    .kb-encounter .eyebrow {
+      font: 11px system-ui;
+      letter-spacing: 2px;
+      color: #c8b17a;
+    }
+    .kb-encounter button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin: 9px 0;
+      padding: 13px;
+      min-height: 48px;
+      border: 1px solid #b29861;
+      border-radius: 5px;
+      background: #394438;
+      color: #fff0cf;
+      font: 600 15px system-ui;
+    }
+    .kb-encounter .note {
+      color: #c4b995;
+      font: 12px system-ui;
+    }
+  `;
+  document.head.appendChild(style);
+
+  const panel = document.createElement('section');
+  panel.className = 'kb-encounter';
+  panel.setAttribute('aria-label', 'Mötet med Ragnhild');
+  story.insertAdjacentElement('afterend', panel);
+
+  function element(tag, value, cls) {
+    const e = document.createElement(tag);
+    if (value !== undefined) e.textContent = value;
+    if (cls) e.className = cls;
+    return e;
+  }
+  function savedStory(c) {
+    try {
+      const s = JSON.parse(localStorage.getItem(STORY_KEY) || 'null');
+      return s && s.version === 1 && s.characterName === c.name &&
+        s.background === c.background && Object.hasOwn(openings, s.choice)
+        ? s : null;
+    } catch (_) { return null; }
+  }
+  function savedEncounter(c, firstChoice) {
+    try {
+      const s = JSON.parse(localStorage.getItem(KEY) || 'null');
+      return s && s.version === 1 && s.characterName === c.name &&
+        s.background === c.background && s.firstChoice === firstChoice &&
+        Object.hasOwn(responses, s.response) ? s : null;
+    } catch (_) { return null; }
+  }
+  function save(c, firstChoice, response) {
+    const r = responses[response];
+    const data = {
+      version: 1,
+      characterName: c.name,
+      background: c.background,
+      firstChoice,
+      npcId: 'ragnhild',
+      response,
+      relation: r.relation,
+      flag: r.flag
+    };
+    try {
+      localStorage.setItem(KEY, JSON.stringify(data));
+      return true;
+    } catch (_) { return false; }
+  }
+  function draw() {
+    const c = character.get();
+    const first = c && savedStory(c);
+    panel.replaceChildren();
+    panel.hidden = !first;
+    if (!first) return;
+
+    panel.appendChild(element('div', 'KAPITEL I · MÖTET', 'eyebrow'));
+    const state = savedEncounter(c, first.choice);
+    if (state) {
+      const r = responses[state.response];
+      panel.append(
+        element('h2', r.title),
+        element('p', r.body),
+        element('p', 'Relation: Ragnhild ' +
+          (r.relation > 0 ? '+1 (förtroende)' :
+           r.relation < 0 ? '−1 (misstro)' : '0 (avvaktande)')),
+        element('p', 'Ragnhild minns ditt svar. Fortsättning kommer i nästa paket.', 'note')
+      );
+      return;
+    }
+
+    panel.append(
+      element('h2', 'Kvinnan i den mörka manteln'),
+      element('p', openings[first.choice]),
+      element('p', '”En man har försvunnit”, säger hon lågt. ”Jag tror att ringen kan leda oss till honom. Men först måste jag veta var du står.”'),
+      element('p', 'Vad svarar du?')
+    );
+    Object.entries(responses).forEach(([id, r]) => {
+      const button = element('button', r.label);
+      button.type = 'button';
+      button.addEventListener('click', () => {
+        const current = character.get();
+        const currentStory = current && savedStory(current);
+        if (!current || !currentStory || current.name !== c.name ||
+            current.background !== c.background ||
+            currentStory.choice !== first.choice) return;
+        if (!save(current, first.choice, id)) {
+          window.alert('Kunde inte spara valet. Kontrollera Safaris webbplatslagring.');
+          return;
+        }
+        draw();
+      });
+      panel.appendChild(button);
+    });
+    panel.appendChild(element('p', 'Valet sparas lokalt och påverkar Ragnhilds förtroende.', 'note'));
+  }
+  draw();
+  // Reagera på ändringar i karaktär och första berättelsescen.
+  new MutationObserver(draw).observe(story, { childList: true });
+})();
