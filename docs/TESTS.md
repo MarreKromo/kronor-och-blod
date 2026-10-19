@@ -28,4 +28,20 @@
 - [ ] EJ SEPARAT VERIFIERAT: Varje platsmarkörs namn, ID och beskrivning kontrollerade individuellt.
 - [ ] EJ TESTAT: Liggande skärmläge.
 
-**KB-02.3 resultat:** PASS för första fungerande Safari-prototypen enligt användarens test. Resterande detaljtester kvarstår.
+**KB-02.3 resultat:** PASS för första fungerande Safari-prototypen enligt användarens test.
+
+## KB-02.4.1 – Platsregister och ekonomi (2026-10-19)
+- [x] PASS: `src/world.js` finns på GitHub och innehåller fem platser med befolkning, resurser, makt och ekonomisk roll.
+- [x] PASS: `docs/KB-02_04_1_PLATSREGISTER_EKONOMI.md` finns på GitHub.
+- [x] PASS: Datamodellen håller spelvärden skilda från historiskt belagda uppgifter.
+- [ ] EJ TESTAT: Simulering av ekonomi (ingår inte i paketet).
+
+## KB-02.4.2 – Kartpanel och ekonomi (2026-10-19)
+- [x] PASS: Uppdaterad `index.html` finns på GitHub och laddar `src/world.js`.
+- [x] PASS: Kodgranskning visar uppslag på plats-ID och visning av befolkning, makt, ekonomi och resursstaplar.
+- [x] PASS: `docs/KB-02_04_2_KARTPANEL_EKONOMI.md` finns på GitHub.
+- [x] RAPPORTERAT PASS: Användaren svarade 'Klar med bägge' efter fråga om Safari-test och dokumentationsuppladdning.
+- [ ] EJ SEPARAT VERIFIERAT: Samtliga fem orters värden och resursstaplar i Safari.
+- [ ] EJ TESTAT: Liggande skärmläge.
+
+**KB-02.4.2 resultat:** PASS för kod- och filkontroll; övergripande Safari-PASS enligt användarens besked. Detaljtester kvarstår.
