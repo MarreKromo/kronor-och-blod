@@ -45,3 +45,16 @@
 - [ ] EJ TESTAT: Liggande skärmläge.
 
 **KB-02.4.2 resultat:** PASS för kod- och filkontroll; övergripande Safari-PASS enligt användarens besked. Detaljtester kvarstår.
+
+## KB-02.5 – Tid och årstider (2026-10-19)
+- [x] PASS: `src/calendar.js` finns på GitHub; fristående kalender med start 1 januari 1250.
+- [x] PASS: `index.html` laddar kalenderfilen och kopplar knappen till `advanceDay()`.
+- [x] PASS: `docs/KB-02_05_TID_OCH_ARSTIDER.md` finns på GitHub.
+- [x] PASS (användarrapporterat): Kalendern visas på iPhone efter att den uppdaterade GitHub Pages-sidan öppnats i Safari.
+- [x] PASS (användarrapporterat): Knappen för nästa dag fungerar och datumet ändras från 1 till 2 januari 1250.
+- [ ] EJ SEPARAT TESTAT: Övergången till 1 mars 1250 / vår efter 59 tryck.
+- [ ] EJ SEPARAT TESTAT: Omladdning återställer datum till 1 januari 1250 (avsedd begränsning).
+- [ ] EJ SEPARAT TESTAT: Alla fem markörer och samhällsvärden efter kalenderändring.
+- [ ] EJ TESTAT: JavaScript-konsol i Safari och liggande skärmläge.
+
+**KB-02.5 resultat:** PASS för kalenderns grundfunktion enligt användarens iPhone-test. Första försöket visade äldre KB-02.4.2-sida; uppdaterad länk i Safari löste visningsproblemet. Ingen sparning finns ännu.
