@@ -135,7 +135,7 @@
         element('p', 'Relation: Ragnhild ' +
           (r.relation > 0 ? '+1 (förtroende)' :
            r.relation < 0 ? '−1 (misstro)' : '0 (avvaktande)')),
-        element('p', 'Ragnhild minns ditt svar. Fortsättning kommer i nästa paket.', 'note')
+        element('p', 'Ragnhild minns ditt svar. Ditt val påverkar vilka ledtrådar hon delar i undersökningen nedan.', 'note')
       );
       return;
     }
