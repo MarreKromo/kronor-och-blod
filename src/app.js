@@ -1,4 +1,4 @@
-// KB-03.4: Kart- och kalenderlogik flyttad oförändrad i funktion till egen fil.
+// KB-03.4 / UI – Kartan visar kalendern; endast Hem styr tiden.
 (function () {
   'use strict';
   const markers = document.getElementById('markers');
@@ -90,9 +90,9 @@
     document.getElementById('gameDay').textContent = 'Dag ' + c.dayNumber;
     document.getElementById('headerYear').textContent = c.year;
   }
-  document.getElementById('nextDay').addEventListener('click', () => {
-    window.KB_CALENDAR.advanceDay();
-    renderCalendar();
-  });
+  // Den gamla knappen ligger i HTML för bakåtkompatibilitet men tas bort ur gränssnittet.
+  // Kalenderns enda dag-framåt-knapp finns på Hem och använder KB_CALENDAR.advanceDay().
+  const oldMapDayButton = document.getElementById('nextDay');
+  if (oldMapDayButton) oldMapDayButton.remove();
   renderCalendar();
 })();
