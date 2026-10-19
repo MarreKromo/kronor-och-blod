@@ -14,6 +14,11 @@
 | D-010 | Kartgrafik, platsdata (stabila plats-ID:n och koordinater) och spelvärld (NPC:er, uppdrag, sparfiler) lagras separat | Beslutat |
 | D-011 | Kartgrafiken ska kunna bytas utan att spelvärldens data går förlorade; platspositioner kan behöva justeras | Beslutat |
 | D-012 | Rättigheter och källhänvisning för referenskartan kontrolleras innan själva kartbilden publiceras i spelet | Beslutat |
+| D-013 | Resor tar speltid och kan ge dynamiska händelser oavsett färdsätt; häst, vagn och följe påverkar kostnad, tempo och möjligheter | Beslutat för framtida design |
+| D-014 | Spelarens livsväg formas av val, relationer och resurser, inte låsta startklasser | Beslutat för framtida design |
+| D-015 | Följeslagare är självständiga NPC:er med personlighet, utveckling och vilja; väpnare, rövarband och andra grupper ska kunna växa fram | Beslutat för framtida design |
+| D-016 | Gårdar, borgar, följen och arméer kräver resurser, löpande kostnader och aktiv förvaltning | Beslutat för framtida design |
+| D-017 | Makt, titlar och riddarslag kräver historiskt rimliga villkor och konsekvenser, inte enbart knapptryckning eller pengar | Beslutat för framtida design |
 
 ## Kartprincip – 2026-10-19
 
@@ -23,3 +28,13 @@
 - **Världsdata:** NPC:er, relationer, handel, uppdrag och sparfiler hänvisar till plats-ID:n, inte till pixlar i kartbilden.
 - **Utbyte:** ny kartbild kan läggas in och koordinater kan mappas om; spelvärlden bevaras.
 - **Rättigheter:** publicera inte originalbilden förrän dess digitala källa och eventuella villkor har dokumenterats.
+
+## Designbeslut – livsvägar och levande resor, 2026-10-19
+
+- Resor är spelbara händelseförlopp, inte omedelbar förflyttning mellan markörer.
+- Resor till fots är ekonomiskt tillgängliga; köp av häst eller hyra av vagn ger alternativa fördelar, inte automatisk immunitet mot händelser.
+- Resesällskap kan växa till ett personligt följe, med relationer och händelser längs vägen.
+- Väpnare och andra lärlingar är individuella NPC:er; ålder, vilja, förutsättningar och historisk kontext avgör om rekrytering och framtida befordran är möjliga.
+- Rövarband, gårdar, borgar och arméer delar grundsystem för NPC:er, ekonomi, resurser och tid, men ger olika spelupplevelser.
+- Större förvaltning ska ske genom begripliga spelarval i mobilgränssnittet.
+- Historisk rimlighet granskas före detaljerad implementation. Dessa beslut är **framtida mål**, inte färdiga funktioner.

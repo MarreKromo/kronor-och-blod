@@ -26,6 +26,9 @@ Statusen nedan avser dokumenterade delpaket; fullständiga system är inte färd
 - [x] KB-03.5 Ragnhild, relationsvärde och sparade svar.
 - [x] KB-03.6 undersökning med förgrenade ledtrådar, PASS inom testad omfattning.
 - [ ] KB-03.6.1 förbättra berättelseflöde och konsekvenser, testa relation −1.
+- [x] KB-03.6.2 steg 1: endast aktiv berättelsescen visas; GitHub PASS, Safari-bilder visar korrekt scen. Fullständiga regressionstester återstår.
+- [ ] KB-03.6.2 fortsättning: dagbok med händelser, beslut, ledtrådar och relationer.
+- [ ] KB-03.6.2 fortsättning: tydlig mobilnavigation mellan karta, berättelse, karaktär och dagbok.
 - [ ] Stabilt unikt karaktärs-ID, sparfiler och migration.
 - [ ] Framtida åldrande, porträtt, utrustning och alternativa historiskt anpassade livsvägar.
 
@@ -40,7 +43,73 @@ Statusen nedan avser dokumenterade delpaket; fullständiga system är inte färd
 - Paketdokument som innehåller unik planering, beslut eller testunderlag bevaras tills separat granskning beslutas.
 
 ## KB-04 – Världens grundsystem (FRAMTID)
-- [ ] Tid och resor i spelvärlden.
+### KB-04.1 – Position, resor och uppdragsvillkor
+- [ ] Varje karaktär har en faktisk, sparad position (start Skara).
+- [ ] Klick på en ort visar information; det innebär **inte** att spelaren har rest dit.
+- [ ] Spelaren väljer en resa, färdas längs tillåtna förbindelser och förbrukar speltid.
+- [ ] Resor kan ge händelser, möten och vägval.
+- [ ] Uppdrag och berättelsescener kan kräva att spelaren faktiskt befinner sig på rätt plats, exempelvis Varnhem.
+- [ ] Säker plan för sparfiler och migrering innan position kopplas till befintliga karaktärer.
+
+### KB-04.2 – Fog of war och kartkunskap
+- [ ] Tre kunskapsnivåer per plats/område: **okänd**, **känd genom karta eller rykte**, **själv utforskad**.
+- [ ] Okända platser döljs eller framstår som osäkra; köp av karta kan avslöja orter, vägar och ungefärliga avstånd.
+- [ ] Rykten, samtal och vägvisare kan avslöja information utan kartköp; kartor är aldrig ett obligatoriskt köp för att kunna fortsätta.
+- [ ] Egna besök avslöjar fler detaljer, personer, möjligheter och uppdrag.
+- [ ] Kartor från år 1250 behöver inte vara exakta eller fullständiga. Historisk trovärdighet ska granskas separat.
+- [ ] Kartkunskap sparas för karaktären och finns kvar efter omladdning.
+- [ ] Designa utforskning, resor och kartans gränssnitt tillsammans; lägg inte bara en visuell dimma över dagens schematiska karta.
+- [ ] Testa både ny karaktär, kartköp, ryktesupptäckt, egen upptäckt, resa och sparning på iPhone.
+
+### KB-04.3 – Färdsätt och levande resehändelser
+- [ ] Resor förbrukar speltid; längd beror på avstånd, väg, årstid, väder, färdsätt och eventuella hinder.
+- [ ] Till fots: låg direkt kostnad, men behov av mat, vila och övernattning; fler möjligheter till möten och upptäckter.
+- [ ] Häst: kräver köp eller tillgång, foder och skötsel; ofta snabbare men inte riskfri.
+- [ ] Hyrd vagn, kärra eller följe: kostar pengar, kan bära varor och medresenärer; hastighet och trygghet varierar.
+- [ ] Dynamiska resehändelser kan ske oavsett färdsätt: väder, trasig utrustning, hjälpbehövande, rykten, handel, överfall, vägval och sociala möten.
+- [ ] Händelser ger meningsfulla val med följder för tid, resurser, relationer, rykte och uppdrag; inte bara slumpmässiga strider.
+- [ ] Resor till fots får inte bli ett orimligt straff för fattiga spelare; dyrare färdsätt ska ge andra fördelar, inte vara obligatoriska.
+- [ ] Händelser och resor ska kunna påverkas av följeslagare och spelarens livsväg.
+
+## KB-05 – Livsvägar, följeslagare och egendom (FRAMTID)
+**Designprincip:** Livsvägar växer fram genom handlingar, relationer, resurser och historiskt rimliga möjligheter, inte låsta startklasser. Flera vägar ska kunna kombineras eller förändras över tid.
+
+### KB-05.1 – Följeslagare och egna grupper
+- [ ] Rekrytera namngivna NPC:er som själva kan tacka ja eller nej utifrån ålder, situation, relation, lojalitet och intressen.
+- [ ] Varje följeslagare har färdigheter, personlighet, behov, mål, relationer och möjlighet att utvecklas, misslyckas, lämna eller svika.
+- [ ] Interagera med följeslagare under resor och i vardagen; de ska vara personer, inte enbart bonusvärden.
+- [ ] En riddare kan anta en historiskt rimligt lämpad **väpnare**, träna och bedöma honom samt, när villkoren är uppfyllda, välja att stödja eller avstå från hans riddarslag. Riddarskap är inte en automatisk knappbelöning.
+- [ ] Rekrytering är inte fri kontroll över valfri NPC: samtycke, ålder, sociala förhållanden och historisk trovärdighet sätter gränser.
+- [ ] En laglös spelare kan bygga ett rövarband med individuella medlemmar, lojalitet, delat byte, risker och interna konflikter.
+- [ ] Gruppstorlek och förmåga begränsas av ekonomi, försörjning, anseende och ledarskap.
+
+### KB-05.2 – Gård, verksamheter och försörjning
+- [ ] Förvärva eller få tillgång till mark genom historiskt rimliga former; rättigheter och skyldigheter skiljer sig mellan livsvägar.
+- [ ] Förvalta gård med byggnader, djur, åkrar, utsäde, skörd, arbetare, förråd och årstider.
+- [ ] Byggande och drift kräver resurser, tid och pengar; avkastning och risker varierar.
+- [ ] Spelaren fattar begripliga beslut med knappar och tydliga följder, utan att fastna i oändlig mikroadministration.
+- [ ] Även handel, hantverk och andra försörjningsvägar ska kunna utvecklas.
+
+### KB-05.3 – Borgar, adel, politik och arméer
+- [ ] Högre status och titlar nås genom relationer, stöd, prestationer och historiskt rimlig legitimitet; inte enbart genom pengar eller erfarenhetspoäng.
+- [ ] Förvalta borgar och större egendomar: underhåll, garnison, förråd, personal, försvar och inkomster.
+- [ ] Större följen och arméer kräver rekrytering, försörjning, utrustning, lojalitet och löpande kostnader.
+- [ ] Härskarroll med politiska beslut, vasaller, allianser, konflikter och följder för befolkningen.
+- [ ] Möjlighet att bli hertig eller kung är ett mycket långsiktigt, svårt och historiskt granskat mål, inte ett utlovat tidigt spelmoment.
+
+### KB-05.4 – Laglöshet, överfall och konsekvenser
+- [ ] Rövarband kan välja mål som vägfarare eller handelskaravaner och försöka råna eller plundra inom spelets fiktiva värld.
+- [ ] Risker inkluderar motstånd, rättsliga följder, ryktesspridning, vedergällning och bristande lojalitet.
+- [ ] Samma öppna värld ska reagera på spelarens handlingar; lagliga och olagliga vägar ger olika möjligheter.
+
+### Genomförandeordning och kvalitet
+- [ ] Bygg först stabila NPC-identiteter, relationer, ekonomi, tid, resor och sparning.
+- [ ] Prototypa **en** liten rekryterbar följeslagare med interaktion under resa innan större grupper eller arméer.
+- [ ] Prototypa **en** liten förvaltningskedja för en gård innan borgar och riken.
+- [ ] Skapa användarflöden och balansera kostnader före implementation; testa mobilupplevelsen.
+- [ ] Historiska villkor (titlar, markrätt, riddarslag, samhällsskikt och krigsmakt år 1250) faktagranskas innan de presenteras som fakta.
+
+### Övriga grundsystem
 - [ ] NPC-data, relationer och händelser.
 - [ ] Enkel handel och ekonomi.
 
