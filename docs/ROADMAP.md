@@ -40,6 +40,16 @@ Statusen nedan avser dokumenterade delpaket; fullständiga system är inte färd
 - [ ] Stabilt unikt karaktärs-ID, sparfiler och migration.
 - [ ] Framtida åldrande, porträtt, utrustning och alternativa historiskt anpassade livsvägar.
 
+### IMP-025 – Delpaket och godkännandegater (PLANERAT)
+- [x] Dokumentera valbara uppväxter, familjesituation, förflutet och ambition (design, inte kod).
+- [x] Föreslå startkunskaper och kontakter: jordbruk, hantverk, skriftkunskap, umgängesvana; värde 2 som preliminär balans.
+- [x] Dokumentera migrationskrav och regressionstestfall för befintliga karaktärer.
+- [ ] Inventera samtliga sparnycklar och besluta om stabilt `characterId` samt säker backup/återställning.
+- [ ] Implementera och testa en säker minimal migration utan att radera äldre sparningar.
+- [ ] Implementera nya bakgrundsfält och mobilanpassad förhandsvisning i separat litet paket.
+- [ ] Testa Ragnhilds olika ingångar, möjlighet att avstå och bestående konsekvenser enligt IMP-024.
+- [ ] Bygg riktiga familje-NPC:er först när NPC-identitet och världssystem stöder det.
+
 ## KB-DOC-01 – Dokumentationsstädning (AVSLUTAD)
 - [x] Inventering av docs: ursprungligen 34 poster, varav 33 dokument.
 - [x] Slå ihop TESTS.md, DAILY_LOG.md, ROADMAP.md och ARBETSMETOD.md.

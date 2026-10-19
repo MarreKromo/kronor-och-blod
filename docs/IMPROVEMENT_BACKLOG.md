@@ -1,5 +1,5 @@
 # SVERIGE: Kronor & Blod – Improvement Backlog
-Version: 1.3
+Version: 1.4
 Datum: 2026-10-20
 Status: LEVANDE PLANERINGSDOKUMENT – inga punkter markeras som implementerade utan verifiering.
 
@@ -75,6 +75,29 @@ Status: `IDÉ`, `PLANERAD`, `PÅGÅR`, `TESTAS`, `PASS`, `PARKERAD`.
 **Designprincip:** Du skapar ditt förflutna. Dina handlingar skapar din framtid. Familjemedlemmar ska inte utlovas som levande NPC:er innan NPC-systemet finns. Fri biografitext är rollspelsinformation, inte en automatisk källa till spelregler. Startfördelar ska balanseras och historiska förhållanden år 1250 faktagranskas.
 
 **Första genomförandepaketet:** kravspecifikation och datamodell, därefter sparning och formulär i små steg. Före ändring av befintliga karaktärsdata: unikt karaktärs-ID, backup/migrationsstrategi och regressionstest. IMP-024 och IMP-025 designas tillsammans; ingen av dem är ännu implementerad.
+
+## IMP-025 – Steg 2: konkret balans- och sparspecifikation (DESIGN, EJ IMPLEMENTERAD)
+
+### Startvärden och val
+- **Behåll befintliga egenskaper** `styrka`, `list`, `anseende` och deras nuvarande värden tills separat balanseringsbeslut. Nuvarande `src/character.js` använder bakgrunderna `bonde`, `hantverkare`, `skrivare`, `friboren`; nya namn får inte bryta dessa nycklar.
+- **Föreslagna nya färdigheter, skilda från grundegenskaperna:** bonde → `jordbruk: 2`; hantverkare → `hantverk: 2`; skrivare → `skriftkunskap: 2`; friboren → `umgangesvana: 2`. Alla andra nya färdigheter startar på 0. Siffrorna är prototypvärden, inte historiska fakta eller implementerad kod. Inga kombinationer ska ge större total grundbonus utan avsiktlig balansering.
+- **Uppväxtens första kontakter:** bonde → gårdsfolk; hantverkare → lokal hantverkare; skrivare → skrivare i Skara; friboren → släktkontakt. Kontakterna är planerade möjligheter, inte existerande NPC:er. Namn och faktiska NPC-poster skapas först när NPC-systemet stöder det.
+- **Familj:** `tillsammans`, `distanserad`, `ensam`. Påverkar planerade relationer, stöd och skyldigheter, inte grundegenskaper. Inga föräldrar eller syskon ska påstås leva i världen innan de har persistenta NPC-identiteter. Familjemedlemmars antal och namn utformas i senare delpaket.
+- **Förflutet:** `vanlig`, `skuld`, `lofte`, `konflikt`. Vanlig uppväxt är likvärdig och får inte straffas eller gömmas bakom ett hemligt arv. Valen skapar framtida berättelsekrokar först när dessa är implementerade; ingen obligatorisk familjehemlighet.
+- **Ambition:** `gard`, `handel`, `resa`, `inflytande`. Styr tidiga förslag och frivilliga mål, aldrig tillgången till livsvägar eller permanenta klasser.
+- **Fri biografi:** frivillig text endast för rollspel och profil; inte exekverbara spelregler. Begränsa längd och visa som ren text (inte HTML).
+
+### Säker datamodell och migrering – måste beslutas före kodändring
+1. Inventera alla lokala nycklar för karaktär, berättelse, möte, undersökning, kalender och dagshistorik samt hur de kopplas till namn/bakgrund. Dokumentera vilka som i dag är globala.
+2. Introducera stabilt unikt `characterId` och `schemaVersion` utan att kasta bort äldre data. **Skriv inte om `character.v1` i första steget**; skapa verifierad säker kopia och återställningsväg innan migration.
+3. För en äldre karaktär: härled endast det som är säkert från `background`; markera familj/förflutet/ambition som `ejValt` tills spelaren aktivt väljer dem. Hitta inte på familje-NPC:er eller livshändelser.
+4. Säkerställ att nya karaktärer får separata berättelse- och dagdata; nya och gamla karaktärer får inte ärva varandras uppdrag genom namnlikhet eller återanvända globala nycklar.
+5. Testmatris på iPhone/Safari: gammal karaktär, ny karaktär, byte av bakgrundsval före skapande, omladdning, ny karaktär med samma namn, reset, gammal berättelse med Ragnhild, daglogg, offline och felaktig lokal data. **Inget PASS före faktisk verifiering.**
+
+### IMP-024-beroende
+Ragnhilds introduktion ska erbjuda minst tre vägar (hjälpa, undersöka själv, avstå). Bakgrunden kan påverka information, reaktioner och alternativa ingångar, men ingen vald familjesituation får krävas för att berättelsen ska fungera. Händelser i världen fortsätter utan att spelaren tvingas delta. Dialog och uppdragskonsekvenser skrivs efter att bakgrundsmodellen godkänts.
+
+**Avgränsning för första kodpaketet:** endast stabil identifiering, säker migration och en liten verifierbar datamodelländring; därefter separat formulär/UI-paket. Inga levande familjer, färdigskrivna uppdrag eller nya NPC-system utlovas i första kodpaketet.
 
 ## Utvecklingsordning
 1. Avsluta och GitHub-verifiera dokumentation för KB-03.6 och detta backlog-dokument.

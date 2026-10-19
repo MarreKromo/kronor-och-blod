@@ -69,9 +69,17 @@ Uppdaterad: 2026-10-20
 - Första paketet är design och säker datamodell, inte levande familje-NPC:er. IMP-024 och IMP-025 ska samordnas innan kodändringar.
 - GitHub-verifiering av detta dokumentationspaket återstår tills användaren committat det.
 
+## 2026-10-20 – IMP-025 steg 2: startvärden och migrationskrav
+- Beslutat som **designförslag**, inte implementerat: behåll befintliga `styrka`, `list`, `anseende`; föreslå separata färdigheter `jordbruk`, `hantverk`, `skriftkunskap`, `umgangesvana` med startvärde 2 för respektive uppväxt.
+- Familj (`tillsammans`, `distanserad`, `ensam`), förflutet (`vanlig`, `skuld`, `lofte`, `konflikt`) och ambition (`gard`, `handel`, `resa`, `inflytande`) definierade som oberoende val utan låsta livsvägar.
+- Ingen levande familje-NPC eller faktisk berättelsekonsekvens påstås finnas förrän systemen är byggda.
+- Krav: inventera globala localStorage-nycklar, inför unikt `characterId`, skydda `character.v1` och övriga sparningar, migrera bara kända värden, testa gammal/ny/samma namn/reset/omladdning/Ragnhild/daglogg i Safari.
+- IMP-024 samordnas med IMP-025: valfri Ragnhild-inledning, olika ingångar utan påtvingad familjehemlighet.
+- Nästa steg efter GitHub-verifiering: granska sparnycklar och göra separat säker migrationsplan innan någon spelkod ändras.
+
 ## Aktuellt läge
 Aktivt paket: IMP-025 – dokumentera karaktärsskaparens design och samordna med IMP-024.
-Nästa exakta steg: ersätt de tre befintliga dokumenten med IMP-025-paketet och GitHub-verifiera; därefter specificera valens konkreta startvärden och säker sparmigrering innan kodändringar.
+Nästa exakta steg: GitHub-verifiera IMP-025 steg 2; inventera därefter sparnycklar och besluta om säker migration innan kodändringar.
 Tester som återstår: båda kalenderknapparna, daglogg efter omladdning, befintlig karaktär/berättelse, relation −1 och samtliga undersökningsval.
 Kända risker: ingen stabil unik karaktärsidentitet eller riktig sparfilsmigration. IMP-023 är planerad, inte implementerad.
 
