@@ -38,13 +38,16 @@ Uppdaterad: 2026-10-19
 ## 2026-10-19 – Kvalitetsbeslut och dokumentationsstädning
 - KB-03.6.1 beslutad: rätta inaktuella texter, förbättra flöde och konsekvenser, testa relation −1 och planera riktiga sparfiler.
 - docs/IMPROVEMENT_BACKLOG.md med 22 förbättringspunkter verifierad på GitHub.
-- KB-DOC-01 påbörjad: inventering av 34 poster i docs (33 dokument + .gitkeep).
-- Fyra huvuddokument ska slås ihop utan att äldre filer raderas innan verifiering.
+- KB-DOC-01: fyra huvuddokument sammanslagna och GitHub-verifierade.
+- Tio tilläggsfiler jämförda med originalen, arkiverade i `docs/archive/` och därefter borttagna från huvudmappen.
+- Slutkontroll GitHub PASS: tio arkivfiler finns, inga `*_TILLAGG.md` direkt i `docs/`.
+- Regel: uppdatera huvuddokumenten framöver; bevara unika paketdokument.
 
 ## Aktuellt läge
-Aktivt paket: KB-DOC-01, steg 1 – sammanslagning av fyra huvuddokument.
-Nästa exakta steg: ladda upp färdiga TESTS.md, DAILY_LOG.md, ROADMAP.md och ARBETSMETOD.md; verifiera GitHub.
-Kända problem: samma information utspridd i tilläggsfiler; gamla statusrader i huvuddokument; risk för blandade testkaraktärer med samma namn/bakgrund.
+Aktivt paket: KB-03.6.1 – kvalitet och förbättringar.
+Nästa exakta steg: granska aktuella `src/encounter.js` och `index.html` på GitHub och förbered ett minimalt, testbart ZIP-paket för att rätta Ragnhilds inaktuella fortsättningstext.
+Tester som återstår: relation −1 och samtliga sex undersökningsval.
+Kända risker: testkaraktärer med samma namn/bakgrund kan dela äldre berättelsedata; ingen stabil unik karaktärsidentitet eller riktig sparfilsmigration.
 
 ### Mall för nästa arbetspass
 Datum:

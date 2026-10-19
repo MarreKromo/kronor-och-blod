@@ -29,12 +29,15 @@ Statusen nedan avser dokumenterade delpaket; fullständiga system är inte färd
 - [ ] Stabilt unikt karaktärs-ID, sparfiler och migration.
 - [ ] Framtida åldrande, porträtt, utrustning och alternativa historiskt anpassade livsvägar.
 
-## KB-DOC-01 – Dokumentationsstädning (AKTIVT)
-- [x] Inventering av docs: 34 poster, varav 33 dokument.
-- [ ] Slå ihop TESTS.md, DAILY_LOG.md, ROADMAP.md och ARBETSMETOD.md.
-- [ ] GitHub-verifiera sammanslagna huvuddokument.
-- [ ] Inventera och arkivera äldre tillägg och paketdokument, utan att radera före kontroll.
-- [ ] Dokumentera ny regel: uppdatera befintliga huvuddokument i stället för att skapa tillägg.
+## KB-DOC-01 – Dokumentationsstädning (AVSLUTAD)
+- [x] Inventering av docs: ursprungligen 34 poster, varav 33 dokument.
+- [x] Slå ihop TESTS.md, DAILY_LOG.md, ROADMAP.md och ARBETSMETOD.md.
+- [x] GitHub-verifiera sammanslagna huvuddokument.
+- [x] Granska och arkivera tio äldre `*_TILLAGG.md` i `docs/archive/`.
+- [x] Kontrollera att arkivkopiorna överensstämmer med originalen innan originalen tas bort.
+- [x] Kontrollera att inga `*_TILLAGG.md` återstår direkt i `docs/`.
+- [x] Dokumentera regel: uppdatera befintliga huvuddokument i stället för att skapa tillägg.
+- Paketdokument som innehåller unik planering, beslut eller testunderlag bevaras tills separat granskning beslutas.
 
 ## KB-04 – Världens grundsystem (FRAMTID)
 - [ ] Tid och resor i spelvärlden.
