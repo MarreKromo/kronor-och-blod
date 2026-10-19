@@ -1,4 +1,4 @@
-// KB-03.6.3 steg 1 – hemskärm och sparad dagshistorik.
+// KB-03.6.3 steg 2 – hemskärm och sparad dagshistorik.
 // Befintliga kalender-, karaktärs- och berättelsesparningar lämnas orörda.
 (function () {
   'use strict';
@@ -62,26 +62,12 @@
     const next=el('button','Gå vidare en dag →','kb-home-button');
     next.type='button';
     next.disabled=!person;
-    next.addEventListener('click',()=>{
-      const before=calendar.getState().dayNumber;
-      const after=calendar.advanceDay();
-      if(after.dayNumber>before){
-        const entries=loadLog();
-        entries.push({dayNumber:after.dayNumber,label:after.label});
-        warning=saveLog(entries)?'':'Dagen gick vidare, men dagshistoriken kunde inte sparas i webbläsaren.';
-        // Befintlig kalenderpanel uppdateras utan att dess gamla knapp behöver användas.
-        document.getElementById('gameDate').textContent=after.label;
-        document.getElementById('gameSeason').textContent=after.season;
-        document.getElementById('gameDay').textContent='Dag '+after.dayNumber;
-        document.getElementById('headerYear').textContent=after.year;
-      } else warning='Kalenderns maximala daggräns har nåtts.';
-      render();
-    });
+    next.addEventListener('click',()=>calendar.advanceDay());
     card.append(next);
     if(!person)card.append(el('p','Skapa först din karaktär.','kb-home-muted'));
     home.append(card);
     const events=el('div',undefined,'kb-home-card');
-    events.append(el('h3','Dagshändelser'),el('p','Daganteckningar i prototypen. Inga slumpmöten eller världsförändringar är implementerade ännu.','kb-home-muted'));
+    events.append(el('h3','Dagshändelser'),el('p','Daganteckningar från båda kalenderknapparna. Inga slumpmöten eller världsförändringar är implementerade ännu.','kb-home-muted'));
     const entries=loadLog().filter(x=>x.dayNumber<=c.dayNumber).slice(-7).reverse();
     if(!entries.length) events.append(el('p','Inga nya daganteckningar ännu.','kb-home-empty'));
     entries.forEach(item=>{
@@ -102,9 +88,18 @@
   const profile=document.querySelector('.kb-profile');
   const form=document.querySelector('#kbCharacterContent');
   [profile,form].filter(Boolean).forEach(x=>new MutationObserver(render).observe(x,{childList:true}));
-  // Om kalendern ändras via den äldre kalenderknappen uppdateras även hemvyn.
-  document.getElementById('nextDay')?.addEventListener('click',()=>{
-    warning='En dag gick vidare via den äldre kalenderknappen. Dagshistoriken loggar bara dagar som passerar via Hem.';
+  window.addEventListener('kb:day-advanced',event=>{
+    const after=event.detail;
+    const entries=loadLog();
+    if(!entries.some(x=>x.dayNumber===after.dayNumber)){
+      entries.push({dayNumber:after.dayNumber,label:after.label});
+      warning=saveLog(entries)?'':'Dagen gick vidare, men historiken kunde inte sparas.';
+    } else warning='';
+    // Även den gamla kartkalendern uppdateras om dagen flyttas via Hem.
+    document.getElementById('gameDate').textContent=after.label;
+    document.getElementById('gameSeason').textContent=after.season;
+    document.getElementById('gameDay').textContent='Dag '+after.dayNumber;
+    document.getElementById('headerYear').textContent=after.year;
     render();
   });
   render();
