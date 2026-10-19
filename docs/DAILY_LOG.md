@@ -55,9 +55,16 @@ Uppdaterad: 2026-10-20
 - UX-brist identifierad: många vanliga dagar ger upprepad text och lång historik.
 - IMP-023 tillagd i befintliga `docs/IMPROVEMENT_BACKLOG.md`, GitHub-verifierad PASS. Ingen tilläggsfil ska skapas.
 
+## 2026-10-20 – Berättelsebeslut och omprioritering
+- Ragnhilds nuvarande scener klassas som teknisk prototyp, inte färdig introduktion eller huvudberättelse.
+- Beslut: Ragnhilds mysterium ska bli ett större frivilligt introduktionsuppdrag som öppnar upp den verkliga huvudberättelsen.
+- IMP-024 planerad med P1: dramaturgi, Ragnhilds motiv, spelarens drivkraft, valens konsekvenser och möjligheten att avstå.
+- Dagshändelser (KB-03.6.4) skjuts efter berättelsegenomgången. Befintliga sparningar får inte raderas eller skrivas över utan säker migrationsplan.
+- Den nuvarande tekniska implementationen behålls tills en ersättningsplan är granskad och testad.
+
 ## Aktuellt läge
-Aktivt paket: KB-03.6.3 – dokumentationssynk, därefter planering av första riktiga dagshändelser.
-Nästa exakta steg: ersätt `docs/ROADMAP.md`, `docs/TESTS.md` och `docs/DAILY_LOG.md` med komplett dokumentationspaket; verifiera GitHub efter commit.
+Aktivt paket: IMP-024 – planering av introduktionsuppdraget med Ragnhild.
+Nästa exakta steg: verifiera IMP-024 i backlog/roadmap/daily log på GitHub, därefter ta fram och granska berättelsens struktur innan kodändringar.
 Tester som återstår: båda kalenderknapparna, daglogg efter omladdning, befintlig karaktär/berättelse, relation −1 och samtliga undersökningsval.
 Kända risker: ingen stabil unik karaktärsidentitet eller riktig sparfilsmigration. IMP-023 är planerad, inte implementerad.
 

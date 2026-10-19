@@ -1,5 +1,5 @@
 # SVERIGE: Kronor & Blod – Improvement Backlog
-Version: 1.1
+Version: 1.2
 Datum: 2026-10-20
 Status: LEVANDE PLANERINGSDOKUMENT – inga punkter markeras som implementerade utan verifiering.
 
@@ -60,9 +60,16 @@ Status: `IDÉ`, `PLANERAD`, `PÅGÅR`, `TESTAS`, `PASS`, `PARKERAD`.
 
 **Bakgrund 2026-10-20:** Safari-skärmbilder från KB-03.6.3 visar att många vanliga dagar upprepar samma text och gör Hem onödigt långt. Förbättringen är ännu inte implementerad.
 
+## E. Introduktion och huvudberättelse
+| ID | Prioritet | Status | Förbättring | Godkännandekriterium |
+| --- | --- | --- | --- | --- |
+| IMP-024 | P1 | PLANERAD | **Omarbeta Ragnhilds introduktionsuppdrag och huvudberättelsens grund**: dagens scener är en teknisk prototyp; mysteriet ska bli ett stort frivilligt introduktionsuppdrag som leder in i den verkliga huvudberättelsen. Utveckla stark öppning, Ragnhilds bakgrund och egna motiv, den försvunne mannens betydelse, insatser, flera vägar och konsekvenser. Spelaren ska kunna tacka nej och ägna sig åt andra livsvägar. | Godkänd berättelsestruktur med begriplig drivkraft, trovärdiga NPC-motiv, minst tre meningsfulla vägar inklusive att avstå, bestående konsekvenser och en tydlig men icke-tvingande brygga till huvudberättelsen. Befintliga testkaraktärer och sparningar skyddas före kodändring. |
+
+**Beslut 2026-10-20:** Prioritera IMP-024 före KB-03.6.4 dagshändelser. Skilj huvudberättelse, sidouppdrag och vardagshändelser; dagshändelser får inte automatiskt flytta fram huvuduppdraget. Historisk trovärdighet och Ragnhilds roll ska granskas innan dialog skrivs om. IMP-024 är ännu inte implementerad.
+
 ## Utvecklingsordning
 1. Avsluta och GitHub-verifiera dokumentation för KB-03.6 och detta backlog-dokument.
-2. Gör KB-03.6.1 med små förbättringar och regressionstester.
+2. Gör berättelsegenomgången IMP-024 före nya dagshändelser; därefter små implementationer och regressionstester enligt KB-03.6.1.
 3. Separat arbete med stabila karaktärs-ID:n och sparningar.
 4. Genomför en **egen kart- och UI-designgenomgång** innan större visuell implementation.
 5. Bygg vidare på större spelmekanik, med förbättringsrunda efter varje större funktion.
