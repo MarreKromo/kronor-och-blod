@@ -1,7 +1,25 @@
-// KB-03.1 – fristående karaktärsmodell. Ingen UI-ändring i detta steg.
+// KB-03 / IMP-025 steg 3a – icke-destruktiv engångskopia före framtida migration.
 (function () {
   'use strict';
   const KEY = 'kronor-och-blod.character.v1';
+  const BACKUP_KEY = 'kronor-och-blod.backup.pre-migration.v1';
+  const SAVE_KEYS = [KEY, 'kronor-och-blod.story.v1', 'kronor-och-blod.encounter.v1', 'kronor-och-blod.investigation.v1', 'kronor-och-blod.calendar.v1', 'kronor-och-blod.daylog.v1'];
+  // Skapa endast en kopia om en äldre karaktär redan finns. Ändra aldrig befintliga data.
+  // Befintlig kopia skrivs aldrig över, inte heller vid reset eller ny karaktär.
+  let backupStatus = 'not-needed';
+  try {
+    if (localStorage.getItem(BACKUP_KEY) !== null) {
+      backupStatus = 'already-exists';
+    } else if (localStorage.getItem(KEY) !== null) {
+      const entries = {};
+      SAVE_KEYS.forEach(key => { const raw = localStorage.getItem(key); if (raw !== null) entries[key] = raw; });
+      const snapshot = JSON.stringify({ version: 1, createdAt: new Date().toISOString(), entries });
+      localStorage.setItem(BACKUP_KEY, snapshot);
+      backupStatus = localStorage.getItem(BACKUP_KEY) === snapshot ? 'created' : 'failed';
+    }
+  } catch (_) { backupStatus = 'failed'; }
+  window.KB_SAVE_GUARD = Object.freeze({ status: backupStatus, backupKey: BACKUP_KEY });
+
   const START_PLACE = 'VG-SKARA-001';
   const BACKGROUNDS = Object.freeze({
     bonde: { label: 'Bonde', description: 'Uppvuxen med jordbruk och hårt arbete.', attributes: { styrka: 3, list: 1, anseende: 1 } },
