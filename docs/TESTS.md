@@ -69,3 +69,21 @@
 - [ ] ÅTERSTÅR: `index.html` visar fortfarande gammal text om att sparning saknas; korrigera i separat UI-ändring.
 
 **KB-02.6 resultat:** PASS för lokal sparning vid omladdning i samma Safari-flik. Fullständigt återöppningstest och UI-textkorrigering återstår.
+
+## KB-03.1 – Karaktärsmodell (2026-10-19)
+- [x] PASS: `src/character.js` finns på GitHub och har granskats.
+- [x] PASS (kodgranskning): Fyra bakgrunder, namnvalidering, egenskaper, Skara som startplats och lokal lagringslogik.
+- [ ] EJ SEPARAT TESTAT: Felaktiga namn, felaktiga sparvärden och blockerad lagring.
+
+**KB-03.1 resultat:** PASS för fil- och kodgranskning; användarflöde testat i KB-03.2.
+
+## KB-03.2 – Karaktärsskapare (2026-10-19)
+- [x] PASS: `src/character-ui.js` finns på GitHub och har granskats.
+- [x] PASS: `index.html` laddar `character.js` före `character-ui.js`, en gång vardera.
+- [x] PASS (användarrapporterat): Karaktärsskaparen fungerar i Safari på iPhone.
+- [x] PASS (användarrapporterat): Karaktären visas efter skapande med namn och egenskaper.
+- [x] PASS (användarrapporterat): Karaktären finns kvar efter omladdning av sidan.
+- [ ] EJ SEPARAT TESTAT: Skapa om karaktär, alla fyra bakgrunder, felaktiga namn, privat surfning och blockerad lagring.
+- [ ] ÅTERSTÅR: Förbättrad karaktärsprofil och spelintegration i senare paket.
+
+**KB-03.2 resultat:** PASS för grundflödet och lokal sparning efter omladdning, enligt användarens Safari-test.

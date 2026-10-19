@@ -24,6 +24,23 @@
 **Nästa exakta steg:** Ladda upp en dokumentfil i taget i GitHub `docs/`, commit och verifiera. Därefter korrigera gammal sidfotstext i separat UI-paket och planera KB-03 – spelarkaraktär.
 **Kända begränsningar:** Endast kalenderns dagantal sparas lokalt i aktuell webbläsare/enhet; ingen molnsparning eller övrig spelvärldssparning. Ingen handel, produktion eller ekonomisk simulering. Kalendern är förenklad gregoriansk modell, inte historiskt exakt för 1250. Historisk detaljgranskning, koordinater och rättighetskontroll för originalkartan återstår. Befolkning och resursindex är fiktiva prototypvärden. `index.html` har ännu gammal text om att sparning saknas.
 
+
+## 2026-10-19 – KB-03.1 och KB-03.2
+**Mål:** Införa spelarkaraktär utan att påverka karta, kalender eller samhällsdata.
+
+**Genomfört:**
+- KB-03.1: `src/character.js` uppladdad och kontrollerad på GitHub. Modellen innehåller namn, fyra bakgrunder, egenskaper, startplats `VG-SKARA-001` och lokal sparning med nyckeln `kronor-och-blod.character.v1`.
+- KB-03.2: `src/character-ui.js` uppladdad och kontrollerad. `index.html` uppdaterad med skripten i rätt ordning.
+- Användaren skapade en karaktär i Safari och bekräftade att den visas samt finns kvar efter omladdning.
+
+**Verifierat:** GitHub-filernas existens och skriptordning PASS. Grundflöde och omladdningssparning PASS enligt användaren. Se `docs/TESTS.md`.
+
+**Teststatus:** KB-03.1 kodgranskning PASS; KB-03.2 grundfunktion och omladdning PASS. Felhantering, samtliga bakgrunder och återöppning efter stängd flik ej separat testade.
+
+**Aktiv uppgift:** Dokumentera KB-03.1 och KB-03.2 i `docs/TESTS.md` och `docs/DAILY_LOG.md`; ladda upp och verifiera en fil i taget.
+**Nästa exakta steg:** Efter dokumentations-PASS, planera KB-03.3 karaktärsprofil som separat, litet paket. Rätta samtidigt inte orelaterad kod.
+**Kända begränsningar:** Karaktären kan ännu inte resa eller påverka världen. Endast lokal webbläsarsparning; ingen molnsynk. Sidfoten i `index.html` säger fortfarande felaktigt att sparning saknas och ska rättas separat.
+
 ### Mall för nästa pass
 Datum:
 Aktivt paket:
