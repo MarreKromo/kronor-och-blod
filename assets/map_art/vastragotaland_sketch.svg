@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1050">
+<defs><pattern id="paper" width="65" height="65" patternUnits="userSpaceOnUse"><path d="M0 0H65M0 0V65" stroke="#9e8b63" stroke-opacity=".07"/></pattern><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="3" seed="7" result="n"/><feColorMatrix in="n" type="saturate" values="0"/></filter></defs>
+<rect width="900" height="1050" fill="#d9c89f"/><rect width="900" height="1050" fill="url(#paper)"/>
+<path d="M0 0H900V130C812 155 777 200 724 220C658 240 605 204 538 215C476 225 435 175 390 138C336 95 260 124 196 110C108 94 57 138 0 152Z" fill="#86a9a6" stroke="#577c7d" stroke-width="4"/>
+<path d="M282 1050C286 977 296 909 276 835C257 765 272 705 301 653C335 594 331 540 315 492C290 421 320 367 340 320" fill="none" stroke="#709a9a" stroke-width="32" stroke-linecap="round"/>
+<path d="M282 1050C286 977 296 909 276 835C257 765 272 705 301 653C335 594 331 540 315 492C290 421 320 367 340 320" fill="none" stroke="#a4c3bd" stroke-width="19" stroke-linecap="round"/>
+<path d="M480 255Q570 310 720 265T880 370L900 420V860Q750 830 690 920T460 920Q360 820 395 710T405 505Z" fill="#c1c09a" opacity=".4"/>
+<g fill="none" stroke="#a98e60" stroke-width="3" opacity=".45"><path d="M365 430Q480 470 570 450T735 490"/><path d="M350 740Q480 690 620 720T810 665"/><path d="M440 290Q520 350 610 320"/></g>
+<g font-family="Georgia,serif" fill="#54432e"><text x="440" y="125" font-size="50" letter-spacing="8" font-style="italic">VÄNERN</text><text x="170" y="740" transform="rotate(-79 170 740)" font-size="26" font-style="italic">Göta älv</text><text x="495" y="610" font-size="33" opacity=".24" transform="rotate(-12 495 610)">VÄSTERGÖTLAND</text><text x="42" y="1000" font-size="17">SCHEMATISK SPELKARTA • EJ HISTORISK REKONSTRUKTION</text></g>
+<g transform="translate(790 890)" stroke="#594a31" fill="none"><circle r="54"/><path d="M0 -45V45M-45 0H45" stroke-width="2"/><path d="M0 -64L-10 -39H10Z" fill="#594a31"/><text y="-72" text-anchor="middle" font-family="Georgia" fill="#594a31" stroke="none" font-size="22">N</text></g>
+</svg>
