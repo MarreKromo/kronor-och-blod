@@ -1,5 +1,5 @@
 # Testlogg – SVERIGE: Kronor & Blod
-Uppdaterad: 2026-10-19
+Uppdaterad: 2026-10-20
 Status anges per paket och endast inom faktiskt verifierad omfattning. Historiska detaljer finns kvar i äldre källdokument tills arkivering är godkänd.
 
 ## KB-01 – Projektstruktur
@@ -69,6 +69,18 @@ Status anges per paket och endast inom faktiskt verifierad omfattning. Historisk
 - PASS Safari (två skärmbilder): relation 0 ger »Ett löfte i mörkret« och ledtråd; relation +1 ger »Brevets avsändare« och ledtrådar.
 - PASS enligt användaren: val/ledtrådar kvarstår efter omladdning, karta och kalender fungerar.
 - EJ TESTAT: relation −1 och samtliga sex undersökningsval.
+
+## KB-03.6.2 – Scen, dagbok och mobilnavigation
+- Steg 1 GitHub PASS, Safari-skärmbilder visar att endast aktiv scen visas. Fullständig regression ej genomförd.
+- Steg 2 GitHub PASS och Safari-skärmbilder: dagbok med berättelseval, relation +1 och ledtrådar.
+- Steg 3 GitHub PASS, användaren bekräftade att mobilnavigationen såg bättre ut. Inte alla vyer regressionstestade separat.
+
+## KB-03.6.3 – Hem och gemensam kalender
+- Steg 1 GitHub PASS: index.html, navigation.js och home.js; användaren rapporterade att Hem fungerade i Safari.
+- Steg 2 GitHub PASS: index.html, calendar.js och home.js; båda kalenderknapparna utlöser samma `kb:day-advanced`-händelse enligt kodgranskning.
+- Safari-skärmbilder: datum 22 januari 1250, dag 22; dagshistorik och fem flikar synliga. **Visuell PASS**, men bilderna bevisar inte separat att båda knapparna loggar korrekt eller att loggen består efter omladdning.
+- ÅTERSTÅR: separat PASS/FAIL för båda knapparna, omladdning och kontroll att befintlig karaktär/berättelse finns kvar.
+- UX-förbättring IMP-023 dokumenterad och GitHub-verifierad; **inte implementerad**.
 
 ## Kvarstående tvärgående risker
 - Ingen stabil unik karaktärsidentitet: namn/bakgrund kan återanvända äldre berättelsedata.

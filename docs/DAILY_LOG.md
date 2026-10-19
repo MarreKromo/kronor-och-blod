@@ -1,5 +1,5 @@
 # Daglig utvecklingslogg – SVERIGE: Kronor & Blod
-Uppdaterad: 2026-10-19
+Uppdaterad: 2026-10-20
 
 ## 2026-10-19 – KB-01 till KB-02.6
 - Repository, GDD, roadmap, beslutslogg, testlogg och historiskt referensunderlag etablerades.
@@ -37,17 +37,29 @@ Uppdaterad: 2026-10-19
 
 ## 2026-10-19 – Kvalitetsbeslut och dokumentationsstädning
 - KB-03.6.1 beslutad: rätta inaktuella texter, förbättra flöde och konsekvenser, testa relation −1 och planera riktiga sparfiler.
-- docs/IMPROVEMENT_BACKLOG.md med 22 förbättringspunkter verifierad på GitHub.
+- docs/IMPROVEMENT_BACKLOG.md med ursprungligen 22 förbättringspunkter verifierad på GitHub.
 - KB-DOC-01: fyra huvuddokument sammanslagna och GitHub-verifierade.
 - Tio tilläggsfiler jämförda med originalen, arkiverade i `docs/archive/` och därefter borttagna från huvudmappen.
 - Slutkontroll GitHub PASS: tio arkivfiler finns, inga `*_TILLAGG.md` direkt i `docs/`.
 - Regel: uppdatera huvuddokumenten framöver; bevara unika paketdokument.
 
+## 2026-10-19 till 2026-10-20 – KB-03.6.2
+- Steg 1: aktiva berättelsescener, GitHub och visuell Safari PASS.
+- Steg 2: dagbok med relationer, ledtrådar och val, GitHub och visuell Safari PASS.
+- Steg 3: fliknavigation, GitHub PASS och positiv användarbekräftelse.
+
+## 2026-10-20 – KB-03.6.3
+- Steg 1: Hem – Mitt liv, kalender och sparad dagshistorik; GitHub PASS, Safari fungerade enligt användaren.
+- Steg 2: kalenderknapparna på Hem och Karta använder gemensam dagshändelse; GitHub PASS.
+- Safari-skärmbilder visar 22 januari 1250, dag 22 och dagshistorik. Separat test av båda knapparna och omladdning återstår.
+- UX-brist identifierad: många vanliga dagar ger upprepad text och lång historik.
+- IMP-023 tillagd i befintliga `docs/IMPROVEMENT_BACKLOG.md`, GitHub-verifierad PASS. Ingen tilläggsfil ska skapas.
+
 ## Aktuellt läge
-Aktivt paket: KB-03.6.1 – kvalitet och förbättringar.
-Nästa exakta steg: granska aktuella `src/encounter.js` och `index.html` på GitHub och förbered ett minimalt, testbart ZIP-paket för att rätta Ragnhilds inaktuella fortsättningstext.
-Tester som återstår: relation −1 och samtliga sex undersökningsval.
-Kända risker: testkaraktärer med samma namn/bakgrund kan dela äldre berättelsedata; ingen stabil unik karaktärsidentitet eller riktig sparfilsmigration.
+Aktivt paket: KB-03.6.3 – dokumentationssynk, därefter planering av första riktiga dagshändelser.
+Nästa exakta steg: ersätt `docs/ROADMAP.md`, `docs/TESTS.md` och `docs/DAILY_LOG.md` med komplett dokumentationspaket; verifiera GitHub efter commit.
+Tester som återstår: båda kalenderknapparna, daglogg efter omladdning, befintlig karaktär/berättelse, relation −1 och samtliga undersökningsval.
+Kända risker: ingen stabil unik karaktärsidentitet eller riktig sparfilsmigration. IMP-023 är planerad, inte implementerad.
 
 ### Mall för nästa arbetspass
 Datum:

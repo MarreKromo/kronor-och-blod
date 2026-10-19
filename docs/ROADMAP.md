@@ -1,5 +1,5 @@
 # Roadmap – SVERIGE: Kronor & Blod
-Uppdaterad: 2026-10-19
+Uppdaterad: 2026-10-20
 Statusen nedan avser dokumenterade delpaket; fullständiga system är inte färdigutvecklade.
 
 ## KB-00 – Speldesign
@@ -27,8 +27,13 @@ Statusen nedan avser dokumenterade delpaket; fullständiga system är inte färd
 - [x] KB-03.6 undersökning med förgrenade ledtrådar, PASS inom testad omfattning.
 - [ ] KB-03.6.1 förbättra berättelseflöde och konsekvenser, testa relation −1.
 - [x] KB-03.6.2 steg 1: endast aktiv berättelsescen visas; GitHub PASS, Safari-bilder visar korrekt scen. Fullständiga regressionstester återstår.
-- [ ] KB-03.6.2 fortsättning: dagbok med händelser, beslut, ledtrådar och relationer.
-- [ ] KB-03.6.2 fortsättning: tydlig mobilnavigation mellan karta, berättelse, karaktär och dagbok.
+- [x] KB-03.6.2 steg 2: dagbok med berättelseval, ledtrådar och relationer, GitHub och Safari PASS inom testad omfattning.
+- [x] KB-03.6.2 steg 3: mobilnavigation med flikarna Berättelse, Karta, Karaktär, Dagbok; GitHub och Safari PASS.
+- [x] KB-03.6.3 steg 1: Hem – Mitt liv, datum, nästa dag, lokal dagshistorik; GitHub och användarrapporterat Safari PASS.
+- [x] KB-03.6.3 steg 2: båda kalenderknapparna kopplade till gemensam dagshändelse, GitHub PASS; Safari-skärmbilder visar dag 22 och dagshistorik.
+- [ ] KB-03.6.3 kompletterande regressionstest: båda knapparnas loggning och sparning efter omladdning, separat bekräftelse.
+- [ ] KB-03.6.4 första riktiga dagshändelser: begränsad händelsepool, sparade beslut, inga oavsiktliga upprepningar; kravspecifikation och test först.
+- [ ] IMP-023 kompakt dagshistorik: korta vanliga dagar, tydliga viktiga händelser, bevarad historik.
 - [ ] Stabilt unikt karaktärs-ID, sparfiler och migration.
 - [ ] Framtida åldrande, porträtt, utrustning och alternativa historiskt anpassade livsvägar.
 
