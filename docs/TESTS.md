@@ -53,8 +53,19 @@
 - [x] PASS (användarrapporterat): Kalendern visas på iPhone efter att den uppdaterade GitHub Pages-sidan öppnats i Safari.
 - [x] PASS (användarrapporterat): Knappen för nästa dag fungerar och datumet ändras från 1 till 2 januari 1250.
 - [ ] EJ SEPARAT TESTAT: Övergången till 1 mars 1250 / vår efter 59 tryck.
-- [ ] EJ SEPARAT TESTAT: Omladdning återställer datum till 1 januari 1250 (avsedd begränsning).
 - [ ] EJ SEPARAT TESTAT: Alla fem markörer och samhällsvärden efter kalenderändring.
 - [ ] EJ TESTAT: JavaScript-konsol i Safari och liggande skärmläge.
 
-**KB-02.5 resultat:** PASS för kalenderns grundfunktion enligt användarens iPhone-test. Första försöket visade äldre KB-02.4.2-sida; uppdaterad länk i Safari löste visningsproblemet. Ingen sparning finns ännu.
+**KB-02.5 resultat:** PASS för kalenderns grundfunktion enligt användarens iPhone-test. Sparning infördes senare i KB-02.6.
+
+## KB-02.6 – Lokal sparning (2026-10-19)
+- [x] PASS: Uppdaterad `src/calendar.js` finns på GitHub med `localStorage` och sparnyckeln `kronor-och-blod.calendar.v1`.
+- [x] PASS: Användaren visade skärmbild där KB-02.6-filen serveras från GitHub Pages i Safari.
+- [x] PASS (användarrapporterat): Efter tre dagsteg och omladdning av samma Safari-flik finns datumet kvar.
+- [ ] EJ SEPARAT TESTAT: Stäng fliken helt och öppna spelet igen i samma Safari.
+- [ ] EJ SEPARAT TESTAT: Sparning över månadsskifte och årsskifte.
+- [ ] EJ SEPARAT TESTAT: Kartmarkörer och samhällsdata efter omladdning.
+- [ ] EJ TESTAT: Beteende vid blockerad lagring, privat surfning eller rensad webbplatsdata.
+- [ ] ÅTERSTÅR: `index.html` visar fortfarande gammal text om att sparning saknas; korrigera i separat UI-ändring.
+
+**KB-02.6 resultat:** PASS för lokal sparning vid omladdning i samma Safari-flik. Fullständigt återöppningstest och UI-textkorrigering återstår.
