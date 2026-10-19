@@ -40,3 +40,28 @@ På kort sikt ersätts hela index.html via färdig fil när ändring behövs. P�
 - Varje större funktion följs av en förbättrings- och testomgång.
 - GitHub-PASS och Safari-PASS är skilda verifieringar; ange alltid ej testade delar.
 - Uppdatera inte GDD eller äldre historiska beslut utan uttryckligt beslut.
+
+## Spelarupplevelse först – permanent designregel, 2026-10-19
+Bakgrund: KB-03.4–03.6 fungerade tekniskt men staplade karaktär, äldre scener, möte, undersökning och karta i en lång mobilwebbsida. Detta ska fångas före implementation, inte efter flera paket.
+
+Inför varje ny spel- eller gränssnittsfunktion ska vi:
+1. **Börja med spelaren:** beskriv vad spelaren ser, gör och känner i den faktiska mobilvyn. Gör en enkel skiss eller ett konkret användarflöde innan kod skrivs.
+2. **Granska helheten:** kontrollera hur funktionen samspelar med befintliga vyer, navigation, berättelse, karta, karaktär och sparning. Undvik att bara stapla ännu ett avsnitt.
+3. **Tänka framåt:** bedöm hur lösningen fungerar när antalet scener, val, NPC:er och sparade händelser ökar. Välj ett hållbart mönster framför en snabb tillfällig lösning.
+4. **Prioritera kvalitet:** färdigställ en tydlig, begriplig och testad spelupplevelse före nästa stora funktion.
+5. **Ifrågasätta aktivt:** assistenten ska lyfta användbarhetsproblem och föreslå bättre alternativ även om koden redan fungerar.
+
+### Obligatorisk kontroll före kodpaket
+- Vilken vy är aktiv och hur hittar spelaren till den?
+- Vad visas efter ett val? Döljs eller arkiveras tidigare innehåll?
+- Kan spelaren nå historik och beslut utan att hela historien ligger kvar på skärmen?
+- Fungerar upplevelsen på iPhone utan onödig scrollning?
+- Bevaras befintliga val, relationer och lokala sparningar?
+- Vilka tester krävs för att både funktion **och spelkänsla** ska få PASS?
+
+### Tillämpning i KB-03.6.2
+- En aktiv berättelsescen visas åt gången; gamla scener staplas inte.
+- Tidigare händelser, beslut, ledtrådar och relationer ska kunna återbesökas i en dagbok.
+- Karta, berättelse, karaktär och dagbok får tydliga separata vyer.
+- Implementera stegvis med bevarade sparnycklar, verifiering på GitHub och Safari-test efter varje paket.
+- Stor visuell omarbetning av kartan hanteras separat och glöms inte bort.
