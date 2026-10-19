@@ -1,4 +1,4 @@
-// KB-03.6.2 steg 3 – fyra mobilvyer. Ingen förändring av sparningar.
+// KB-03.6.3 steg 1 – fem mobilvyer. Ingen förändring av sparningar.
 (function () {
   'use strict';
   const required = ['.clock', '.layout', '.kb-story', '.kb-encounter', '.kb-investigation',
@@ -7,10 +7,18 @@
 
   const css = document.createElement('style');
   css.textContent = `
-    .kb-navigation{position:sticky;top:0;z-index:30;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:9px max(8px,env(safe-area-inset-right)) 9px max(8px,env(safe-area-inset-left));background:#17221b;border-bottom:1px solid #9c865c;box-shadow:0 3px 12px #0008}
-    .kb-navigation button{min-width:0;min-height:48px;padding:8px 2px;border:1px solid #72684c;border-radius:6px;background:#303b31;color:#eadcba;font:600 clamp(11px,3vw,15px) system-ui;cursor:pointer}
+    .kb-navigation{position:sticky;top:0;z-index:30;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:9px max(8px,env(safe-area-inset-right)) 9px max(8px,env(safe-area-inset-left));background:#17221b;border-bottom:1px solid #9c865c;box-shadow:0 3px 12px #0008}
+    .kb-navigation button{min-width:0;min-height:48px;padding:8px 2px;border:1px solid #72684c;border-radius:6px;background:#303b31;color:#eadcba;font:600 clamp(10px,2.8vw,15px) system-ui;cursor:pointer}
     .kb-navigation button[aria-current="page"]{background:#795333;border-color:#e2c78d;color:#fff7df}
     .kb-navigation button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+    body[data-kb-view="home"] .clock,
+    body[data-kb-view="home"] .layout,
+    body[data-kb-view="home"] .kb-profile,
+    body[data-kb-view="home"] section[aria-label="Din karaktär"],
+    body[data-kb-view="home"] .kb-story,
+    body[data-kb-view="home"] .kb-encounter,
+    body[data-kb-view="home"] .kb-investigation,
+    body[data-kb-view="home"] .kb-journal,
     body[data-kb-view="story"] .clock,
     body[data-kb-view="story"] .layout,
     body[data-kb-view="story"] .kb-profile,
@@ -45,7 +53,7 @@
   const nav = document.createElement('nav');
   nav.className = 'kb-navigation';
   nav.setAttribute('aria-label','Spelets huvudnavigation');
-  const views = [['story','Berättelse'],['map','Karta'],['character','Karaktär'],['journal','Dagbok']];
+  const views = [['home','Hem'],['story','Berättelse'],['map','Karta'],['character','Karaktär'],['journal','Dagbok']];
   const buttons = new Map();
   for (const [id,label] of views) {
     const button = document.createElement('button');
@@ -80,5 +88,5 @@
   [profile,form].filter(Boolean).forEach(el =>
     new MutationObserver(syncCharacter).observe(el,{childList:true}));
   syncCharacter();
-  switchView(window.KB_CHARACTER?.get()?'story':'character');
+  switchView(window.KB_CHARACTER?.get()?'home':'character');
 })();
