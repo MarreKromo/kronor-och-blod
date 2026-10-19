@@ -25,5 +25,18 @@ Projektägaren utvecklar via iPhone, Safari och GitHubs webbgränssnitt. Arbetsf
 ## Teknisk plan
 På kort sikt ersätts hela index.html via färdig fil när ändring behövs. På längre sikt delas den stora filen upp i mindre moduler, exempelvis src/app.js, src/map-ui.js och assets/styles.css. Uppdelningen görs i ett separat, litet och testbart paket; inte samtidigt med orelaterade funktioner.
 
-## Aktuell situation
-KB-03.3: src/character-profile.js finns på GitHub. Nästa steg är en färdig uppdaterad index.html som laddar profilen efter src/character-ui.js, följt av GitHub-verifiering och Safari-test. Dokumentation av designbeslut om spelbar manlig huvudkaraktär och framtida kvinnliga spelkaraktärer görs i KB-03.3-paketets dokumentationssteg.
+## Prototypdata och cache – beslut 2026-10-19
+- Testkaraktärer och testdata får återställas under prototypfasen. Informera innan avsiktlig återställning.
+- Bevara fungerande kod och övriga spelsystem även när testdata är utbytbar.
+- Inför framtida riktiga sparfiler ska migrering, säkerhetskopiering och versionshantering planeras.
+- Vid ändring av JavaScript-fil: versionsmärk dess `<script src>` i `index.html` när Safari kan ha en gammal cachad kopia. Ändring av enbart sidans `?v=` räcker inte alltid.
+- Skicka färdiga, verifierade ZIP-paket. Vid uppladdning av fil med samma namn: kontrollera filens innehåll på GitHub, inte bara filnamnet.
+- Separera GitHub-PASS från Safari-PASS.
+
+## Dokumentationsregel – KB-DOC-01
+- Använd i första hand befintliga huvuddokument: GDD, ROADMAP.md, IMPROVEMENT_BACKLOG.md, TESTS.md, DAILY_LOG.md, ARBETSMETOD.md och DECISIONS.md.
+- Skapa inte separata `*_TILLAGG.md` för varje delpaket när informationen kan läggas direkt i rätt huvuddokument.
+- Bevara äldre paketdokument tills innehållet granskats och arkiverats säkert.
+- Varje större funktion följs av en förbättrings- och testomgång.
+- GitHub-PASS och Safari-PASS är skilda verifieringar; ange alltid ej testade delar.
+- Uppdatera inte GDD eller äldre historiska beslut utan uttryckligt beslut.

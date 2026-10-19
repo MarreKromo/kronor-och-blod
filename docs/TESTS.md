@@ -1,89 +1,77 @@
 # Testlogg – SVERIGE: Kronor & Blod
+Uppdaterad: 2026-10-19
+Status anges per paket och endast inom faktiskt verifierad omfattning. Historiska detaljer finns kvar i äldre källdokument tills arkivering är godkänd.
 
-## KB-01 – Projektstruktur (2026-10-19)
-- [x] PASS: Repository finns på GitHub.
-- [x] PASS: `README.md` visas i repositoryt.
-- [x] PASS: `docs/ROADMAP.md` finns och har kontrollerats via GitHub.
-- [x] PASS: `docs/DAILY_LOG.md` finns och har kontrollerats via GitHub.
-- [x] PASS: `docs/GDD_v1.0.docx` finns på GitHub (nedladdning på iPhone ej separat testad).
-- [x] PASS: `assets/reference/O37_original_map.pdf` finns på GitHub.
-- [x] PASS: GitHub-commits har publicerat filerna.
+## KB-01 – Projektstruktur
+- PASS GitHub: repo, README, roadmap, daglig logg, GDD v1.0, referenskarta och commits.
+- EJ SEPARAT TESTAT: nedladdning av GDD på iPhone.
 
-**KB-01 resultat:** PASS för repositorystruktur och filnärvaro. Separat nedladdningstest av GDD på iPhone återstår.
+## KB-02.1 – Historiska platser
+- PASS GitHub: dokument och fem stabila plats-ID:n.
+- ÅTERSTÅR: fördjupad källgranskning.
 
-## KB-02.1 – Historiska platser (2026-10-19)
-- [x] PASS: `docs/KB-02_01_HISTORISKA_PLATSER.md` finns på GitHub.
-- [x] PASS: Fem stabila plats-ID:n och historiska reservationer dokumenterade.
-- [ ] PENDING: Fördjupad källgranskning.
+## KB-02.2 – Geografisk grund
+- PASS GitHub: dokument och separerade kart-/platsdatalager.
+- ÅTERSTÅR: verifierade koordinater och historiska färdvägar.
 
-## KB-02.2 – Geografisk grund (2026-10-19)
-- [x] PASS: `docs/KB-02_02_GEOGRAFISK_GRUND.md` finns på GitHub.
-- [x] PASS: Kartgrafik och platsdata planerade som separata lager.
-- [ ] PENDING: Verifierade geografiska koordinater och historiska färdvägar.
+## KB-02.3 – Klickbar kartprototyp
+- PASS GitHub: index.html, src/places.js, SVG-karta, dokument.
+- PASS Safari enligt användaren: GitHub Pages öppnas och kartan fungerar.
+- EJ SEPARAT TESTAT: varje markörs ID/beskrivning och liggande skärmläge.
 
-## KB-02.3 – Klickbar kartprototyp (2026-10-19)
-- [x] PASS: `index.html`, `src/places.js`, `assets/map_art/vastragotaland_sketch.svg` och `docs/KB-02_03_KARTPROTOTYP.md` finns på GitHub.
-- [x] PASS: Användaren bekräftar att GitHub Pages-spelet öppnas i Safari på iPhone.
-- [x] PASS: Användaren rapporterar att kartan fungerar.
-- [ ] EJ SEPARAT VERIFIERAT: Varje platsmarkörs namn, ID och beskrivning kontrollerade individuellt.
-- [ ] EJ TESTAT: Liggande skärmläge.
+## KB-02.4.1 – Platsregister och ekonomi
+- PASS GitHub: src/world.js, fem platser med befolkning/resurser/makt/ekonomisk roll och dokument.
+- Ingen ekonomisk simulering ingår.
 
-**KB-02.3 resultat:** PASS för första fungerande Safari-prototypen enligt användarens test.
+## KB-02.4.2 – Kartpanel och ekonomi
+- PASS GitHub: index.html visar platsdata och resursstaplar.
+- Övergripande Safari-PASS användarrapporterat.
+- EJ SEPARAT TESTAT: alla fem orters värden, liggande skärmläge.
 
-## KB-02.4.1 – Platsregister och ekonomi (2026-10-19)
-- [x] PASS: `src/world.js` finns på GitHub och innehåller fem platser med befolkning, resurser, makt och ekonomisk roll.
-- [x] PASS: `docs/KB-02_04_1_PLATSREGISTER_EKONOMI.md` finns på GitHub.
-- [x] PASS: Datamodellen håller spelvärden skilda från historiskt belagda uppgifter.
-- [ ] EJ TESTAT: Simulering av ekonomi (ingår inte i paketet).
+## KB-02.5 – Tid och årstider
+- PASS GitHub: kalender och dokument.
+- PASS Safari enligt användaren: dagknappen flyttar datum 1→2 januari 1250.
+- EJ SEPARAT TESTAT: säsongsskifte, samtliga markörer efter ändring, liggande skärmläge.
 
-## KB-02.4.2 – Kartpanel och ekonomi (2026-10-19)
-- [x] PASS: Uppdaterad `index.html` finns på GitHub och laddar `src/world.js`.
-- [x] PASS: Kodgranskning visar uppslag på plats-ID och visning av befolkning, makt, ekonomi och resursstaplar.
-- [x] PASS: `docs/KB-02_04_2_KARTPANEL_EKONOMI.md` finns på GitHub.
-- [x] RAPPORTERAT PASS: Användaren svarade 'Klar med bägge' efter fråga om Safari-test och dokumentationsuppladdning.
-- [ ] EJ SEPARAT VERIFIERAT: Samtliga fem orters värden och resursstaplar i Safari.
-- [ ] EJ TESTAT: Liggande skärmläge.
+## KB-02.6 – Lokal kalendersparning
+- PASS GitHub: localStorage-nyckel `kronor-och-blod.calendar.v1`.
+- PASS Safari enligt användaren: datum kvar efter omladdning i samma flik.
+- EJ SEPARAT TESTAT: stängd flik, månad/årsskifte, blockerad lagring, privat läge.
 
-**KB-02.4.2 resultat:** PASS för kod- och filkontroll; övergripande Safari-PASS enligt användarens besked. Detaljtester kvarstår.
+## KB-03.1 – Karaktärsmodell
+- PASS GitHub: src/character.js, fyra bakgrunder, namnvalidering, egenskaper, Skara och lokal sparning.
+- EJ SEPARAT TESTAT: felaktiga namn/sparvärden och blockerad lagring.
 
-## KB-02.5 – Tid och årstider (2026-10-19)
-- [x] PASS: `src/calendar.js` finns på GitHub; fristående kalender med start 1 januari 1250.
-- [x] PASS: `index.html` laddar kalenderfilen och kopplar knappen till `advanceDay()`.
-- [x] PASS: `docs/KB-02_05_TID_OCH_ARSTIDER.md` finns på GitHub.
-- [x] PASS (användarrapporterat): Kalendern visas på iPhone efter att den uppdaterade GitHub Pages-sidan öppnats i Safari.
-- [x] PASS (användarrapporterat): Knappen för nästa dag fungerar och datumet ändras från 1 till 2 januari 1250.
-- [ ] EJ SEPARAT TESTAT: Övergången till 1 mars 1250 / vår efter 59 tryck.
-- [ ] EJ SEPARAT TESTAT: Alla fem markörer och samhällsvärden efter kalenderändring.
-- [ ] EJ TESTAT: JavaScript-konsol i Safari och liggande skärmläge.
+## KB-03.2 – Karaktärsskapare
+- PASS GitHub: src/character-ui.js och korrekt skriptordning.
+- PASS Safari enligt användaren: skapa, visa och ladda om karaktär.
+- EJ SEPARAT TESTAT: samtliga bakgrunder, ogiltiga namn, privat läge.
 
-**KB-02.5 resultat:** PASS för kalenderns grundfunktion enligt användarens iPhone-test. Sparning infördes senare i KB-02.6.
+## KB-03.3 – Karaktärsprofil
+- PASS GitHub: src/character-profile.js, korrekt skriptordning och cacheversion v=0336.
+- PASS Safari (skärmbild): endast profil visas, namn/kön/ålder/bakgrund/plats/egenskaper syns, karta syns och resetknapp visas.
+- Senare användarbekräftelse: återställningsknapp fungerade.
+- EJ SEPARAT TESTAT: alla bakgrunder, liggande skärmläge och felhantering.
 
-## KB-02.6 – Lokal sparning (2026-10-19)
-- [x] PASS: Uppdaterad `src/calendar.js` finns på GitHub med `localStorage` och sparnyckeln `kronor-och-blod.calendar.v1`.
-- [x] PASS: Användaren visade skärmbild där KB-02.6-filen serveras från GitHub Pages i Safari.
-- [x] PASS (användarrapporterat): Efter tre dagsteg och omladdning av samma Safari-flik finns datumet kvar.
-- [ ] EJ SEPARAT TESTAT: Stäng fliken helt och öppna spelet igen i samma Safari.
-- [ ] EJ SEPARAT TESTAT: Sparning över månadsskifte och årsskifte.
-- [ ] EJ SEPARAT TESTAT: Kartmarkörer och samhällsdata efter omladdning.
-- [ ] EJ TESTAT: Beteende vid blockerad lagring, privat surfning eller rensad webbplatsdata.
-- [ ] ÅTERSTÅR: `index.html` visar fortfarande gammal text om att sparning saknas; korrigera i separat UI-ändring.
+## KB-03.4 – Första berättelsescenen
+- PASS GitHub: src/story.js, src/app.js och index-aktivering.
+- PASS Safari enligt användaren: berättelseval, sparning, profil, kalender och fem kartplatser.
+- Tillfälligt kart-/kalenderproblem försvann utan kodändring; orsak okänd.
+- EJ TESTAT: alla tre berättelsegrenar, privat läge, blockerad lagring, samma namn/bakgrund.
 
-**KB-02.6 resultat:** PASS för lokal sparning vid omladdning i samma Safari-flik. Fullständigt återöppningstest och UI-textkorrigering återstår.
+## KB-03.5 – Ragnhild
+- PASS GitHub: src/encounter.js, plan och index-aktivering.
+- PASS Safari (skärmbild/användarbekräftelse): »Spår i gränden«, »En försiktig allians«, relation 0, kvarstående val efter omladdning samt fungerande karta/kalender.
+- Inte ett fullständigt test av alla svar.
 
-## KB-03.1 – Karaktärsmodell (2026-10-19)
-- [x] PASS: `src/character.js` finns på GitHub och har granskats.
-- [x] PASS (kodgranskning): Fyra bakgrunder, namnvalidering, egenskaper, Skara som startplats och lokal lagringslogik.
-- [ ] EJ SEPARAT TESTAT: Felaktiga namn, felaktiga sparvärden och blockerad lagring.
+## KB-03.6 – Mannen som försvann
+- PASS GitHub: src/investigation.js, implementationsdokument och index med v=0361 i rätt ordning.
+- PASS Safari (två skärmbilder): relation 0 ger »Ett löfte i mörkret« och ledtråd; relation +1 ger »Brevets avsändare« och ledtrådar.
+- PASS enligt användaren: val/ledtrådar kvarstår efter omladdning, karta och kalender fungerar.
+- EJ TESTAT: relation −1 och samtliga sex undersökningsval.
 
-**KB-03.1 resultat:** PASS för fil- och kodgranskning; användarflöde testat i KB-03.2.
-
-## KB-03.2 – Karaktärsskapare (2026-10-19)
-- [x] PASS: `src/character-ui.js` finns på GitHub och har granskats.
-- [x] PASS: `index.html` laddar `character.js` före `character-ui.js`, en gång vardera.
-- [x] PASS (användarrapporterat): Karaktärsskaparen fungerar i Safari på iPhone.
-- [x] PASS (användarrapporterat): Karaktären visas efter skapande med namn och egenskaper.
-- [x] PASS (användarrapporterat): Karaktären finns kvar efter omladdning av sidan.
-- [ ] EJ SEPARAT TESTAT: Skapa om karaktär, alla fyra bakgrunder, felaktiga namn, privat surfning och blockerad lagring.
-- [ ] ÅTERSTÅR: Förbättrad karaktärsprofil och spelintegration i senare paket.
-
-**KB-03.2 resultat:** PASS för grundflödet och lokal sparning efter omladdning, enligt användarens Safari-test.
+## Kvarstående tvärgående risker
+- Ingen stabil unik karaktärsidentitet: namn/bakgrund kan återanvända äldre berättelsedata.
+- Endast lokal webbläsarlagring, inte separata riktiga sparfiler.
+- Historisk faktakontroll, mobil liggande läge och blockerad lagring är inte färdigtestade.
+- Gammal Ragnhild-text hänvisar fortfarande till nästa paket.

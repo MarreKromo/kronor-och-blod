@@ -1,47 +1,52 @@
 # Daglig utvecklingslogg – SVERIGE: Kronor & Blod
+Uppdaterad: 2026-10-19
 
 ## 2026-10-19 – KB-01 till KB-02.6
-**Mål:** Etablera projektstruktur, historiskt underlag, klickbar karta, samhällsdatapanel, spelkalender och lokal kalendersparning.
-
-**Genomfört:**
-- GitHub-repository `MarreKromo/kronor-och-blod` etablerat med README, dokumentation, kartgrafik och källkod.
-- GDD, roadmap, beslutslogg, testlogg och historisk referenskarta uppladdade.
-- Kartprincip: 1600-talskartan är referens, inte spelkarta för 1250; grafik, platsdata och världsdata hålls separata.
-- KB-02.1: fem historiska platser med stabila ID:n dokumenterade.
-- KB-02.2: geografiska principer och forskningsbehov dokumenterade.
-- KB-02.3: klickbar karta publicerad via GitHub Pages och grundtestad på iPhone/Safari.
-- KB-02.4.1: `src/world.js` med fiktiva prototypvärden och dokumentation uppladdade och kontrollerade.
-- KB-02.4.2: `index.html` visar befolkning, resurser, makt och ekonomisk roll för vald plats.
-- KB-02.5: spelkalender med start 1 januari 1250 och manuell dagframflyttning; grundfunktion PASS i Safari.
-- KB-02.6: `src/calendar.js` uppdaterad med `localStorage` för automatisk sparning av passerade dagar.
-- Användaren visade KB-02.6-koden levererad av GitHub Pages och bekräftade att datumet finns kvar efter omladdning i samma Safari-flik.
-
-**Verifierat:** `src/calendar.js` har lästs direkt från GitHub. KB-02.6 visas via GitHub Pages enligt användarens skärmbild. Omladdningstest rapporterat PASS. Stängning och återöppning av flik är inte separat testat.
-
-**Teststatus:** KB-01 till KB-02.6 PASS inom respektive dokumenterad omfattning. Se `docs/TESTS.md` för öppna testpunkter.
-
-**Aktiv uppgift:** Ladda upp och verifiera dokumentationspaketet för KB-02.6: `docs/KB-02_06_LOKAL_SPARNING.md`, `docs/TESTS.md` och `docs/DAILY_LOG.md`.
-**Nästa exakta steg:** Ladda upp en dokumentfil i taget i GitHub `docs/`, commit och verifiera. Därefter korrigera gammal sidfotstext i separat UI-paket och planera KB-03 – spelarkaraktär.
-**Kända begränsningar:** Endast kalenderns dagantal sparas lokalt i aktuell webbläsare/enhet; ingen molnsparning eller övrig spelvärldssparning. Ingen handel, produktion eller ekonomisk simulering. Kalendern är förenklad gregoriansk modell, inte historiskt exakt för 1250. Historisk detaljgranskning, koordinater och rättighetskontroll för originalkartan återstår. Befolkning och resursindex är fiktiva prototypvärden. `index.html` har ännu gammal text om att sparning saknas.
-
+- Repository, GDD, roadmap, beslutslogg, testlogg och historiskt referensunderlag etablerades.
+- Fem platser med ID, kartprinciper, klickbar karta och plats-/ekonomipanel infördes.
+- Kalender start 1 januari 1250 och lokal kalendersparning infördes.
+- GitHub-kontroller PASS; grundläggande Safari-tester PASS inom dokumenterad omfattning.
+- Kända begränsningar: förenklad gregoriansk kalender, fiktiva ekonomivärden, begränsad källgranskning och enbart lokal sparning.
 
 ## 2026-10-19 – KB-03.1 och KB-03.2
-**Mål:** Införa spelarkaraktär utan att påverka karta, kalender eller samhällsdata.
+- Karaktärsmodell med fyra bakgrunder och lokal sparning infördes.
+- Karaktärsskapare kopplades in; användaren bekräftade skapande och sparning efter omladdning.
+- Kända begränsningar: ingen resa, molnsparning eller fullständig felhantering.
 
-**Genomfört:**
-- KB-03.1: `src/character.js` uppladdad och kontrollerad på GitHub. Modellen innehåller namn, fyra bakgrunder, egenskaper, startplats `VG-SKARA-001` och lokal sparning med nyckeln `kronor-och-blod.character.v1`.
-- KB-03.2: `src/character-ui.js` uppladdad och kontrollerad. `index.html` uppdaterad med skripten i rätt ordning.
-- Användaren skapade en karaktär i Safari och bekräftade att den visas samt finns kvar efter omladdning.
+## 2026-10-19 – KB-03.3
+- Karaktärsprofil i src/character-profile.js; den dubbla karaktärsvyn dold.
+- Profilens resetknapp flyttades, skript versionsmärktes v=0336.
+- GitHub/Safari PASS för profil; reset senare användarbekräftat.
+- Designbeslut: spelbar man, 18 år vid start; kvinnliga NPC:er nu, kvinnliga spelkaraktärer senare.
 
-**Verifierat:** GitHub-filernas existens och skriptordning PASS. Grundflöde och omladdningssparning PASS enligt användaren. Se `docs/TESTS.md`.
+## 2026-10-19 – KB-03.4
+- Första berättelsescenen med tre val och lokal sparning.
+- index.html gjord läsbar och kart-/kalenderlogik flyttad till src/app.js.
+- GitHub/Safari PASS för berättelse, profil, kalender och karta.
+- Tillfälligt kart-/kalenderproblem försvann utan kodändring; orsak okänd.
 
-**Teststatus:** KB-03.1 kodgranskning PASS; KB-03.2 grundfunktion och omladdning PASS. Felhantering, samtliga bakgrunder och återöppning efter stängd flik ej separat testade.
+## 2026-10-19 – KB-03.5
+- Ragnhilds scen, svar, relationsvärde och separat lokal sparning infördes.
+- GitHub PASS och Safari PASS enligt skärmbild och användarbekräftelse.
+- Begränsning: identitet bygger på namn/bakgrund och tidigare val.
 
-**Aktiv uppgift:** Dokumentera KB-03.1 och KB-03.2 i `docs/TESTS.md` och `docs/DAILY_LOG.md`; ladda upp och verifiera en fil i taget.
-**Nästa exakta steg:** Efter dokumentations-PASS, planera KB-03.3 karaktärsprofil som separat, litet paket. Rätta samtidigt inte orelaterad kod.
-**Kända begränsningar:** Karaktären kan ännu inte resa eller påverka världen. Endast lokal webbläsarsparning; ingen molnsynk. Sidfoten i `index.html` säger fortfarande felaktigt att sparning saknas och ska rättas separat.
+## 2026-10-19 – KB-03.6
+- »Mannen som försvann« planerad, implementerad i src/investigation.js och aktiverad i index.html.
+- GitHub PASS; Safari PASS för två berättelsevägar och bestående ledtrådar.
+- Relation −1 och samtliga sex val ännu inte fullständigt testade.
 
-### Mall för nästa pass
+## 2026-10-19 – Kvalitetsbeslut och dokumentationsstädning
+- KB-03.6.1 beslutad: rätta inaktuella texter, förbättra flöde och konsekvenser, testa relation −1 och planera riktiga sparfiler.
+- docs/IMPROVEMENT_BACKLOG.md med 22 förbättringspunkter verifierad på GitHub.
+- KB-DOC-01 påbörjad: inventering av 34 poster i docs (33 dokument + .gitkeep).
+- Fyra huvuddokument ska slås ihop utan att äldre filer raderas innan verifiering.
+
+## Aktuellt läge
+Aktivt paket: KB-DOC-01, steg 1 – sammanslagning av fyra huvuddokument.
+Nästa exakta steg: ladda upp färdiga TESTS.md, DAILY_LOG.md, ROADMAP.md och ARBETSMETOD.md; verifiera GitHub.
+Kända problem: samma information utspridd i tilläggsfiler; gamla statusrader i huvuddokument; risk för blandade testkaraktärer med samma namn/bakgrund.
+
+### Mall för nästa arbetspass
 Datum:
 Aktivt paket:
 Senaste fungerande commit/branch:
