@@ -1,9 +1,11 @@
-// KB-03.4 – första berättelsescenen. Fristående från karta och kalender.
+// KB-03.4 / IMP-025 steg 3C – bind första kapitlets äldre sparning till karaktärs-ID.
 (function () {
   'use strict';
   const character = window.KB_CHARACTER;
   if (!character) return;
   const KEY = 'kronor-och-blod.story.v1';
+  const OWNER_KEY = 'kronor-och-blod.story.owner.v1';
+  const BACKUP_KEY = 'kronor-och-blod.backup.pre-migration.v1';
   const introductions = {
     bonde: 'Du känner doften av vedrök och våt jord. Arbetet väntar, som det alltid gör.',
     hantverkare: 'Verktygen ligger framme. En beställning måste bli klar innan dagen är slut.',
@@ -25,13 +27,40 @@
   if (!anchor) return;
   anchor.insertAdjacentElement('afterend',host);
   const node = (tag, value, cls) => { const el = document.createElement(tag); if (value !== undefined) el.textContent = value; if (cls) el.className = cls; return el; };
+  function ownerFor(c, raw) {
+    if (!c.characterId || !raw) return false;
+    try {
+      const saved = JSON.parse(localStorage.getItem(OWNER_KEY) || 'null');
+      if (saved) return saved.version === 1 && saved.characterId === c.characterId && saved.storyRaw === raw;
+      // Migrera endast en äldre sparning som finns i den bevarade originalkopian.
+      const backup = JSON.parse(localStorage.getItem(BACKUP_KEY) || 'null');
+      if (!backup || !backup.entries || backup.entries[KEY] !== raw) return false;
+      const record = JSON.stringify({ version: 1, characterId: c.characterId, storyRaw: raw });
+      localStorage.setItem(OWNER_KEY, record);
+      return localStorage.getItem(OWNER_KEY) === record;
+    } catch (_) { return false; }
+  }
   function read(c) {
-    try { const data = JSON.parse(localStorage.getItem(KEY) || 'null'); return data && data.version === 1 && data.characterName === c.name && data.background === c.background && choices[data.choice] ? data : null; }
-    catch (_) { return null; }
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (!raw || !ownerFor(c, raw)) return null;
+      const data = JSON.parse(raw);
+      return data && data.version === 1 && data.characterName === c.name && data.background === c.background && choices[data.choice] ? data : null;
+    } catch (_) { return null; }
   }
   function save(c, choice) {
-    try { localStorage.setItem(KEY, JSON.stringify({ version:1, characterName:c.name, background:c.background, choice, flag:choices[choice].flag })); return true; }
-    catch (_) { return false; }
+    if (!c.characterId || !choices[choice]) return false;
+    try {
+      // Skriv aldrig över en berättelse som tillhör en annan identitet.
+      const existing = localStorage.getItem(KEY);
+      if (existing && !ownerFor(c, existing)) return false;
+      const raw = JSON.stringify({ version:1, characterName:c.name, background:c.background, choice, flag:choices[choice].flag });
+      const owner = JSON.stringify({ version:1, characterId:c.characterId, storyRaw:raw });
+      localStorage.setItem(OWNER_KEY, owner);
+      if (localStorage.getItem(OWNER_KEY) !== owner) return false;
+      localStorage.setItem(KEY, raw);
+      return localStorage.getItem(KEY) === raw;
+    } catch (_) { return false; }
   }
   function draw() {
     const c = character.get();
@@ -49,7 +78,12 @@
     Object.entries(choices).forEach(([id, choice]) => {
       const button = node('button',choice.label,'kb-story-choice');
       button.type = 'button';
-      button.addEventListener('click', () => { if (!character.get()) return; save(c,id); draw(); });
+      button.addEventListener('click', () => {
+        const current = character.get();
+        if (!current || current.characterId !== c.characterId) return;
+        if (!save(current,id)) { window.alert('Berättelsen kunde inte sparas säkert. Äldre sparningar har inte skrivits över.'); return; }
+        draw();
+      });
       host.appendChild(button);
     });
     host.append(node('p','Ditt första val sparas lokalt. Du kan inte ändra det utan att skapa en ny testkaraktär.','kb-story-note'));
