@@ -1,6 +1,6 @@
 # SVERIGE: Kronor & Blod – Improvement Backlog
-Version: 1.0
-Datum: 2026-10-19
+Version: 1.1
+Datum: 2026-10-20
 Status: LEVANDE PLANERINGSDOKUMENT – inga punkter markeras som implementerade utan verifiering.
 
 ## Syfte
@@ -52,6 +52,13 @@ Status: `IDÉ`, `PLANERAD`, `PÅGÅR`, `TESTAS`, `PASS`, `PARKERAD`.
 | IMP-020 | P3 | IDÉ | Animationer och ljud | Förstärk stämningen efter att grundsystem och design fungerar |
 | IMP-021 | P2 | IDÉ | Historisk faktagranskning | Skilj belagda förhållanden från fiktiva berättelser |
 | IMP-022 | P2 | IDÉ | Tillgänglighet och mobilprestanda | Läsbart, responsivt och stabilt i Safari på iPhone |
+
+## D. Hem och dagshistorik
+| ID | Prioritet | Status | Förbättring | Godkännandekriterium |
+| --- | --- | --- | --- | --- |
+| IMP-023 | P1 | PLANERAD | **Kompakt dagshistorik på Hem**: vanliga dagar visas som kort datumrad/sammanfattning; viktiga händelser får större kort med berättelse, spelarval och konsekvenser; äldre händelser kan öppnas för detaljer | Historiken är överskådlig på iPhone även efter många dagar; viktiga händelser framträder; befintliga anteckningar bevaras; inga dubbletter efter omladdning |
+
+**Bakgrund 2026-10-20:** Safari-skärmbilder från KB-03.6.3 visar att många vanliga dagar upprepar samma text och gör Hem onödigt långt. Förbättringen är ännu inte implementerad.
 
 ## Utvecklingsordning
 1. Avsluta och GitHub-verifiera dokumentation för KB-03.6 och detta backlog-dokument.
