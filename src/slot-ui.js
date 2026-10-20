@@ -1,11 +1,12 @@
-// KB-03.6.8 / IMP-025 3H.3 – manuell kopia av aktiv karaktär till separat sparplats.
+// KB-03.6.9 / IMP-025 3H.3.1 – manuell kopia av aktiv karaktär till separat sparplats.
 // Inget byte, ingen automatisk migrering, ingen radering.
 (function () {
   'use strict';
   const slots = window.KB_CHARACTER_SLOTS;
   const character = window.KB_CHARACTER;
-  const host = document.getElementById('kbCharacterContent');
-  if (!slots || !character || !host) return;
+  const host = document.querySelector('.kb-profile');
+  const characterContent = document.getElementById('kbCharacterContent');
+  if (!slots || !character || !host || !characterContent) return;
   const wrap = document.createElement('div');
   wrap.style.cssText = 'margin-top:16px;padding:14px;border:1px solid #786c4c;border-radius:6px';
   const title = document.createElement('h3');
@@ -43,6 +44,6 @@
     if (!character.get()) { wrap.remove(); return; }
     if (wrap.parentElement !== host) host.appendChild(wrap);
   });
-  observer.observe(host, { childList: true });
+  observer.observe(characterContent, { childList: true });
   mount();
 })();
