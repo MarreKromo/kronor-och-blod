@@ -80,3 +80,74 @@
     if (!panel.hidden) render();
   });
 })();
+
+// IMP-025 J-L3 – skrivskyddad sammanfattning, formulär bakom egen utfällning.
+// Körs sist efter livsbakgrundens befintliga kontroller. Inga lagringsskrivningar.
+(function () {
+  'use strict';
+  const root = document.getElementById('kb-life-profile-entry');
+  if (!root || root.tagName !== 'DETAILS' || document.getElementById('kb-jl3-editor')) return;
+  const form = root.querySelector('#kb-life-background-form');
+  const skill = root.querySelector('#kb-jk2-skills-preview');
+  if (!form || !skill) return;
+  const summary = root.querySelector(':scope > summary');
+  if (summary) summary.textContent = 'Min livsbakgrund och färdigheter';
+
+  const card = document.createElement('div');
+  card.style.cssText = 'margin:10px 14px;padding:14px;border:1px solid #a68c5c;border-radius:8px;background:#263a2d';
+  const heading = document.createElement('strong');
+  heading.textContent = 'Min berättelse';
+  heading.style.cssText = 'display:block;font:600 16px system-ui;margin-bottom:8px';
+  const description = document.createElement('p');
+  description.style.cssText = 'margin:0;font:14px/1.6 system-ui;color:#eadcc1;overflow-wrap:anywhere';
+  card.append(heading,description);
+
+  const editor = document.createElement('details');
+  editor.id = 'kb-jl3-editor';
+  editor.style.cssText = 'margin:12px 14px;border:1px solid #8e7a51;border-radius:8px;background:#19291f';
+  const editTitle = document.createElement('summary');
+  editTitle.textContent = 'Visa formulär och sparningskontroller';
+  editTitle.style.cssText = 'cursor:pointer;padding:14px;min-height:48px;font:600 14px system-ui';
+  const editorBody = document.createElement('div');
+  editorBody.style.cssText = 'padding:0 10px 12px';
+  editor.append(editTitle,editorBody);
+
+  // Flytta endast formulärets omgivande UI. Händelselyssnare och kontroller följer med.
+  // Säkerhetskontroller som ligger på root lämnas kvar.
+  const mount = root.querySelector('.kb-life-form-mount');
+  if (mount) editorBody.appendChild(mount);
+  else editorBody.appendChild(form);
+  // Flytta inte andra säkerhetskontroller: de ligger kvar i originalsektionen.
+  skill.before(card);
+  skill.after(editor);
+
+  function render() {
+    let message = 'Ingen verifierad livsbakgrund för den aktiva karaktären.';
+    try {
+      const character = window.KB_CHARACTER && window.KB_CHARACTER.get();
+      const model = window.KB_LIFE_BACKGROUND_MODEL;
+      const data = localStorage.getItem('kronor-och-blod.life-background.v1');
+      const rawOwner = localStorage.getItem('kronor-och-blod.life-background.owner.v1');
+      if (character && character.characterId && model && data !== null && rawOwner !== null) {
+        const owner = JSON.parse(rawOwner);
+        if (owner && owner.version === 1 &&
+            owner.characterId === character.characterId &&
+            owner.backgroundRaw === data) {
+          const result = model.parse(data);
+          if (result.ok) {
+            message = result.value.biography && result.value.biography.trim()
+              ? result.value.biography.trim()
+              : 'Livsbakgrunden är sparad och verifierad. Ingen berättelsetext angiven.';
+          }
+        }
+      }
+    } catch (_) {
+      message = 'Livsbakgrunden kunde inte verifieras. Ingen data ändrades.';
+    }
+    description.textContent = message;
+  }
+  render();
+  root.addEventListener('toggle', function () { if (root.open) render(); });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) render(); });
+  window.addEventListener('pageshow', render);
+})();
