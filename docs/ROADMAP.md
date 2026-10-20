@@ -1,3 +1,26 @@
+## AKTUELL STYRNING v2.0 — 2026-10-20
+**Detta avsnitt ersätter äldre prioriteringar längre ned i filen.** Officiell vision: [`MASTERPLAN_V2.md`](MASTERPLAN_V2.md). Äldre roadmaptext behålls ordagrant som projekthistorik.
+
+**Projekt:** KRONOR & BLOD (arbetsnamn), egen mörk realistisk fantasyvärld. Ingen längre historisk Sverige-simulering.
+
+### Aktiv ordning
+- [ ] **V2-00 Dokumentationsövergång:** fem styrdokument i ett paket. Efter uppladdning: GitHub-verifiering. Ingen spelkod ändras.
+- [ ] **V2-01 Världsbibel:** geografi, politiska nivåer, riken och småstater, startregion, världstid, namngivning och grundkonflikter. Fatta beslut innan kod.
+- [ ] **V2-02 Teknisk migrationsdesign:** inventera samtliga hårdkodade Sverige-referenser, plats-ID:n, kalendrar, sparnycklar, identitetspar, slots, backup och återställning. Välj säker isolering/migration utan dataradering.
+- [ ] **V2-03 Vertikal spelbar prototyp:** en fantasyregion, ett antal personer, en tydlig spelkedja och verklig tid/position först när transaktioner är säkra.
+- [ ] **V2-04 Levande samhälle:** NPC-rutiner, familjer, relationer, yrken, ekonomi och konsekvenser.
+- [ ] **V2-05 Politik och dynastier:** titlar, vasaller, adelshus, tronföljd, rikesbildning och krig i avgränsade steg.
+
+### Frysta och bevarade arbeten
+- B1.1 och B1.2 är isolerade skrivskyddade prototyper med tidigare rapporterade Safari PASS (8/8 respektive 12/12).
+- B1.3 är **PAUSAD**; ingen verklig resefunktion eller positionsmigration är godkänd.
+- A2-backup är testad inom tidigare dokumenterad omfattning; verklig återställning av saknad slot i Safari är fortfarande otestad.
+- All befintlig spelkod, Testbonde, JH2-Test, Mk, Sven och Erik och localStorage lämnas orörda i V2-00.
+
+**Nästa exakta steg efter GitHub PASS för V2-00:** designa V2-01 världsbibeln. Ingen ny gameplay-kod före att migrationsriskerna i V2-02 är kartlagda.
+
+---
+
 # Roadmap – SVERIGE: Kronor & Blod
 Uppdaterad: 2026-10-20
 **Aktuell styrning:** KB-PLAN-01. Historiska delpaket och äldre prioriteringar finns i Git-historiken (föregående ROADMAP.md: blob `9d0c5c4d8e719fcf86740f8fd1e629222f37cabc`) och i `docs/TESTS.md`, `docs/DAILY_LOG.md` och äldre stoppunkter.
@@ -117,15 +140,3 @@ Milstolpen är **inte** uppnådd. Den byggs genom små paket från fas A–D.
 ## Nästa exakta steg
 **KB-PLAN-01:** GitHub-verifiera denna roadmap efter commit.
 **Därefter Fas A1:** läsbaserad inventering av sparnycklar och karaktärskoppling, utan spelkodändring.
-
----
-
-## Aktuell checkpoint – 2026-10-20 · A2 avslutat, B1 nästa
-- [x] **A1:** läsbaserad inventering av sparnycklar och karaktärskoppling genomförd.
-- [x] **A2.1–A2.6:** backup-specifikation, full export, SHA-256, validering, backupcenter och create-only-återställning färdigbyggda och testade inom dokumenterad omfattning.
-- [x] **A2.6:** GitHub PASS; 10/10 isolerade Safari-tester PASS. Riktig backup kontrollerad: fem befintliga sparplatser, noll saknade; ingen import gjordes.
-- [ ] **Kvarstående A2-begränsning:** faktisk återställning av en saknad karaktär i verklig Safari-lagring är inte testad.
-- [ ] **A3:** generell versionering/migration och full felmatris är fortfarande öppna; inte automatiskt godkända genom A2.
-- [ ] **B1 (nästa aktiva paket):** bestående karaktärsposition, skillnad mellan kartval och resa, första väg och tidskostnad, karaktärsisolering och omladdning.
-- **Nuvarande vägledning:** `docs/KB_A2_AVSLUT_OCH_B_START_2026-10-20.md` och `docs/KB_B1_POSITION_RESOR_PLAN.md`.
-- Äldre formuleringar ovan om att A1 är nästa steg är historiska och ersätts av denna checkpoint.

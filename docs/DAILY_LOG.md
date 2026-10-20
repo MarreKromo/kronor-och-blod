@@ -1,3 +1,14 @@
+## 2026-10-20 — BESLUT: Kronor & Blod v2.0
+- Projektägaren beslutar att ersätta den historiska Sverige-inriktningen med en egen mörk, huvudsakligen realistisk fantasyvärld.
+- Politisk grund: kombination av etablerade större kungadömen och mindre riken/furstendömen/fria städer som kan förenas, splittras och erövras.
+- Kärnvision: levande värld, spelaren inte utvald, social rörlighet från bonde till kung, dynastier och generationer.
+- `docs/MASTERPLAN_V2.md` blir enda aktuella spelvision; `docs/LEGACY_INDEX.md` märker äldre dokument som historik.
+- B1.3 pausas. B1.1 och B1.2:s tidigare isolerade testresultat kvarstår; de innebär inte att resor eller fantasyvärld är implementerade.
+- Detta är ett **dokumentationspaket**; ingen spelkod, lokal sparning, backup eller karaktär ändras.
+- **Efter användarens commit:** verifiera fem filer i GitHub, rapportera PASS/FAIL. Därefter V2-01 världsbibel och V2-02 migrationsdesign före ny spelkod.
+
+---
+
 # Daglig utvecklingslogg – SVERIGE: Kronor & Blod
 Uppdaterad: 2026-10-20
 
@@ -194,14 +205,3 @@ Nästa exakta steg:
 - **Separat checkpoint:** `docs/CHECKPOINT_JL3_2026-10-20.md`, GitHub PASS.
 
 **Nästa exakta steg:** GitHub-verifiera detta dokumentationspaket (`docs/TESTS.md` och `docs/DAILY_LOG.md`) efter användarens commit. Välj därefter nästa avgränsade utvecklingspaket. Behåll små ZIP-paket och separata GitHub-/Safari-tester. Tidigare poster är historiska och får inte raderas.
-
----
-
-## 2026-10-20 – Kapitel A2 avslutat; startpunkt för B1
-- A2.1–A2.6 är implementerade och GitHub-verifierade. Isolerade Safari-resultat: A2.2 6/6, A2.3 7/7, A2.4 7/7, A2.5 7/7 och A2.6 10/10 PASS.
-- Full JSON-backup laddades ned och återvaldes i Safari. SHA-256-verifiering PASS. Fem karaktärer: Testbonde, JH2-Test, Mk, Sven och Erik.
-- A2.6 kontrollerades mot verklig backup: fem befintliga sparplatser, noll saknade. Ingen riktig återställning utfördes; scenariot saknad sparplats har bara isolerat PASS.
-- GitHub Pages visade tillfälligt 404 innan lyckad deployment; testet fungerade efter publicering.
-- Dokumenten `docs/KB_A2_AVSLUT_OCH_B_START_2026-10-20.md` och `docs/KB_B1_POSITION_RESOR_PLAN.md` är uppladdade och GitHub-verifierade.
-- **Aktivt nästa paket:** B1. Granska faktisk kod för karta, platser, kalender, karaktärsidentitet och byte innan ändringar. Skilj visad kartplats från karaktärens faktiska position. Först isolerade tester, sedan verklig Safari-testning utan att radera eller skriva över sparningar.
-- Tidigare ”nästa steg”-poster är historik och ska inte användas som aktuella instruktioner.

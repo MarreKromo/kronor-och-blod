@@ -1,3 +1,16 @@
+## ÖVERGÅNGSREGLER v2.0 — 2026-10-20
+**Detta avsnitt har företräde framför äldre arbetsinstruktioner nedan.**
+
+1. Endast `docs/MASTERPLAN_V2.md` är aktuell spelvision. `docs/ROADMAP.md` är aktiv utvecklingsplan; `docs/LEGACY_INDEX.md` förklarar historiska filer. Skapa inte en andra aktiv masterplan.
+2. Dokumentationspaketet V2-00 ändrar **endast fem docs-filer**; ingen `src/`, `index.html`, `tests/`, lagringsnyckel eller befintlig karaktär ändras.
+3. Historisk dokumentation och gamla PASS/FAIL får inte raderas eller omtolkas som test av fantasyvärlden. Lägg nya checkpoint-avsnitt överst; bevara äldre text ordagrant.
+4. Arbetsflöde: fullständiga filer i ZIP med repo-relativa sökvägar → iPhone-uppladdning → commit → separat GitHub-verifiering. Dokumentationspaket behöver inte Safari-test.
+5. Före kodmigration: kartlägg hårdkodade Sverige-platser, startår, sparnycklar, ägarskap, slots, switchjournal, backup/export/import och eventuella resetflöden. Gör en återställningsplan och isolerade tester först.
+6. Bevara alla befintliga karaktärer och deras data. Ingen tyst reset, omskrivning av gamla plats-ID:n eller otestad konvertering.
+7. Håll teknisk prototyp och framtida fantasyvärld åtskilda tills ett säkert, versionsmärkt byte är beslutat.
+
+---
+
 # Arbetsmetod – SVERIGE: Kronor & Blod
 
 Beslutad: 2026-10-19
@@ -75,15 +88,3 @@ Inför varje ny spel- eller gränssnittsfunktion ska vi:
 - **Migration efter behov:** under prototypfasen kan testdata nollställas i stället för att bygga dyra engångsmigrationer, men beslutet dokumenteras och verifieras. Innan riktiga spelare tillkommer krävs en definierad och testad policy för kompatibilitet, säkerhetskopiering och återställning.
 - **Gäller IMP-025 3H.12.3 och framåt:** utforma den nya bakgrundsmodellen framtidssäkert; inga speciallösningar enbart för Mk/Erik/Sven. Varje risk för befintlig demodata meddelas före installation.
 - **Arbetsflödet kvarstår:** små ZIP-paket, komplett ersättningsfil med historiken bevarad, commit, GitHub PASS och separat Safari PASS.
-
----
-
-## Reviderat arbetsflöde – 2026-10-20 (ersätter äldre mikropaketsregler)
-- **Sammanhållna leveranser:** normalt 3–6 närbesläktade funktioner per ZIP och en commit/testomgång per paket. Vid risk eller kritiska fel får ett mindre paket användas.
-- **iPhone först:** kompletta ersättningsfiler med korrekta repo-relativa sökvägar i ZIP. Ingen manuell långredigering på telefonen.
-- **Två verifieringsnivåer:** efter commit kontrollerar assistenten faktisk GitHub-kod (GitHub PASS/FAIL). Användaren testar separat i vanlig Safari (Safari PASS/FAIL). Isolerade minnestester får inte beskrivas som skarp återställning.
-- **Kapitelvis huvuddokumentation:** uppdatera `ROADMAP.md`, `TESTS.md`, `DAILY_LOG.md` och vid behov `ARBETSMETOD.md` samlat när ett helt kapitel avslutas, inte efter varje mikrosteg. Tidigare historik bevaras ordagrant.
-- **Dataskydd:** inventera aktuella localStorage-nycklar och karaktärsägarskap innan kodändring; aldrig tyst radera, migrera eller skriva över sparplatser. Informera och invänta uttryckligt godkännande om nollställning någonsin behövs.
-- **Safari-cache:** ändrade JS-filer får nya skriptversionsparametrar i HTML. Kontrollera även att GitHub Pages hunnit publiceras.
-- **Spelarupplevelse:** planera först spelarens mobilflöde och kontrollera samspelet mellan karta, tid, position, berättelse och historik.
-- Äldre formuleringar ovan om att alltid göra ”små ZIP-paket” och uppdatera dokument efter varje delsteg är historiska; denna regel gäller framåt.
