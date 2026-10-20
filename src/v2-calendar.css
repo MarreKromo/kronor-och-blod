@@ -1,1 +1,12 @@
-.calendar-panel{margin:14px 14px 0;padding:15px 18px;border:1px solid #76674a;border-radius:8px;background:#1b2722;color:#eee4cf}.calendar-eyebrow{font:600 11px system-ui,sans-serif;letter-spacing:1.5px;color:#c6a879;text-transform:uppercase}.calendar-panel h2{font-size:23px;font-weight:400;margin:9px 0 3px}.calendar-season{font:13px system-ui,sans-serif;color:#d2c2a5}.calendar-status{font:12px/1.5 system-ui,sans-serif;color:#d6c29c}.calendar-advance{min-height:46px;width:100%;border:1px solid #c7a76b;border-radius:7px;background:#725733;color:#fff4dd;font:600 14px system-ui,sans-serif}.calendar-advance:disabled{opacity:.45}
+/* V2-03.2F.1 – story-first time resource */
+.calendar-panel[hidden]{display:none!important}
+.calendar-panel{margin:0 14px 16px;padding:20px 19px 18px;border:1px solid #b69a65;border-radius:10px;background:linear-gradient(145deg,#26382f 0%,#18261f 70%,#16221c 100%);color:#f6ebd5;box-shadow:0 12px 28px #0005,inset 0 1px #fff1}
+.calendar-heading{display:flex;align-items:center;gap:14px}
+.calendar-symbol{display:grid;place-items:center;flex:none;width:58px;height:58px;border-radius:12px;border:1px solid #ad905e;background:#354638;color:#e6c88e;font-size:30px;line-height:1}
+.calendar-eyebrow{font:700 10px system-ui,sans-serif;letter-spacing:1.8px;color:#d6b985;text-transform:uppercase}
+.calendar-panel h2{font-size:clamp(25px,7vw,33px);font-weight:400;line-height:1.15;margin:5px 0 4px}
+.calendar-season{margin:0;font:13px system-ui,sans-serif;color:#e0c9a1}
+.calendar-status{font:12px/1.5 system-ui,sans-serif;color:#d3c4a7;margin:13px 0}
+.calendar-advance{display:flex;align-items:center;justify-content:center;gap:10px;min-height:53px;width:100%;border:1px solid #e0c28c;border-radius:7px;background:#9a7440;color:#fff8e9;font:700 16px system-ui,sans-serif;cursor:pointer}
+.calendar-advance:active{background:#ac8650}
+.calendar-advance:disabled{opacity:.45;cursor:default}
