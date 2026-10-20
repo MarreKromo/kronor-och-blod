@@ -1,0 +1,16 @@
+/* V2-03.2K: active encounter takes the scene; completed decisions move to Dagbok. */
+.story.v2-focus-active .scene-art,
+.story.v2-focus-active .scene-meta,
+.story.v2-focus-active #sceneTitle,
+.story.v2-focus-active #storyText,
+.story.v2-focus-active #choices,
+.story.v2-focus-active #storySaveNotice{display:none!important}
+.story.v2-focus-active .scene-body{padding-top:25px}
+.story.v2-focus-active .living-story{margin-top:0;padding-top:0;border-top:0}
+.v2-event-history[hidden]{display:none!important}
+.v2-event-history{margin-top:30px;border-top:1px solid #786c52;padding-top:24px}
+.v2-history-entry{padding:12px 0 24px}
+.v2-history-entry+.v2-history-entry{border-top:1px solid #766b51;padding-top:24px}
+.v2-history-entry h4{font-size:23px;font-weight:400;margin:12px 0;color:#f1e4cd}
+.v2-history-choice{font-weight:700;color:#e8c991!important}
+.v2-history-result{color:#ded5c3!important}
