@@ -1,17 +1,36 @@
 (()=>{'use strict';
-const KEY='kronor-och-blod.fantasy.v2.first-scene.v1';
+const binding=window.KB_V2_STORY_BINDING;
 const scenes={
 start:{title:'Regnet har fallit i fyra dagar',place:'Keldra',paragraphs:['Vattnet letar sig längs hjulspåren mellan husen. Vid en gårdsgrind står Mara med handen på en säck utsäde. En bärare från kvarnen väntar under en genomblöt huva.','”De vill ha säden före marknaden”, säger Mara. ”Tar de den nu har vi inget att så med.”','Bäraren skakar på huvudet. ”Jag har bara fått order att hämta det som är skyldigt.”'],choices:[['help','Hjälp Mara att skydda utsädet'],['mill','Sök upp kvarnen i Dorneth'],['tax','Fråga om skatterna vid Varnhold'],['leave','Gå vidare med ditt eget liv']]},
 help:{title:'Ett löfte i regnet',place:'Keldra',paragraphs:['Du ställer dig bredvid Mara. Bäraren tvekar när du frågar vem som bestämt att säden ska hämtas redan i dag.','”Jag kan inte lova något”, säger han. ”Men jag kan framföra det ni säger.” Mara nickar kort. Skulden finns fortfarande kvar.'],choices:[['mill','Gå till Dorneth och sök svar'],['end','Fortsätt dagen']]},
 mill:{title:'Vid kvarnen i Dorneth',place:'Dorneth',paragraphs:['Du följer vägen mot Dorneth. Här luktar det vått trä och mald säd. Vid kvarnen räknar en kvinna säckar medan folk väntar på sin tur.','Hon presenterar sig som Edda. ”Alla vill ha mjöl på kredit”, säger hon. ”Men någon måste betala för kvarnhjulet också.”'],choices:[['end','Fråga efter arbete och fortsätt dagen'],['end','Lämna kvarnen utan att lova något']]},
 tax:{title:'Vägen mot Varnhold',place:'Dornmark',paragraphs:['På vägen möter du folk som talar om nya pålagor. Ingen tycks veta om de verkligen är beslutade.','Du kan söka upp fogdens folk en annan dag. I dag har du bara hört ett rykte.'],choices:[['end','Fortsätt dagen']]},
 leave:{title:'Din egen väg',place:'Keldra',paragraphs:['Du lämnar gårdsgrinden bakom dig. Det finns arbete att söka och andra vägar att gå.','Bakom dig fortsätter diskussionen om säden. Världen väntar inte på att du ska välja sida.'],choices:[['end','Fortsätt dagen']]},
-end:{title:'Ryktet vid vägen',place:'Keldra',paragraphs:['Senare talar någon om en skadad ryttare som setts längs vägen. En del säger att han bar bud från hovet. Andra säger att han bara flydde från rövare.','En sak är säker: priserna diskuteras med allt större oro. Vad som verkligen hänt vet du ännu inte.'],choices:[['start','Börja en ny berättelse (nollställ denna prototyp)']]}
+end:{title:'Ryktet vid vägen',place:'Keldra',paragraphs:['Senare talar någon om en skadad ryttare som setts längs vägen. En del säger att han bar bud från hovet. Andra säger att han bara flydde från rövare.','En sak är säker: priserna diskuteras med allt större oro. Vad som verkligen hänt vet du ännu inte.'],choices:[['start','Börja en ny berättelse (nollställ denna karaktärs berättelse)']]}
 };
-const $=id=>document.getElementById(id);let state={scene:'start',history:[]};try{const raw=localStorage.getItem(KEY);if(raw){const saved=JSON.parse(raw);if(saved&&scenes[saved.scene]&&Array.isArray(saved.history))state={scene:saved.scene,history:saved.history.filter(x=>typeof x==='string').slice(-30)};}}catch(_){/* works without storage */}
-let tab='story';function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(_){}}
-function choose(target,label){if(state.scene==='end'&&target==='start'){state={scene:'start',history:[]};}else{state.history.push(label);state.scene=target;}save();tab='story';render();}
-function render(){const s=scenes[state.scene];$('location').textContent=tab==='story'?s.place:tab==='journal'?'Dagbok':'Dornmark';$('day').textContent='Första prototypen';$('sceneTitle').textContent=tab==='story'?s.title:tab==='journal'?'Din dagbok':'Kända platser';const text=$('storyText'),choices=$('choices');text.replaceChildren();choices.replaceChildren();function paragraph(t,cl){const p=document.createElement('p');p.textContent=t;if(cl)p.className=cl;text.appendChild(p)}
-if(tab==='story'){s.paragraphs.forEach((p,i)=>paragraph(p,i===1&&state.scene==='start'?'dialogue':''));s.choices.forEach(([target,label])=>{const b=document.createElement('button');b.type='button';b.className='choice';b.textContent=label;b.addEventListener('click',()=>choose(target,label));choices.appendChild(b)})}else if(tab==='journal'){paragraph(state.history.length?'Dina val hittills:':'Din berättelse har precis börjat.');state.history.forEach((h,i)=>paragraph((i+1)+'. '+h))}else{paragraph('Keldra – byn där berättelsen börjar.');paragraph('Dorneth – marknadsort med kvarn och handel.');paragraph('Varnhold – borg och maktcentrum.');paragraph('Detta är ännu ingen fungerande resekarta. Platserna visas som berättelseinformation.')}['story','journal','map'].forEach(t=>$(t+'Tab').classList.toggle('active',t===tab));}
-[['storyTab','story'],['journalTab','journal'],['mapTab','map']].forEach(([id,t])=>$(id).addEventListener('click',()=>{tab=t;render()}));render();
+const $=id=>document.getElementById(id);let tab='story';
+function paragraph(parent,t,cl){const p=document.createElement('p');p.textContent=t;if(cl)p.className=cl;parent.appendChild(p);}
+function render(){
+ const text=$('storyText'),choices=$('choices');text.replaceChildren();choices.replaceChildren();
+ const result=binding?.read()||{ok:false,error:'Berättelsemodulen saknas.'};
+ $('day').textContent='Första prototypen';
+ if(!result.ok){$('location').textContent='Dornmark';$('sceneTitle').textContent='Din berättelse väntar';paragraph(text,result.error);binding?.message(result.error);return;}
+ const state=result.value;
+ if(!Object.prototype.hasOwnProperty.call(scenes,state.scene)){$('sceneTitle').textContent='Sparningen kunde inte tolkas';paragraph(text,'Okänd berättelsescen. Sparningen har inte ändrats.');return;}
+ binding.message('Berättelsen är kopplad till din aktiva karaktär.');
+ const s=scenes[state.scene];$('location').textContent=tab==='story'?s.place:tab==='journal'?'Dagbok':'Dornmark';$('sceneTitle').textContent=tab==='story'?s.title:tab==='journal'?'Din dagbok':'Kända platser';
+ if(tab==='story'){
+  s.paragraphs.forEach((p,i)=>paragraph(text,p,i===1&&state.scene==='start'?'dialogue':''));
+  s.choices.forEach(([target,label])=>{const b=document.createElement('button');b.type='button';b.className='choice';b.textContent=label;b.addEventListener('click',()=>{
+   const next=state.scene==='end'&&target==='start'?{scene:'start',history:[]}:{scene:target,history:[...state.history,label]};
+   const saved=binding.write(next);if(!saved.ok){binding.message(saved.error);return;}
+   tab='story';render();
+  });choices.appendChild(b);});
+ }else if(tab==='journal'){paragraph(text,state.history.length?'Dina val hittills:':'Din berättelse har precis börjat.');state.history.forEach((h,i)=>paragraph(text,(i+1)+'. '+h));}
+ else{paragraph(text,'Keldra – byn där berättelsen börjar.');paragraph(text,'Dorneth – marknadsort med kvarn och handel.');paragraph(text,'Varnhold – borg och maktcentrum.');paragraph(text,'Detta är ännu ingen fungerande resekarta. Platserna visas som berättelseinformation.');}
+ ['story','journal','map'].forEach(t=>$(t+'Tab').classList.toggle('active',t===tab));
+}
+[['storyTab','story'],['journalTab','journal'],['mapTab','map']].forEach(([id,t])=>$(id).addEventListener('click',()=>{tab=t;render();}));
+window.addEventListener('kb:v2-character-changed',render);
+render();
 })();
