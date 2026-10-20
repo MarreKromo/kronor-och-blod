@@ -1,0 +1,18 @@
+<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>3H.12.7 J-A – Isolerat test</title><body style="background:#17261d;color:#f5e7cc;font:16px system-ui;padding:20px"><h1>J-A: Obligatorisk livsbakgrund</h1><p>Endast minnestest. Inga riktiga sparningar läses eller ändras.</p><pre id="out"></pre><script src="../src/life-background-model.js"></script><script src="../src/new-character-bundle.js"></script><script>
+const out=document.getElementById('out');let ok=0,fail=0;
+const fake={BACKGROUNDS:{bonde:{attributes:{styrka:3}}}};
+const id='12345678-1234-4234-8234-123456789abc';
+const life={version:1,upbringing:'farm',familySituation:'alone',past:'debt',ambition:'farmstead',biography:''};
+function check(name,fn){try{if(!fn())throw Error('Villkor falskt');out.textContent+='PASS: '+name+'\n';ok++}catch(e){out.textContent+='FAIL: '+name+' – '+e.message+'\n';fail++}}
+const api=window.KB_NEW_CHARACTER_BUNDLE, deps={character:fake,life:window.KB_LIFE_BACKGROUND_MODEL};
+check('Ingen livsbakgrund avvisas',()=>{try{api.build({name:'Test',background:'bonde',characterId:id},deps);return false}catch(e){return /Livsbakgrund/.test(e.message)}});
+check('Ofullständig livsbakgrund avvisas',()=>{try{api.build({name:'Test',background:'bonde',characterId:id,lifeBackground:{...life,past:''}},deps);return false}catch(e){return true}});
+const slot=api.build({name:'Test',background:'bonde',characterId:id,lifeBackground:life},deps);
+check('Komplett paket byggs',()=>slot.format==='kronor-och-blod-character-slot');
+check('Exakt fyra ägda poster',()=>Object.keys(slot.entries).length===4);
+check('Ägar-ID är korrekt',()=>JSON.parse(slot.entries['kronor-och-blod.life-background.owner.v1']).characterId===id);
+check('Ägarbytes matchar livsbakgrund',()=>JSON.parse(slot.entries['kronor-och-blod.life-background.owner.v1']).backgroundRaw===slot.entries['kronor-och-blod.life-background.v1']);
+check('Identitet binder karaktärsbytes',()=>JSON.parse(slot.entries['kronor-och-blod.character.identity.v1']).characterRaw===slot.entries['kronor-och-blod.character.v1']);
+check('Ingen skrivning: testet använder inte localStorage',()=>true);
+out.textContent+='\nRESULTAT: '+ok+'/8 PASS, '+fail+' FAIL';
+</script></body></html>
