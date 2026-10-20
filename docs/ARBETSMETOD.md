@@ -1,5 +1,45 @@
+# KRONOR & BLOD — ARBETSMETOD v3.0
+**Beslutad uppdatering: 2026-10-21. Detta avsnitt har företräde framför äldre instruktioner längre ned.**
+
+## 1. Sammanhängande paket som standard
+- Bygg **större, logiskt sammanhängande och spelbara ZIP-paket** när delarna naturligt hör ihop. Målet är färre chattmeddelanden, uppladdningar, commits och testomgångar, utan att offra kvalitet.
+- Ett paket kan omfatta datakontrakt, motor, UI, relevanta tester och dokumentation för **en och samma funktion**. Exempel: jordbruksaktivitet + tidskostnad + XP + färdighetsvy + sparsäkerhet.
+- Dela bara upp i mindre paket när en konkret risk, ett beroende, ett oklart beslut eller en verklig säkerhetsgrind kräver det. Motivera uppdelningen tydligt; dela inte rutinmässigt i ”steg 1/2/3”.
+- Undvik också alltför stora paket med orelaterade system. Ett paket ska gå att förstå, granska och testa som en sammanhängande spelupplevelse.
+
+## 2. Standardflöde — iPhone först
+1. Assistenten läser aktuell kod och relevanta dokument från GitHub **innan** ett paket byggs.
+2. Beskriv kort vad spelaren faktiskt ser, gör och upplever på iPhone; granska hur funktionen passar i befintlig berättelse, navigation, kalender och sparning.
+3. Bygg **en riktig, kontrollerad ZIP** med kompletta ersättningsfiler och repo-relativa sökvägar. Bevara all annan fungerande kod; ändra endast det som behövs. Versionsmärk ändrade JS/CSS-filer i `index.html` för Safari-cache.
+4. Användaren packar upp ZIP på iPhone, laddar upp filerna och gör normalt **en commit för hela paketet**, sedan svarar ”Klar”.
+5. Assistenten läser filerna direkt från GitHub och redovisar **GitHub PASS/FAIL**. Påstå inte att något är uppladdat eller testat utan faktisk verifiering.
+6. Användaren provar det sammanhängande flödet i Safari och rapporterar **Safari PASS/FAIL**. För dokumentationspaket utan spelkod krävs inget Safari-test.
+7. Efter godkänt test uppdateras den samlade statusen och eventuella kända begränsningar. Fortsätt sedan till nästa funktion, inte till en serie onödiga mikropaket.
+
+## 3. Dokumentationsprincip
+- Fyra aktiva styrdokument: `docs/MASTERPLAN_V2.md` (innehåller masterplan v3.0), `docs/ROADMAP.md`, `docs/SYSTEMS.md`, `docs/DEVLOG.md`. **Detta dokument** styr arbetsprocessen och är ett särskilt permanent undantag.
+- Uppdatera dokumentation **samlat vid ett avslutat funktionskapitel** eller vid viktiga arkitektur-/produktbeslut. Skapa inte ett nytt permanent dokument för varje ZIP och skriv inte om samma status efter varje mikroändring.
+- Bevara äldre dokument och Git-historik som referens. Masterplanen är funktionsregistret; roadmapen prioriterar; SYSTEMS beskriver verklig implementation; DEVLOG skiljer plan, GitHub-test och Safari-test.
+- Inget tidigare beslutat kärnsystem får tas bort från masterplanen utan projektägarens uttryckliga godkännande.
+
+## 4. Säkerhetsgrindar
+- Alla bestående speldata ska ha definierat ägarskap, version, validering, kompatibilitet och test av omladdning/karaktärsbyte. Ingen tyst reset, radering eller migration.
+- Vid kombinerade operationer (t.ex. tid + XP + inventarium) måste vi före leverans verifiera idempotens, transaktions-/återhämtningsdesign och felvägar. Om detta kräver ett separat paket ska den **konkreta tekniska orsaken** förklaras.
+- Utbytbar prototypdata får bara nollställas efter tydlig riskinformation och uttryckligt godkännande. Framtida riktiga användarsparningar prioriteras i arkitekturen.
+- Ändra inte orelaterade system. Kontrollera regression för berättelse, dagbok, NPC-val, kalender och karaktärsbyte när relevant.
+- Spelkänsla är ett acceptanskriterium, inte bara att koden fungerar. Undvik staplade paneler och onödig scrollning på iPhone.
+
+## 5. Nästa tillämpning: V2-03.3B
+- **Planera som ett sammanhängande funktionspaket:** säker färdighets-/aktivitetsmodell, jordbruk i Keldra, verklig tidskostnad, erfarenhet, begriplig UI och regressionstester.
+- Om en säker och återhämtningsbar tid/XP-operation inte kan verifieras i samma leverans: stoppa och avgränsa endast den nödvändiga säkerhetsdelen. Inget skenbart XP-system och ingen dubbelbelöning.
+- V2-03.3A var ett dokumenterat kontrakt och är avslutat. Det kräver inte att varje följande intern del blir en separat commit.
+
+---
+
+# Historiska arbetsregler (bevarade som referens; v3.0 ovan gäller vid konflikt)
+
 ## ÖVERGÅNGSREGLER v2.0 — 2026-10-20
-**Detta avsnitt har företräde framför äldre arbetsinstruktioner nedan.**
+**Detta avsnitt hade tidigare företräde framför äldre arbetsinstruktioner nedan. Ersatt i konflikter av v3.0 ovan.**
 
 1. Endast `docs/MASTERPLAN_V2.md` är aktuell spelvision. `docs/ROADMAP.md` är aktiv utvecklingsplan; `docs/LEGACY_INDEX.md` förklarar historiska filer. Skapa inte en andra aktiv masterplan.
 2. Dokumentationspaketet V2-00 ändrar **endast fem docs-filer**; ingen `src/`, `index.html`, `tests/`, lagringsnyckel eller befintlig karaktär ändras.
