@@ -1,0 +1,48 @@
+<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>3H.12.7 G – sparprov</title>
+<style>body{background:#151a17;color:#f2e7ce;font:17px system-ui;padding:20px;max-width:650px;margin:auto}button{background:#914633;color:#fff1d7;border:1px solid #d9b579;border-radius:7px;padding:14px}pre{white-space:pre-wrap;line-height:1.7;overflow-wrap:anywhere}</style>
+<h1>Livsbakgrund – isolerat sparprov</h1><p>Vi testar den riktiga sparmotorn mot en separat låtsaslagring. Inga riktiga spelkaraktärer eller sparningar berörs.</p>
+<button id="run">Kör sparprov</button><pre id="out">Inte körda.</pre>
+<script>
+document.getElementById('run').onclick=async()=>{
+const out=document.getElementById('out');out.textContent='Kör tester…';
+try{
+const scripts=await Promise.all(['../src/life-background-model.js','../src/life-background-save.js'].map(async p=>{const r=await fetch(p+'?v=03127g',{cache:'no-store'});if(!r.ok)throw Error('Saknar '+p);return r.text()}));
+const frame=document.createElement('iframe');frame.hidden=true;frame.sandbox='allow-scripts';document.body.append(frame);
+const token='g'+Math.random();
+const wait=new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Tidsgräns nådd')),12000);const listener=e=>{if(e.source!==frame.contentWindow||e.data?.token!==token)return;clearTimeout(timer);window.removeEventListener('message',listener);resolve(e.data.lines)};window.addEventListener('message',listener)});
+frame.srcdoc=`<!doctype html><script>
+window.addEventListener('message',e=>{
+const {token,scripts}=e.data,lines=[];
+const prefix='kronor-och-blod.',idA='11111111-1111-4111-8111-111111111111',idB='22222222-2222-4222-8222-222222222222';
+const store=new Map(), storage={getItem:k=>store.has(k)?store.get(k):null,setItem:(k,v)=>store.set(k,String(v)),removeItem:k=>store.delete(k)};
+let active=idA;
+const raw=JSON.stringify({version:1,name:'Testperson',background:'bonde',placeId:'VG-SKARA-001',attributes:{styrka:3,list:1,anseende:1}});
+const character={get:()=>({characterId:active,name:'Testperson'})};
+function identity(id){store.set(prefix+'character.v1',raw);store.set(prefix+'character.identity.v1',JSON.stringify({version:1,characterId:id,characterRaw:raw}));}
+function reset(){store.clear();active=idA;identity(idA)}
+function check(cond,msg){if(!cond)throw Error(msg)}
+function rejects(fn){let failed=false;try{fn()}catch(_){failed=true}check(failed,'Förväntat stopp saknas')}
+const w={KB_CHARACTER:character,KB_LIFE_BACKGROUND_MODEL:null,KB_LIFE_BACKGROUND_SAVE:null};
+const valid={version:1,upbringing:'farm',familySituation:'together',past:'debt',ambition:'trade',biography:'En resa börjar.'};
+try{
+new Function('window',scripts[0])(w);
+const load=()=>new Function('window','localStorage',scripts[1])(w,storage);
+function test(name,fn){try{reset();load();fn();lines.push('PASS '+name)}catch(err){lines.push('FAIL '+name+': '+err.message)}}
+test('Spara livsbakgrund för testperson',()=>{check(w.KB_LIFE_BACKGROUND_SAVE.save(valid).ok,'Kunde inte spara');check(w.KB_LIFE_BACKGROUND_SAVE.inspect().value.past==='debt','Fel innehåll')});
+test('Läs tillbaka efter simulerad omladdning',()=>{w.KB_LIFE_BACKGROUND_SAVE.save(valid);load();check(w.KB_LIFE_BACKGROUND_SAVE.inspect().value.biography===valid.biography,'Återläsning misslyckades')});
+test('Dubbel sparning blockeras',()=>{w.KB_LIFE_BACKGROUND_SAVE.save(valid);rejects(()=>w.KB_LIFE_BACKGROUND_SAVE.save(valid))});
+test('Felaktig identitet blockeras',()=>{store.set(prefix+'character.identity.v1','{}');rejects(()=>w.KB_LIFE_BACKGROUND_SAVE.save(valid))});
+test('Ogiltiga val blockeras',()=>rejects(()=>w.KB_LIFE_BACKGROUND_SAVE.save({...valid,past:'unknown'})));
+test('Pågående bytesjournal blockeras',()=>{store.set(prefix+'switch.journal.v1','{}');rejects(()=>w.KB_LIFE_BACKGROUND_SAVE.save(valid))});
+test('Karaktär B kan inte läsa A:s bakgrund',()=>{w.KB_LIFE_BACKGROUND_SAVE.save(valid);active=idB;identity(idB);rejects(()=>w.KB_LIFE_BACKGROUND_SAVE.inspect());rejects(()=>w.KB_LIFE_BACKGROUND_SAVE.save(valid))});
+test('Återgång till A läser A:s bakgrund',()=>{w.KB_LIFE_BACKGROUND_SAVE.save(valid);active=idB;identity(idB);active=idA;identity(idA);check(w.KB_LIFE_BACKGROUND_SAVE.inspect().value.ambition==='trade','A:s bakgrund saknas')});
+test('Ofullständigt bakgrundspar blockeras',()=>{store.set(prefix+'life-background.v1','{}');rejects(()=>w.KB_LIFE_BACKGROUND_SAVE.save(valid))});
+test('Inga journaler kvar efter lyckad sparning',()=>{w.KB_LIFE_BACKGROUND_SAVE.save(valid);check(storage.getItem(prefix+'life-background.write-journal.v1')===null,'Journal kvar')});
+}catch(err){lines.push('FAIL Testmiljö: '+err.message)}
+parent.postMessage({token,lines},'*');
+});<\/script>`;
+await new Promise(resolve=>frame.addEventListener('load',resolve,{once:true}));frame.contentWindow.postMessage({token,scripts},'*');
+const lines=await wait;out.textContent=lines.join('\n')+'\n\n'+lines.filter(x=>x.startsWith('PASS')).length+'/'+lines.length+' PASS';frame.remove();
+}catch(e){out.textContent='TESTFEL: '+e.message}
+};
+</script></html>
