@@ -1,54 +1,12 @@
-// KB-A2.5 – stand-alone backup center; no storage writes or import.
-(function(){
-'use strict';
-const builder=window.KB_FULL_BACKUP_BUILDER, integrity=window.KB_FULL_BACKUP_INTEGRITY,
- validator=window.KB_FULL_BACKUP_VALIDATOR;
-const exportButton=document.getElementById('export'),status=document.getElementById('status'),
-file=document.getElementById('file'),previewStatus=document.getElementById('previewStatus'),
-characters=document.getElementById('characters');
-let busy=false;
-const setBusy=value=>{busy=value;exportButton.disabled=value;file.disabled=value};
-function download(json,filename){
- const blob=new Blob([json],{type:'application/json;charset=utf-8'});
- const url=URL.createObjectURL(blob);
- const a=document.createElement('a');
- a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
- setTimeout(()=>URL.revokeObjectURL(url),60000);
-}
-exportButton.addEventListener('click',async()=>{
- if(busy)return;
- setBusy(true);status.textContent='Kontrollerar sparningar…';
- try{
-  if(!builder||!integrity||!validator)throw Error('En säkerhetsmodul saknas.');
-  const raw=builder.build(localStorage);
-  const sealed=await integrity.seal(raw);
-  const result=await validator.preview(sealed,integrity);
-  if(!result.ok)throw Error('Förhandskontroll misslyckades: '+result.reason);
-  const filename='kronor-och-blod-alla-karaktarer-'+new Date().toISOString().slice(0,10)+'.json';
-  download(JSON.stringify(sealed,null,2),filename);
-  status.textContent='Export begärd för '+result.characters.length+' karaktär(er) och '+result.slotCount+' sparplats(er). Kontrollera själv att filen '+filename+' finns i Filer. Ingen import har gjorts.';
- }catch(e){status.textContent='Export stoppad: '+e.message+'. Dina sparningar har inte ändrats av exportverktyget.'}
- finally{setBusy(false)}
-});
-file.addEventListener('change',async()=>{
- if(busy)return;
- characters.replaceChildren();
- const selected=file.files&&file.files[0];
- if(!selected){previewStatus.textContent='Ingen fil vald.';return}
- if(selected.size>5*1024*1024){previewStatus.textContent='Filen är för stor (max 5 MB).';return}
- setBusy(true);previewStatus.textContent='Kontrollerar filen…';
- try{
-  const raw=await selected.text();
-  const payload=JSON.parse(raw);
-  const result=await validator.preview(payload,integrity);
-  if(!result.ok)throw Error(result.reason);
-  previewStatus.textContent='PASS – kontrollsumma och karaktärsdata verifierade. '+result.characters.length+' karaktär(er), '+result.slotCount+' sparplats(er). Skapad: '+result.createdAt+'. Ingen import utförd.';
-  for(const c of result.characters){
-   const li=document.createElement('li');
-   li.textContent=c.name+(c.active?' (aktiv vid export)':'')+' · ID: '+c.id;
-   characters.appendChild(li);
-  }
- }catch(e){previewStatus.textContent='FAIL – filen kan inte godkännas: '+e.message}
- finally{setBusy(false)}
-});
+// KB-A2.6 – backup center, explicit create-only restore.
+(function(){'use strict';
+const builder=window.KB_FULL_BACKUP_BUILDER,integrity=window.KB_FULL_BACKUP_INTEGRITY,validator=window.KB_FULL_BACKUP_VALIDATOR,engine=window.KB_FULL_BACKUP_RESTORE;
+const $=id=>document.getElementById(id),exportButton=$('export'),status=$('status'),file=$('file'),previewStatus=$('previewStatus'),characters=$('characters'),choices=$('restoreChoices'),restoreButton=$('restore'),restoreStatus=$('restoreStatus');
+let busy=false,loaded=null,planned=null;
+function setBusy(v){busy=v;exportButton.disabled=v;file.disabled=v;restoreButton.disabled=v||!planned||!planned.candidates.length}
+function reset(){loaded=null;planned=null;choices.replaceChildren();characters.replaceChildren();restoreButton.disabled=true;restoreStatus.textContent='Ingen återställning förberedd.'}
+function download(json,filename){const blob=new Blob([json],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000)}
+exportButton.addEventListener('click',async()=>{if(busy)return;setBusy(true);status.textContent='Kontrollerar sparningar…';try{const sealed=await integrity.seal(builder.build(localStorage)),result=await validator.preview(sealed,integrity);if(!result.ok)throw Error(result.reason);const name='kronor-och-blod-alla-karaktarer-'+new Date().toISOString().slice(0,10)+'.json';download(JSON.stringify(sealed,null,2),name);status.textContent='Export begärd för '+result.characters.length+' karaktär(er) och '+result.slotCount+' sparplats(er). Kontrollera filen i Filer.'}catch(e){status.textContent='Export stoppad: '+e.message}finally{setBusy(false)}});
+file.addEventListener('change',async()=>{if(busy)return;reset();const selected=file.files&&file.files[0];if(!selected){previewStatus.textContent='Ingen fil vald.';return}if(selected.size>5*1024*1024){previewStatus.textContent='Filen är för stor (max 5 MB).';return}setBusy(true);previewStatus.textContent='Kontrollerar filen…';try{const data=JSON.parse(await selected.text()),valid=await validator.preview(data,integrity);if(!valid.ok)throw Error(valid.reason);const p=await engine.plan(data,localStorage,validator,integrity);loaded=data;planned=p;previewStatus.textContent='PASS – kontrollsumma verifierad. '+valid.characters.length+' karaktär(er), '+valid.slotCount+' sparplats(er). Ingen import utförd.';for(const c of valid.characters){const li=document.createElement('li');li.textContent=c.name+(c.active?' (aktiv vid export)':'');characters.appendChild(li)}for(const c of p.candidates){const label=document.createElement('label'),cb=document.createElement('input');cb.type='checkbox';cb.value=c.id;cb.checked=true;label.append(cb,document.createTextNode(' Lägg till '+c.name));choices.appendChild(label)}for(const c of p.conflicts){const el=document.createElement('p');el.textContent='Hoppar över '+c.name+': '+c.reason;choices.appendChild(el)}restoreStatus.textContent=p.candidates.length?p.candidates.length+' saknade sparplatser kan läggas till. Ingen ändring har gjorts.':'Inga saknade sparplatser att återställa. Allt befintligt lämnas orört.';}catch(e){reset();previewStatus.textContent='FAIL – '+e.message}finally{setBusy(false)}});
+restoreButton.addEventListener('click',async()=>{if(busy||!loaded||!planned)return;const ids=Array.from(choices.querySelectorAll('input:checked')).map(c=>c.value);if(!ids.length){restoreStatus.textContent='Markera minst en saknad karaktär.';return}const names=planned.candidates.filter(c=>ids.includes(c.id)).map(c=>c.name);if(!window.confirm('Lägg till '+names.length+' saknade sparplatser?\n\n'+names.join(', ')+'\n\nBefintliga sparningar skrivs inte över.'))return;setBusy(true);restoreStatus.textContent='Kontrollerar och återställer…';try{const result=await engine.restore(loaded,localStorage,validator,integrity,ids);restoreStatus.textContent='PASS – '+result.restored.length+' saknade sparplatser har lagts till. Aktiva karaktären ändrades inte. Ladda om sidan och välj backupfilen igen för ny jämförelse.';loaded=null;planned=null;choices.replaceChildren();restoreButton.disabled=true}catch(e){restoreStatus.textContent='STOPP – '+e.message+' Kontrollera sparplatserna innan nytt försök.'}finally{setBusy(false)}});
 })();
