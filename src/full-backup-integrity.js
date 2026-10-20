@@ -1,9 +1,8 @@
-// KB-A2.3 – isolated SHA-256 seal and read-only verification.
+// KB-A2.3 FIX1 – isolated SHA-256 seal and read-only verification.
 // No localStorage, no import, no download. Requires secure context (GitHub Pages).
 (function () {
   'use strict';
   const fail = message => { throw Error(message); };
-  const own = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
   function plain(value) {
     if (!value || typeof value !== 'object' || Array.isArray(value) ||
         Object.getPrototypeOf(value) !== Object.prototype) fail('Objektformatet är ogiltigt.');
@@ -22,7 +21,7 @@
     if (p.format !== 'kronor-och-blod-full-backup' || p.version !== 2 ||
         typeof p.createdAt !== 'string' || !Number.isFinite(Date.parse(p.createdAt)) ||
         !(p.activeCharacterId === null || (typeof p.activeCharacterId === 'string' &&
-          /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(p.activeCharacterId))))
+          /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(p.activeCharacterId))))
       fail('Felaktigt backupformat.');
     for (const field of ['activeEntries', 'slots', 'otherEntries']) {
       plain(p[field]);
@@ -60,11 +59,10 @@
   async function seal(unsigned) {
     validate(unsigned, false);
     const checksum = await hash(unsigned);
-    const result = {
+    return {
       ...unsigned,
       manifest:{...unsigned.manifest,checksumAlgorithm:'SHA-256',checksum}
     };
-    return result;
   }
   async function verify(sealed) {
     try {
