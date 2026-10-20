@@ -1,45 +1,26 @@
-# KRONOR & BLOD — SYSTEMS
-**Status:** teknisk nulägesöversikt, uppdaterad 2026-10-21. Skilj implementerat från planerat.
+# KRONOR & BLOD – SYSTEMS
+**Status:** V2-03.2L förberett för GitHub- och Safari-test 2026-10-21.
 
-## Implementerad V2-arkitektur
-- `index.html` laddar V2-modulerna.
-- `src/v2-data-contract.js`: V2-karaktär med UUID, startplats Keldra, bakgrundsfält och separata nycklar.
-- `src/v2-character.js`: upp till tre karaktärsplatser, byte av aktiv karaktär.
-- `src/v2-story-binding.js`: scen och valhistorik per karaktär.
-- `src/v2.js`: Regn över Keldra, berättelse, dagbok och platser.
-- `src/v2-calendar.js` och `src/v2-calendar-ui.js`: separat kalender per karaktär, start 1 januari 1250, Fortsätt dagen.
-- `src/v2-events.js` och `src/v2-npc.js`: Maras tidsstyrda händelse och Eddas möte med karaktärsbundna beslut.
-- `src/v2-narrative.css`: sammanhållen berättelsepresentation.
-- `src/v2-focus.js` och `src/v2-focus.css`: läsande presentationslager. Pågående möten i Berättelse; avgjorda möten i Dagbok. V2-03.2K GitHub PASS och användarrapporterad Safari PASS.
+## Befintlig V2-grund
+- `src/v2-data-contract.js`: UUID, Keldra och separata karaktärsnycklar.
+- `src/v2-character.js`: tre karaktärsplatser.
+- `src/v2-story-binding.js` och `src/v2.js`: berättelse, dagbok och platser.
+- `src/v2-calendar.js` och `src/v2-calendar-ui.js`: karaktärsbunden kalender.
+- `src/v2-events.js` och `src/v2-npc.js`: Mara och Edda med val och ägarbundna create-only-beslut.
+- `src/v2-focus.js`: aktuell händelse i berättelsen, avgjorda händelser i dagboken. V2-03.2K GitHub/Safari PASS.
 
-## Livsbakgrund – befintlig grund, ännu ej fullt spelaktiv
-- `src/life-background-model.js` är en ren modell för validering och etiketter; den skriver inte till lagring.
-- Fält: `upbringing`, `familySituation`, `past`, `ambition`, `biography`; modellversion 1.
-- Uppväxt: `farm`, `craft`, `letters`, `freeborn`; familj: `together`, `distant`, `alone`; förflutet: `ordinary`, `debt`, `promise`, `conflict`; ambition: `farmstead`, `trade`, `travel`, `influence`.
-- V2-karaktären innehåller bakgrund. Det finns ännu ingen generell mekanik som gör bakgrunden till kontakter, startresurser, relationer eller färdighetsbonusar.
-- Utökat skapande/UI planeras separat; inga tysta ändringar av befintliga karaktärsposter.
+## V2-03.2L – frågesteg i NPC-samtal (test väntar)
+- `src/v2-events-ui.js` och `src/v2-npc-ui.js` visar två möjliga frågor innan befintliga beslutsknappar.
+- Ett svar visas direkt efter frågan; spelaren kan ställa en annan fråga eller välja det tidigare befintliga beslutet.
+- Frågor är tillfälliga presentationsval, inte sparade beslut, XP, NPC-minnen eller verkliga ekonomiska effekter. Omladdning kan återställa frågesteget.
+- Beslut går fortfarande endast genom `KB_V2_EVENTS.decide()` respektive `KB_V2_NPC.decide()` med befintlig validering och lagring.
+- `index.html` versionsmärker båda UI-skripten `?v=2032l` för Safari-cache.
+- Inga nya lagringsnycklar, migrationer eller automatiska återställningar.
 
-## Färdigheter – planerat, INTE aktivt
-- Grundkatalog att besluta: jordbruk, hantverk, handel, kunskap/skrift, social förmåga, överlevnad, ridning och strid.
-- Designbehov: nivå/XP, svårighetsgrad, tidskostnad, träning/lärare, rimliga startförutsättningar, skydd mot XP-farm, versionsmärkt ägarbunden lagring.
-- Äldre `Jordbruk +2` från Sverige-prototypen var en skrivskyddad förhandsvisning. Det är inte en aktiv V2-bonus.
-- Första riktiga färdighetsmomentet måste påverka en faktisk aktivitet och klara GitHub/Safari-regression innan det kallas implementerat.
-
-## Händelser och NPC-konsekvenser
-- Maras händelse är tillgänglig från modelldag 3; upptäckt och beslut kan ske senare. Beslutet har egen beslutsdag och konsekvensflagga.
-- Edda-mötet kräver relevant tidigare Mara-beslut och tid; dialogval leder exempelvis till `edda_konflikt`.
-- Händelserna är ännu inte en full NPC-ekonomi, relationsmodell eller autonom simulering.
-- Avgjorda möten kan visas i Dagbok genom V2-03.2K utan nya sparnycklar.
+## Planerade kärnsystem, INTE implementerade
+- Livsbakgrund: `src/life-background-model.js` är läsande valideringsmodell; aktiv effekt på kontakter, resurser och färdigheter saknas.
+- Färdigheter: jordbruk, hantverk, handel, kunskap, socialt, överlevnad, ridning och strid; XP/nivåer och tid måste designas och testas.
+- Ekonomi, arbete, resor, följeslagare, egna grupper, familjer, dynastier, politik och krig kvarstår som mål enligt masterplan v3.0 och roadmap v3.0.
 
 ## Sparsäkerhet
-- V2-prefix: `kronor-och-blod.fantasy.v2.`; karaktärs-ID används för berättelse, kalender och händelseposter.
-- Äldre Sverige-nycklar migreras eller raderas inte automatiskt. Äldre testkaraktärer behöver inte vara spelbara i V2.
-- Korrupta/främmande poster ska ge säkert stopp, inte tyst nollställning.
-- Safari localStorage är lokal för enheten/webbläsaren; ingen fullständig V2-backup eller molnsynk är verifierad.
-
-## Princip för kommande implementation
-En karaktärs bakgrund ger förutsättningar, handlingar förbrukar tid och kan öka färdigheter, och både NPC:er och berättelse reagerar på resultat. Definiera kontrakt och tester före nya skrivningar. Ingen parallell motor eller automatisk ändring av befintliga sparningar.
-
-
-## KB-DOC-04 — nulägesgräns för framtida system
-Masterplan v3.0 och Roadmap v3.0 bevarar färdigheter, bakgrund, ekonomi, handel, egendom, följeslagare, egna grupper, familjer, dynastier, politik och krig som **produktmål**. Ingen av dessa stora motorer blir implementerad av dokumentuppdateringen. Äldre `src/life-background-model.js` är en valideringsmodell, inte bevis för aktiv bakgrundsbonus i V2. Ingen spelkod eller lagring ändras i KB-DOC-04.
+V2-prefix `kronor-och-blod.fantasy.v2.`. Äldre Sverige-sparningar raderas eller migreras inte automatiskt. Ogiltiga poster ska ge säkert stopp. Safari localStorage är lokal; full V2-backup/export återstår.
