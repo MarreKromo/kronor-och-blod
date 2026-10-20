@@ -1,0 +1,26 @@
+<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KB-A2.5 – Integrationstest</title><style>body{font:16px system-ui;max-width:680px;margin:25px auto;padding:16px;background:#17261e;color:#f3e5c8}li{margin:12px 0}</style><h1>KB-A2.5 – Exportkedjan</h1><p>Endast påhittade data i minnet. Ingen riktig localStorage används.</p><ol id="results"></ol>
+<script src="../src/full-backup-builder.js?v=a25"></script><script src="../src/full-backup-integrity.js?v=a25"></script><script src="../src/full-backup-validator.js?v=a25"></script>
+<script>(async()=>{
+const out=document.getElementById('results');const report=(name,ok)=>{const li=document.createElement('li');li.textContent=(ok?'PASS: ':'FAIL: ')+name;out.appendChild(li)};
+const B='kronor-och-blod.',id='12345678-1234-4234-8234-123456789abc',id2='87654321-4321-4321-8321-cba987654321';
+const entry=(who,name)=>{const c=JSON.stringify({version:1,name,background:'bonde',placeId:'VG-SKARA-001'});return {[B+'character.v1']:c,[B+'character.identity.v1']:JSON.stringify({version:1,characterId:who,characterRaw:c})}};
+const a=entry(id,'Testbonde'),b=entry(id2,'Skrivare');
+const slot=(who,name,e)=>JSON.stringify({format:'kronor-och-blod-character-slot',version:1,characterId:who,name,savedAt:'2026-10-20T12:00:00Z',entries:e});
+const data={...a,[B+'slot.v1.'+id]:slot(id,'Testbonde',a),[B+'slot.v1.'+id2]:slot(id2,'Skrivare',b)};
+const storage=o=>({get length(){return Object.keys(o).length},key(i){return Object.keys(o)[i]??null},getItem(k){return Object.prototype.hasOwnProperty.call(o,k)?o[k]:null}});
+try{
+ const built=window.KB_FULL_BACKUP_BUILDER.build(storage(data));
+ report('Två slots läses',Object.keys(built.slots).length===2);
+ const sealed=await window.KB_FULL_BACKUP_INTEGRITY.seal(built);
+ report('SHA-256 förseglas',/^[a-f0-9]{64}$/.test(sealed.manifest.checksum));
+ const check=await window.KB_FULL_BACKUP_VALIDATOR.preview(sealed,window.KB_FULL_BACKUP_INTEGRITY);
+ report('Förhandsgranskning godkänner exporten',check.ok&&check.characters.length===2);
+ const reloaded=JSON.parse(JSON.stringify(sealed));
+ report('JSON-fil kan läsas tillbaka',(await window.KB_FULL_BACKUP_VALIDATOR.preview(reloaded,window.KB_FULL_BACKUP_INTEGRITY)).ok);
+ reloaded.activeEntries[B+'character.v1']='{}';
+ report('Ändrad fil stoppas',!(await window.KB_FULL_BACKUP_VALIDATOR.preview(reloaded,window.KB_FULL_BACKUP_INTEGRITY)).ok);
+ const unsafe={...data,[B+'switch.journal.v1']:'{}'};
+ try{window.KB_FULL_BACKUP_BUILDER.build(storage(unsafe));report('Pågående transaktion stoppas',false)}catch(_){report('Pågående transaktion stoppas',true)}
+ report('Minnesdata har inte ändrats',data[B+'character.v1']===a[B+'character.v1']);
+}catch(e){report('Testkedja: '+e.message,false)}
+})();</script></html>
