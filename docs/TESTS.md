@@ -102,3 +102,20 @@ Status anges per paket och endast inom faktiskt verifierad omfattning. Historisk
 | 3H.11.5 | PASS | PASS, bild | Ny profil, emblem, egenskaper, prototypetikett dold. |
 
 **Öppna tester:** 3H.11.6 ej påbörjad. Full regression av berättelse, kalender, fler bakgrunder och sparningar återstår. Se `docs/DAILY_LOG.md`.
+
+---
+
+## 2026-10-20 – IMP-025 3H.12.7 J-H1–J-H3 (aktuell status)
+
+| Paket | GitHub | Safari | Verifiering |
+| --- | --- | --- | --- |
+| J-H1 | PASS | PASS enligt användaren | Obligatoriskt formulär, fyra livsval, frivillig biografi, förhandsvisning. Inga riktiga skrivningar i detta steg. |
+| J-H2A | PASS | PASS 10/10, skärmbild | Isolerade säkerhetstester med minneslagring, inte verklig Safari-sparning. |
+| J-H2B | PASS | PASS, skärmbild + omladdningskontroll enligt användaren | JH2-Test sparades i ny inaktiv slot. Tidigare karaktärer bevarade enligt användaren. |
+| J-H3 | Ingen ny kod | PASS enligt användaren | Byte till JH2-Test och tillbaka, rätt fyra livsval i karaktärsprofilen. |
+
+**Känt visningsfel:** `\\n` visas som bokstavlig text efter UUID vid lyckad sparning; endast presentationen berörs enligt observerat test.
+
+**Återstår:** separat feltest med nekad/full lagring, bred regression av kalender, dagbok, Ragnhild, undersökningsval och äldre karaktärer samt plan för export/backup. Fullständig säkerhet eller total regression är inte godkänd.
+
+**Aktuell checkpoint:** `docs/STOPP_2026-10-20_JH.md`. Äldre statusrader ovan är historiska och ska inte tolkas som aktuellt läge.

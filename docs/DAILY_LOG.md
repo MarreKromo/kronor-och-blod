@@ -127,3 +127,20 @@ Nästa exakta steg:
 - **3H.11.6 har inte kodats eller testats.**
 
 **Arbetsregler:** ett steg i taget, inga oombedda bilder, inga manuella långredigeringar på iPhone, GitHub PASS och Safari PASS verifieras separat.
+
+---
+
+## 2026-10-20 – IMP-025 3H.12.7 J-H1–J-H3 · aktuell checkpoint
+
+**Resultat:** nytt obligatoriskt karaktärsskapande har integrerats och användartestats inom avgränsad omfattning.
+- J-H1: formulär med namn, roll, fyra obligatoriska livsval, frivillig biografi och förhandsgranskning. GitHub + Safari PASS.
+- J-H2A: isolerade säkerhetstester med minneslagring, 10/10 Safari PASS.
+- J-H2B: verklig create-only-sparning med ny UUID, separat inaktiv slot, explicit bekräftelse och återläsningskontroll. GitHub PASS. Användaren bekräftade lyckad sparning, omladdning och bevarade karaktärer i Safari.
+- J-H3: användaren testade byte till JH2-Test och tillbaka samt att dess fyra livsval visades korrekt. Safari PASS.
+- Testbonde, Mk, Erik, Sven och JH2-Test rapporterades finnas kvar. Sparningarna ligger lokalt i Safari.
+
+**Kvarvarande:** bokstavligt `\\n` i kvittot efter sparning; rätta i separat rent presentationspaket. Ingen full regression av kalender, dagbok, Ragnhild och övriga berättelsegrenar. Ingen verifierad backup/export för riktiga spelare.
+
+**Nästa exakta steg:** Läs `docs/STOPP_2026-10-20_JH.md`, rätta visningsfelet utan ändrad sparlogik, verifiera GitHub efter commit och Safari separat, genomför därefter avgränsad regression.
+
+**Historik:** äldre stoppnoteringar ovan beskriver tidigare utvecklingslägen och ersätts i fråga om aktuell status av denna post.

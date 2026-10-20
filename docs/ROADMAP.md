@@ -154,3 +154,20 @@ Nästa större funktion påbörjas efter godkänt test och en förbättringsrund
 - [ ] Bred regression av berättelse, kalender och sparningar.
 
 Äldre checklistor ovan speglar planeringsläget före delpaket 3H. Se stoppunkt i `docs/DAILY_LOG.md`.
+
+---
+
+## Lägesuppdatering 2026-10-20 – IMP-025 3H.12.7 J-H (aktuell status)
+
+- [x] J-A–J-G: paketbyggare, förhandsvisning, säker sparmotor, validering och spärr mot gamla osäkra skapandevägar; tester dokumenterade i `docs/TESTS.md`.
+- [x] J-H1: obligatoriskt nytt karaktärsformulär med fyra livsval och frivillig biografi; GitHub/Safari PASS.
+- [x] J-H2A: isolerade säkerhetstester 10/10 PASS i Safari med minneslagring.
+- [x] J-H2B: verklig sparning till ny inaktiv separat slot; GitHub/Safari PASS för lyckat fall och omladdning.
+- [x] J-H3: karaktärsbyte fram och tillbaka samt korrekt livsbakgrund i profil; Safari PASS enligt användaren.
+- [ ] Nästa lilla paket: korrigera bokstavligt `\\n` efter sparad karaktärs-ID och missvisande kommentar, utan att ändra sparmotorn.
+- [ ] Kompletterande regression: kalender, dagbok, Ragnhild, berättelsegrenar, äldre karaktärer och felhantering.
+- [ ] IMP-025 fortsatt: startfärdigheter, resurser, kontakter och berättelsekonsekvenser utifrån livsbakgrund (ej färdigimplementerat).
+- [ ] Export/backup, versionering och migrering inför framtida riktiga spelare.
+- [ ] IMP-024: valfri introduktionsberättelse med Ragnhild; IMP-023: kompakt dagshistorik.
+
+**Avgränsning:** J-H avslutar grundflödet för skapande och lokal sparning, inte hela IMP-025 eller ett fullständigt produktionssäkert sparsystem. Äldre öppna checklistor ovan är historiska; denna sektion anger senaste läget. Se `docs/STOPP_2026-10-20_JH.md`.
