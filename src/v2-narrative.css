@@ -1,0 +1,17 @@
+/* V2-03.2J: one continuous story section instead of stacked event cards. */
+.living-story[hidden],.narrative-chapter[hidden]{display:none!important}
+.living-story{margin-top:34px;border-top:1px solid #786c52;padding-top:24px}
+.living-story-heading{margin-bottom:23px}
+.living-story-heading span,.narrative-kicker{font:700 11px/1.5 system-ui,sans-serif;letter-spacing:2px;color:#d7b783}
+.living-story-heading h3{font-size:29px;font-weight:400;line-height:1.15;margin:9px 0;color:#f1e4cd}
+.narrative-chapter{padding:7px 0 23px;border:0;background:none;box-shadow:none;color:#f0e4ce}
+.narrative-chapter+.narrative-chapter{border-top:1px solid #766b51;padding-top:27px}
+.narrative-chapter h4{font-size:27px;font-weight:400;line-height:1.2;margin:12px 0 19px;color:#f4e6cb}
+.narrative-prose{font-size:18px;line-height:1.75;margin:15px 0;color:#eee1cb}
+.narrative-context,.narrative-time{font:13px/1.6 system-ui,sans-serif;color:#c9b896;margin:13px 0 18px}
+.narrative-context{border-left:2px solid #a98a58;padding-left:12px}
+.narrative-answer{font-size:19px;font-weight:700;line-height:1.5;color:#e8c991;margin:12px 0}
+.narrative-prompt{font-size:17px;color:#f1ddbd;margin:21px 0 11px}
+.narrative-choice{display:block;width:100%;min-height:52px;margin:10px 0;padding:14px 16px;text-align:left;border:1px solid #a88c5d;border-radius:6px;background:#303b33;color:#f6e9ce;font:600 15px/1.4 system-ui,sans-serif;cursor:pointer}
+.narrative-choice:focus-visible{outline:3px solid #e9c98b;outline-offset:3px}
+@media(max-width:420px){.narrative-chapter h4{font-size:25px}.narrative-prose{font-size:17px}}
