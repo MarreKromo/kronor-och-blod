@@ -1,0 +1,40 @@
+<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KB-A2.4 – Backupvalidator</title><style>body{font:16px system-ui;max-width:680px;margin:25px auto;padding:16px;background:#17261e;color:#f3e5c8}li{margin:12px 0}</style>
+<h1>KB-A2.4 – Förhandsgranskning</h1><p>Testar enbart påhittade data. Ingen riktig localStorage används.</p><ol id="results"><li>Startar tester…</li></ol>
+<script src="../src/full-backup-integrity.js?v=a24"></script>
+<script src="../src/full-backup-validator.js?v=a24"></script>
+<script>
+(async function(){
+const list=document.getElementById('results');list.replaceChildren();
+const report=(name,ok)=>{const li=document.createElement('li');li.textContent=(ok?'PASS: ':'FAIL: ')+name;list.append(li)};
+const I=window.KB_FULL_BACKUP_INTEGRITY,V=window.KB_FULL_BACKUP_VALIDATOR;
+const B='kronor-och-blod.',a='12345678-1234-4234-8234-123456789abc',b='87654321-4321-4321-8321-cba987654321';
+const entry=(id,name)=>{const c=JSON.stringify({version:1,name,background:'bonde',placeId:'VG-SKARA-001'});return {[B+'character.v1']:c,[B+'character.identity.v1']:JSON.stringify({version:1,characterId:id,characterRaw:c})}};
+const slot=(id,name,e)=>JSON.stringify({format:'kronor-och-blod-character-slot',version:1,characterId:id,name,savedAt:'2026-10-20T12:00:00Z',entries:e});
+const e1=entry(a,'Testbonde'),e2=entry(b,'Skrivare');
+const base={format:'kronor-och-blod-full-backup',version:2,createdAt:'2026-10-20T12:00:00Z',activeCharacterId:a,
+activeEntries:e1,slots:{[B+'slot.v1.'+a]:slot(a,'Testbonde',e1),[B+'slot.v1.'+b]:slot(b,'Skrivare',e2)},
+otherEntries:{},manifest:{slotCount:2,keyCount:4,checksumAlgorithm:null,checksum:null}};
+try{
+ const sealed=await I.seal(base);
+ const good=await V.preview(sealed,I);
+ report('Giltig backup med två karaktärer',good.ok&&good.characters.length===2&&good.slotCount===2);
+ const damaged={...sealed,slots:{...sealed.slots,[B+'slot.v1.'+b]:'{trasig'}};
+ report('Förändrad backup blockeras',!(await V.preview(damaged,I)).ok);
+ const wrong=JSON.parse(JSON.stringify(base));const broken=JSON.parse(wrong.slots[B+'slot.v1.'+b]);
+ broken.entries[B+'character.identity.v1']=JSON.stringify({version:1,characterId:a,characterRaw:broken.entries[B+'character.v1']});
+ wrong.slots[B+'slot.v1.'+b]=JSON.stringify(broken);
+ report('Fel karaktärs-ID blockeras',!(await V.preview(await I.seal(wrong),I)).ok);
+ const owner=JSON.parse(JSON.stringify(base));
+ owner.activeEntries[B+'calendar.v1']='{"version":1}';
+ owner.activeEntries[B+'calendar.owner.v1']=JSON.stringify({version:1,characterId:b,calendarRaw:'{"version":1}'});
+ owner.manifest.keyCount=6;
+ report('Fel ägare blockeras',!(await V.preview(await I.seal(owner),I)).ok);
+ const unknown=JSON.parse(JSON.stringify(base));unknown.otherEntries[B+'unexpected.v1']='{}';unknown.manifest.keyCount=5;
+ report('Okänd nyckel blockeras',!(await V.preview(await I.seal(unknown),I)).ok);
+ const invalid=await V.preview({...sealed,version:99},I);
+ report('Fel formatversion blockeras',!invalid.ok);
+ report('Förhandsgranskning skriver inte till lagring',!('localStorage' in V)&&good.ok);
+}catch(e){report('Testmiljön: '+e.message,false)}
+})();
+</script></html>
