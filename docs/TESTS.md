@@ -119,3 +119,28 @@ Status anges per paket och endast inom faktiskt verifierad omfattning. Historisk
 **Återstår:** separat feltest med nekad/full lagring, bred regression av kalender, dagbok, Ragnhild, undersökningsval och äldre karaktärer samt plan för export/backup. Fullständig säkerhet eller total regression är inte godkänd.
 
 **Aktuell checkpoint:** `docs/STOPP_2026-10-20_JH.md`. Äldre statusrader ovan är historiska och ska inte tolkas som aktuellt läge.
+
+---
+
+## 2026-10-20 – J-I och J-J: verifiering efter J-H
+
+### J-I – Visningsfix
+- **GitHub PASS:** `src/new-character-jh1-ui.js` innehåller rättad radbrytningssekvens och uppdaterad kommentar; `index.html` laddar cacheversion `v=03127ji`.
+- **Safari PASS enligt användaren:** Testbonde och JH2-Test finns kvar, karaktärsbyte fungerar.
+- **EJ VISUELLT TESTAT:** den rättade radbrytningen i kvittot efter en helt ny sparning. Ingen ny karaktär skapades bara för detta.
+
+### J-J – Grundläggande regression (7/7 Safari PASS enligt användaren)
+
+| Test | Resultat | Bekräftad omfattning |
+| --- | --- | --- |
+| J-J1.1 Hem | PASS | Datum +1 och kvar efter omladdning |
+| J-J1.2 Karta | PASS | Datum +1 och samma datum på Hem |
+| J-J1.3 Dagshistorik | PASS | De två senaste dagarna finns kvar efter omladdning |
+| J-J2.1 Berättelse | PASS | Befintlig scen, tidigare val och ledtrådar finns kvar |
+| J-J2.2 Berättelse efter omladdning | PASS | Scen, val och ledtrådar kvar |
+| J-J3.1 Karaktärsbyte | PASS | JH2-Test och Testbonde visar var sin korrekta livsbakgrund |
+| J-J3.2 Omladdning | PASS | Testbonde aktiv med rätt bakgrund; JH2-Test finns kvar i listan |
+
+**Begränsning:** Detta är användarrapporterade funktionstester, inte en fullständig teknisk säkerhetsgranskning. Felhantering vid nekad/full lagring, export/backup, alla berättelsegrenar, andra webbläsarlägen och radbrytning efter ny sparning återstår. Historiska öppna testpunkter högre upp ersätts bara i den omfattning tabellen ovan faktiskt täcker.
+
+**Checkpoint:** `docs/STOPP_2026-10-20_JJ.md`.

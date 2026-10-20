@@ -144,3 +144,18 @@ Nästa exakta steg:
 **Nästa exakta steg:** Läs `docs/STOPP_2026-10-20_JH.md`, rätta visningsfelet utan ändrad sparlogik, verifiera GitHub efter commit och Safari separat, genomför därefter avgränsad regression.
 
 **Historik:** äldre stoppnoteringar ovan beskriver tidigare utvecklingslägen och ersätts i fråga om aktuell status av denna post.
+
+---
+
+## 2026-10-20 – J-I visningsfix och J-J grundläggande regression
+
+- **J-I GitHub PASS:** korrigerad radbrytningssekvens efter UUID, uppdaterad missvisande kommentar och ny cacheversion i `index.html`. Ingen ändring av sparmotor eller sparnycklar.
+- **J-I Safari PASS enligt användaren:** befintliga Testbonde och JH2-Test kvar och karaktärsbyte fungerar. Själva radbrytningen efter ny sparning är ännu inte visuellt testad.
+- **J-J1 kalender 3/3 Safari PASS:** Hem +1 och omladdning; Karta +1 med samma datum på Hem; två senaste dagar i historiken efter omladdning.
+- **J-J2 berättelse 2/2 Safari PASS:** scen, tidigare val och ledtrådar finns kvar, även efter omladdning. Inga nya berättelseval gjordes.
+- **J-J3 karaktärer 2/2 Safari PASS:** Testbonde och JH2-Test visar separata korrekta livsbakgrunder vid byte; efter omladdning är Testbonde fortfarande aktiv och JH2-Test finns i listan.
+- **Summa J-J: 7/7 användarrapporterade Safari PASS inom testad omfattning.**
+- **Kvar:** feltest av lagring, backup/export, alla berättelsegrenar och visuell kontroll av radbrytning vid nästa faktiska karaktärsskapande.
+- **Nästa steg:** dokumentera denna checkpoint i GitHub och GitHub-verifiera de fyra dokumentfilerna. Därefter planera nästa avgränsade paket utan att riskera befintliga sparningar.
+
+**Senaste återstartspunkt:** `docs/STOPP_2026-10-20_JJ.md`. Tidigare stoppnoteringar ovan är historiska.

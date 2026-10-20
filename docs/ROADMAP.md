@@ -171,3 +171,19 @@ Nästa större funktion påbörjas efter godkänt test och en förbättringsrund
 - [ ] IMP-024: valfri introduktionsberättelse med Ragnhild; IMP-023: kompakt dagshistorik.
 
 **Avgränsning:** J-H avslutar grundflödet för skapande och lokal sparning, inte hela IMP-025 eller ett fullständigt produktionssäkert sparsystem. Äldre öppna checklistor ovan är historiska; denna sektion anger senaste läget. Se `docs/STOPP_2026-10-20_JH.md`.
+
+---
+
+## Lägesuppdatering 2026-10-20 – J-I / J-J (senaste status)
+
+- [x] **J-I kodfix:** radbrytning och kommentar korrigerade, cacheversion uppdaterad; GitHub PASS.
+- [x] **J-I bevarande:** Testbonde och JH2-Test kvar, byte fungerar; Safari PASS enligt användaren.
+- [ ] **J-I visuell slutkontroll:** kontrollera radbrytning efter nästa verkliga nykaraktärssparning; skapa inte onödig testkaraktär.
+- [x] **J-J1:** kalender Hem, Karta, synkronisering och dagshistorik efter omladdning – 3/3 Safari PASS.
+- [x] **J-J2:** berättelsescen, val och ledtrådar före/efter omladdning – 2/2 Safari PASS.
+- [x] **J-J3:** separata livsbakgrunder, karaktärsbyte och aktiv karaktär efter omladdning – 2/2 Safari PASS.
+- [ ] **Kvalitetsarbete kvar:** nekad/full lagring, kollisions- och återställningsfall, export/backup, alla berättelsegrenar, fler äldre karaktärer.
+- [ ] **IMP-025 fortsatt:** livsbakgrundens spelkonsekvenser, startvärden, kontakter och resurser.
+- [ ] **IMP-024 / IMP-023:** berättelsedesign respektive kompakt dagshistorik är fortfarande planerade.
+
+**J-J = 7/7 användarrapporterade Safari PASS inom testad omfattning; inte full regression av alla spelvägar.** Se `docs/TESTS.md` och `docs/STOPP_2026-10-20_JJ.md`. Äldre checklistor ovan visar historiska planeringslägen.
