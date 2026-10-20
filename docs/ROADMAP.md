@@ -117,3 +117,15 @@ Milstolpen är **inte** uppnådd. Den byggs genom små paket från fas A–D.
 ## Nästa exakta steg
 **KB-PLAN-01:** GitHub-verifiera denna roadmap efter commit.
 **Därefter Fas A1:** läsbaserad inventering av sparnycklar och karaktärskoppling, utan spelkodändring.
+
+---
+
+## Aktuell checkpoint – 2026-10-20 · A2 avslutat, B1 nästa
+- [x] **A1:** läsbaserad inventering av sparnycklar och karaktärskoppling genomförd.
+- [x] **A2.1–A2.6:** backup-specifikation, full export, SHA-256, validering, backupcenter och create-only-återställning färdigbyggda och testade inom dokumenterad omfattning.
+- [x] **A2.6:** GitHub PASS; 10/10 isolerade Safari-tester PASS. Riktig backup kontrollerad: fem befintliga sparplatser, noll saknade; ingen import gjordes.
+- [ ] **Kvarstående A2-begränsning:** faktisk återställning av en saknad karaktär i verklig Safari-lagring är inte testad.
+- [ ] **A3:** generell versionering/migration och full felmatris är fortfarande öppna; inte automatiskt godkända genom A2.
+- [ ] **B1 (nästa aktiva paket):** bestående karaktärsposition, skillnad mellan kartval och resa, första väg och tidskostnad, karaktärsisolering och omladdning.
+- **Nuvarande vägledning:** `docs/KB_A2_AVSLUT_OCH_B_START_2026-10-20.md` och `docs/KB_B1_POSITION_RESOR_PLAN.md`.
+- Äldre formuleringar ovan om att A1 är nästa steg är historiska och ersätts av denna checkpoint.

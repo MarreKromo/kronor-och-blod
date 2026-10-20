@@ -182,3 +182,22 @@ Status anges per paket och endast inom faktiskt verifierad omfattning. Historisk
 - **Ingen avsiktlig ändring av sparlogik, sparnycklar eller befintliga karaktärer.**
 - **Dokumentationscheckpoint:** `docs/CHECKPOINT_JL3_2026-10-20.md`, GitHub PASS.
 - **Framtida UX:** större visuell omarbetning av karaktärsgränssnitt och karta skjuts upp; stabila grundsystem prioriteras.
+
+---
+
+## 2026-10-20 – A2.1–A2.6 · slutlig verifiering av backupkapitlet
+
+| Del | GitHub | Safari / faktisk verifiering |
+| --- | --- | --- |
+| A2.1 Specifikation | PASS | Ej tillämpligt för ren specifikation |
+| A2.2 Full backup-builder | PASS | 6/6 isolerade tester PASS |
+| A2.3 SHA-256-integritet | PASS | 7/7 isolerade tester PASS |
+| A2.4 Backup-validering | PASS | 7/7 isolerade tester PASS |
+| A2.5 Backupcenter/export | PASS | 7/7 isolerade tester PASS; JSON nedladdad och återvald i Safari; checksumma PASS |
+| A2.6 Säker återställning | PASS | 10/10 isolerade tester PASS; verklig backup: 5 befintliga, 0 saknade |
+
+- Verklig backup innehöll Testbonde (aktiv), JH2-Test, Mk, Sven och Erik; fem sparplatser.
+- A2.6-gränssnitt visades korrekt. Återställning erbjöds inte för befintliga sparplatser. **Ingen riktig import genomfördes.**
+- GitHub Pages gav initialt 404 för isolerat test medan publiceringen ännu inte var klar; efter lyckad publicering laddades sidan och 10/10 tester passerade.
+- **Ej verifierat:** riktig återställning av en faktiskt saknad sparplats på iPhone, samtliga äldre spelgrenar, blockerad/full verklig lagring och generell framtida migration.
+- **Slutsats:** A2 kapitel PASS inom testad omfattning; ingen garanti för ännu otestade scenarier. Fortsatt dataskydd krävs under B1.

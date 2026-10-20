@@ -75,3 +75,15 @@ Inför varje ny spel- eller gränssnittsfunktion ska vi:
 - **Migration efter behov:** under prototypfasen kan testdata nollställas i stället för att bygga dyra engångsmigrationer, men beslutet dokumenteras och verifieras. Innan riktiga spelare tillkommer krävs en definierad och testad policy för kompatibilitet, säkerhetskopiering och återställning.
 - **Gäller IMP-025 3H.12.3 och framåt:** utforma den nya bakgrundsmodellen framtidssäkert; inga speciallösningar enbart för Mk/Erik/Sven. Varje risk för befintlig demodata meddelas före installation.
 - **Arbetsflödet kvarstår:** små ZIP-paket, komplett ersättningsfil med historiken bevarad, commit, GitHub PASS och separat Safari PASS.
+
+---
+
+## Reviderat arbetsflöde – 2026-10-20 (ersätter äldre mikropaketsregler)
+- **Sammanhållna leveranser:** normalt 3–6 närbesläktade funktioner per ZIP och en commit/testomgång per paket. Vid risk eller kritiska fel får ett mindre paket användas.
+- **iPhone först:** kompletta ersättningsfiler med korrekta repo-relativa sökvägar i ZIP. Ingen manuell långredigering på telefonen.
+- **Två verifieringsnivåer:** efter commit kontrollerar assistenten faktisk GitHub-kod (GitHub PASS/FAIL). Användaren testar separat i vanlig Safari (Safari PASS/FAIL). Isolerade minnestester får inte beskrivas som skarp återställning.
+- **Kapitelvis huvuddokumentation:** uppdatera `ROADMAP.md`, `TESTS.md`, `DAILY_LOG.md` och vid behov `ARBETSMETOD.md` samlat när ett helt kapitel avslutas, inte efter varje mikrosteg. Tidigare historik bevaras ordagrant.
+- **Dataskydd:** inventera aktuella localStorage-nycklar och karaktärsägarskap innan kodändring; aldrig tyst radera, migrera eller skriva över sparplatser. Informera och invänta uttryckligt godkännande om nollställning någonsin behövs.
+- **Safari-cache:** ändrade JS-filer får nya skriptversionsparametrar i HTML. Kontrollera även att GitHub Pages hunnit publiceras.
+- **Spelarupplevelse:** planera först spelarens mobilflöde och kontrollera samspelet mellan karta, tid, position, berättelse och historik.
+- Äldre formuleringar ovan om att alltid göra ”små ZIP-paket” och uppdatera dokument efter varje delsteg är historiska; denna regel gäller framåt.

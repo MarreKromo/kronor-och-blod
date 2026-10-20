@@ -194,3 +194,14 @@ Nästa exakta steg:
 - **Separat checkpoint:** `docs/CHECKPOINT_JL3_2026-10-20.md`, GitHub PASS.
 
 **Nästa exakta steg:** GitHub-verifiera detta dokumentationspaket (`docs/TESTS.md` och `docs/DAILY_LOG.md`) efter användarens commit. Välj därefter nästa avgränsade utvecklingspaket. Behåll små ZIP-paket och separata GitHub-/Safari-tester. Tidigare poster är historiska och får inte raderas.
+
+---
+
+## 2026-10-20 – Kapitel A2 avslutat; startpunkt för B1
+- A2.1–A2.6 är implementerade och GitHub-verifierade. Isolerade Safari-resultat: A2.2 6/6, A2.3 7/7, A2.4 7/7, A2.5 7/7 och A2.6 10/10 PASS.
+- Full JSON-backup laddades ned och återvaldes i Safari. SHA-256-verifiering PASS. Fem karaktärer: Testbonde, JH2-Test, Mk, Sven och Erik.
+- A2.6 kontrollerades mot verklig backup: fem befintliga sparplatser, noll saknade. Ingen riktig återställning utfördes; scenariot saknad sparplats har bara isolerat PASS.
+- GitHub Pages visade tillfälligt 404 innan lyckad deployment; testet fungerade efter publicering.
+- Dokumenten `docs/KB_A2_AVSLUT_OCH_B_START_2026-10-20.md` och `docs/KB_B1_POSITION_RESOR_PLAN.md` är uppladdade och GitHub-verifierade.
+- **Aktivt nästa paket:** B1. Granska faktisk kod för karta, platser, kalender, karaktärsidentitet och byte innan ändringar. Skilj visad kartplats från karaktärens faktiska position. Först isolerade tester, sedan verklig Safari-testning utan att radera eller skriva över sparningar.
+- Tidigare ”nästa steg”-poster är historik och ska inte användas som aktuella instruktioner.
