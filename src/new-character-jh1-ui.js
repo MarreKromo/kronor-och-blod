@@ -1,4 +1,4 @@
-// IMP-025 J-H1: complete mandatory creator preview; no storage writes.
+// IMP-025 J-H2B/J-I: mandatory creator with confirmed create-only save.
 (function(){
 'use strict';
 const host=document.querySelector('.kb-profile');
@@ -45,7 +45,7 @@ confirm.addEventListener('click',()=>{
   });
   approved=null;
   status.textContent='SPARAD: '+saved.name+' har fått en ny separat, inaktiv sparplats. Karaktärsbyte sker inte automatiskt. Ladda om sidan för att se karaktären i listan.';
-  preview.textContent='Sparningen verifierad. Karaktärs-ID: '+saved.characterId+'\\nAlla fyra livsval är sparade.';
+  preview.textContent='Sparningen verifierad. Karaktärs-ID: '+saved.characterId+'\nAlla fyra livsval är sparade.';
  }catch(error){
   status.textContent='SPARNING STOPPAD: '+(error&&error.message?error.message:'Okänt fel')+' Ingen befintlig sparplats ska ha ändrats.';
   confirm.disabled=false;
