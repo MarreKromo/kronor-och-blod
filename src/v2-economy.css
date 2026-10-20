@@ -1,1 +1,2 @@
-.economy-balance{border:1px solid #9c855e;background:#2b3932;border-radius:8px;padding:13px 12px;color:#e8d4a7;font:600 15px/1.5 system-ui}
+.economy-balance{border:1px solid #9c855e;background:#2b3932;border-radius:8px;padding:13px 12px;color:#e8d4a7;font:600 15px/1.65 system-ui;white-space:pre-line}
+.economy-note{font:13px/1.5 system-ui;color:#c8bfa9;margin:5px 0 18px}
