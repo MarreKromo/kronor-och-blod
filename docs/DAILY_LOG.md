@@ -179,3 +179,18 @@ Nästa exakta steg:
 - Färdigheten är fortfarande en skrivskyddad förhandsvisning, inte en aktiv spelbonus.
 - Övriga bakgrunder, byte mellan karaktärer, felaktig lagring och bred regression är ännu inte godkända.
 - **Nästa exakta steg:** granska karaktärsflikens befintliga paneler och prioritera en tydligare spelarupplevelse före ytterligare funktioner. Skydda alla befintliga sparningar.
+
+---
+
+## 2026-10-20 – IMP-025 J-L1–J-L3 · UX, Safari-cache och dokumentationsstopp
+
+- **J-L1:** befintliga karaktärs- och livsbakgrundspaneler inventerades utan kodändring.
+- **J-L2:** färdighetsförhandsvisningen integrerades i livsbakgrundspanelen. GitHub PASS; Safari PASS med skärmbild.
+- **J-L3:** ”Min berättelse” och hopfällbart ”Visa formulär och sparningskontroller” infördes. GitHub PASS, men första Safari-testet **FAIL**: gammal vy visades.
+- **Cachefix:** `index.html` uppdaterades från `?v=jk2-1` till `?v=jl3-2` för färdighets-/livsbakgrundsskriptet. GitHub PASS efter commit.
+- **Slutligt Safari PASS med skärmbild:** Testbonde, verifierad livsbakgrund, ”Min berättelse”, ”Jordbruk +2” som förslag samt hopfällbart formulär visas.
+- **Dataskydd:** inga avsiktliga ändringar i sparmotor eller localStorage; inget nytt formulärsparprov eller fullständig regression har utförts i J-L3.
+- **Produktbeslut:** gör en större visuell redesign av karaktärsgränssnitt och karta i senare fas. Prioritera nu funktion, stabilitet och spelvärld.
+- **Separat checkpoint:** `docs/CHECKPOINT_JL3_2026-10-20.md`, GitHub PASS.
+
+**Nästa exakta steg:** GitHub-verifiera detta dokumentationspaket (`docs/TESTS.md` och `docs/DAILY_LOG.md`) efter användarens commit. Välj därefter nästa avgränsade utvecklingspaket. Behåll små ZIP-paket och separata GitHub-/Safari-tester. Tidigare poster är historiska och får inte raderas.

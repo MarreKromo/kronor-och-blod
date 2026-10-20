@@ -165,3 +165,20 @@ Status anges per paket och endast inom faktiskt verifierad omfattning. Historisk
 - **Ingen ny spelkod i J-K3:** detta är ett funktionstest av J-K2-modulen, inte en aktivering av färdighetsbonus.
 - **Ej verifierat i J-K3:** byte till annan karaktär och tillbaka, övriga tre uppväxtalternativ, blockerad/felaktig lagring och fullständig regression av övriga spelsystem.
 - **Nästa:** UX-genomgång av karaktärsfliken innan fler paneler eller spelmekaniska färdigheter införs.
+
+---
+
+## 2026-10-20 – IMP-025 J-L1–J-L3 · sammanhållen karaktärsvy
+
+| Paket | GitHub | Safari | Omfattning |
+| --- | --- | --- | --- |
+| J-L1 | Ingen kodändring | Ej aktuellt | Inventering av befintliga profil- och livsbakgrundspaneler. |
+| J-L2 | PASS | PASS, skärmbild | Färdighetsförhandsvisningen flyttad in i befintlig livsbakgrundspanel. |
+| J-L3 första versionen | PASS | **FAIL**, skärmbilder | Ny kod fanns på GitHub men Safari visade äldre J-L2-vy. |
+| J-L3 cachefix | **PASS** | **PASS**, skärmbild | `index.html` ändrad till `src/life-background-skills-preview.js?v=jl3-2`; ”Min berättelse”, ”Möjlig startfärdighet” och hopfällbart formulär visas. |
+
+- **Verifierad karaktär:** Testbonde. Sparad livsbakgrund känns igen; ”Jordbruk +2” visas endast som förslag, utan aktiv spelbonus.
+- **Safari PASS gäller synlig presentation**, inte nytt sparprov med formuläret eller fullständig regression.
+- **Ingen avsiktlig ändring av sparlogik, sparnycklar eller befintliga karaktärer.**
+- **Dokumentationscheckpoint:** `docs/CHECKPOINT_JL3_2026-10-20.md`, GitHub PASS.
+- **Framtida UX:** större visuell omarbetning av karaktärsgränssnitt och karta skjuts upp; stabila grundsystem prioriteras.
