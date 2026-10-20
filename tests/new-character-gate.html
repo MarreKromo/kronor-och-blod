@@ -1,0 +1,17 @@
+<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>J-F spärrtest</title><body style="background:#19291e;color:#f5e8cf;font:16px/1.5 system-ui;padding:20px"><h2>⚔️ J-F – Spärrtest</h2><p>Isolerad simulering. Inga riktiga skaparfunktioner eller sparningar ändras.</p><pre id="out" style="white-space:pre-wrap"></pre><script src="../src/life-background-model.js"></script><script src="../src/new-character-gate.js"></script><script>
+const gate=window.KB_NEW_CHARACTER_GATE,model=window.KB_LIFE_BACKGROUND_MODEL,out=document.getElementById('out');
+const life={version:1,upbringing:'farm',familySituation:'alone',past:'debt',ambition:'farmstead',biography:''};
+const req={name:'Testperson',background:'bonde',lifeBackground:life};let pass=0,fail=0;
+function t(name,fn){try{if(!fn())throw Error('Fel resultat');out.textContent+='PASS '+name+'\n';pass++}catch(e){out.textContent+='FAIL '+name+' '+e.message+'\n';fail++}}
+t('Komplett underlag tillåts',()=>gate.check(req,model).ok);
+t('Livsbakgrund saknas',()=>!gate.check({...req,lifeBackground:null},model).ok);
+t('Uppväxt saknas',()=>!gate.check({...req,lifeBackground:{...life,upbringing:''}},model).ok);
+t('Familj saknas',()=>!gate.check({...req,lifeBackground:{...life,familySituation:''}},model).ok);
+t('Förflutet saknas',()=>!gate.check({...req,lifeBackground:{...life,past:''}},model).ok);
+t('Ambition saknas',()=>!gate.check({...req,lifeBackground:{...life,ambition:''}},model).ok);
+t('Namn saknas',()=>!gate.check({...req,name:''},model).ok);
+t('Roll saknas',()=>!gate.check({...req,background:''},model).ok);
+t('Gammal separat skapare spärras i simulering',()=>{try{gate.blockLegacy()}catch(e){return e.message.includes('livsbakgrund')}return false});
+t('Gammal aktiv skapare spärras i simulering',()=>{try{gate.blockLegacy()}catch(e){return e.message.includes('livsbakgrund')}return false});
+out.textContent+='\nRESULTAT '+pass+'/10 PASS, '+fail+' FAIL';
+</script></body></html>
