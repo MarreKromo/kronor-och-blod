@@ -1,0 +1,24 @@
+<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KB-A2.2 – isolerat exporttest</title><style>body{font:16px system-ui;max-width:680px;margin:25px auto;padding:16px;background:#17261e;color:#f3e5c8}li{margin:12px 0}</style>
+<h1>KB-A2.2 – Exportmotorn</h1><p>Testet använder enbart minneslagring. Ingen riktig localStorage läses eller skrivs.</p><ol id="results"></ol>
+<script src="../src/full-backup-builder.js"></script><script>
+(function(){
+ const out=document.getElementById('results');
+ function report(name,ok){const li=document.createElement('li');li.textContent=(ok?'PASS: ':'FAIL: ')+name;out.append(li);}
+ const base='kronor-och-blod.',id='12345678-1234-4234-8234-123456789abc',id2='87654321-4321-4321-8321-cba987654321';
+ const character=JSON.stringify({version:1,name:'Testbonde',background:'bonde',placeId:'VG-SKARA-001'});
+ function entries(who,name){const c=JSON.stringify({version:1,name,background:'bonde',placeId:'VG-SKARA-001'});return {[base+'character.v1']:c,[base+'character.identity.v1']:JSON.stringify({version:1,characterId:who,characterRaw:c})};}
+ const a=entries(id,'Testbonde'),b=entries(id2,'Skrivare');
+ function storage(o){return {get length(){return Object.keys(o).length},key(i){return Object.keys(o)[i]??null},getItem(k){return Object.prototype.hasOwnProperty.call(o,k)?o[k]:null}}}
+ function slot(who,name,e){return JSON.stringify({format:'kronor-och-blod-character-slot',version:1,characterId:who,name,savedAt:'2026-10-20T00:00:00Z',entries:e})}
+ const all={...a,[base+'slot.v1.'+id]:slot(id,'Testbonde',a),[base+'slot.v1.'+id2]:slot(id2,'Skrivare',b)};
+ const api=window.KB_FULL_BACKUP_BUILDER;
+ try{const r=api.build(storage(all),'2026-10-20T00:00:00Z');report('Två slots + aktiv karaktär',r.manifest.slotCount===2&&r.activeCharacterId===id&&r.manifest.keyCount===4)}catch(e){report('Två slots + aktiv karaktär: '+e.message,false)}
+ function rejects(name,changed){try{api.build(storage({...all,...changed}));report(name,false)}catch(_){report(name,true)}}
+ rejects('Oavslutad bytesjournal blockeras',{[base+'switch.journal.v1']:'{}'});
+ rejects('Okänd nyckel blockeras',{[base+'future.v1']:'{}'});
+ rejects('Korrupt slot blockeras',{[base+'slot.v1.'+id2]:'{bad'});
+ rejects('Felaktig identitet blockeras',{[base+'character.identity.v1']:'{}'});
+ let reads=0;const probe=storage(all);const original=probe.getItem;probe.getItem=function(k){reads++;return original(k)};api.build(probe);report('Endast läsning; inga skrivmetoder används',reads>0);
+})();
+</script></html>
