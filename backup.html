@@ -1,0 +1,11 @@
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Säkerhetskopior – Kronor & Blod</title>
+<style>:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#17231d;color:#f2e7ce;font:16px/1.55 system-ui;padding:18px}main{max-width:700px;margin:auto}h1{font:700 30px Georgia,serif}h2{font:700 23px Georgia,serif}.card{background:#283229;border:1px solid #786c4c;padding:18px;margin:18px 0;border-radius:7px}button,.link{display:inline-block;background:#8e412e;color:#fff3d5;border:1px solid #e0bd73;border-radius:5px;padding:12px 15px;min-height:44px;font:600 15px system-ui;cursor:pointer;text-decoration:none}button:disabled{opacity:.5}input{font-size:16px;max-width:100%}#status,#previewStatus{white-space:pre-wrap;overflow-wrap:anywhere}li{margin:8px 0}.hint{color:#c8b995;font-size:14px}strong{color:#ffe2a2}</style></head>
+<body><main><a class="link" href="./index.html">← Till spelet</a><h1>Säkerhetskopior</h1><p>Här kan du skapa en säkerhetskopia av dina karaktärer och kontrollera en tidigare backupfil. <strong>Återställning är inte aktiverad.</strong></p>
+<section class="card"><h2>1. Exportera alla karaktärer</h2><p class="hint">Exporten läser sparningarna i samma webbläsare som spelet. Den ändrar inga sparningar. Om något är osäkert stoppas exporten.</p><button id="export" type="button">Skapa säkerhetskopia</button><p id="status" role="status">Ingen export begärd.</p></section>
+<section class="card"><h2>2. Kontrollera en backupfil</h2><p class="hint">Välj en JSON-fil. Filen granskas i webbläsaren, utan att något importeras.</p><input id="file" type="file" accept=".json,application/json" aria-label="Välj backupfil"><p id="previewStatus" role="status">Ingen fil vald.</p><ul id="characters"></ul></section>
+<p class="hint">Spara filen i Filer på din iPhone och kontrollera att den finns där. En begärd nedladdning är inte samma sak som en bekräftat sparad fil. Lämna inte din säkerhetskopia till någon annan.</p></main>
+<script src="src/full-backup-builder.js?v=a25"></script>
+<script src="src/full-backup-integrity.js?v=a25"></script>
+<script src="src/full-backup-validator.js?v=a25"></script>
+<script src="src/backup-center-ui.js?v=a25"></script>
+</body></html>
