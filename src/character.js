@@ -1,4 +1,4 @@
-// KB-03 / IMP-025 steg 3B – separat stabil identitet; äldre sparformat bevaras.
+// KB-03 / IMP-025 J-G — legacy creation disabled; existing saves preserved.
 (function () {
   'use strict';
   const KEY = 'kronor-och-blod.character.v1';
@@ -34,9 +34,8 @@
     const bytes = new Uint8Array(16); crypto.getRandomValues(bytes);
     bytes[6] = (bytes[6] & 15) | 64; bytes[8] = (bytes[8] & 63) | 128;
     const hex = Array.from(bytes, b => b.toString(16).padStart(2,'0')).join('');
-    return [hex.slice(0,8),hex.slice(8,12),hex.slice(12,16),hex.slice(16,20),hex.slice(20)].join('-');
+    return [hex.slice(0,8),hex.slice(8,12),hex.slice(12,16),hex.slice(16,20)].join('-');
   }
-  // Sidecar binder ID till exakta bytes i befintlig character.v1; filen skrivs inte om.
   function ensureIdentity(raw) {
     if (backupStatus === 'failed') return null;
     try {
@@ -48,22 +47,10 @@
       return localStorage.getItem(ID_KEY) === record ? id : null;
     } catch (_) { return null; }
   }
-  function create(name, background) {
-    if (!validName(name)) throw new Error('Namnet måste innehålla 2–32 tecken.');
-    if (!Object.prototype.hasOwnProperty.call(BACKGROUNDS, background)) throw new Error('Ogiltig bakgrund.');
-    if (backupStatus === 'failed') throw new Error('Säkerhetskopian misslyckades. Skapandet avbröts.');
-    const next = { version: 1, name: name.trim(), background, placeId: START_PLACE, attributes: { ...BACKGROUNDS[background].attributes } };
-    const raw = JSON.stringify(next);
-    const id = newId();
-    // Förbered identiteten först, men lämna gamla sparningar orörda.
-    try {
-      const record = JSON.stringify({ version: 1, characterId: id, characterRaw: raw });
-      localStorage.setItem(ID_KEY, record);
-      if (localStorage.getItem(ID_KEY) !== record) throw new Error('Identiteten kunde inte sparas.');
-      localStorage.setItem(KEY, raw);
-      if (localStorage.getItem(KEY) !== raw) throw new Error('Karaktären kunde inte sparas.');
-    } catch (_) { throw new Error('Karaktären kunde inte sparas säkert.'); }
-    character = next; characterId = id; return get();
+  function create() {
+    // J-G: Do not permit the obsolete name+class-only creation API.
+    // Never write any storage keys here. New complete creation uses separate slots.
+    throw new Error('Ny karaktär kräver fullständig livsbakgrund. Det äldre skapandet är spärrat.');
   }
   function get() { return character ? { ...JSON.parse(JSON.stringify(character)), characterId } : null; }
   function load() {
