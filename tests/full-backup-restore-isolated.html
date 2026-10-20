@@ -1,0 +1,22 @@
+<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KB-A2.6 – Restore-test</title><style>body{font:16px system-ui;max-width:680px;margin:25px auto;padding:16px;background:#17261e;color:#f3e5c8}li{margin:10px 0}</style><h1>KB-A2.6 – Säker återställning</h1><p>Alla tester använder påhittade sparningar i minnet. Inga riktiga sparningar ändras.</p><ol id="results"></ol><script src="../src/full-backup-builder.js?v=a26"></script><script src="../src/full-backup-integrity.js?v=a26"></script><script src="../src/full-backup-validator.js?v=a26"></script><script src="../src/full-backup-restore.js?v=a26"></script><script>
+(async()=>{const out=document.getElementById('results'),show=(name,ok)=>{const li=document.createElement('li');li.textContent=(ok?'PASS: ':'FAIL: ')+name;out.appendChild(li)};
+const B='kronor-och-blod.',P=B+'slot.v1.',a='12345678-1234-4234-8234-123456789abc',b='87654321-4321-4321-8321-cba987654321',c='aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+function entries(id,name){const cr=JSON.stringify({version:1,name,background:'bonde',placeId:'VG-SKARA-001'});return {[B+'character.v1']:cr,[B+'character.identity.v1']:JSON.stringify({version:1,characterId:id,characterRaw:cr})}}
+function slot(id,name){return JSON.stringify({format:'kronor-och-blod-character-slot',version:1,characterId:id,name,savedAt:'2026-10-20T12:00:00Z',entries:entries(id,name)})}
+function storage(obj,failKey){return {get length(){return Object.keys(obj).length},key(i){return Object.keys(obj)[i]??null},getItem(k){return Object.prototype.hasOwnProperty.call(obj,k)?obj[k]:null},setItem(k,v){if(k===failKey)throw Error('Simulerat skrivfel');obj[k]=v},removeItem(k){delete obj[k]}}}
+const engine=window.KB_FULL_BACKUP_RESTORE,v=window.KB_FULL_BACKUP_VALIDATOR,i=window.KB_FULL_BACKUP_INTEGRITY;
+try{
+ const data={...entries(a,'Testbonde'),[P+a]:slot(a,'Testbonde'),[P+b]:slot(b,'Skrivare'),[P+c]:slot(c,'Erik')};const backup=await i.seal(window.KB_FULL_BACKUP_BUILDER.build(storage(data)));
+ const current={...entries(a,'Testbonde'),[P+a]:slot(a,'Testbonde')},s=storage(current);
+ const plan=await engine.plan(backup,s,v,i);show('Förhandsgranskning visar två saknade',plan.candidates.length===2&&plan.conflicts.length===1);
+ show('Förhandsgranskning ändrar inga data',Object.keys(current).length===3);
+ const res=await engine.restore(backup,s,v,i,[b,c]);show('Två saknade sparplatser återställda',res.ok&&current[P+b]===data[P+b]&&current[P+c]===data[P+c]);
+ show('Aktiv karaktär helt orörd',current[B+'character.v1']===data[B+'character.v1']);
+ try{await engine.restore(backup,s,v,i,[b]);show('Befintlig sparplats skrivs inte över',false)}catch(_){show('Befintlig sparplats skrivs inte över',true)}
+ const corrupted=JSON.parse(JSON.stringify(backup));corrupted.slots[P+b]='{}';try{await engine.plan(corrupted,s,v,i);show('Manipulerad fil nekas',false)}catch(_){show('Manipulerad fil nekas',true)}
+ const journal={...current,[B+'switch.journal.v1']:'{}'};try{await engine.plan(backup,storage(journal),v,i);show('Pågående transaktion blockerar',false)}catch(_){show('Pågående transaktion blockerar',true)}
+ const rollback={...entries(a,'Testbonde'),[P+a]:slot(a,'Testbonde')};try{await engine.restore(backup,storage(rollback,P+c),v,i,[b,c]);show('Skrivfel upptäcks',false)}catch(_){show('Skrivfel upptäcks',true)}
+ show('Återställning rullar tillbaka nya poster',rollback[P+b]===undefined&&rollback[P+c]===undefined);
+ const activeOnly={...entries(b,'Skrivare')};const check=await engine.plan(backup,storage(activeOnly),v,i);show('Aktiv karaktär utan slot hoppas över',!check.candidates.some(x=>x.id===b));
+}catch(e){show('Testkedjan: '+e.message,false)}
+})();</script></html>
