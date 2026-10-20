@@ -1,0 +1,10 @@
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>J-E Säkerhetsinventering</title><style>body{background:#19291e;color:#f5e8cf;font:16px/1.5 system-ui;padding:18px;max-width:650px;margin:auto}article{border:1px solid #b99b65;padding:16px;border-radius:10px}li{margin:12px 0}.warn{color:#ffca9c}.good{color:#b8e1b4}</style></head><body><article><h1>⚔️ J-E – Säkerhetsinventering</h1><p>Denna sida läser endast information om systemets funktioner. Inga karaktärer skapas, inga sparningar ändras.</p><ol id="results"></ol><p id="summary"></p></article><script src="../src/character.js"></script><script src="../src/life-background-model.js"></script><script src="../src/new-character-bundle.js"></script><script src="../src/new-character-writer.js"></script><script src="../src/slot-creator.js"></script><script>
+const list=document.getElementById('results');let passed=0;
+function check(name,ok,detail){const li=document.createElement('li');li.className=ok?'good':'warn';li.textContent=(ok?'PASS: ':'SPÄRR KRÄVS: ')+name+' – '+detail;list.append(li);if(ok)passed++}
+check('Livsbakgrundsmodell',!!window.KB_LIFE_BACKGROUND_MODEL,'validering finns');
+check('Komplett sparpaket',!!window.KB_NEW_CHARACTER_BUNDLE,'J-A finns');
+check('Säker sparmotor',!!window.KB_NEW_CHARACTER_WRITER,'J-C finns');
+check('Äldre separat skapare',!window.KB_SLOT_CREATOR?.createSlot,'gammal funktion kan fortfarande skapa utan livsbakgrund');
+check('Äldre aktiv skapare',!window.KB_CHARACTER?.create,'gammal funktion kan fortfarande skapa utan livsbakgrund');
+document.getElementById('summary').textContent=passed+'/5 säkerhetskontroller godkända. De två äldre skaparfunktionerna måste spärras innan obligatorisk livsbakgrund kan garanteras.';
+</script></body></html>
