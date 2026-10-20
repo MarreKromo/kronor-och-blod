@@ -1,11 +1,10 @@
-// KB-03.7.2 / IMP-025 3H.6.1 – read-only preflight before any character restore.
-// Does not write to localStorage, create characters, switch or delete anything.
+// KB-03.7.2 / IMP-025 3H.12.4 – read-only slot validation.
 (function () {
   'use strict';
   const PREFIX = 'kronor-och-blod.slot.v1.';
   const BASE = 'kronor-och-blod.';
   const ID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-  const STEMS = ['story', 'encounter', 'investigation', 'calendar', 'daylog'];
+  const STEMS = ['story', 'encounter', 'investigation', 'calendar', 'daylog', 'life-background'];
   const allowed = new Set([BASE + 'character.v1', BASE + 'character.identity.v1']);
   for (const stem of STEMS) {
     allowed.add(BASE + stem + '.v1');
@@ -46,8 +45,14 @@
         if (ownerRaw !== undefined) {
           const owner = JSON.parse(ownerRaw);
           if (!owner || owner.version !== 1 || owner.characterId !== id) return fail('Fel ägare: ' + stem);
-          const rawField = stem === 'calendar' ? 'calendarRaw' : stem === 'daylog' ? 'daylogRaw' : null;
+          const rawField = stem === 'calendar' ? 'calendarRaw' : stem === 'daylog' ? 'daylogRaw' :
+            stem === 'life-background' ? 'backgroundRaw' : null;
           if (rawField && owner[rawField] !== data) return fail('Data och ägarpost skiljer sig: ' + stem);
+          if (stem === 'life-background') {
+            const model = window.KB_LIFE_BACKGROUND_MODEL;
+            if (!model || typeof model.parse !== 'function' || !model.parse(data).ok)
+              return fail('Ogiltig livsbakgrund i sparplatsen.');
+          }
         }
         checks.push(stem + ': ' + (data === undefined ? 'tomt' : 'verifierat'));
       }
