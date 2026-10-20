@@ -1,4 +1,5 @@
-// IMP-025 J-K2: read-only skill preview. No persistence or changes to attributes.
+// IMP-025 J-L2 – samlad livsbakgrund och skrivskyddad färdighetsvisning.
+// Ersätter J-K2-modulens presentation. Ingen lagring, bonus eller byteslogik ändras.
 (function () {
   'use strict';
   const SKILLS = Object.freeze({
@@ -8,47 +9,74 @@
     freeborn: Object.freeze({name:'Umgängesvana',level:2})
   });
   function preview(background) {
-    if (!Object.prototype.hasOwnProperty.call(SKILLS,background)) return null;
-    const s=SKILLS[background];
-    return Object.freeze({name:s.name,level:s.level,proposed:true});
+    if (!Object.prototype.hasOwnProperty.call(SKILLS, background)) return null;
+    const skill = SKILLS[background];
+    return Object.freeze({name:skill.name,level:skill.level,proposed:true});
   }
-  window.KB_SKILLS_PREVIEW=Object.freeze({preview});
-  const host=document.querySelector('.kb-profile');
+  window.KB_SKILLS_PREVIEW = Object.freeze({preview});
+
+  const host = document.querySelector('.kb-profile');
   if (!host) return;
-  const details=document.createElement('details');
-  details.id='kb-jk2-skills-preview';
-  details.style.cssText='margin:12px 0;border:1px solid #8e7a51;border-radius:8px;padding:12px;color:#f4e9ce;background:#1b2b22';
-  const summary=document.createElement('summary');
-  summary.textContent='Möjlig startfärdighet · förhandsvisning';
-  summary.style.cssText='cursor:pointer;min-height:44px;font:600 14px system-ui';
-  const content=document.createElement('p');
-  content.style.cssText='font:14px/1.6 system-ui;margin:8px 0 0';
-  details.append(summary,content);
-  host.append(details);
+
+  const section = document.getElementById('kb-life-profile-entry');
+  const panel = document.createElement('div');
+  panel.id = 'kb-jk2-skills-preview';
+  panel.style.cssText =
+    'margin:12px 14px 16px;padding:12px 14px;border:1px solid #8e7a51;' +
+    'border-radius:8px;background:#22362a;color:#f4e9ce';
+  const heading = document.createElement('strong');
+  heading.textContent = 'Möjlig startfärdighet';
+  heading.style.cssText = 'display:block;font:600 14px system-ui;margin-bottom:8px';
+  const content = document.createElement('p');
+  content.style.cssText = 'font:14px/1.6 system-ui;margin:0';
+  panel.append(heading, content);
+
+  // Förslaget ligger inuti den befintliga livsbakgrundspanelen.
+  // Saknas den används den tidigare fristående, utfällbara presentationen.
+  if (section && section.tagName === 'DETAILS') {
+    section.appendChild(panel);
+    const summary = section.querySelector(':scope > summary');
+    if (summary) summary.textContent = 'Din livsbakgrund och färdigheter · förhandsvisning';
+  } else {
+    const fallback = document.createElement('details');
+    fallback.style.cssText = 'margin:12px 0;border:1px solid #8e7a51;border-radius:8px';
+    const summary = document.createElement('summary');
+    summary.textContent = 'Möjlig startfärdighet · förhandsvisning';
+    summary.style.cssText = 'cursor:pointer;padding:12px;min-height:44px;font:600 14px system-ui';
+    fallback.append(summary, panel);
+    host.appendChild(fallback);
+    panel.style.margin = '0 12px 12px';
+  }
+
   function render() {
-    const c=window.KB_CHARACTER&&window.KB_CHARACTER.get();
-    if(!c){details.hidden=true;return;}
-    details.hidden=false;
-    let life=null;
+    const c = window.KB_CHARACTER && window.KB_CHARACTER.get();
+    if (!c) { panel.hidden = true; return; }
+    panel.hidden = false;
+    let life = null;
     try {
-      const data=localStorage.getItem('kronor-och-blod.life-background.v1');
-      const ownerRaw=localStorage.getItem('kronor-och-blod.life-background.owner.v1');
-      if(data!==null&&ownerRaw!==null&&c.characterId){
-        const owner=JSON.parse(ownerRaw);
-        const model=window.KB_LIFE_BACKGROUND_MODEL;
-        if(owner&&owner.version===1&&owner.characterId===c.characterId&&owner.backgroundRaw===data&&model){
-          const parsed=model.parse(data);
-          if(parsed.ok)life=parsed.value;
+      const data = localStorage.getItem('kronor-och-blod.life-background.v1');
+      const ownerRaw = localStorage.getItem('kronor-och-blod.life-background.owner.v1');
+      if (data !== null && ownerRaw !== null && c.characterId) {
+        const owner = JSON.parse(ownerRaw);
+        const model = window.KB_LIFE_BACKGROUND_MODEL;
+        if (owner && owner.version === 1 &&
+            owner.characterId === c.characterId &&
+            owner.backgroundRaw === data && model) {
+          const parsed = model.parse(data);
+          if (parsed.ok) life = parsed.value;
         }
       }
-    } catch(_) {life=null;}
-    const skill=life&&preview(life.upbringing);
-    content.textContent=skill
-      ? skill.name+' +'+skill.level+' (förslag – ger ännu ingen spelbonus).'
+    } catch (_) { life = null; }
+    const skill = life && preview(life.upbringing);
+    content.textContent = skill
+      ? skill.name + ' +' + skill.level + ' (förslag – ger ännu ingen spelbonus).'
       : 'Ingen verifierad livsbakgrund för aktiv karaktär. Inga färdigheter ändras.';
   }
   render();
-  // Read-only refresh when switching back to the profile tab or returning to the app.
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden)render();});
-  document.addEventListener('click',()=>{if(!details.hidden)render();});
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) render();
+  });
+  document.addEventListener('click', function () {
+    if (!panel.hidden) render();
+  });
 })();
