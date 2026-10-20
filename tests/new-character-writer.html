@@ -1,0 +1,21 @@
+<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>J-C Säker sparning</title><body style="background:#17261d;color:#f5e7cc;font:16px/1.5 system-ui;padding:20px"><h2>J-C – Isolerad sparmotor</h2><p>Alla tester körs med minneslagring. Riktiga sparplatser påverkas inte.</p><pre id="results" style="white-space:pre-wrap"></pre>
+<script src="../src/life-background-model.js"></script><script src="../src/new-character-bundle.js"></script><script src="../src/new-character-writer.js"></script>
+<script>
+const out=document.getElementById('results'),ID='12345678-1234-4234-8234-123456789abc',key='kronor-och-blod.slot.v1.'+ID;
+const life={version:1,upbringing:'farm',familySituation:'alone',past:'debt',ambition:'farmstead',biography:''};
+const input={name:'Testbonde JC',background:'bonde',characterId:ID,lifeBackground:life};
+const deps={builder:window.KB_NEW_CHARACTER_BUNDLE,character:{BACKGROUNDS:{bonde:{attributes:{strength:3}}}},life:window.KB_LIFE_BACKGROUND_MODEL};
+function store(){const m=new Map();return {getItem:k=>m.has(k)?m.get(k):null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k),keys:()=>[...m.keys()]}}
+function verifier(id,s){const raw=s.getItem(key);if(!raw)return {ok:false};const slot=JSON.parse(raw),e=slot.entries,b=e['kronor-och-blod.life-background.v1'],owner=JSON.parse(e['kronor-och-blod.life-background.owner.v1']);return {ok:slot.characterId===id&&owner.characterId===id&&owner.backgroundRaw===b&&window.KB_LIFE_BACKGROUND_MODEL.parse(b).ok,characterId:id}}
+const api=window.KB_NEW_CHARACTER_WRITER;let pass=0,fail=0;
+function test(name,fn){try{if(!fn())throw Error('Villkor falskt');out.textContent+='PASS: '+name+'\n';pass++}catch(e){out.textContent+='FAIL: '+name+' '+e.message+'\n';fail++}}
+test('Komplett ny sparplats skapas',()=>{const s=store();api.create(input,{...deps,storage:s,verify:verifier});return !!s.getItem(key)});
+test('Ofullständig livsbakgrund avvisas',()=>{const s=store();try{api.create({...input,lifeBackground:{...life,past:''}},{...deps,storage:s,verify:verifier})}catch(_){return s.keys().length===0}return false});
+test('Befintlig sparplats skrivs inte över',()=>{const s=store();s.setItem(key,'VIKTIG BEFINTLIG DATA');try{api.create(input,{...deps,storage:s,verify:verifier})}catch(_){return s.getItem(key)==='VIKTIG BEFINTLIG DATA'}return false});
+test('Misslyckad verifiering rullar tillbaka ny post',()=>{const s=store();try{api.create(input,{...deps,storage:s,verify:()=>({ok:false})})}catch(_){return s.getItem(key)===null}return false});
+test('Andra nycklar påverkas aldrig',()=>{const s=store();s.setItem('kronor-och-blod.character.v1','ORÖRD');api.create(input,{...deps,storage:s,verify:verifier});return s.getItem('kronor-och-blod.character.v1')==='ORÖRD'});
+test('Andra karaktärers sparplatser påverkas aldrig',()=>{const s=store();s.setItem('kronor-och-blod.slot.v1.aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','ORÖRD');api.create(input,{...deps,storage:s,verify:verifier});return s.getItem('kronor-och-blod.slot.v1.aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa')==='ORÖRD'});
+test('Dubbelsparning stoppas',()=>{const s=store();api.create(input,{...deps,storage:s,verify:verifier});const before=s.getItem(key);try{api.create(input,{...deps,storage:s,verify:verifier})}catch(_){return s.getItem(key)===before}return false});
+test('Ägarpost matchar livsbakgrund',()=>{const s=store();api.create(input,{...deps,storage:s,verify:verifier});return verifier(ID,s).ok});
+out.textContent+='\nRESULTAT: '+pass+'/8 PASS, '+fail+' FAIL';
+</script></body></html>
