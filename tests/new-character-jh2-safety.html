@@ -1,0 +1,27 @@
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>J-H2A – Isolerat säkerhetstest</title><style>body{background:#18271e;color:#f5e7cb;font:16px/1.5 system-ui;padding:18px}main{max-width:700px;margin:auto}button{min-height:48px;padding:12px;background:#8e412e;color:white;border:1px solid #e0bd73;border-radius:6px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#23382a;padding:14px;border:1px solid #a58d56}</style></head><body><main><h1>⚔️ J-H2A – Säkerhetstest</h1><p>Detta test använder enbart minneslagring. <strong>Inget skrivs till Safaris localStorage.</strong> Det skapar ingen spelkaraktär.</p><button id="run">Kör 10 säkerhetstester</button><pre id="result">Inte kört ännu.</pre></main><script src="../src/life-background-model.js"></script><script src="../src/new-character-bundle.js"></script><script src="../src/new-character-writer.js"></script><script>
+(function(){'use strict';
+const output=document.getElementById('result');const model=window.KB_LIFE_BACKGROUND_MODEL,builder=window.KB_NEW_CHARACTER_BUNDLE,writer=window.KB_NEW_CHARACTER_WRITER;
+const character={BACKGROUNDS:{bonde:{attributes:{styrka:3,list:1,anseende:1}}}};
+const id='12345678-1234-4234-8234-123456789abc';const key='kronor-och-blod.slot.v1.'+id;
+const life={version:1,upbringing:'farm',familySituation:'alone',past:'debt',ambition:'farmstead',biography:''};
+function input(){return {name:'Säkerhetstest',background:'bonde',characterId:id,lifeBackground:{...life}}}
+function storage(){const data=new Map();return {data,getItem:k=>data.has(k)?data.get(k):null,setItem:(k,v)=>data.set(k,String(v)),removeItem:k=>data.delete(k),keys:()=>Array.from(data.keys())}}
+function verify(cid,s){try{const slot=JSON.parse(s.getItem('kronor-och-blod.slot.v1.'+cid));const e=slot.entries;const identity=JSON.parse(e['kronor-och-blod.character.identity.v1']);const owner=JSON.parse(e['kronor-och-blod.life-background.owner.v1']);return {ok:slot.characterId===cid&&identity.characterId===cid&&owner.characterId===cid&&owner.backgroundRaw===e['kronor-och-blod.life-background.v1']&&model.parse(e['kronor-och-blod.life-background.v1']).ok,characterId:cid}}catch(_){return {ok:false}}}
+function create(i,s,v=verify){return writer.create(i,{storage:s,builder,character,life:model,verify:v})}
+function check(label,fn){try{if(!fn())throw Error('Fel resultat');results.push('PASS '+label);passed++}catch(e){results.push('FAIL '+label+': '+e.message)}}
+function rejected(fn){try{fn();return false}catch(_){return true}}
+let results=[],passed=0;
+document.getElementById('run').onclick=function(){results=[];passed=0;
+check('Komplett livsbakgrund sparas i NY slot',()=>{const s=storage();const r=create(input(),s);return r.characterId===id&&verify(id,s).ok&&s.data.size===1});
+check('Aktiv karaktärsnyckel lämnas orörd',()=>{const s=storage();s.setItem('kronor-och-blod.character.v1','ORÖRD');create(input(),s);return s.getItem('kronor-och-blod.character.v1')==='ORÖRD'});
+check('Befintlig slot skrivs aldrig över',()=>{const s=storage();s.setItem(key,'GAMMAL');return rejected(()=>create(input(),s))&&s.getItem(key)==='GAMMAL'});
+check('Uppväxt krävs',()=>{const s=storage(),i=input();i.lifeBackground.upbringing='';return rejected(()=>create(i,s))&&s.data.size===0});
+check('Familj krävs',()=>{const s=storage(),i=input();i.lifeBackground.familySituation='';return rejected(()=>create(i,s))&&s.data.size===0});
+check('Förflutet krävs',()=>{const s=storage(),i=input();i.lifeBackground.past='';return rejected(()=>create(i,s))&&s.data.size===0});
+check('Ambition krävs',()=>{const s=storage(),i=input();i.lifeBackground.ambition='';return rejected(()=>create(i,s))&&s.data.size===0});
+check('Ogiltigt ID stoppas',()=>{const s=storage(),i=input();i.characterId='fel';return rejected(()=>create(i,s))&&s.data.size===0});
+check('Misslyckad verifiering rullar tillbaka endast egen slot',()=>{const s=storage();s.setItem('annat','ORÖRT');return rejected(()=>create(input(),s,()=>({ok:false})))&&s.getItem(key)===null&&s.getItem('annat')==='ORÖRT'});
+check('Ingen lagring utan uttryckligt anrop',()=>{const s=storage();builder.build(input(),{character,life:model});return s.data.size===0});
+output.textContent=results.join('\n')+'\n\nRESULTAT '+passed+'/10 '+(passed===10?'PASS':'FAIL')+'\n\nEndast minneslagring användes.';
+};})();
+</script></body></html>
