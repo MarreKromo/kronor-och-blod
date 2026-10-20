@@ -155,3 +155,13 @@ Status anges per paket och endast inom faktiskt verifierad omfattning. Historisk
 - **Ej testat:** alla fyra uppväxtalternativ, omladdning och byte mellan flera karaktärer inom J-K2; ingen aktiv färdighetsbonus eller berättelseeffekt finns ännu.
 - **Sparningar:** ingen avsiktlig migration, återställning eller ny karaktär.
 - **Nästa:** J-K3-test med befintlig sparad karaktär och omladdning; därefter UX-genomgång innan fler profilpaneler tillkommer.
+
+---
+
+## 2026-10-20 – IMP-025 J-K3 · omladdning med befintlig karaktär
+
+- **Safari PASS enligt användaren:** Testbonde visar färdighetsförslaget `Jordbruk +2` före omladdning och fortfarande efter omladdning i vanliga Safari.
+- **Omfattning:** en befintlig karaktär och ett uppväxtalternativ (`farm`), med läsning från befintlig sparad livsbakgrund.
+- **Ingen ny spelkod i J-K3:** detta är ett funktionstest av J-K2-modulen, inte en aktivering av färdighetsbonus.
+- **Ej verifierat i J-K3:** byte till annan karaktär och tillbaka, övriga tre uppväxtalternativ, blockerad/felaktig lagring och fullständig regression av övriga spelsystem.
+- **Nästa:** UX-genomgång av karaktärsfliken innan fler paneler eller spelmekaniska färdigheter införs.

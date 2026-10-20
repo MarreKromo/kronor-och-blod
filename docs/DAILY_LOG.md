@@ -169,3 +169,13 @@ Nästa exakta steg:
 - **Begränsning:** ingen aktiv bonus; inte fullständigt test av alla uppväxter, omladdning, karaktärsbyte eller felaktiga lagringsposter. Inga sparningar återställda eller avsiktligt ändrade.
 - **Spelarupplevelse:** karaktärsfliken har flera hopfällbara paneler; gör UX-genomgång och välj hållbar struktur före ytterligare paneler.
 - **Nästa exakta steg:** J-K3, testa läsningen med befintlig karaktär och omladdning utan att skapa ny karaktär eller ändra data. Därefter besluta separat om färdigheternas framtida spelmekanik.
+
+---
+
+## 2026-10-20 – IMP-025 J-K3 · Safari-test och nästa UX-steg
+
+- **J-K3 Safari PASS enligt användaren:** Testbonde visar `Jordbruk +2` både före och efter omladdning i vanliga Safari.
+- Ingen ny kod levererades i J-K3; testet bekräftar endast fortsatt visning för en befintlig karaktär.
+- Färdigheten är fortfarande en skrivskyddad förhandsvisning, inte en aktiv spelbonus.
+- Övriga bakgrunder, byte mellan karaktärer, felaktig lagring och bred regression är ännu inte godkända.
+- **Nästa exakta steg:** granska karaktärsflikens befintliga paneler och prioritera en tydligare spelarupplevelse före ytterligare funktioner. Skydda alla befintliga sparningar.
