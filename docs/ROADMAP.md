@@ -1,189 +1,119 @@
 # Roadmap – SVERIGE: Kronor & Blod
 Uppdaterad: 2026-10-20
-Statusen nedan avser dokumenterade delpaket; fullständiga system är inte färdigutvecklade.
+**Aktuell styrning:** KB-PLAN-01. Historiska delpaket och äldre prioriteringar finns i Git-historiken (föregående ROADMAP.md: blob `9d0c5c4d8e719fcf86740f8fd1e629222f37cabc`) och i `docs/TESTS.md`, `docs/DAILY_LOG.md` och äldre stoppunkter.
+**Planunderlag:** `docs/KB_PLAN_01_ROADMAP_GENOMGANG.md`.
+**Viktigt:** PASS betyder verifierad delomfattning, inte att hela systemet är färdigutvecklat.
 
-## KB-00 – Speldesign
-- [x] GDD v1.0 framtagen.
+## Vision
+Ett öppet historiskt inspirerat RPG i Västergötland år 1250. Spelaren formar sitt liv genom resor, arbete, relationer, uppdrag, träning och beslut. Livsvägar är inte låsta klasser. Tid är en begränsad resurs och specialisering växer fram genom handlingar.
 
-## KB-01 – Projektgrund
-- [x] Repo, README, dokumentstruktur och GitHub Pages-grund etablerade.
-- [x] GitHub-verifiering genomförd.
+## Aktuellt läge
+- [x] **KB-00:** GDD v1.0.
+- [x] **KB-01:** repo, dokumentstruktur och GitHub Pages.
+- [x] **KB-02 prototyp:** fem platser, schematisk klickbar karta, kalender och lokal sparning.
+- [x] **KB-03 prototyp:** karaktärsskapande, flera karaktärsplatser, profil, berättelsescener, Ragnhild, ledtrådar, relation, dagbok och mobilnavigation.
+- [x] **J-A–J-H:** stegvis skapande, validering, säkerhetsarbete och separat sparning; omfattning enligt testloggen.
+- [x] **J-I:** radbrytnings-/kommentarsfix; Safari bevarandetest.
+- [x] **J-J:** 7/7 rapporterade Safari PASS för kalender, berättelse och karaktärsbyte inom testad omfattning.
+- [x] **J-K1–J-K3:** färdighetsförhandsvisning utan aktiv bonus, testad omladdning och dokumentation.
+- [x] **J-L1–J-L3:** samlad livsbakgrundsvy, ”Min berättelse” och hopfällbart formulär. Cachefix `jl3-2`, GitHub/Safari PASS inom synlig UI-omfattning.
+- [x] **KB-PLAN-01 steg 1:** strategidokument uppladdat och GitHub-verifierat.
+- [ ] **KB-PLAN-01 steg 2:** detta uppdaterade huvuddokument inväntar GitHub-verifiering efter commit.
+- [ ] **Ej färdigt:** export/backup, bred fel- och regressionsmatris, riktiga resor, spelposition, generella NPC:er, aktiviteter, aktiv XP/färdighetsmotor och större världssystem.
 
-## KB-02 – Historiskt kartunderlag och prototyp
-- [x] Fem platser och plats-ID:n dokumenterade.
-- [x] Geografiska grundprinciper dokumenterade.
-- [x] Klickbar schematisk kartprototyp.
-- [x] Platsregister, prototypvärden och kartpanel.
-- [x] Spelkalender och lokal kalendersparning.
-- [ ] Fördjupad historisk källgranskning, geografiska koordinater och färdvägar.
-- [ ] Stor visuell kartomarbetning enligt IMP-006–008; kräver egen kravspecifikation.
+## Officiell utvecklingsordning – KB-PLAN-01
 
-## KB-03 – Karaktär och berättelse
-- [x] KB-03.1 karaktärsmodell.
-- [x] KB-03.2 karaktärsskapare och lokal sparning.
-- [x] KB-03.3 karaktärsprofil utan dubbel vy.
-- [x] KB-03.4 första berättelsescenen med tre val.
-- [x] KB-03.5 Ragnhild, relationsvärde och sparade svar.
-- [x] KB-03.6 undersökning med förgrenade ledtrådar, PASS inom testad omfattning.
-- [ ] KB-03.6.1 förbättra berättelseflöde och konsekvenser, testa relation −1.
-- [x] KB-03.6.2 steg 1: endast aktiv berättelsescen visas; GitHub PASS, Safari-bilder visar korrekt scen. Fullständiga regressionstester återstår.
-- [x] KB-03.6.2 steg 2: dagbok med berättelseval, ledtrådar och relationer, GitHub och Safari PASS inom testad omfattning.
-- [x] KB-03.6.2 steg 3: mobilnavigation med flikarna Berättelse, Karta, Karaktär, Dagbok; GitHub och Safari PASS.
-- [x] KB-03.6.3 steg 1: Hem – Mitt liv, datum, nästa dag, lokal dagshistorik; GitHub och användarrapporterat Safari PASS.
-- [x] KB-03.6.3 steg 2: båda kalenderknapparna kopplade till gemensam dagshändelse, GitHub PASS; Safari-skärmbilder visar dag 22 och dagshistorik.
-- [ ] KB-03.6.3 kompletterande regressionstest: båda knapparnas loggning och sparning efter omladdning, separat bekräftelse.
-- [ ] **IMP-025 – utökat karaktärsskapande:** fem designsteg (identitet, uppväxt, familj, förflutet, ambition) och frivillig biografi; konsekvenser för startkunskaper, kontakter, resurser och berättelse utan låsta livsvägar. En vanlig uppväxt ska vara lika spelbar som ett dramatiskt förflutet.
-- [ ] **IMP-025 – säker implementation:** planera stabilt karaktärs-ID och migration före nya sparfält; skapa stegvis mobilformulär och förhandsvisning, testa ny/gammal karaktär, omladdning och Ragnhilds introduktion. Levande familje-NPC:er är framtida system, inte del av första paketet.
-- [ ] **IMP-024 – berättelsegenomgång före KB-03.6.4:** Ragnhilds mysterium blir ett stort frivilligt introduktionsuppdrag, inte hela huvudberättelsen. Först design av motiv, dramatik, förgreningar, konsekvenser och bryggan till huvudberättelsen; därefter implementation och tester.
-- [ ] KB-03.6.4 första riktiga dagshändelser: begränsad händelsepool, sparade beslut, inga oavsiktliga upprepningar; kravspecifikation och test först.
-- [ ] IMP-023 kompakt dagshistorik: korta vanliga dagar, tydliga viktiga händelser, bevarad historik.
-- [ ] Stabilt unikt karaktärs-ID, sparfiler och migration.
-- [ ] Framtida åldrande, porträtt, utrustning och alternativa historiskt anpassade livsvägar.
+### Fas A – Dataskydd och sammanhängande grund (NÄSTA)
+- [ ] **A1 – Läsbaserad sparinventering:** identifiera alla lokala nycklar, karaktärskoppling, globala värden, slotbyten och risker. Ingen spelkodändring.
+- [ ] **A2 – Backup och återställning:** specificera säker export och återställning innan fler bestående världstillstånd införs.
+- [ ] **A3 – Säker datamodell:** versionering, identifiering och migration i små testbara steg. Inga gamla sparningar får raderas.
+**Gate:** befintliga karaktärer, livsbakgrunder, berättelse, dagbok, kalender och karaktärsbyte fungerar efter omladdning. Testa nekad/full lagring och återställning separat.
 
-### IMP-025 – Ursprungliga delpaket och godkännandegater (historisk plan; se statusuppdatering längst ned)
-- [x] Dokumentera valbara uppväxter, familjesituation, förflutet och ambition (design, inte kod).
-- [x] Föreslå startkunskaper och kontakter: jordbruk, hantverk, skriftkunskap, umgängesvana; värde 2 som preliminär balans.
-- [x] Dokumentera migrationskrav och regressionstestfall för befintliga karaktärer.
-- [ ] Inventera samtliga sparnycklar och besluta om stabilt `characterId` samt säker backup/återställning.
-- [ ] Implementera och testa en säker minimal migration utan att radera äldre sparningar.
-- [ ] Implementera nya bakgrundsfält och mobilanpassad förhandsvisning i separat litet paket.
-- [ ] Testa Ragnhilds olika ingångar, möjlighet att avstå och bestående konsekvenser enligt IMP-024.
-- [ ] Bygg riktiga familje-NPC:er först när NPC-identitet och världssystem stöder det.
+### Fas B – Position, resor och spelvärld (KB-04.1)
+- [ ] Varje karaktär har en bestående faktisk position, initialt Skara.
+- [ ] Vald ort på kartan skiljs från faktisk resa.
+- [ ] En första väg mellan två platser med tydliga villkor och kostnad i speltid.
+- [ ] Position och tid bevaras efter omladdning.
+- [ ] Förbered platsvillkor för uppdrag och aktiviteter.
+**Gate:** en säker resa genomförd, kalender korrekt och ingen påverkan på andra karaktärers data.
 
-## KB-DOC-01 – Dokumentationsstädning (AVSLUTAD)
-- [x] Inventering av docs: ursprungligen 34 poster, varav 33 dokument.
-- [x] Slå ihop TESTS.md, DAILY_LOG.md, ROADMAP.md och ARBETSMETOD.md.
-- [x] GitHub-verifiera sammanslagna huvuddokument.
-- [x] Granska och arkivera tio äldre `*_TILLAGG.md` i `docs/archive/`.
-- [x] Kontrollera att arkivkopiorna överensstämmer med originalen innan originalen tas bort.
-- [x] Kontrollera att inga `*_TILLAGG.md` återstår direkt i `docs/`.
-- [x] Dokumentera regel: uppdatera befintliga huvuddokument i stället för att skapa tillägg.
-- Paketdokument som innehåller unik planering, beslut eller testunderlag bevaras tills separat granskning beslutas.
+### Fas C – En levande aktivitet och en NPC
+- [ ] Gemensam aktivitetsmodell: plats, krav, tidskostnad, resultat, ID och karaktärskoppling.
+- [ ] En namngiven NPC med identitet, ett möte och en begriplig relation.
+- [ ] En aktivitet med bestående resultat i dagbok/historik.
+- [ ] Undvik dubbelbelöningar och oavsiktliga upprepningar efter omladdning.
+**Gate:** spelaren kan möta en NPC, göra en aktivitet, förbruka tid och se en bestående konsekvens.
 
-## KB-04 – Världens grundsystem (FRAMTID)
-### KB-04.1 – Position, resor och uppdragsvillkor
-- [ ] Varje karaktär har en faktisk, sparad position (start Skara).
-- [ ] Klick på en ort visar information; det innebär **inte** att spelaren har rest dit.
-- [ ] Spelaren väljer en resa, färdas längs tillåtna förbindelser och förbrukar speltid.
-- [ ] Resor kan ge händelser, möten och vägval.
-- [ ] Uppdrag och berättelsescener kan kräva att spelaren faktiskt befinner sig på rätt plats, exempelvis Varnhem.
-- [ ] Säker plan för sparfiler och migrering innan position kopplas till befintliga karaktärer.
+### Fas D – Arbete, färdigheter och utveckling
+- [ ] Designa färdighetskatalog: strid, överlevnad, ridning, jordbruk, hantverk, handel, kunskap och sociala färdigheter.
+- [ ] Skilj inlärda färdigheter från befintliga grundegenskaper `styrka`, `list`, `anseende`.
+- [ ] Fastställ nivåer, erfarenhet, svårighetsgrad, tidsåtgång och skydd mot XP-farm.
+- [ ] Första verkliga färdigheten tränas genom en faktisk aktivitet.
+- [ ] Utöka till jobb, lärare, uppdrag och händelser; högre nivåer kräver större investering.
+- [ ] Ingen klasslåsning: spelaren kan byta livsväg, men tiden gör det svårt att bemästra allt.
+**Gate:** aktiv färdighetsförändring efter tidskostnad, korrekt karaktärskoppling och säker omladdning.
+**OBS:** Nuvarande `Jordbruk +2` är enbart skrivskyddad förhandsvisning, inte implementerad bonus.
 
-### KB-04.2 – Fog of war och kartkunskap
-- [ ] Tre kunskapsnivåer per plats/område: **okänd**, **känd genom karta eller rykte**, **själv utforskad**.
-- [ ] Okända platser döljs eller framstår som osäkra; köp av karta kan avslöja orter, vägar och ungefärliga avstånd.
-- [ ] Rykten, samtal och vägvisare kan avslöja information utan kartköp; kartor är aldrig ett obligatoriskt köp för att kunna fortsätta.
-- [ ] Egna besök avslöjar fler detaljer, personer, möjligheter och uppdrag.
-- [ ] Kartor från år 1250 behöver inte vara exakta eller fullständiga. Historisk trovärdighet ska granskas separat.
-- [ ] Kartkunskap sparas för karaktären och finns kvar efter omladdning.
-- [ ] Designa utforskning, resor och kartans gränssnitt tillsammans; lägg inte bara en visuell dimma över dagens schematiska karta.
-- [ ] Testa både ny karaktär, kartköp, ryktesupptäckt, egen upptäckt, resa och sparning på iPhone.
+### Fas E – Berättelse, relationer och öppna livsvägar
+- [ ] **IMP-024:** Ragnhilds mysterium blir ett frivilligt introduktionsuppdrag, inte hela huvudberättelsen. Hjälpa, undersöka själv och avstå ska vara meningsfulla vägar.
+- [ ] **IMP-025:** bakgrund får verkliga men balanserade konsekvenser för kontakter, startmöjligheter och berättelser, utan påhittade familje-NPC:er.
+- [ ] **IMP-023:** kompakt dagshistorik med viktiga händelser tydligt markerade.
+- [ ] Fördjupa relationer, handel, försörjning, följeslagare och egendom när beroendena finns.
+**Gate:** minst en spelbar alternativ väg utan att acceptera huvuduppdraget; följder består.
 
-### KB-04.3 – Färdsätt och levande resehändelser
-- [ ] Resor förbrukar speltid; längd beror på avstånd, väg, årstid, väder, färdsätt och eventuella hinder.
-- [ ] Till fots: låg direkt kostnad, men behov av mat, vila och övernattning; fler möjligheter till möten och upptäckter.
-- [ ] Häst: kräver köp eller tillgång, foder och skötsel; ofta snabbare men inte riskfri.
-- [ ] Hyrd vagn, kärra eller följe: kostar pengar, kan bära varor och medresenärer; hastighet och trygghet varierar.
-- [ ] Dynamiska resehändelser kan ske oavsett färdsätt: väder, trasig utrustning, hjälpbehövande, rykten, handel, överfall, vägval och sociala möten.
-- [ ] Händelser ger meningsfulla val med följder för tid, resurser, relationer, rykte och uppdrag; inte bara slumpmässiga strider.
-- [ ] Resor till fots får inte bli ett orimligt straff för fattiga spelare; dyrare färdsätt ska ge andra fördelar, inte vara obligatoriska.
-- [ ] Händelser och resor ska kunna påverkas av följeslagare och spelarens livsväg.
+### Fas F – Fördjupning, historiskt underlag och presentation
+- [ ] **KB-04.2:** kartkunskap – okänd, känd genom rykte/karta, själv utforskad. Kartköp får aldrig vara obligatoriskt.
+- [ ] **KB-04.3:** färdsätt till fots, häst och vagn; väg, årstid, väder, kostnad, risk och resehändelser.
+- [ ] **KB-05:** levande samhällen, ekonomi, gårdar, rekryterbara följeslagare, familjer, dynastier och långsiktiga livsvägar.
+- [ ] Senare: borgar, politik, arméer, laglöshet och möjliga högre titlar med historisk granskning.
+- [ ] **IMP-006–013:** större kart- och karaktärs-UI-redesign i separat krav- och testfas; karta ska fungera som spelgränssnitt, inte bara illustration.
+- [ ] Historisk källgranskning av geografi, vägar, titlar, markrätt och samhällsskikt.
+- [ ] Eventuell framtida hybrid med spelbara 2D-miljöer.
 
-## KB-05 – Livsvägar, följeslagare och egendom (FRAMTID)
-**Designprincip:** Livsvägar växer fram genom handlingar, relationer, resurser och historiskt rimliga möjligheter, inte låsta startklasser. Flera vägar ska kunna kombineras eller förändras över tid.
+## Första stora spelbara milstolpen
+En karaktär ska kunna:
+1. Befinna sig i Skara.
+2. Möta en person eller välja en aktivitet.
+3. Utföra en handling som förbrukar speltid.
+4. Se ett bestående resultat i historik, relation eller resurs.
+5. Resa till en andra plats.
+6. Ladda om och fortsätta utan förlorad eller sammanblandad karaktärsdata.
 
-### KB-05.1 – Följeslagare och egna grupper
-- [ ] Rekrytera namngivna NPC:er som själva kan tacka ja eller nej utifrån ålder, situation, relation, lojalitet och intressen.
-- [ ] Varje följeslagare har färdigheter, personlighet, behov, mål, relationer och möjlighet att utvecklas, misslyckas, lämna eller svika.
-- [ ] Interagera med följeslagare under resor och i vardagen; de ska vara personer, inte enbart bonusvärden.
-- [ ] En riddare kan anta en historiskt rimligt lämpad **väpnare**, träna och bedöma honom samt, när villkoren är uppfyllda, välja att stödja eller avstå från hans riddarslag. Riddarskap är inte en automatisk knappbelöning.
-- [ ] Rekrytering är inte fri kontroll över valfri NPC: samtycke, ålder, sociala förhållanden och historisk trovärdighet sätter gränser.
-- [ ] En laglös spelare kan bygga ett rövarband med individuella medlemmar, lojalitet, delat byte, risker och interna konflikter.
-- [ ] Gruppstorlek och förmåga begränsas av ekonomi, försörjning, anseende och ledarskap.
+Milstolpen är **inte** uppnådd. Den byggs genom små paket från fas A–D.
 
-### KB-05.2 – Gård, verksamheter och försörjning
-- [ ] Förvärva eller få tillgång till mark genom historiskt rimliga former; rättigheter och skyldigheter skiljer sig mellan livsvägar.
-- [ ] Förvalta gård med byggnader, djur, åkrar, utsäde, skörd, arbetare, förråd och årstider.
-- [ ] Byggande och drift kräver resurser, tid och pengar; avkastning och risker varierar.
-- [ ] Spelaren fattar begripliga beslut med knappar och tydliga följder, utan att fastna i oändlig mikroadministration.
-- [ ] Även handel, hantverk och andra försörjningsvägar ska kunna utvecklas.
+## Historiska delpaket och öppna punkter – bevarad översikt
+### KB-02 och KB-03
+- Schematisk karta och kalender är prototyper; koordinater, färdvägar och historisk källgranskning återstår.
+- Berättelseprototypen omfattar första scen, tre val, Ragnhild, förgreningar, ledtrådar och dagbok.
+- KB-03.6.1: berättelseflöde, tydligare konsekvenser och relation −1 återstår.
+- KB-03.6.2: aktiv scen, dagbok och mobilnavigation har testade delpaket; full regression återstår.
+- KB-03.6.3: Hem/dagshistorik och synkroniserad kalender har testade delpaket; vissa äldre separata testpunkter återstår.
+- KB-03.6.4: riktiga dagshändelser återstår, ska inte automatiskt driva huvuduppdraget.
+### IMP-025
+- Flerkaraktär, bakgrundsformulär och förhandsvisning är delvis implementerade och testade.
+- Uppväxtvärdena bonde→jordbruk 2, hantverkare→hantverk 2, skrivare→skriftkunskap 2, friboren→umgängesvana 2 är preliminära och ännu inte aktiva färdigheter.
+- Familj, förflutet, ambition och biografi får inte automatiskt skapa fiktiva NPC:er eller ge obalanserade bonusar.
+- Kontakter, resurser, berättelsekoppling och aktiv utveckling återstår.
+- Äldre checklistor om `characterId`, migration, säkerhetskontroller och backup måste granskas mot faktisk kod innan de markeras klara.
+### KB-DOC-01
+- [x] Huvuddokumenten TESTS, DAILY_LOG, ROADMAP och ARBETSMETOD konsoliderade.
+- [x] Äldre tillägg granskade/arkiverade enligt dokumentationslogg.
+- [x] Princip: uppdatera huvuddokument, skapa inte lösa tillägg för varje test.
+### Tidigare delpaket
+- 3H.10–3H.11: flera karaktärer, byte och UI-städning; se TESTS och DAILY_LOG.
+- 3H.11.6 noterades som ”nästa” i en äldre stoppunkt, men är inte längre aktuell prioritet.
+- J-A–J-H: sparning, bakgrund och säkerhetskontroller; J-I fixade bokstavlig radbrytning; J-J verifierade 7/7 grundregressioner.
+- J-K: förhandsvisning; J-L: sammanhållen presentation och Safari-cachefix.
+- Historiska detaljer och exakta PASS/FAIL finns i `docs/TESTS.md`, `docs/DAILY_LOG.md`, `docs/IMPROVEMENT_BACKLOG.md` samt äldre checkpoints. Ursprunglig roadmap finns kvar i Git-historiken.
 
-### KB-05.3 – Borgar, adel, politik och arméer
-- [ ] Högre status och titlar nås genom relationer, stöd, prestationer och historiskt rimlig legitimitet; inte enbart genom pengar eller erfarenhetspoäng.
-- [ ] Förvalta borgar och större egendomar: underhåll, garnison, förråd, personal, försvar och inkomster.
-- [ ] Större följen och arméer kräver rekrytering, försörjning, utrustning, lojalitet och löpande kostnader.
-- [ ] Härskarroll med politiska beslut, vasaller, allianser, konflikter och följder för befolkningen.
-- [ ] Möjlighet att bli hertig eller kung är ett mycket långsiktigt, svårt och historiskt granskat mål, inte ett utlovat tidigt spelmoment.
+## Regler för ordning och godkännande
+- Faserna är beroendeordning, **inte** krav på att färdigställa en hel fas innan nästa kan prototypas.
+- Bygg en liten komplett spelkedja åt gången.
+- Läs aktuell kod före varje ändring; skydda alla localStorage-data och befintliga karaktärer.
+- Varje kodpaket: ZIP med fullständiga ersättningsfiler → commit → GitHub PASS/FAIL → användartest i vanlig Safari PASS/FAIL → dokumentation.
+- Dokumentationspaket behöver GitHub-kontroll men inte nytt Safari-test.
+- Registrera öppna fel i `docs/IMPROVEMENT_BACKLOG.md`. Kritiska datarisker prioriteras först.
 
-### KB-05.4 – Laglöshet, överfall och konsekvenser
-- [ ] Rövarband kan välja mål som vägfarare eller handelskaravaner och försöka råna eller plundra inom spelets fiktiva värld.
-- [ ] Risker inkluderar motstånd, rättsliga följder, ryktesspridning, vedergällning och bristande lojalitet.
-- [ ] Samma öppna värld ska reagera på spelarens handlingar; lagliga och olagliga vägar ger olika möjligheter.
-
-### Genomförandeordning och kvalitet
-- [ ] Bygg först stabila NPC-identiteter, relationer, ekonomi, tid, resor och sparning.
-- [ ] Prototypa **en** liten rekryterbar följeslagare med interaktion under resa innan större grupper eller arméer.
-- [ ] Prototypa **en** liten förvaltningskedja för en gård innan borgar och riken.
-- [ ] Skapa användarflöden och balansera kostnader före implementation; testa mobilupplevelsen.
-- [ ] Historiska villkor (titlar, markrätt, riddarslag, samhällsskikt och krigsmakt år 1250) faktagranskas innan de presenteras som fakta.
-
-### Övriga grundsystem
-- [ ] NPC-data, relationer och händelser.
-- [ ] Enkel handel och ekonomi.
-
-## Senare utveckling
-- Levande samhällen, uppdrag med följder, familjer och dynastier.
-- Fördjupad kart- och UI-design.
-- Eventuell framtida hybrid med spelbara 2D-miljöer, större krig och belägringar.
-
-## Arbetsregel
-Nästa större funktion påbörjas efter godkänt test och en förbättringsrunda. Kända begränsningar och öppna tester ska synas i TESTS.md och IMPROVEMENT_BACKLOG.md.
-
----
-
-## Lägesuppdatering 2026-10-20 – IMP-025 flerkaraktär och UI
-
-- [x] Flera lokala karaktärsplatser och säkert byte testade med Mk, Erik och Sven.
-- [x] 3H.10.3–3H.10.6: separat skapande och byte tillbaka till Mk.
-- [x] 3H.11.1–3H.11.2: karaktärsmeny och återläsningskontroll städade; slutlig Safari PASS.
-- [x] 3H.11.3: kompakt hopfällbart byte; Safari PASS.
-- [x] 3H.11.4: nya RPG-karaktärskort; Safari PASS.
-- [x] 3H.11.5: ny profil; Safari PASS.
-- [ ] **NÄSTA 3H.11.6:** kompakt kort för aktiv karaktär; ej påbörjat.
-- [ ] IMP-025 utökad bakgrund: familj, förflutet, ambition, färdigheter, biografi och berättelsekoppling.
-- [ ] Bred regression av berättelse, kalender och sparningar.
-
-Äldre checklistor ovan speglar planeringsläget före delpaket 3H. Se stoppunkt i `docs/DAILY_LOG.md`.
-
----
-
-## Lägesuppdatering 2026-10-20 – IMP-025 3H.12.7 J-H (aktuell status)
-
-- [x] J-A–J-G: paketbyggare, förhandsvisning, säker sparmotor, validering och spärr mot gamla osäkra skapandevägar; tester dokumenterade i `docs/TESTS.md`.
-- [x] J-H1: obligatoriskt nytt karaktärsformulär med fyra livsval och frivillig biografi; GitHub/Safari PASS.
-- [x] J-H2A: isolerade säkerhetstester 10/10 PASS i Safari med minneslagring.
-- [x] J-H2B: verklig sparning till ny inaktiv separat slot; GitHub/Safari PASS för lyckat fall och omladdning.
-- [x] J-H3: karaktärsbyte fram och tillbaka samt korrekt livsbakgrund i profil; Safari PASS enligt användaren.
-- [ ] Nästa lilla paket: korrigera bokstavligt `\\n` efter sparad karaktärs-ID och missvisande kommentar, utan att ändra sparmotorn.
-- [ ] Kompletterande regression: kalender, dagbok, Ragnhild, berättelsegrenar, äldre karaktärer och felhantering.
-- [ ] IMP-025 fortsatt: startfärdigheter, resurser, kontakter och berättelsekonsekvenser utifrån livsbakgrund (ej färdigimplementerat).
-- [ ] Export/backup, versionering och migrering inför framtida riktiga spelare.
-- [ ] IMP-024: valfri introduktionsberättelse med Ragnhild; IMP-023: kompakt dagshistorik.
-
-**Avgränsning:** J-H avslutar grundflödet för skapande och lokal sparning, inte hela IMP-025 eller ett fullständigt produktionssäkert sparsystem. Äldre öppna checklistor ovan är historiska; denna sektion anger senaste läget. Se `docs/STOPP_2026-10-20_JH.md`.
-
----
-
-## Lägesuppdatering 2026-10-20 – J-I / J-J (senaste status)
-
-- [x] **J-I kodfix:** radbrytning och kommentar korrigerade, cacheversion uppdaterad; GitHub PASS.
-- [x] **J-I bevarande:** Testbonde och JH2-Test kvar, byte fungerar; Safari PASS enligt användaren.
-- [ ] **J-I visuell slutkontroll:** kontrollera radbrytning efter nästa verkliga nykaraktärssparning; skapa inte onödig testkaraktär.
-- [x] **J-J1:** kalender Hem, Karta, synkronisering och dagshistorik efter omladdning – 3/3 Safari PASS.
-- [x] **J-J2:** berättelsescen, val och ledtrådar före/efter omladdning – 2/2 Safari PASS.
-- [x] **J-J3:** separata livsbakgrunder, karaktärsbyte och aktiv karaktär efter omladdning – 2/2 Safari PASS.
-- [ ] **Kvalitetsarbete kvar:** nekad/full lagring, kollisions- och återställningsfall, export/backup, alla berättelsegrenar, fler äldre karaktärer.
-- [ ] **IMP-025 fortsatt:** livsbakgrundens spelkonsekvenser, startvärden, kontakter och resurser.
-- [ ] **IMP-024 / IMP-023:** berättelsedesign respektive kompakt dagshistorik är fortfarande planerade.
-
-**J-J = 7/7 användarrapporterade Safari PASS inom testad omfattning; inte full regression av alla spelvägar.** Se `docs/TESTS.md` och `docs/STOPP_2026-10-20_JJ.md`. Äldre checklistor ovan visar historiska planeringslägen.
+## Nästa exakta steg
+**KB-PLAN-01:** GitHub-verifiera denna roadmap efter commit.
+**Därefter Fas A1:** läsbaserad inventering av sparnycklar och karaktärskoppling, utan spelkodändring.
