@@ -1,4 +1,5 @@
-// KB-03.3 – profilvy. Befintlig sparfil ändras inte.
+// KB-03.3 / IMP-025 3H.10.4 – profilvy utan den gamla missvisande skapa-knappen.
+// Befintlig sparfil och karaktärsbytesmotor ändras inte.
 (function () {
   'use strict';
   const model = window.KB_CHARACTER;
@@ -6,7 +7,7 @@
   const old = document.querySelector('section[aria-label="Din karaktär"]');
   if (!old) return;
   const style = document.createElement('style');
-  style.textContent = '.kb-profile{border:1px solid #9b8354;background:linear-gradient(145deg,#303b31,#1d2721);color:#f4e9ce;padding:18px;border-radius:10px;margin-top:12px}.kb-profile h3{margin:4px 0;font-size:25px}.kb-profile small{color:#d7c49a}.kb-profile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}.kb-profile-stat{padding:12px 5px;text-align:center;background:#18241d;border:1px solid #786c4c;border-radius:6px}.kb-profile-stat strong{display:block;font-size:23px}.kb-profile-stat span{font:12px system-ui;color:#d7c49a}.kb-profile-avatar{width:72px;height:86px;border:1px solid #bca16b;border-radius:5px;background:#18241d;display:grid;place-items:center;font-size:37px;flex-shrink:0}.kb-profile-head{display:flex;gap:15px;align-items:center}.kb-profile-note{font:12px system-ui;color:#d7c49a;margin:12px 0 0}.kb-profile-reset{min-height:44px;margin-top:14px;padding:10px 14px;border:1px solid #e0bd73;border-radius:5px;background:#8e412e;color:#fff3d5;font:600 14px system-ui}';
+  style.textContent = '.kb-profile{border:1px solid #9b8354;background:linear-gradient(145deg,#303b31,#1d2721);color:#f4e9ce;padding:18px;border-radius:10px;margin-top:12px}.kb-profile h3{margin:4px 0;font-size:25px}.kb-profile small{color:#d7c49a}.kb-profile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}.kb-profile-stat{padding:12px 5px;text-align:center;background:#18241d;border:1px solid #786c4c;border-radius:6px}.kb-profile-stat strong{display:block;font-size:23px}.kb-profile-stat span{font:12px system-ui;color:#d7c49a}.kb-profile-avatar{width:72px;height:86px;border:1px solid #bca16b;border-radius:5px;background:#18241d;display:grid;place-items:center;font-size:37px;flex-shrink:0}.kb-profile-head{display:flex;gap:15px;align-items:center}.kb-profile-note{font:12px system-ui;color:#d7c49a;margin:12px 0 0}';
   document.head.appendChild(style);
   const panel = document.createElement('div');
   panel.className = 'kb-profile';
@@ -28,13 +29,6 @@
     const grid = el('div',null,'kb-profile-grid');
     for (const [label,key] of [['Styrka','styrka'],['List','list'],['Anseende','anseende']]) { const cell = el('div',null,'kb-profile-stat'); cell.append(el('strong',String(c.attributes[key])),el('span',label)); grid.appendChild(cell); }
     panel.append(grid,el('p','Porträtt, utrustning och livshistoria kommer i senare versioner.','kb-profile-note'));
-    const reset = el('button','Skapa ny karaktär','kb-profile-reset');
-    reset.type = 'button';
-    reset.addEventListener('click', () => {
-      const oldReset = old.querySelector('#kbCharacterContent button[type="button"]');
-      if (oldReset) oldReset.click();
-    });
-    panel.appendChild(reset);
   }
   render();
   const host = old.querySelector('#kbCharacterContent');
