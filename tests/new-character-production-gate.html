@@ -1,0 +1,7 @@
+<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>J-G produktionsspärr</title><body style="background:#18291e;color:#f4e8d0;font:16px/1.6 system-ui;padding:18px"><h2>⚔️ J-G – Riktig spärr</h2><p>Testet anropar de äldre skaparfunktionerna med ogiltiga testvärden. Ingen riktig karaktär ska skapas.</p><pre id="out" style="white-space:pre-wrap"></pre><script src="../src/character.js?v=03127jg"></script><script src="../src/slot-creator.js?v=03127jg"></script><script>
+const out=document.getElementById('out');let n=0;
+function check(label,fn){try{fn();out.textContent+='FAIL '+label+'\n'}catch(e){if(String(e.message).includes('livsbakgrund')){n++;out.textContent+='PASS '+label+'\n'}else out.textContent+='FAIL '+label+': '+e.message+'\n'}}
+check('Äldre aktiv skapare spärrad',()=>window.KB_CHARACTER.create('Spärrtest','bonde'));
+check('Äldre separat skapare spärrad',()=>window.KB_SLOT_CREATOR.createSlot('Spärrtest','bonde'));
+out.textContent+='\nRESULTAT '+n+'/2 PASS';
+</script></body></html>
