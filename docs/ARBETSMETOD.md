@@ -65,3 +65,13 @@ Inför varje ny spel- eller gränssnittsfunktion ska vi:
 - Karta, berättelse, karaktär och dagbok får tydliga separata vyer.
 - Implementera stegvis med bevarade sparnycklar, verifiering på GitHub och Safari-test efter varje paket.
 - Stor visuell omarbetning av kartan hanteras separat och glöms inte bort.
+
+## Prototypkaraktärer kontra framtida spelarsparningar – förtydligat beslut 2026-10-20
+- **Mk, Erik och Sven är demokaraktärer**, inte skarpa användarkonton eller sparningar som måste skyddas till varje pris. Det är acceptabelt att återskapa dem om en genomtänkt teknisk förbättring kräver det.
+- **Framtida spelare är prioriteringen:** arkitektur, karaktärsidentitet, ägarskap, versionshantering, validering, återställning och migration ska utformas så att riktiga användares sparningar skyddas när spelet senare tas i bruk.
+- **Undvik prototyplåsning:** behåll inte en sämre datamodell enbart för att bevara de tre demokaraktärerna. En kontrollerad brytande förändring i prototypen är tillåten när den ger en mer hållbar lösning.
+- **Ingen tyst radering:** assistenten måste i förväg tydligt ange om ett paket kan radera, nollställa eller göra testkaraktärer inkompatibla. Användaren ska uttryckligen godkänna en avsiktlig nollställning innan den genomförs.
+- **Risk ska avgränsas:** skilj på utbytbar demodata, fungerande spelkod, gemensamma speldata och framtida skarpa sparningar. Att demodata får gå förlorad betyder inte att sparsystemet får vara osäkert.
+- **Migration efter behov:** under prototypfasen kan testdata nollställas i stället för att bygga dyra engångsmigrationer, men beslutet dokumenteras och verifieras. Innan riktiga spelare tillkommer krävs en definierad och testad policy för kompatibilitet, säkerhetskopiering och återställning.
+- **Gäller IMP-025 3H.12.3 och framåt:** utforma den nya bakgrundsmodellen framtidssäkert; inga speciallösningar enbart för Mk/Erik/Sven. Varje risk för befintlig demodata meddelas före installation.
+- **Arbetsflödet kvarstår:** små ZIP-paket, komplett ersättningsfil med historiken bevarad, commit, GitHub PASS och separat Safari PASS.
