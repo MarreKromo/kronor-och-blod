@@ -47,7 +47,10 @@ function restore(j){
 }
 
 function recover(){const raw=localStorage.getItem(JOURNAL);if(raw===null)return false;restore(JSON.parse(raw));return true;}
-try{window.KB_SWITCH_RECOVERY=Object.freeze({ok:true,recovered:recover()});}
+try{
+ if(localStorage.getItem(JOURNAL)!==null && localStorage.getItem(BASE+'life-background.write-journal.v1')!==null)throw Error('Samtidiga journaler måste granskas manuellt.');
+ window.KB_SWITCH_RECOVERY=Object.freeze({ok:true,recovered:recover()});
+}
 catch(error){
  window.KB_SWITCH_RECOVERY=Object.freeze({ok:false,recovered:false});
  document.open();
