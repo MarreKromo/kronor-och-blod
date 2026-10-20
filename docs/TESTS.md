@@ -99,7 +99,7 @@ Status anges per paket och endast inom faktiskt verifierad omfattning. Historisk
 | 3H.11.2 | PASS | PASS, bilder | Återläsningskontroll flyttad till avancerade verktyg. |
 | 3H.11.3 | PASS | PASS, bilder och användarsvar | Hopfällbar bytespanel; Välj Erik öppnar den. |
 | 3H.11.4 | PASS | PASS, bild och användarsvar | Nya kort; Välj Erik öppnar byteskontroll. |
-| 3H.11.5 | PASS | PASS, bild | Ny profil, emblem, egenskaper, prototypetikett dold. |
+| 3H.11.5 | PASS | PASS, bild | Ny profil, emblem, egenskapsrutor, prototypetikett dold. |
 
 **Öppna tester:** 3H.11.6 ej påbörjad. Full regression av berättelse, kalender, fler bakgrunder och sparningar återstår. Se `docs/DAILY_LOG.md`.
 
@@ -144,3 +144,14 @@ Status anges per paket och endast inom faktiskt verifierad omfattning. Historisk
 **Begränsning:** Detta är användarrapporterade funktionstester, inte en fullständig teknisk säkerhetsgranskning. Felhantering vid nekad/full lagring, export/backup, alla berättelsegrenar, andra webbläsarlägen och radbrytning efter ny sparning återstår. Historiska öppna testpunkter högre upp ersätts bara i den omfattning tabellen ovan faktiskt täcker.
 
 **Checkpoint:** `docs/STOPP_2026-10-20_JJ.md`.
+
+---
+
+## 2026-10-20 – IMP-025 J-K2 · skrivskyddad färdighetsförhandsvisning
+
+- **GitHub PASS (kodgranskning):** `index.html` laddar `src/life-background-skills-preview.js?v=jk2-1`; modulen finns i `src/` och har inga skrivningar till localStorage.
+- **Safari PASS, bild 1:** utfällbar panel visas; utan verifierad livsbakgrund visas ”Ingen verifierad livsbakgrund för aktiv karaktär. Inga färdigheter ändras.”
+- **Safari PASS, bild 2:** med Testbondes verifierade livsbakgrund visas ”Jordbruk +2 (förslag – ger ännu ingen spelbonus).”
+- **Ej testat:** alla fyra uppväxtalternativ, omladdning och byte mellan flera karaktärer inom J-K2; ingen aktiv färdighetsbonus eller berättelseeffekt finns ännu.
+- **Sparningar:** ingen avsiktlig migration, återställning eller ny karaktär.
+- **Nästa:** J-K3-test med befintlig sparad karaktär och omladdning; därefter UX-genomgång innan fler profilpaneler tillkommer.

@@ -159,3 +159,13 @@ Nästa exakta steg:
 - **Nästa steg:** dokumentera denna checkpoint i GitHub och GitHub-verifiera de fyra dokumentfilerna. Därefter planera nästa avgränsade paket utan att riskera befintliga sparningar.
 
 **Senaste återstartspunkt:** `docs/STOPP_2026-10-20_JJ.md`. Tidigare stoppnoteringar ovan är historiska.
+
+---
+
+## 2026-10-20 – IMP-025 J-K1/J-K2 · fortsättning efter J-J
+
+- **J-K1:** kodinventering av karaktär, livsbakgrund, slots, profil och berättelse. Fyra livsval och separat sparning finns; aktiva färdighetsbonusar, kontakter och livsvalsstyrda berättelsekonsekvenser återstår. Ingen kodändring i J-K1.
+- **J-K2:** `src/life-background-skills-preview.js` och komplett `index.html` levererade som ZIP och uppladdade av användaren. GitHub PASS för filernas innehåll och skriptlänk. Safari PASS med två skärmbilder: korrekt informationsmeddelande utan verifierad livsbakgrund, samt ”Jordbruk +2” som enbart förslag för Testbonde med verifierad bakgrund.
+- **Begränsning:** ingen aktiv bonus; inte fullständigt test av alla uppväxter, omladdning, karaktärsbyte eller felaktiga lagringsposter. Inga sparningar återställda eller avsiktligt ändrade.
+- **Spelarupplevelse:** karaktärsfliken har flera hopfällbara paneler; gör UX-genomgång och välj hållbar struktur före ytterligare paneler.
+- **Nästa exakta steg:** J-K3, testa läsningen med befintlig karaktär och omladdning utan att skapa ny karaktär eller ändra data. Därefter besluta separat om färdigheternas framtida spelmekanik.
