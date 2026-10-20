@@ -1,0 +1,2 @@
+/* V2-03.5: enforce location for agriculture, even outside the map UI. */
+(function(){'use strict';const original=window.KB_V2_SKILLS,travel=window.KB_V2_TRAVEL;if(!original||!travel)return;window.KB_V2_SKILLS=Object.freeze({getState:original.getState,work(){const s=travel.getState();if(!s.ok)return s;if(s.placeId!=='keldra')return {ok:false,error:'Jordbruk kan bara utföras vid åkrarna i Keldra.'};return original.work();}});})();
