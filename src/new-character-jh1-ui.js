@@ -4,15 +4,16 @@
 const host=document.querySelector('.kb-profile');
 const life=window.KB_LIFE_BACKGROUND_MODEL, character=window.KB_CHARACTER, bundle=window.KB_NEW_CHARACTER_BUNDLE;
 const old=host&&host.querySelector('.kb-create-experience');
-if(!host||!old||!life||!character||!bundle)return;
+const writer=window.KB_NEW_CHARACTER_WRITER,preflight=window.KB_SLOT_RESTORE_PREFLIGHT;
+if(!host||!old||!life||!character||!bundle||!writer||!preflight)return;
 const former=document.getElementById('kb-new-character-jd');
 old.hidden=true;old.style.display='none';
 if(former){former.hidden=true;former.style.display='none';}
-const panel=document.createElement('details');panel.id='kb-jh1-creator';
+const panel=document.createElement('details');panel.id='kb-jh2b-creator';
 panel.style.cssText='margin:12px 0;border:1px solid #c6a466;border-radius:10px;background:#223428;color:#f4e9ce;overflow:hidden';
 const summary=document.createElement('summary');summary.textContent='⚔️ Börja ett nytt liv – fullständig livsbakgrund';summary.style.cssText='padding:15px;cursor:pointer;font:600 16px system-ui;min-height:48px';
 const form=document.createElement('form');form.style.cssText='display:grid;gap:13px;padding:16px';
-const intro=document.createElement('p');intro.textContent='J-H1: Förhandsgranskning. Ingen karaktär skapas eller sparas i detta steg.';form.append(intro);
+const intro=document.createElement('p');intro.textContent='J-H2B: Granska alla val innan du skapar en NY separat sparplats. Din aktiva karaktär ändras inte.';form.append(intro);
 function field(label,element){const wrap=document.createElement('label');wrap.style.cssText='display:grid;gap:6px;font:600 14px system-ui';wrap.append(document.createTextNode(label),element);element.style.cssText='width:100%;box-sizing:border-box;padding:11px;min-height:46px;border:1px solid #c9a768;border-radius:6px;background:#14251b;color:#f5e7cb;font:16px system-ui';form.append(wrap);return element;}
 const name=document.createElement('input');name.type='text';name.required=true;name.minLength=2;name.maxLength=32;field('Namn',name);
 const role=document.createElement('select');for(const [key,value] of Object.entries(character.BACKGROUNDS)){const option=document.createElement('option');option.value=key;option.textContent=value.label;role.append(option);}field('Roll',role);
@@ -20,16 +21,36 @@ const choices={};for(const [key,label] of Object.entries({upbringing:'Uppväxt',
 const bio=document.createElement('textarea');bio.maxLength=500;bio.rows=3;field('Egen berättelse (frivillig)',bio);
 const review=document.createElement('button');review.type='submit';review.textContent='Granska min karaktär';
 const preview=document.createElement('pre');preview.style.cssText='white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid #786c4c;padding:12px;font:14px/1.6 system-ui';preview.textContent='Fyll i alla fyra livsval.';
-const confirm=document.createElement('button');confirm.type='button';confirm.disabled=true;confirm.textContent='Bekräfta valen (test – sparar inte)';
+const confirm=document.createElement('button');confirm.type='button';confirm.disabled=true;confirm.textContent='Skapa och spara ny karaktär';
 for(const button of [review,confirm])button.style.cssText='min-height:48px;padding:12px;background:#8e412e;border:1px solid #e0bd73;color:#fff3d5;border-radius:6px;font:600 15px system-ui';
-const status=document.createElement('p');status.setAttribute('role','status');status.textContent='Inga data sparas i J-H1.';
+const status=document.createElement('p');status.setAttribute('role','status');status.textContent='Ingenting sparas förrän du bekräftar.';
 form.append(review,preview,confirm,status);panel.append(summary,form);old.insertAdjacentElement('beforebegin',panel);
 let approved=null;
 function current(){return {name:name.value,background:role.value,characterId:'12345678-1234-4234-8234-123456789abc',lifeBackground:{version:1,upbringing:choices.upbringing.value,familySituation:choices.familySituation.value,past:choices.past.value,ambition:choices.ambition.value,biography:bio.value}};}
-function invalidate(){approved=null;confirm.disabled=true;status.textContent='Ändrade val kräver ny granskning. Inget sparas.';}
+function invalidate(){approved=null;confirm.disabled=true;status.textContent='Ändrade val kräver ny granskning. Inget har sparats.';}
 form.addEventListener('input',invalidate);form.addEventListener('change',invalidate);
-form.addEventListener('submit',event=>{event.preventDefault();invalidate();try{const input=current();const slot=bundle.build(input,{character,life});approved=JSON.stringify(input);preview.textContent='FÖRHANDSGRANSKNING – EJ SPARAD\n\n'+slot.name+' · '+character.BACKGROUNDS[input.background].label+'\n'+Object.entries(choices).map(([key])=>life.LABELS[key][input.lifeBackground[key]]).join('\n')+'\n\n'+(bio.value||'Ingen egen berättelse');confirm.disabled=false;status.textContent='Komplett livsbakgrund godkänd. Testbekräftelse möjlig.';}catch(error){preview.textContent='Kan inte fortsätta: '+error.message;}});
-confirm.addEventListener('click',()=>{if(!approved||approved!==JSON.stringify(current())){invalidate();return;}approved=null;confirm.disabled=true;status.textContent='J-H1 PASS: Bekräftelsen fungerar. Ingen karaktär skapad eller sparad.';});
+form.addEventListener('submit',event=>{event.preventDefault();invalidate();try{const input=current();const slot=bundle.build(input,{character,life});approved=JSON.stringify(input);preview.textContent='FÖRHANDSGRANSKNING – SPARAS FÖRST EFTER BEKRÄFTELSE\n\n'+slot.name+' · '+character.BACKGROUNDS[input.background].label+'\n'+Object.entries(choices).map(([key])=>life.LABELS[key][input.lifeBackground[key]]).join('\n')+'\n\n'+(bio.value||'Ingen egen berättelse');confirm.disabled=false;status.textContent='Komplett livsbakgrund godkänd. Bekräfta för att skapa en NY sparplats.';}catch(error){preview.textContent='Kan inte fortsätta: '+error.message;}});
+confirm.addEventListener('click',()=>{
+ if(!approved||approved!==JSON.stringify(current())){invalidate();return;}
+ if(!window.confirm('Skapa och SPARA en helt ny, inaktiv karaktär med denna livsbakgrund? Befintliga karaktärer ska inte ändras.'))return;
+ confirm.disabled=true;
+ try{
+  if(!window.crypto||typeof window.crypto.randomUUID!=='function')throw Error('Säker ID-generering saknas i denna webbläsare.');
+  const input=current();input.characterId=window.crypto.randomUUID();
+  const key='kronor-och-blod.slot.v1.'+input.characterId;
+  if(localStorage.getItem(key)!==null)throw Error('Det nya ID:t är redan upptaget. Försök igen.');
+  const saved=writer.create(input,{
+   storage:localStorage,builder:bundle,character,life,
+   verify:(id)=>preflight.inspect(id)
+  });
+  approved=null;
+  status.textContent='SPARAD: '+saved.name+' har fått en ny separat, inaktiv sparplats. Karaktärsbyte sker inte automatiskt. Ladda om sidan för att se karaktären i listan.';
+  preview.textContent='Sparningen verifierad. Karaktärs-ID: '+saved.characterId+'\\nAlla fyra livsval är sparade.';
+ }catch(error){
+  status.textContent='SPARNING STOPPAD: '+(error&&error.message?error.message:'Okänt fel')+' Ingen befintlig sparplats ska ha ändrats.';
+  confirm.disabled=false;
+ }
+});
 // Capture on ancestor before the older button-level capture listener.
 host.addEventListener('click',event=>{const button=event.target.closest&&event.target.closest('button');if(!button||!/skapa ny karaktär/i.test(button.textContent))return;event.preventDefault();event.stopImmediatePropagation();panel.open=true;panel.scrollIntoView({behavior:'smooth',block:'start'});name.focus({preventScroll:true});},true);
 })();
