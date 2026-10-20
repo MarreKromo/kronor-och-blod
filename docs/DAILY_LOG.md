@@ -1,3 +1,27 @@
+## 2026-10-21 — STOPP: V2-03.6L / överlämning till ny chatt
+
+**Projekt:** Kronor & Blod, Dornmark. GitHub `MarreKromo/kronor-och-blod`, branch `main`. Spel: https://marrekromo.github.io/kronor-och-blod/
+
+### Senaste faktiska läge
+- V2-03.5, position/resor/platsbundet arbete: GitHub PASS och användarrapporterad Safari PASS.
+- V2-03.6, arbete och ekonomi: GitHub PASS. Keldra: en arbetsdag ger +1 dag, +10 jordbruks-XP, +3 kopparmynt, +1 enhet spannmål. Dorneth: köp 1 spannmål för 2 kopparmynt. Fullständig separat ekonomiregression ännu inte formellt avslutad.
+- V2-03.6L, språk och mynt: GitHub PASS för sex filer: `index.html`, `src/v2-travel-ui.js`, `src/v2-economy.css`, `docs/MASTERPLAN_V2.md`, `docs/SYSTEMS.md`, `docs/DEVLOG.md`. Användaren skrev ”Allt funkar” och visade Safari-bilder av Dorneth med 1 kopparmynt, 2 spannmål, 0 silver och 0 guld. Safari PASS inom visad omfattning, inte full regression.
+- Språkbeslut: lättförståelig svenska från ungefär 12 år, historisk atmosfär utan svårbegripliga ord. UI använder ”Dina pengar”, ”Din väska”, ”Spannmål”. Historiska titlar som ”fogde” ska förklaras första gången.
+- Valutabeslut: koppar, silver och guld ingår i framtida ekonomin. Endast koppar är aktivt i nuvarande `economy-v1`; silver/guld visas som 0. Ingen växelkurs fastställd, inga gamla kopparsaldo konverteras.
+
+### Nästa exakta uppgift: ta bort två störande bekräftelser
+1. Läs aktuella `docs/MASTERPLAN_V2.md`, `docs/ROADMAP.md`, `docs/SYSTEMS.md`, `docs/DEVLOG.md`, `docs/ARBETSMETOD.md` och denna stoppnotering. Hämta aktuell kod från GitHub.
+2. Ta bort `window.confirm` före **resa** (t.ex. ”Resa till Keldra? Resan förbrukar en dag.”) och före **Fortsätt dagen** (kalenderbekräftelsen). Båda handlingarna ska ske direkt när knappen trycks.
+3. Bevara exakt samma tidskostnad, platslogik, sparmotor, XP och ekonomi. Behåll tydlig knapptext och återkoppling. Ändra inte andra bekräftelser utan separat beslut.
+4. Bygg ett verkligt, verifierat ZIP-paket med fullständiga repo-relativa filer och ändrad cacheversion i `index.html` om JS ändras. Användaren laddar upp via iPhone och committar; därefter GitHub PASS/FAIL och separat Safari PASS/FAIL.
+5. Safari-test: resa Dorneth → Keldra utan popup och exakt +1 dag; Fortsätt dagen utan popup och exakt +1 dag; omladdning, pengar, spannmål, position, färdigheter, berättelse, dagbok och karaktärsbyte fungerar.
+
+**Säkerhetsregler:** inga raderingar eller tysta migrationer av `localStorage`; inga dubbla utbetalningar; ingen oombedd bildgenerering. Arbeta med sammanhängande paket enligt arbetsmetod v3.0, inte många onödiga mikrosteg.
+
+**Status vid stopp:** Bekräftelserna är **inte** borttagna ännu. Nästa chatt ska börja med källkodsgranskning och sedan bygga paketet. Äldre daglogg nedan bevaras som historik.
+
+---
+
 ## 2026-10-20 — BESLUT: Kronor & Blod v2.0
 - Projektägaren beslutar att ersätta den historiska Sverige-inriktningen med en egen mörk, huvudsakligen realistisk fantasyvärld.
 - Politisk grund: kombination av etablerade större kungadömen och mindre riken/furstendömen/fria städer som kan förenas, splittras och erövras.
