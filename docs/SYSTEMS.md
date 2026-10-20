@@ -1,36 +1,29 @@
 # KRONOR & BLOD – SYSTEMS
-**Status:** V2-03.3B kodpaket för GitHub/Safari-test; ej verifierat på användarens GitHub ännu.
+**Status:** V2-03.5 kodpaket färdigställt lokalt; GitHub- och Safari-test återstår.
 
-## Befintlig V2-grund
-- `src/v2-data-contract.js`: V2 UUID och karaktärsbundna nycklar.
-- `src/life-background-model.js`: skrivskyddad bakgrundsmodell med uppväxt, familj, förflutet, ambition och biografi. Bakgrund ger ännu inga aktiva bonusar.
-- `src/v2-character.js`: tre karaktärsplatser. Berättelse, kalender, Mara/Edda och dagbok använder befintliga moduler.
-- V2-03.2L: GitHub PASS och användarrapporterad Safari PASS.
+## V2-grund
+- `v2-data-contract.js`: karaktärsbunden identitet, startplats Keldra. Den ursprungliga `character.placeId` är oföränderlig startplats, **inte aktuell position**.
+- `v2-calendar.js`: kalender per karaktär; `advanceDay()` förbrukar en dag.
+- `v2-skills.js`: jordbruksjournal med 10 XP per arbetsdag, nivå 2 efter fem arbetsdagar; återhämtningsbar pending-skrivning. Befintliga XP och sparningar bevaras.
+- `v2-events*`, `v2-npc*`, `v2-focus.js`: berättelse, Mara/Edda, dagbok.
 
-## V2-03.3A – beslutat designkontrakt
-- Inlärda färdigheter är skilda från framtida grundegenskaper; ingen låst klass.
-- Föreslagen katalog: jordbruk, hantverk, handel, skriftkunskap, förhandling, ledarskap, läkekonst, överlevnad/jakt, ridning, svärd, yxa, spjut, sköld och båge.
-- XP kräver verklig aktivitet med tidskostnad. Ingen XP från dialog eller sidöppning. Bakgrundens startbonusar är ännu inte beslutade.
-- Äldre Sverige-prototypens Jordbruk +2 är ingen aktiv V2-bonus.
+## V2-03.5 – Position, resa och platsbaserat arbete
+- `v2-travel.js`: ny separat karaktärsbunden nyckel `kronor-och-blod.fantasy.v2.character.<uuid>.travel-v1`. Saknad nyckel betyder Keldra, utan migration eller skrivning. Format `{version:1,ownerId,placeId,pending:null|{from,to,day}}`.
+- Kartmarkering och faktisk position är separata. Keldra och Dorneth har första prototypförbindelsen, 1 dag till fots per enkel resa. Varnhold syns men saknar ännu öppen färdväg. Restiden är prototypbalans, inte geografiskt fastställd.
+- Bekräftad resa: skriv och verifiera pending, förflytta kalender exakt en dag, slutför och verifiera position. Vid avbrott kan nästa läsning återuppta samma resa. Inget nytt XP tillkommer av resa.
+- `v2-travel-ui.js`: platsval, restid, bekräftelse och arbete under Platser. `v2-skills-ui.js` visar enbart färdighetsstatus på Karaktär. `v2-work-location.js` skyddar även direkta arbetsanrop mot jordbruk utanför Keldra.
+- Ingen inkomst, egna gårdar, inventarium, vagnar, hästar, följen, slumpmöten eller riktig grafisk karta i denna vertikala kedja. Dessa **bevaras** i Masterplan v3.0.
+- Äldre berättelsescener kan nämna Dorneth även när spelaren fysiskt är i Keldra. Detta är ett känt äldre berättelseberoende, **inte** en resa; scenkoppling till position ingår i senare berättelsearbete.
+- Säkerhetsgräns: kalendern är fortfarande ett separat lagringsobjekt; avbrutna skrivningar hanteras med pending-journal, inte atomär fler-nyckelstransaktion. Skadad data stoppas utan automatisk radering. Export/backup för V2 återstår.
 
-## V2-03.3B – första vertikala färdighetskedjan (EJ SAFARI-TESTAD)
-- Nya `src/v2-skills.js`, `src/v2-skills-ui.js`, `src/v2-skills.css`; `index.html` laddar dem med cacheversion `2033b`.
-- Karaktärsfliken visar jordbruk, nivå, erfarenhet och knappen **Arbeta en dag på åkern**.
-- Arbete förbrukar en hel dag via `KB_V2_CALENDAR.advanceDay()` och ger 10 XP; nivå = `1 + floor(XP / 50)`. Detta är prototypbalans, inte slutlig nivåkurva.
-- Lagring: `kronor-och-blod.fantasy.v2.character.<uuid>.skills-v1`, format `{version:1,ownerId,entries:[{kind:'farm',day}],pending:null|{kind:'farm',day}}`.
-- `pending` skrivs och verifieras före kalenderförflyttning. Återhämtning kan fortsätta kalendersteget eller slutföra XP-bokföringen vid nästa läsning. XP härleds från avslutade, unika arbetsdagar; ett pågående steg ger inte XP.
-- Första arbetsdagen registreras med kalenderns `elapsedDays` före förflyttning. Max ett registrerat jordbruksarbete per dag, och varje aktivitet flyttar dagen framåt.
-- Ingen lön, inventarium, bakgrundsbonus, tränare, misslyckande eller fullständig XP-katalog i denna första vertikala kedja.
-- Befintliga karaktärsposter, berättelse, Mara/Edda, kalenderformat och gamla Sverige-sparningar skrivs inte om av installationen.
-- **Känd begränsning:** om lagringen misslyckas efter att ett `pending` har skrivits måste nästa läsning kunna slutföra det. Under ett sådant fel kan annan kalenderaktivitet behöva stoppas tills journalen återhämtats. Safari-test och felinjektion återstår.
+## Acceptans för Safari
+1. Platser: vald plats ändrar inte faktisk position.
+2. Keldra → Dorneth: bekräfta, +1 dag, plats Dorneth; där finns ingen jordbruksknapp.
+3. Dorneth → Keldra: +1 dag; jordbruk kan åter användas, +10 XP och +1 dag.
+4. Avbryt resbekräftelse: ingen förändring.
+5. Omladdning och A→B→A: position, tid, XP per karaktär bevaras.
+6. Varnhold är inte resbart; Mara/Edda och Dagbok fungerar fortsatt.
+7. Avbruten/ogiltig pending och skadad ägar-/versionsdata ska inte tyst skrivas över.
 
-## Acceptans – kräver användartest
-1. På Karaktär: jordbruk nivå 1, 0/50 XP före arbete (på en ny testkaraktär).
-2. Ett arbete: kalendern +1 dag, 10 XP; fem arbeten: nivå 2.
-3. Omladdning och byte A→B→A: varje karaktär behåller sin egen erfarenhet.
-4. Dubbeltryck, nekad bekräftelse och omladdning ger ingen gratis XP.
-5. Berättelse, Mara/Edda och dagbok fungerar fortsatt.
-6. GitHub PASS och Safari PASS redovisas separat; skadad data får inte raderas automatiskt.
-
-## Fortsatta system
-Masterplan v3.0 och Roadmap v3.0 bevarar ekonomi, handel, egendom, resor, följeslagare, grupper, familjer, dynastier, politik och krig.
+## Kommande arbete
+Förbättra verklig kartgrafik, fler orter/vägar, resetyper, vägfaror, årstider, väder, upptäckter, NPC-rutiner, platsbaserade yrken, ägda gårdar och verksamheter, ekonomi, följen och grupper. Bygg på samma plats-/tid-/aktivitetsmodell, inte separata yrkesknappar.
