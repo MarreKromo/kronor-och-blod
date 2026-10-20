@@ -25,3 +25,9 @@
 5. Otillräckliga mynt: köp stoppas. Återresa till Keldra: arbete åter tillgängligt.
 6. Karaktär A→B→A: saldo/inventarium och XP separerade. Berättelse och Dagbok fungerar.
 7. Skadad/avbruten sparning får inte tyst skrivas över. GitHub och Safari redovisas separat.
+
+## V2-03.6L – Språk och framtida mynt (kodpaket, Safari-test återstår)
+- `v2-travel-ui.js`: vardaglig svensk text för pengar, varor, arbete, resor och köp. `spannmål` är **enbart visningsnamn** för det befintliga lagringsfältet `grain`; antal, pris, arbete och ekonomi ändras inte.
+- Pengar visas som `0 guld · 0 silver · N kopparmynt`. Silver och guld är **inte ännu aktiva valutor** och kan inte tjänas, växlas eller spenderas. Ingen växelkurs fastställd.
+- `v2-economy.css`: radbrytning och tydligare text. `index.html` har cache-version `2036l`. Ingen ändring i `v2-economy.js`, sparformat, arbets- eller resemodeller.
+- Kontrollera i Safari: befintligt saldo/varor identiskt före/efter, text och köp begripliga, resa/arbete/karaktärsbyte/omladdning oförändrade.

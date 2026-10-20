@@ -108,3 +108,10 @@ Familjer, barn, efterträdare, adelshus, titlar, riken och krig byggs ovanpå st
 - Varje framtida planändring ska redovisa: BEVARAS / ÄNDRAS / UTGÅR och skälet. **UTGÅR kräver uttryckligt godkännande från projektägaren.**
 - Att ett system saknas i aktuell sprint betyder aldrig att det är bortvalt. Skilj alltid BESLUTAT MÅL, DESIGNFÖRSLAG, IMPLEMENTERAT och TESTAT.
 - Denna v3 är en spårbar sammanställning av granskade huvuddokument och centrala äldre designfiler; inte en påstådd rad-för-rad-granskning av varje arkivfil eller varje kodmodul.
+
+## Beslut 2026-10-21: begripligt språk och mynt i Dornmark
+- **Språkregel:** En spelare från ungefär 12 års ålder ska förstå menyer, priser, uppdrag och konsekvenser utan att slå upp historiska ord. Berättelsen ska vara stämningsfull, men tydlig. NPC:er får ha olika röster; undvik ogenomskinligt ålderdomligt språk och modernt slang.
+- Vardagliga varor och gränssnitt använder begripliga namn: **spannmål** i stället för **sädeskärve**, **Dina pengar** i stället för **Börs**, **Din väska** i stället för **Inventarium**. Historiska titlar som fogde förklaras första gången: exempelvis en person som samlar in skatt åt härskaren.
+- **Beslutad långsiktig valuta:** koppar, silver och guld. Silver ska spela en viktig roll och guld vara sällsynt. Den exakta växelkursen och historiskt inspirerad värdebalans beslutas separat före införande av silver- och guldtransaktioner. Ingen automatisk 100:1-konvertering antas.
+- **Aktuell teknisk gräns:** V2-03.6 lagrar enbart kopparmynt i `economy-v1.coins`. Gränssnittet får visa `0 guld · 0 silver · X kopparmynt` som tydlig förhandsvisning, men inga silver- eller guldmynt kan ännu tjänas eller spenderas. Befintliga kopparvärden får inte räknas om eller migreras tyst.
+- Ägande, handel, skatter, skulder, resor, följeslagare och politik använder samma framtida ekonomiska grund; ingen tidigare beslutad funktion tas bort.
