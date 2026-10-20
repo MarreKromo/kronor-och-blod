@@ -1,0 +1,31 @@
+<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KB-A2.3 – kontrollsumma</title>
+<style>body{font:16px system-ui;max-width:680px;margin:25px auto;padding:16px;background:#17261e;color:#f3e5c8}li{margin:12px 0}</style>
+<h1>KB-A2.3 – Kontrollsumma</h1>
+<p>Isolerade tester med påhittade data. Ingen riktig localStorage används.</p><ol id="results"><li>Tester startar…</li></ol>
+<script src="../src/full-backup-integrity.js"></script><script>
+(async function(){
+ const out=document.getElementById('results');out.replaceChildren();
+ function report(label,ok){const li=document.createElement('li');li.textContent=(ok?'PASS: ':'FAIL: ')+label;out.append(li);}
+ const api=window.KB_FULL_BACKUP_INTEGRITY;
+ const raw={format:'kronor-och-blod-full-backup',version:2,createdAt:'2026-10-20T12:00:00.000Z',
+ activeCharacterId:'12345678-1234-4234-8234-123456789abc',
+ activeEntries:{'kronor-och-blod.character.v1':'{"name":"Testbonde"}'},
+ slots:{'kronor-och-blod.slot.v1.12345678-1234-4234-8234-123456789abc':'{"test":true}'},
+ otherEntries:{},manifest:{slotCount:1,keyCount:2,checksumAlgorithm:null,checksum:null}};
+ try{
+ const sealed=await api.seal(raw);
+ report('SHA-256 genereras',sealed.manifest.checksumAlgorithm==='SHA-256'&&/^[a-f0-9]{64}$/.test(sealed.manifest.checksum));
+ report('Oförändrad kopia verifieras',(await api.verify(sealed)).ok);
+ const changed={...sealed,activeEntries:{...sealed.activeEntries,'kronor-och-blod.character.v1':'{"name":"Förändrad"}'}};
+ report('Förändrad data upptäcks',!(await api.verify(changed)).ok);
+ const reordered={...sealed,activeEntries:{...sealed.activeEntries},manifest:{checksum:sealed.manifest.checksum,keyCount:2,slotCount:1,checksumAlgorithm:'SHA-256'}};
+ report('Ändrad nyckelordning accepteras',(await api.verify(reordered)).ok);
+ const wrong={...sealed,manifest:{...sealed.manifest,keyCount:3}};
+ report('Fel antal poster upptäcks',!(await api.verify(wrong)).ok);
+ const missing={...sealed,manifest:{...sealed.manifest,checksum:null}};
+ report('Saknad kontrollsumma stoppas',!(await api.verify(missing)).ok);
+ report('Originaldata förblir oförändrade',raw.manifest.checksum===null&&raw.manifest.checksumAlgorithm===null);
+ }catch(e){report('Testmiljön: '+e.message,false)}
+})();
+</script></html>
