@@ -1,4 +1,4 @@
-/* V2-03.2F.1 – prominent calendar in story view only. */
+/* V2-03.7 – calendar advances directly; game logic unchanged. */
 (function(){
 'use strict';
 const calendar=window.KB_V2_CALENDAR;
@@ -25,7 +25,6 @@ function render(){
 }
 button.addEventListener('click',()=>{
  const current=calendar?.getState();if(!current?.ok){render();return;}
- if(!window.confirm('Fortsätta till nästa dag för denna karaktär? Berättelseval ändras inte.'))return;
  const result=calendar.advanceDay();render();
  if(!result.ok)status.textContent=result.error;
 });
