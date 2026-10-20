@@ -39,12 +39,23 @@ button.textContent='Spara livsbakgrund – permanent';
 button.style.cssText='padding:12px;border-radius:5px;border:1px solid #e0bd73;background:#8e412e;color:#fff3d5;font:600 14px system-ui;min-height:48px';
 const status=document.createElement('p');status.setAttribute('role','status');
 status.textContent='Förhandsgranska dina val och ange namn och samtycke innan sparning.';
-section.append(title,info,label,consentLabel,button,status);
+const diagnostic=document.createElement('p');diagnostic.setAttribute('role','status');diagnostic.style.cssText='margin-top:8px;color:#f0cf8c;font:13px/1.5 system-ui';
+section.append(title,info,label,consentLabel,button,status,diagnostic);
 panel.appendChild(section);
 let ready=false,finished=false;
 function value(){const v={version:1,biography:biography.value};fields.forEach((k,i)=>v[k]=selects[i].value);return v;}
 function sameCharacter(){const c=character.get();return !!c&&c.characterId===initialId&&c.name===initialName;}
-function update(){button.disabled=!ready||finished||!sameCharacter()||name.value!==initialName||!consent.checked;}
+function update(){
+ const reasons=[];
+ if(!ready)reasons.push('Förhandsgranskning behöver göras om');
+ if(finished)reasons.push('Livsbakgrunden har redan sparats i denna session');
+ if(!sameCharacter())reasons.push('Karaktärskontrollen misslyckades – ladda om sidan');
+ if(name.value!==initialName)reasons.push('Namnet matchar inte aktiv karaktär');
+ if(!consent.checked)reasons.push('Godkännande saknas');
+ button.disabled=reasons.length>0;
+ if(reasons.length)diagnostic.textContent='Knappen är låst: '+reasons.join('; ')+'.';
+ else diagnostic.textContent='Alla villkor uppfyllda. Permanent sparning kräver fortfarande en separat bekräftelse.';
+}
 function clear(){ready=false;gate.cancel();update();}
 form.addEventListener('input',clear);
 form.addEventListener('change',clear);
@@ -81,5 +92,6 @@ button.addEventListener('click',()=>{
 });
 root.addEventListener('toggle',()=>{if(!root.open)clear();});
 window.addEventListener('pageshow',clear);
+update();
 document.addEventListener('visibilitychange',()=>{if(document.hidden)clear();});
 })();
