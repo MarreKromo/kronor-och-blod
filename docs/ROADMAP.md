@@ -40,7 +40,7 @@ Statusen nedan avser dokumenterade delpaket; fullständiga system är inte färd
 - [ ] Stabilt unikt karaktärs-ID, sparfiler och migration.
 - [ ] Framtida åldrande, porträtt, utrustning och alternativa historiskt anpassade livsvägar.
 
-### IMP-025 – Delpaket och godkännandegater (PLANERAT)
+### IMP-025 – Ursprungliga delpaket och godkännandegater (historisk plan; se statusuppdatering längst ned)
 - [x] Dokumentera valbara uppväxter, familjesituation, förflutet och ambition (design, inte kod).
 - [x] Föreslå startkunskaper och kontakter: jordbruk, hantverk, skriftkunskap, umgängesvana; värde 2 som preliminär balans.
 - [x] Dokumentera migrationskrav och regressionstestfall för befintliga karaktärer.
@@ -138,3 +138,19 @@ Statusen nedan avser dokumenterade delpaket; fullständiga system är inte färd
 
 ## Arbetsregel
 Nästa större funktion påbörjas efter godkänt test och en förbättringsrunda. Kända begränsningar och öppna tester ska synas i TESTS.md och IMPROVEMENT_BACKLOG.md.
+
+---
+
+## Lägesuppdatering 2026-10-20 – IMP-025 flerkaraktär och UI
+
+- [x] Flera lokala karaktärsplatser och säkert byte testade med Mk, Erik och Sven.
+- [x] 3H.10.3–3H.10.6: separat skapande och byte tillbaka till Mk.
+- [x] 3H.11.1–3H.11.2: karaktärsmeny och återläsningskontroll städade; slutlig Safari PASS.
+- [x] 3H.11.3: kompakt hopfällbart byte; Safari PASS.
+- [x] 3H.11.4: nya RPG-karaktärskort; Safari PASS.
+- [x] 3H.11.5: ny profil; Safari PASS.
+- [ ] **NÄSTA 3H.11.6:** kompakt kort för aktiv karaktär; ej påbörjat.
+- [ ] IMP-025 utökad bakgrund: familj, förflutet, ambition, färdigheter, biografi och berättelsekoppling.
+- [ ] Bred regression av berättelse, kalender och sparningar.
+
+Äldre checklistor ovan speglar planeringsläget före delpaket 3H. Se stoppunkt i `docs/DAILY_LOG.md`.

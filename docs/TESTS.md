@@ -82,8 +82,23 @@ Status anges per paket och endast inom faktiskt verifierad omfattning. Historisk
 - ÅTERSTÅR: separat PASS/FAIL för båda knapparna, omladdning och kontroll att befintlig karaktär/berättelse finns kvar.
 - UX-förbättring IMP-023 dokumenterad och GitHub-verifierad; **inte implementerad**.
 
-## Kvarstående tvärgående risker
+## Tvärgående risker vid tidigare teststopp (historisk status; se 2026-10-20 nedan)
 - Ingen stabil unik karaktärsidentitet: namn/bakgrund kan återanvända äldre berättelsedata.
 - Endast lokal webbläsarlagring, inte separata riktiga sparfiler.
 - Historisk faktakontroll, mobil liggande läge och blockerad lagring är inte färdigtestade.
 - Gammal Ragnhild-text hänvisar fortfarande till nästa paket.
+
+---
+
+## 2026-10-20 – IMP-025 3H.10–3H.11
+
+| Paket | GitHub | Safari | Anmärkning |
+| --- | --- | --- | --- |
+| 3H.10.3–3H.10.6 | PASS inom testad omfattning | PASS enligt användaren | Sven skapad, byte tillbaka till Mk fungerade. |
+| 3H.11.1 | PASS | Testpanelen kvar på bild | Korrigerad i 3H.11.2. |
+| 3H.11.2 | PASS | PASS, bilder | Återläsningskontroll flyttad till avancerade verktyg. |
+| 3H.11.3 | PASS | PASS, bilder och användarsvar | Hopfällbar bytespanel; Välj Erik öppnar den. |
+| 3H.11.4 | PASS | PASS, bild och användarsvar | Nya kort; Välj Erik öppnar byteskontroll. |
+| 3H.11.5 | PASS | PASS, bild | Ny profil, emblem, egenskaper, prototypetikett dold. |
+
+**Öppna tester:** 3H.11.6 ej påbörjad. Full regression av berättelse, kalender, fler bakgrunder och sparningar återstår. Se `docs/DAILY_LOG.md`.

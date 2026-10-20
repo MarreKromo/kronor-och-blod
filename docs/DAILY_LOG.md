@@ -77,7 +77,7 @@ Uppdaterad: 2026-10-20
 - IMP-024 samordnas med IMP-025: valfri Ragnhild-inledning, olika ingångar utan påtvingad familjehemlighet.
 - Nästa steg efter GitHub-verifiering: granska sparnycklar och göra separat säker migrationsplan innan någon spelkod ändras.
 
-## Aktuellt läge
+## Aktuellt läge vid tidigare planeringsstopp (historiskt; ersatt av stoppnotering 2026-10-20 nedan)
 Aktivt paket: IMP-025 – dokumentera karaktärsskaparens design och samordna med IMP-024.
 Nästa exakta steg: GitHub-verifiera IMP-025 steg 2; inventera därefter sparnycklar och besluta om säker migration innan kodändringar.
 Tester som återstår: båda kalenderknapparna, daglogg efter omladdning, befintlig karaktär/berättelse, relation −1 och samtliga undersökningsval.
@@ -91,3 +91,39 @@ Vad ändrades:
 Tester PASS/FAIL:
 Kända problem:
 Nästa exakta steg:
+
+---
+
+## 2026-10-20 – STOPP FÖR DAGEN · IMP-025 3H.11.5
+
+**Status:** Utvecklingen pausad på användarens begäran. Inget 3H.11.6-paket är påbörjat.
+
+### Godkända delpaket
+- 3H.10.3–3H.10.6: säker separat karaktärsskapare, gammal riskabel knapp borttagen, cachekorrigering; Sven skapad och byte tillbaka till Mk fungerade enligt användaren.
+- 3H.11.1: GitHub PASS. Safari-bilder visade återstående återläsningspanel; rättad i 3H.11.2.
+- 3H.11.2: återläsningskontroll flyttad till avancerade verktyg. GitHub PASS, Safari PASS med bilder.
+- 3H.11.3: kompakt hopfällbart byte. GitHub PASS, Safari PASS och användarbekräftad knappkontroll.
+- 3H.11.4: historiskt inspirerade karaktärskort. GitHub PASS, Safari PASS och användarbekräftad knappkontroll.
+- 3H.11.5: ny karaktärsprofil, större namn, emblem och egenskapsrutor, utvecklingstext dold. GitHub PASS och Safari PASS med bild.
+
+### Nuvarande spelstatus
+- Aktiv i vanlig Safari: **Mk**, Bonde, Skara.
+- Ytterligare lokala karaktärer: **Erik** och **Sven**.
+- GitHub: https://github.com/MarreKromo/kronor-och-blod
+- Spelet: https://marrekromo.github.io/kronor-och-blod/
+- Sparningarna finns i **vanliga Safaris localStorage**; privat Safari och ChatGPT:s inbyggda webbläsare delar inte automatiskt dessa.
+
+### Nästa exakta steg – IMP-025 3H.11.6
+1. Läs stoppnoteringen samt ROADMAP, TESTS och IMPROVEMENT_BACKLOG.
+2. Hämta aktuella filer på GitHub: `index.html`, `src/character-cards-ui.js`, `src/character-cards-theme-ui.js`, `src/character-profile-theme-ui.js` och `src/character-switch-compact-ui.js`.
+3. Gör **enbart aktiva karaktärens dubblettkort kompakt**. Behåll Erik och Sven som fulla kort. Ändra inte bytesmotorn eller sparsystemet.
+4. Leverera ett litet ZIP-paket till iPhone. Testa syntax/ZIP, användaren committar, kontrollera GitHub, testa sedan i vanliga Safari med PASS/FAIL.
+5. Kontrollera att Mk:s sparning och valknapparna för Erik/Sven är intakta. Uppdatera dokumenten efter PASS.
+
+### Fortfarande ej färdigt
+- IMP-025:s utökade livsbakgrund (familj, förflutet, ambition, biografi och nya färdigheter) är planerad.
+- IMP-024 Ragnhilds introduktionsberättelse och IMP-023 kompakt dagshistorik är planerade.
+- Full regression av kalender, berättelse, äldre sparningar och olika bakgrunder återstår.
+- **3H.11.6 har inte kodats eller testats.**
+
+**Arbetsregler:** ett steg i taget, inga oombedda bilder, inga manuella långredigeringar på iPhone, GitHub PASS och Safari PASS verifieras separat.

@@ -74,7 +74,7 @@ Status: `IDÉ`, `PLANERAD`, `PÅGÅR`, `TESTAS`, `PASS`, `PARKERAD`.
 
 **Designprincip:** Du skapar ditt förflutna. Dina handlingar skapar din framtid. Familjemedlemmar ska inte utlovas som levande NPC:er innan NPC-systemet finns. Fri biografitext är rollspelsinformation, inte en automatisk källa till spelregler. Startfördelar ska balanseras och historiska förhållanden år 1250 faktagranskas.
 
-**Första genomförandepaketet:** kravspecifikation och datamodell, därefter sparning och formulär i små steg. Före ändring av befintliga karaktärsdata: unikt karaktärs-ID, backup/migrationsstrategi och regressionstest. IMP-024 och IMP-025 designas tillsammans; ingen av dem är ännu implementerad.
+**Ursprunglig plan (historisk; flerkaraktärssystemets senare delpaket redovisas längst ned):** kravspecifikation och datamodell, därefter sparning och formulär i små steg. Före ändring av befintliga karaktärsdata: unikt karaktärs-ID, backup/migrationsstrategi och regressionstest. IMP-024 och IMP-025 designas tillsammans; ingen av dem är ännu implementerad.
 
 ## IMP-025 – Steg 2: konkret balans- och sparspecifikation (DESIGN, EJ IMPLEMENTERAD)
 
@@ -117,3 +117,13 @@ Varje ny punkt ska få ett unikt IMP-ID, en kort problembeskrivning, prioritet, 
 - Kartan är ett särskilt viktigt förbättringsområde.
 - Vi samlar idéer nu men bygger om större delar först efter planering.
 - Denna backlog ska underhållas löpande tillsammans med GDD, roadmap, testlogg och daily log.
+
+---
+
+## Statusnotering 2026-10-20 – IMP-025 3H
+
+**Delvis implementerat och verifierat:** flera lokala karaktärsplatser, säker byteskontroll och UI-städning 3H.11.2–3H.11.5. Mk, Erik och Sven har testats i vanlig Safari.
+
+**Återstår inom IMP-025:** familj, förflutet, ambition, biografi, nya färdigheter, kontakter, berättelsekoppling och full regression. Den äldre statusen PLANERAD avser hela funktionen, inte redan verifierade delpaket.
+
+**Nästa:** 3H.11.6 – kompakt aktivt dubblettkort utan förändring av sparsystem eller bytesmotor. Se `docs/DAILY_LOG.md`.
