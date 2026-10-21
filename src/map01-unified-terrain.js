@@ -1,48 +1,40 @@
-/* MAP-01.6 — presentation-only replacement for the legacy SVG terrain. */
+/* MAP-01.6B — deterministic, display-only illustrated terrain. */
 (function(){'use strict';
 const NS='http://www.w3.org/2000/svg';
-function node(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs||{}))e.setAttribute(k,v);if(parent)parent.appendChild(e);return e;}
-function curve(parent,d,cls){return node('path',{d,class:cls},parent);}
-function random(seed){return function(){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};}
-function terrain(group){const rng=random(1601250),layer=node('g',{'class':'map016-terrain','aria-hidden':'true'});
- const defs=node('defs',{},layer);const gradient=node('linearGradient',{id:'map016-base',x1:'0',y1:'0',x2:'1',y2:'1'},defs);
- [['0%','#77836a'],['43%','#8c9576'],['100%','#526958']].forEach(([offset,color])=>node('stop',{offset,'stop-color':color},gradient));
- node('rect',{x:-150,y:-150,width:2100,height:1700,fill:'url(#map016-base)'},layer);
- // Continuous broad relief with no hard-edged rectangular overlays.
- const swells=[['M-180 90 C130 -65 300 155 540 28 S930 90 1160 -20 S1580 70 1900 -40 L1900 -160 L-180 -160Z','map016-high'],['M-150 590 C100 485 290 630 510 505 S850 565 1070 445 S1440 525 1900 355 L1900 900 C1400 740 1080 850 760 710 S210 790 -150 720Z','map016-low'],['M-150 1080 C220 920 410 1060 690 890 S1120 1010 1400 840 S1710 870 1900 760 L1900 1500 L-150 1500Z','map016-valley']];
- swells.forEach(([d,c])=>curve(layer,d,c));
- // Nested curved mountain contours form a coherent northeastern massif.
- for(let i=0;i<13;i++){let y=140+i*37;curve(layer,`M760 ${y+120} C890 ${y-45} 975 ${y+55} 1110 ${y-80} S1340 ${y-15} 1470 ${y-135} S1690 ${y-60} 1850 ${y-170}`,'map016-ridge '+(i%3===0?'map016-ridge-major':''));}
- for(let i=0;i<6;i++){let y=210+i*70;curve(layer,`M895 ${y+135} C1060 ${y+65} 1140 ${y+150} 1270 ${y+20} S1500 ${y+90} 1730 ${y-65}`,'map016-ridge-shade');}
- // Fine relief strokes across the same underlying land, avoiding tile seams.
- for(let i=0;i<34;i++){let y=50+i*39;curve(layer,`M-130 ${y+28*Math.sin(i)} C210 ${y-45} 350 ${y+72} 620 ${y+6} S1100 ${y-32} 1430 ${y+14} S1740 ${y-20} 1880 ${y+10}`,'map016-isoline');}
- // River and tributary, behind original road and settlement layers.
- curve(layer,'M-80 275 C95 250 150 325 255 278 S410 210 465 294 S515 385 610 380 S795 300 1030 365 S1290 475 1580 690','map016-river-bank');
- curve(layer,'M-80 275 C95 250 150 325 255 278 S410 210 465 294 S515 385 610 380 S795 300 1030 365 S1290 475 1580 690','map016-river');
- curve(layer,'M1580 690 C1480 650 1380 760 1280 740 S1090 810 930 785 S820 860 700 930','map016-brook');
- // Forest clusters have irregular organic edges and mixed canopy marks.
- const forests=[[105,390,130,125],[375,150,110,85],[865,165,115,100],[850,650,135,120],[420,700,110,70],[280,1020,245,145],[770,1120,210,115],[1090,925,165,130],[1570,1020,130,165]];
- forests.forEach(([cx,cy,rx,ry],fi)=>{
-  let d='';const steps=24;for(let i=0;i<=steps;i++){const a=i/steps*Math.PI*2;const wave=1+.11*Math.sin(a*5+fi)+.08*Math.cos(a*9+fi*2);const x=cx+Math.cos(a)*rx*wave,y=cy+Math.sin(a)*ry*wave;d+=(i?' L':'M')+x.toFixed(1)+' '+y.toFixed(1);}curve(layer,d+' Z','map016-woodland');
-  const count=Math.round(rx*ry/370);for(let i=0;i<count;i++){const a=rng()*Math.PI*2,r=Math.sqrt(rng())*.86,x=cx+Math.cos(a)*rx*r,y=cy+Math.sin(a)*ry*r,size=3+rng()*7;
-   if(rng()<.64)node('circle',{cx:x.toFixed(1),cy:y.toFixed(1),r:size.toFixed(1),class:'map016-canopy'},layer);
-   else curve(layer,`M${(x-size).toFixed(1)} ${y.toFixed(1)} q${size} ${(-size*2).toFixed(1)} ${size*2} 0 q${-size} ${size*.7} ${-size*2} 0`,'map016-canopy-stroke');
-  }
- });
- // Irregular agricultural strips and restrained ground texture.
- for(let i=0;i<14;i++){const x=85+(i%4)*39,y=560+Math.floor(i/4)*26;curve(layer,`M${x} ${y} l32 -7 l10 13 l-32 8Z`,'map016-field');}
- for(let i=0;i<18;i++){const x=240+(i%6)*49,y=845+Math.floor(i/6)*32;curve(layer,`M${x} ${y} l40 -9 l13 16 l-40 9Z`,'map016-field');}
- // Decorative names do not become interactive places or new geography IDs.
- [['BERGSTRAKTEN',1320,665],['DJUPSKOGEN',450,1190],['SÖDRA DALEN',930,975]].forEach(([s,x,y])=>{const t=node('text',{x,y,'text-anchor':'middle',class:'map016-land-label'},layer);t.textContent=s;});
- group.insertBefore(layer,group.firstChild);
+function el(t,a,p){const n=document.createElementNS(NS,t);for(const [k,v] of Object.entries(a||{}))n.setAttribute(k,String(v));if(p)p.appendChild(n);return n;}
+function path(p,d,c){return el('path',{d,class:c},p);}
+function rng(seed){return()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/4294967296);}
+function draw(g){const r=rng(125016),root=el('g',{class:'map016b-landscape','aria-hidden':'true'});const defs=el('defs',{},root);
+const base=el('linearGradient',{id:'map016b-ground',x1:0,y1:0,x2:.7,y2:1},defs);[['0%','#92977b'],['55%','#858e72'],['100%','#697a67']].forEach(([offset,c])=>el('stop',{offset,'stop-color':c},base));
+el('rect',{x:-100,y:-100,width:1950,height:1550,fill:'url(#map016b-ground)'},root);
+path(root,'M-100 85 C120 -10 250 100 420 45 S760 100 920 -25 S1300 70 1500 -20 S1770 20 1850 -80 L1850 -100 L-100 -100Z','map016b-upland');
+path(root,'M-100 610 C100 525 260 625 470 545 S800 600 1030 505 S1430 570 1850 420 L1850 910 C1510 830 1200 905 880 785 S230 830 -100 745Z','map016b-lowland');
+path(root,'M-100 1030 C180 920 360 1070 650 910 S1100 1050 1420 860 S1700 910 1850 760 L1850 1450 L-100 1450Z','map016b-meadow');
+for(let i=0;i<38;i++){const y=35+i*34;path(root,`M-70 ${y} C160 ${y-38} 360 ${y+46} 600 ${y+8} S1030 ${y-35} 1320 ${y+13} S1630 ${y-20} 1830 ${y+5}`,'map016b-texture');}
+// Mountains: interlocking shaded rock faces with individual peaks and foothills.
+const mountains=[[1010,375,155,175],[1150,310,180,220],[1305,355,165,205],[1455,295,180,245],[1590,390,160,190],[1160,565,135,135],[1410,565,155,150],[1660,555,150,165]];
+path(root,'M825 600 C930 480 975 490 1040 425 S1160 410 1220 340 S1380 385 1470 300 S1630 385 1810 360 L1810 850 C1550 760 1420 820 1270 730 S960 765 825 730Z','map016b-foothills');
+mountains.forEach(([x,y,w,h],i)=>{const p=el('g',{class:'map016b-peak'},root),top=y-h*.72,left=x-w*.72,right=x+w*.76,bottom=y+h*.58;
+ path(p,`M${left} ${bottom} Q${x-w*.45} ${y+h*.12} ${x-w*.31} ${y-h*.22} L${x-w*.11} ${y-h*.39} L${x} ${top} L${x+w*.15} ${y-h*.36} L${x+w*.33} ${y-h*.18} Q${x+w*.48} ${y+h*.1} ${right} ${bottom} Q${x} ${bottom+h*.13} ${left} ${bottom}Z`,'map016b-peak-shadow');
+ path(p,`M${left} ${bottom} Q${x-w*.45} ${y+h*.12} ${x-w*.31} ${y-h*.22} L${x-w*.11} ${y-h*.39} L${x} ${top} L${x+w*.07} ${y-h*.2} L${x+w*.1} ${y+h*.16} L${x+w*.21} ${bottom+h*.07} Q${x-w*.22} ${bottom+h*.08} ${left} ${bottom}Z`,'map016b-peak-face');
+ path(p,`M${x-w*.11} ${y-h*.39} L${x} ${top} L${x+w*.15} ${y-h*.36} L${x+w*.06} ${y-h*.42} L${x-w*.015} ${y-h*.31}Z`,'map016b-peak-cap');
+ path(p,`M${x+w*.07} ${y-h*.2} L${x+w*.28} ${y+h*.28} M${x-w*.18} ${y-h*.12} L${x-w*.32} ${y+h*.31} M${x+w*.39} ${y+h*.13} L${x+w*.51} ${bottom-h*.06}`,'map016b-peak-etch');
+ for(let j=0;j<3;j++){const yy=bottom+12+j*16;path(root,`M${x-w*.8} ${yy} Q${x} ${yy-18-j*5} ${x+w*.85} ${yy+6}`,'map016b-foothill-line');}
+});
+// Rivers: continuous and behind roads, villages and labels.
+const river='M-80 275 C95 250 150 325 255 278 S410 210 465 294 S515 385 610 380 S795 300 1030 365 S1290 475 1580 690';path(root,river,'map016b-river-bank');path(root,river,'map016b-river');path(root,river,'map016b-river-glint');
+path(root,'M1580 690 C1480 650 1380 760 1280 740 S1090 810 930 785 S820 860 700 930','map016b-brook');
+// Forests: softened organic perimeters, individual overlapping crowns and edge saplings.
+const forests=[[105,390,130,125],[375,150,110,85],[865,165,115,100],[850,650,135,120],[420,700,110,70],[280,1020,245,145],[770,1120,210,115],[1090,925,165,130],[1570,1020,130,165]];
+forests.forEach(([cx,cy,rx,ry],fi)=>{const forest=el('g',{class:'map016b-forest'},root);let d='';const steps=42;for(let i=0;i<=steps;i++){const a=i/steps*Math.PI*2,w=1+.045*Math.sin(a*7+fi)+.035*Math.cos(a*11+fi*2),x=cx+Math.cos(a)*rx*w,y=cy+Math.sin(a)*ry*w;d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1);}path(forest,d+'Z','map016b-forest-floor');
+ const count=Math.min(210,Math.round(rx*ry/135));for(let i=0;i<count;i++){const a=r()*Math.PI*2,rad=Math.sqrt(r())*.98,x=cx+Math.cos(a)*rx*rad,y=cy+Math.sin(a)*ry*rad,sz=5+r()*9;el('ellipse',{cx:x.toFixed(1),cy:y.toFixed(1),rx:sz.toFixed(1),ry:(sz*.72).toFixed(1),class:i%5===0?'map016b-tree-light':'map016b-tree'},forest);if(i%9===0)path(forest,`M${(x-sz*.5).toFixed(1)} ${(y-sz*.1).toFixed(1)} q${(sz*.5).toFixed(1)} ${(-sz*.8).toFixed(1)} ${sz.toFixed(1)} 0`,'map016b-tree-etch');}
+});
+// Fields and paths of cultivation near villages; not gameplay resources.
+for(const [bx,by,cols,rows] of [[75,555,4,4],[250,840,6,3]])for(let j=0;j<rows;j++)for(let i=0;i<cols;i++){const x=bx+i*39+j*4,y=by+j*26-i*2;path(root,`M${x} ${y} l29 -7 l10 12 l-29 8Z`,'map016b-field');}
+[['BERGSTRAKTEN',1300,745],['DJUPSKOGEN',450,1190],['SÖDRA DALEN',930,975]].forEach(([s,x,y])=>{const n=el('text',{x,y,'text-anchor':'middle',class:'map016b-land-label'},root);n.textContent=s;});
+g.insertBefore(root,g.firstChild);
 }
-function enhance(frame){if(frame.dataset.map016==='yes')return;const group=frame.querySelector('.map01-viewport svg > g');if(!group||!group.querySelector('.map01-road-outline'))return;
- const old=[...group.children];const firstRoad=old.findIndex(e=>e.classList&&e.classList.contains('map01-road-outline'));
- if(firstRoad<0)return;
- // Remove only old display terrain; retain roads, markers and settlement art.
- for(let i=0;i<firstRoad;i++)old[i].remove();terrain(group);frame.dataset.map016='yes';
- const caption=frame.querySelector('.map01-caption');if(caption)caption.textContent='Dra för att utforska · Nyp för att zooma · Tryck på en ort för att visa den.';
-}
+function enhance(frame){if(frame.dataset.map016b==='yes')return;const group=frame.querySelector('.map01-viewport svg > g');if(!group)return;const children=[...group.children],road=children.findIndex(n=>n.classList?.contains('map01-road-outline'));if(road<0)return;for(let i=0;i<road;i++)children[i].remove();draw(group);frame.dataset.map016b='yes';const caption=frame.querySelector('.map01-caption');if(caption)caption.textContent='Dra för att utforska · Nyp för att zooma · Välj en ort på kartan.';}
 function scan(){document.querySelectorAll('.map01-frame').forEach(enhance);}
 const observer=new MutationObserver(scan);observer.observe(document.documentElement,{childList:true,subtree:true});scan();
 })();
