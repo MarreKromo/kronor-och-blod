@@ -1,41 +1,36 @@
 # KRONOR & BLOD — DEVLOG
-Uppdaterad 2026-10-21. Dornmark. Testomfattning anges separat från kodexistens.
+Uppdaterad 2026-10-22. Status skiljer kodexistens, GitHub och Safari.
 
-## Tidigare leveranser
+## Tidigare V2-milstolpar
 | Version | GitHub | Safari | Omfattning |
 |---|---|---|---|
 | V2-03.2L | PASS | PASS enligt användaren | NPC-samtal |
 | V2-03.3B | PASS | PASS enligt användaren | Jordbruk, XP, tid |
 | V2-03.5 | PASS | PASS enligt användaren | Position och resa |
-| V2-03.6 | PASS | Delvis | Ekonomi; full regression öppen |
-| V2-03.6L | PASS | Begränsat PASS | Svenska ord och mynt |
+| V2-03.6/L | PASS | Delvis | Ekonomi, svenska ord och mynt |
 | V2-03.7 | PASS | PASS 5/5 | Resa/dagbyte utan bekräftelser |
-| V2-03.8 | PASS | PASS i visad omfattning | Mobilvy |
-| V2-03.9 | PASS | PASS i visad omfattning | Arbetsplats/omladdning |
-| V2-04 | PASS | PASS i rapporterad omfattning | NPC-grund |
-| V2-04R | PASS | PASS 6/6 enligt användaren | Återkommande möten och relationer |
-| V2-04S | PASS | PASS enligt användaren och skärmbilder | Dialog och råd vid +5 |
+| V2-03.8–.9 | PASS | PASS i visad omfattning | Mobilvy, arbetsplats, omladdning |
+| V2-04/R/S | PASS | PASS i rapporterad omfattning | NPC-möten, förtroende, dialog, råd vid +5 |
+| V2-05A–D | PASS enligt tidigare kontroller | PASS i tidigare rapporterad omfattning | Produktion, leveranser, marknad och bakgrundsproduktion |
+| V2-05E | PASS | PASS för UI | Lagerkort och hopfällbar försörjningsvy |
+| V2-05F | PASS | PASS i visad omfattning | Separata ortsvyer, inspektion och resa |
+| NAV-01–04 | Tidigare levererat | Visuell Safari-granskning i rapporterad omfattning | Mobilnavigation |
 
-## V2-04 avslut (tidigare dokumenterat)
-V2-04R/S: separata relationsjournaler, dagspärr, varierande repliker, +5-upplåsta råd, mobilanpassning. Användarens bilder visade Mara +6 och Edda +7. Ingen full NPC-autonomi eller ekonomiregression påstås.
-
-## V2-05 — kapitelavslut 2026-10-21
-| Del | GitHub | Safari | Leverans och evidens |
+## MAP-01 — kartkapitel och kvalitetsarbete
+| Version | GitHub | Safari | Resultat |
 |---|---|---|---|
-| V2-05A–C | PASS enligt tidigare paketkontroller | PASS i tidigare rapporterad omfattning | Lokal produktion, leveranser, marknadsköp och lagerkoppling |
-| V2-05D | PASS | PASS enligt tidigare rapport | Bakgrundsproduktion utan spelararbete; omladdning/full regression ej särskilt bevisad |
-| V2-05E | PASS | PASS för UI, fyra bilder | Lagerkort Keldra/Dorneth, hopfällbar produktionsredovisning; mekaniken inte omtestad |
-| V2-05F | PASS, tre filer lästa från GitHub | PASS enligt användaren + skärmbilder | Individuella ortsvyer, tillbaka till översikt, inspektion utan resa, resa en dag; full ekonomiregression ej omtestad |
+| MAP-01.3–01.4 | Tidigare levererat | Bilder i tidigare chattar | Geografisk Dornmarkkarta, större terräng och Berg-knapp |
+| MAP-01.5 | Filkontroll PASS tidigare | Visuellt ej slutgodkänd | Cartography Quality Pass; skarvar och bergproblem |
+| MAP-01.6 | Filkontroll PASS tidigare | Bilder visade kvalitetsbrister | Unified Terrain Renderer |
+| MAP-01.6B | **PASS**: JS, CSS, testfil och cachefix `index.html` lästa från GitHub | **Begränsat PASS**: användaren säger att allt verkar fungera; två skärmbilder visar normal vy och Berg-vy | Bättre berg/skogsdetaljer, men karta upplevs mindre, geometriska berg och skogar, brist på terrängvariation. Ingen full regression |
 
-V2-05E Safari-bilder visade Keldra 36 och Dorneth 31 säckar samt produktion/leveranser i expanderad redovisning. V2-05F-bilder visade platsöversikt och egna vyer för Keldra och Dorneth, befintliga 25 koppar och 20 spannmål samt ortslager; användaren bekräftade att tillbaka-navigering och resa fungerar.
+**Viktig cachelärdom:** MAP-01.6B:s första ZIP saknade uppdaterade JS/CSS-versioner i `index.html`; separat cachefix behövdes. Från och med ARBETSMETOD v4 ska cacheversionering alltid ingå i samma kodpaket.
 
-**Avslutsbeslut:** V2-05:s första spelbara prototypkedja är färdig i verifierad omfattning, inte hela ekonomisystemet. Återstående system finns kvar i masterplan/roadmap.
+## Produktbeslut och återstående arbete
+- MAP-01.7 är nästa planerade **visuella** redesign; inga nya resmekaniker i detta paket.
+- Den äldre idén `MAP-01.4 – World Locations & Travel Encounters` kvarstår som **planerat, inte byggt**. Nummerkonflikt med redan använd MAP-01.4 kartutbyggnad ska lösas före implementation.
+- V2-06 förblir reserverat för följeslagare. Inga tidigare system stryks.
+- Full regression, säker backup/export/import och långtidstester kvarstår.
 
-## Arkitekturbeslut inför nästa arbete
-- Översikt som framtida huvudflik, skild från fysisk bostad.
-- Senast aktiv huvudflik ska sparas per karaktär och återställas efter omladdning.
-- Geografisk världskarta och datadrivna individuella ortsvyer utvecklas efter stabil navigation. Kartvisning och faktisk resa hålls isär.
-- V2-06 förblir reserverat för följeslagare; inga kapitel omnumreras.
-
-## Nästa
-Verifiera detta dokumentationspaket i GitHub (ingen Safari-test för docs). Planera nästa större spelbara paket enligt roadmap och ARBETSMETOD. Full ekonomiregression och backup/export/import kvarstår öppna.
+## Dokumentationstillfälle KB-DOC-02, 2026-10-22
+Helhetsuppdatering av befintliga dokument, inklusive bindande arbetsmetod v4.0. Detta paket ändrar endast `docs/`. **Lokal paketkontroll är inte GitHub PASS.** GitHub-kontroll görs efter användarens commit; inget Safari-test behövs för docs.
