@@ -1,1 +1,13 @@
-.local-economy,.local-economy-note{margin:15px 0 10px;padding:13px;border:1px solid #76664c;border-radius:9px;background:#27372e;color:#e7ddc8;font:14px/1.5 system-ui}.local-economy h4{font-size:17px;margin:0 0 8px}.local-economy p,.local-economy-note p{margin:7px 0}.local-economy-status{font-weight:700;color:#e8cc91}.local-economy-small{font-size:12px;color:#c7bda9}.local-economy-error{color:#ffb6a7}
+.local-economy,.local-economy-note{margin:15px 0 10px;padding:15px;border:1px solid #76664c;border-radius:9px;background:#27372e;color:#e7ddc8;font:14px/1.5 system-ui}
+.local-economy h4{font-size:17px;margin:0 0 8px}.local-economy p,.local-economy-note p{margin:9px 0}
+.local-economy-status{font-weight:700;color:#e8cc91}
+.local-economy-stocks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+.local-economy-stock{background:#202d27;border:1px solid #5c6657;border-radius:8px;padding:11px;min-width:0}
+.local-economy-stock-name{display:block;color:#c9c2ad;font:12px/1.5 system-ui}
+.local-economy-stock strong{display:block;font:700 19px/1.4 system-ui;color:#f1e1bc}
+.local-economy-explain{line-height:1.5}
+.local-economy-details{border-top:1px solid #66705f;padding-top:12px;margin-top:14px}
+.local-economy-details summary{cursor:pointer;color:#e8cc91;font:600 14px/1.6 system-ui;padding:4px 0;min-height:36px}
+.local-economy-ledger{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;margin:12px 0}
+.local-economy-ledger dt{color:#d8d0bd}.local-economy-ledger dd{margin:0;font-weight:700;text-align:right}
+.local-economy-small{font-size:12px;color:#c7bda9}.local-economy-error{color:#ffb6a7}
