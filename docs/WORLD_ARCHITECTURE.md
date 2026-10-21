@@ -1,4 +1,4 @@
-# KRONOR & BLOD — WORLD ARCHITECTURE v1.0
+# KRONOR & BLOD — WORLD ARCHITECTURE v1.1
 **Status: BESLUTAD PRODUKTVISION / ARKITEKTURKRAV, EJ IMPLEMENTERAD MEKANIK**
 Beslutad 2026-10-21. Gäller MAP-01 och alla senare världskartor, regioner, orter, politik, arv och rikesbildning. Underordnad `MASTERPLAN_V2.md`; refererad som blockerande kartkrav i `ROADMAP.md` v3.5. Ingen kod eller sparfil ändras av detta dokument.
 
@@ -58,6 +58,32 @@ Beslutad 2026-10-21. Gäller MAP-01 och alla senare världskartor, regioner, ort
 - Exakt territoriell detaljnivå, regionstorlek och datakontrakt.
 - Hur anspråk, legitimitet, beskattning, vasallskap, grundande och krig balanseras.
 - När politiskt kartlager och rikesbildning blir spelbara; roadmapens V2-09 och V2-10 förblir reserverade.
+
+## H. Regional variation och levande samhällen — WORLD-02 (beslutat 2026-10-21)
+**Bindande världsdesign:** Regioner får inte bara skilja sig visuellt. Geografi, klimat, historia, resurser och politiska förhållanden ska påverka vilka samhällen som växer fram och hur invånarna lever.
+
+- Varje region ska kunna definiera sin egen kombination av **landskap och terräng**, **klimat och årstider**, **naturresurser och näringar**, **vägar och handelsförbindelser**, **bebyggelse och arkitektur**, **kultur och lokala traditioner**, samt **historia, konflikter och maktförhållanden**.
+- Möjliga miljöer omfattar bördiga jordbruksbygder, djupa skogar, kuster och skärgårdar, berg och gränsmarker samt varmare handelsområden. Dessa är **exempel på variation, inte en fastslagen lista över regioner eller deras namn**.
+- Terrängen ska kunna påverka tillgång till arbete, produktion, handel, resor, försörjning, risker, samhällens storlek och möjligheter till politisk kontroll. Exakta simuleringar och balans beslutas när respektive system utvecklas.
+- Samhällen ska kunna skilja sig åt även inom samma miljötyp: två kuststäder behöver inte ha samma ekonomi, kultur, historia eller styre. Undvik standardiserade regionmallar som skapar identiska samhällen.
+- Karaktärens ursprung och livsväg ska kunna påverkas av regionens förutsättningar, utan att någon region låser spelaren till en yrkesklass eller ett förutbestämt mål.
+- Regional identitet och politisk tillhörighet ska vara separata: en region behåller sin natur och historia även om riket som kontrollerar den ändras.
+- **En region i taget:** Dornmark byggs först på djupet. Nya regioner ska kunna tillföras med egen karaktär utan att befintliga orter, rutter, sparningar eller politiska modeller måste byggas om.
+
+### Kartans visuella riktning — designarbete före MAP-01-kod
+- Designriktning att utforska: **detaljrik, historiskt trovärdig terrängkarta kombinerad med separata politiska lager**, med vuxen, återhållsam mörk fantasy-ton.
+- Föredra varierande natur, väder, dimma, trovärdiga avstånd och småskaliga samhällen framför överdrivet sagoboksutseende, färgglada symboler och dekorativa guldramar.
+- **Resor är en central del av kartupplevelsen:** läsbara vägar, vald färdväg, restid och tydlig skillnad mellan att undersöka en ort och att faktiskt resa dit. Bildexempelens tider och avstånd är inte spelkanon; befintlig resemodell gäller tills annat godkänns.
+- Kartan ska kunna växla mellan regionalt terrängperspektiv och framtida politiska lager, och senare skala till större världskarta och individuella platsvyer.
+- **Designgrind:** visa och diskutera konkreta visuella koncept på iPhone innan MAP-01-kod eller ZIP med spelimplementation tas fram. Konceptbilder är inspirationsmaterial, inte godkänd slutdesign eller fastställd geografi.
+- Förslagna namn på andra regioner, riken, städer, kulturer och geografiska platser i konceptbilder är **inte kanon** förrän projektägaren uttryckligen beslutar det.
+
+### Acceptanskriterier att bevaka
+1. Två regioner med olika naturförutsättningar kan ha olika samhällsstruktur och försörjningsvägar utan separata hårdkodade spelsystem.
+2. Två orter i liknande terräng kan ändå skilja sig genom historia, handel, kultur och styre.
+3. Terräng, regionidentitet och politisk kontroll kan förändras/representeras oberoende där det är relevant; byte av härskare skriver inte över geografisk identitet.
+4. Framtida expansion med ny region kräver inte att befintliga sparningar eller ort-ID:n återställs.
+5. MAP-01 får inte påbörjas som kodpaket förrän visuell riktning har granskats och uttryckligen godkänts av projektägaren.
 
 ## Spårbarhet
 - Grundvision och dynastier: `MASTERPLAN_V2.md`.

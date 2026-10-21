@@ -1,4 +1,4 @@
-# KRONOR & BLOD — ROADMAP v3.5
+# KRONOR & BLOD — ROADMAP v3.6
 Uppdaterad 2026-10-21. Aktiv värld: Dornmark. `MASTERPLAN_V2.md` är överordnad; `ARBETSMETOD.md` v3.0 gäller.
 
 ## Avslutade och verifierade milstolpar
@@ -20,8 +20,14 @@ Uppdaterad 2026-10-21. Aktiv värld: Dornmark. `MASTERPLAN_V2.md` är överordna
 2. Senast valda huvudflik sparas per karaktär. Befintliga sparningar får inte återställas tyst.
 3. NAV-01–04 har levererats och visuellt testats i Safari i rapporterad omfattning; full regression är fortfarande öppen. Fortsätt dagen ligger på Översikt. Fyra huvudflikar: Översikt, Berättelse, Platser, Meny.
 
+**WORLD-02 — regional variation och kartdesign (beslutat, ej implementerat):**
+- `docs/WORLD_ARCHITECTURE.md` v1.1, avsnitt H, är bindande: regionernas natur, klimat, resurser, samhällen, kultur och historia ska skapa verklig variation i spelvärlden.
+- Regioner byggs en i taget, men kart- och datamodell måste tåla skogar, jordbruksbygder, kuster, berg och andra miljöer med olika ekonomi och livsvillkor.
+- MAP-01 har en **visuell designgrind**: granska och godkänn konkreta kartkoncept före kod/ZIP. Föreslagen riktning är historiskt trovärdig, återhållsam mörk fantasy med tydliga resvägar, restider och framtida politiska lager.
+- Namn, geografi och avstånd i konceptbilder är inte automatiskt spelkanon.
+
 **MAP-01 och vidare – blockerande arkitekturbeslut:**
-1. Läs **`docs/WORLD_ARCHITECTURE.md` v1.0** före all ny kartkod, ortdata, politiska system och rikesbildning. Detta är ett godkänt produktbeslut, inte en valfri idé.
+1. Läs **`docs/WORLD_ARCHITECTURE.md` v1.1** före all ny kartkod, ortdata, politiska system och rikesbildning. Detta är ett godkänt produktbeslut, inte en valfri idé.
 2. MAP-01 bygger den första geografiska kartan för **regionen Dornmark** med Keldra, Dorneth och Varnhold, men ska vara utbyggbar till många regioner och kungariken.
 3. Geografiska regioner, politiska riken, äganderätt, titlar och faktisk territoriell kontroll är separata begrepp och datalager. **En region är inte automatiskt ett kungarike.**
 4. Etablerade riken, adelshus och härskare finns i världens startläge; omstridda gränsmarker och självständiga områden ger utrymme för nya makter.
