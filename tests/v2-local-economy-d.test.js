@@ -1,0 +1,18 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const code=fs.readFileSync('src/v2-local-economy.js','utf8');
+const context={window:{}};vm.runInNewContext(code,context);
+const simulate=context.window.KB_V2_LOCAL_ECONOMY.simulate;
+let noWork=simulate(30,[]);
+assert.ok(noWork.backgroundProduced>0,'NPC production must occur without player');
+assert.ok(noWork.mill>0,'mill must recover without player work');
+assert.ok(noWork.delivered>0,'NPC delivery must occur');
+const player=simulate(30,[0,2,4]);
+assert.ok(player.produced===9,'player work remains separately counted');
+assert.ok(player.farm+player.mill>=noWork.farm+noWork.mill,'player work improves supply');
+const one=simulate(14,[],[{day:10,quantity:1,price:2}]);
+const two=simulate(14,[],[{day:10,quantity:1,price:2},{day:10,quantity:1,price:2}]);
+assert.equal(two.bought,2);
+assert.ok(two.mill<=one.mill,'two purchases must not increase mill stock');
+assert.deepEqual(simulate(30,[]),simulate(30,[]),'deterministic replay');
+assert.equal(simulate(0,[]).mill,7);
+console.log('PASS: autonomous production, deliveries, player bonus, purchases, deterministic replay');
