@@ -18,6 +18,20 @@ function draw(){panel.replaceChildren();const head=add(panel,'div','','overview-
  if(warning)add(panel,'p',warning,'overview-warning');
  const cards=add(panel,'div','','overview-grid');
  for(const [label,value] of [['Du befinner dig',t?.ok?t.places[t.placeId]?.name||'Okänd plats':t?.error||'Platsen kunde inte läsas'],['Datum',d?.ok?d.label:'Datumet kunde inte läsas'],['Dina pengar',e?.ok?e.coins+' kopparmynt':'Ekonomin kunde inte läsas'],['Din väska',e?.ok?e.grain+' spannmål':'Väskan kunde inte läsas']]){const card=add(cards,'div','','overview-card');add(card,'span',label);add(card,'strong',value);}
+ // One shared calendar model: the overview action advances exactly one day.
+ const dayAction=add(panel,'button','Fortsätt dagen →','overview-advance');
+ dayAction.type='button';
+ const dayStatus=add(panel,'p','','overview-day-status');dayStatus.setAttribute('role','status');
+ if(!d?.ok || d.elapsedDays>=365000){dayAction.disabled=true;dayStatus.textContent=d?.error||'Kalendern kan inte fortsätta.';}
+ dayAction.addEventListener('click',()=>{
+  dayAction.disabled=true;
+  const current=calendar?.getState();
+  const funds=economy?.getState();
+  if(!current?.ok||!funds?.ok){dayStatus.textContent=current?.error||funds?.error||'Spelets tillstånd kunde inte verifieras.';return;}
+  const result=calendar.advanceDay();
+  if(!result.ok){dayStatus.textContent=result.error;return;}
+  draw();
+ });
  add(panel,'h3','Fortsätt ditt liv');add(panel,'p','Välj vad du vill göra härnäst. Översikten förbrukar ingen speltid.','overview-help');
  const actions=add(panel,'div','','overview-actions');for(const [tab,label,detail] of [['story','Fortsätt berättelsen','Händelser och människor'],['map','Utforska platser','Byar, marknader och resvägar'],['journal','Öppna dagboken','Dina tidigare val'],['character','Din karaktär','Bakgrund och karaktärsplatser']]){const b=add(actions,'button','','overview-link');b.type='button';add(b,'strong',label);add(b,'span',detail);b.addEventListener('click',()=>go(tab));}
 }
