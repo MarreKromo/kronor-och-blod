@@ -1,4 +1,36 @@
 # KRONOR & BLOD — DAILY LOG / STOPP & START
+
+## CHECKPOINT — MAP-01.5 → MAP-01.6 (2026-10-22)
+**Repo:** `MarreKromo/kronor-och-blod` · `main`  
+**Spel:** https://marrekromo.github.io/kronor-och-blod/
+
+### STOPP — senaste kartstatus
+- MAP-01.3: visuell kartgrund för Dornmark med Keldra, Dorneth och Varnhold.
+- MAP-01.4: större panoramabar karta med bergstrakt i nordost, södra dalen, framtida gruv- och jaktresurszoner samt Berg-knapp. Ingen ny resursmekanik.
+- MAP-01.5 Cartography Quality Pass: kod finns i GitHub, inklusive `tests/map01-quality.test.js`; GitHub filverifiering PASS i föregående chatt. Safari-skärmbilder från användaren visar kartan och bergstrakten, men grafiken är **inte slutgodkänd**.
+- Kvarstående synliga brister: rektangulära skarvar/överlapp mellan landskapslager, geometriska triangelformade berg, repetitiva skogar, för mycket UI-yta i Platser. Kvalitetskrav: sikta på en kommersiellt trovärdig kartupplevelse, inte enbart fungerande SVG.
+- Safari-funktioner (panorering, zoom, ortval, sparning, resa) är inte fullständigt regressionstestade för MAP-01.5; inga påståenden om full PASS.
+
+### BESLUT — nästa utvecklingspaket
+**MAP-01.6 – Unified Terrain Renderer**: bygg en sammanhängande terräng utan synliga rektangulära skarvar, med organiska bergskedjor, naturliga övergångar mellan berg/skog/dal, mer varierad skog och en kompaktare iPhone-kartvy. Arbeta på befintlig interaktiv kartkod, inte som en fristående konceptbild. Bygg ett verkligt, testat ZIP-kodpaket med fullständiga ersättningsfiler och repo-relativa sökvägar.
+
+**Bevara:** stabila ort-ID:n (`keldra`, `dorneth`, `varnhold`), Keldra–Dorneth-resan, Varnhold-spärr, geografiskt skilda resurszoner, pan/zoom, ortinspektion utan tid, sparningar, kalender, ekonomi, NPC och övriga spelsystem. Aktivera inte jakt, gruvdrift, resehändelser eller nya sparfält i detta grafikpaket.
+
+**Senare:** MAP-01.7 levande värld med mindre platser, jaktmarker, gruvor och upptäckter; resehändelser/aktiv respektive simulerad resa är produktidéer för separat design och godkännande. Ingen ny mekanik beslutad som implementerad.
+
+### START — nästa chatt
+1. Läs `docs/MASTERPLAN_V2.md`, `docs/ROADMAP.md`, `docs/WORLD_ARCHITECTURE.md`, `docs/MAP_01_APPROVED_IMPROVEMENTS.md`, `docs/ARBETSMETOD.md`, denna logg och senaste `src/map01-*`, `src/v2-travel*`, `index.html`, `tests/map01-*` från GitHub.
+2. Implementera **MAP-01.6** i ett sammanhängande ZIP-paket. Inga genererade bilder som ersättning för kod.
+3. Kör lokalt `node --check` och relevanta Node-tester där möjligt. Rapportera faktiskt körda tester och begränsningar.
+4. Användaren installerar på iPhone och committar. Kontrollera då GitHub-filer (GitHub PASS/FAIL) och därefter Safari-bilder/interaktioner (Safari PASS/FAIL).
+5. Samlad roadmap/SYSTEMS/DEVLOG-dokumentation görs vid kapitelavslut; denna checkpoint är endast överlämning.
+
+### Arbetsmetod
+En ZIP → en commit → GitHub-verifiering → Safari-test. Mobilförst, ingen manuell lång kodinklistrning, ingen tyst dataradering. `ARBETSMETOD.md` v3.0 gäller.
+
+---
+
+# KRONOR & BLOD — DAILY LOG / STOPP & START
 Checkpoint 2026-10-21. Repo: `MarreKromo/kronor-och-blod` · `main`.
 Spel: https://marrekromo.github.io/kronor-och-blod/
 
