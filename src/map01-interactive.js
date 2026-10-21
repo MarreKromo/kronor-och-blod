@@ -28,7 +28,7 @@ function paint(panel){
  if(panel.querySelector('.map01-frame'))return;
  const state=travel.getState();if(!state.ok)return;
  const frame=html('section','map01-frame',undefined);frame.setAttribute('aria-label','Geografisk karta över Dornmark');
- const heading=html('div','map01-heading',undefined,frame);html('strong','', 'DORNMARK · REGIONKARTA',heading);html('span','', 'Dornmark · År 1250',heading);
+ const heading=html('div','map01-heading',undefined,frame);html('strong','', 'DORNMARK',heading);html('span','', 'REGIONKARTA · ÅR 1250',heading);
  const viewport=html('div','map01-viewport',undefined,frame);const canvas=svg('svg',{viewBox:'0 0 1000 800',role:'img','aria-label':'Terrängkarta med vägar och orter'},viewport);
  const defs=svg('defs',{},canvas);const grad=svg('linearGradient',{id:'map01-ground',x1:'0',y1:'0',x2:'1',y2:'1'},defs);svg('stop',{offset:'0%', 'stop-color':'#53634e'},grad);svg('stop',{offset:'55%','stop-color':'#768064'},grad);svg('stop',{offset:'100%','stop-color':'#394e42'},grad);
  const g=svg('g',{},canvas);svg('rect',{width:1700,height:1300,fill:'url(#map01-ground)'},g);
@@ -60,18 +60,22 @@ function paint(panel){
  for(let i=0;i<12;i++){const x=82+(i%4)*28,y=568+Math.floor(i/4)*21;path(g,`M${x} ${y} l27 -6`,'map01-field');}
  // MAP-01.4: land beyond the initial viewport, no travel or save changes.
  const far=svg('g',{class:'map014-wilderness'},g);
- path(far,'M930 90 C1100 20 1250 110 1400 45 S1600 80 1750 5 L1750 780 C1580 670 1490 750 1350 650 S1110 590 930 650Z','map014-uplands');
- for(let i=0;i<10;i++){
-  const y=130+i*54;
-  path(far,`M930 ${y} C1090 ${y-55} 1180 ${y+50} 1320 ${y-15} S1560 ${y+10} 1730 ${y-60}`,'map014-contour');
+ // MAP-01.5: continuous relief rather than a rectangular mountain overlay.
+ // Each ridge shares its foothills with the surrounding terrain.
+ path(far,'M790 420 C900 345 945 375 1025 298 S1180 325 1270 230 S1460 260 1545 170 S1660 195 1740 125 L1740 695 C1590 645 1470 730 1330 650 S1060 620 790 725Z','map015-foothills');
+ const ridges=[
+  {x:1040,y:345,w:195,h:200},{x:1190,y:275,w:230,h:250},
+  {x:1370,y:330,w:220,h:245},{x:1545,y:275,w:205,h:245},
+  {x:1190,y:495,w:175,h:165},{x:1450,y:510,w:195,h:190}
+ ];
+ for(const m of ridges){
+  const x=m.x,y=m.y,w=m.w,h=m.h;
+  path(far,`M${x-w*.65} ${y+h*.48} Q${x-w*.43} ${y+h*.13} ${x-w*.3} ${y-h*.18} L${x-w*.12} ${y-h*.49} L${x} ${y-h} L${x+w*.13} ${y-h*.57} L${x+w*.31} ${y-h*.31} Q${x+w*.48} ${y+h*.09} ${x+w*.73} ${y+h*.48} Q${x+w*.13} ${y+h*.66} ${x-w*.65} ${y+h*.48}Z`,'map015-ridge-shadow');
+  path(far,`M${x-w*.65} ${y+h*.48} Q${x-w*.35} ${y+h*.1} ${x-w*.12} ${y-h*.49} L${x} ${y-h} L${x+w*.13} ${y-h*.57} L${x+w*.2} ${y+h*.07} L${x+w*.73} ${y+h*.48} Q${x+w*.1} ${y+h*.63} ${x-w*.65} ${y+h*.48}Z`,'map015-ridge-face');
+  path(far,`M${x-w*.12} ${y-h*.49} L${x} ${y-h} L${x+w*.13} ${y-h*.57} L${x+w*.04} ${y-h*.63} L${x-w*.025} ${y-h*.52} L${x-w*.08} ${y-h*.57}Z`,'map015-ridge-snow');
+  path(far,`M${x+w*.04} ${y-h*.63} Q${x+w*.16} ${y-h*.22} ${x+w*.25} ${y+h*.14} M${x-w*.12} ${y-h*.22} Q${x-w*.22} ${y+h*.05} ${x-w*.3} ${y+h*.29}`,'map015-ridge-etch');
  }
- const peaks=[{x:1120,y:210,s:1.2},{x:1285,y:185,s:1.55},{x:1450,y:255,s:1.4},{x:1590,y:165,s:1.2},{x:1360,y:405,s:1.1},{x:1530,y:465,s:1.35},{x:1180,y:480,s:0.9}];
- for(const m of peaks){const peak=svg('g',{transform:`translate(${m.x} ${m.y}) scale(${m.s})`},far);
-  path(peak,'M-90 68 L-26 -56 L3 -96 L40 -26 L100 68Z','map014-mountain-shadow');
-  path(peak,'M-90 68 L3 -96 L18 -11 L100 68Z','map014-mountain');
-  path(peak,'M3 -96 L-27 -37 L-5 -42 L10 -27 L18 -11Z','map014-mountain-ridge');
-  path(peak,'M-42 14 L-18 -21 M22 2 L45 34 M-4 -44 L-12 -20','map014-mountain-lines');
- }
+ for(let i=0;i<11;i++){const y=530+i*27;path(far,`M785 ${y} C985 ${y-80} 1100 ${y+45} 1310 ${y-34} S1570 ${y+45} 1750 ${y-28}`,'map014-contour');}
  path(far,'M1605 710 C1500 630 1410 740 1300 715 S1100 770 990 745 S870 810 800 825','map014-stream-bank');
  path(far,'M1605 710 C1500 630 1410 740 1300 715 S1100 770 990 745 S870 810 800 825','map014-stream');
  const extraForests=[{x:280,y:1010,rx:270,ry:170},{x:780,y:1110,rx:255,ry:140},{x:1090,y:910,rx:200,ry:150},{x:1570,y:1000,rx:135,ry:195}];
@@ -126,7 +130,7 @@ function paint(panel){
  apply(g);const actions=html('div','map01-controls',undefined,frame);const interaction=attach(canvas,g);
  function control(label,cb){const b=html('button','map01-control',label,actions);b.type='button';b.addEventListener('click',cb);return b;}
  control('−',()=>interaction.zoom(1/1.3,{x:500,y:400}));control('+',()=>interaction.zoom(1.3,{x:500,y:400}));control('⛰ Berg',()=>{scale=1;offsetX=500-1290;offsetY=400-430;limit();apply(g);});control('⌖ Här är du',()=>{scale=1;offsetX=0;offsetY=0;const p=byId.get(state.placeId);if(p){offsetX=500-p.x;offsetY=400-p.y;}limit();apply(g);});
- html('p','map01-caption','Dra kartan mot öster eller söder för nya landskap. Berg och jaktmarker är ännu inte spelbara. Välj en ort för att se befintliga resvägar.',frame);
+ html('p','map01-caption','Dra för att utforska · Nyp för att zooma · Välj en ort för att undersöka den.',frame);
  const options=panel.querySelector('.travel-places');if(options){options.before(frame);const outdated=[...panel.querySelectorAll('p')].find(p=>p.textContent==='En geografisk världskarta kommer i ett senare kapitel.');outdated?.remove();}
 }
 let queued=false;function refresh(){if(queued)return;queued=true;queueMicrotask(()=>{queued=false;if(!tab.classList.contains('active'))return;const panel=host.querySelector('.travel-panel');if(panel&&panel.querySelector('.travel-places'))paint(panel);});}

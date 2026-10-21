@@ -36,3 +36,21 @@
 .map014-region-label{fill:#f3e1b8;font:bold 25px Georgia,serif;letter-spacing:2px;paint-order:stroke;stroke:#344438;stroke-width:5}
 .map014-sub-label{fill:#ead8b2;font:17px Georgia,serif;paint-order:stroke;stroke:#344438;stroke-width:4}
 .map01-controls{flex-wrap:wrap}.map01-control{padding:0 11px}.map01-control:last-child{font-size:12px}
+
+/* MAP-01.5 — cartographic cohesion, improved mobile map real estate */
+.map01-viewport{aspect-ratio:1/1.06;background:#586953}
+.map01-frame{border-color:#857656;box-shadow:0 12px 30px #0008}
+.map01-heading{padding:10px 13px;background:linear-gradient(110deg,#192a22,#293a2e)}
+.map01-heading strong{font-size:14px;letter-spacing:.15em}
+.map01-heading span{font-size:10px;letter-spacing:.06em}
+.map015-foothills{fill:#637263;stroke:none;opacity:.84}
+.map015-ridge-shadow{fill:#344b47;stroke:#5c6c61;stroke-width:2;stroke-linejoin:round}
+.map015-ridge-face{fill:#718078;stroke:#a8a994;stroke-width:1.8;stroke-linejoin:round}
+.map015-ridge-snow{fill:#c2c8b8;opacity:.77}
+.map015-ridge-etch{fill:none;stroke:#3c534d;stroke-width:2.8;opacity:.65;stroke-linecap:round}
+.map01-controls{padding:7px 9px;gap:6px;justify-content:space-between;flex-wrap:nowrap}
+.map01-control{min-height:38px;min-width:38px;padding:0 9px;border-radius:8px;font-size:15px;white-space:nowrap}
+.map01-control:last-child{font-size:11px;padding:0 8px}
+.map01-caption{padding:0 11px 9px;font-size:11px!important;line-height:1.35!important;opacity:.82}
+.map014-region-label{font-size:22px;letter-spacing:1.2px}
+@media(max-width:390px){.map01-control{min-width:35px;padding:0 7px}.map01-control:last-child{font-size:10px}.map01-heading span{font-size:9px}}
