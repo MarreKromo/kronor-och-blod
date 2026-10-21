@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const source=fs.readFileSync(__dirname+'/../src/v2-market-ui.js','utf8');
+const html=fs.readFileSync(__dirname+'/../index.html','utf8');
+assert.match(source,/Slutsålt – inväntar leverans/);
+assert.match(source,/button\.disabled=unavailable\|\|empty/);
+assert.match(source,/kb:market-changed/);
+assert.match(source,/MutationObserver/);
+assert.match(html,/v2-market-ui\.js\?v=2053f/);
+assert.ok(html.indexOf('v2-market-ui.js')>html.indexOf('v2-market.js'));
+console.log('PASS: V2-05C-FIX market UI checks');
