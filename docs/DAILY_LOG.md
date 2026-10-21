@@ -1,36 +1,25 @@
 # KRONOR & BLOD — DAILY LOG / STOPP & START
-Checkpoint 2026-10-21. Dornmark. Äldre Sverige-logg finns i filens Git-historik.
+Checkpoint 2026-10-21. Repo: `MarreKromo/kronor-och-blod` · `main`.
+Spel: https://marrekromo.github.io/kronor-och-blod/
 
-## STOPP — V2-04 första NPC-grunden testad; dokumentationspaket för commit
-**Repo:** `MarreKromo/kronor-och-blod` · `main` · `https://marrekromo.github.io/kronor-och-blod/`.
+## STOPP — V2-04 NPC-kapitlet avslutat; samlad dokumentation
+- V2-04 första NPC-grund: GitHub PASS, Safari PASS inom rapporterad omfattning.
+- **V2-04R:** GitHub PASS; användaren rapporterade Safari PASS 6/6. Upprepade möten och separata journaler.
+- **V2-04S:** GitHub PASS; användaren skrev 'Allt funkar' och skickade fyra Safari-bilder. Varierad dialog, råd vid +5 och kompaktare mobilvy.
+- Gamla `.npc-life-v1`-minnen behålls. Nya `.npc-relations-v1`-möten är karaktärsbundna. Ingen migration eller reset.
+- Äldre 'Ett bud väntar på svar' kvarstår i berättelsen; känd UI-skuld, inte ett nytt Safari-FAIL.
+- Full ekonomiregression och backup/import kvarstår öppna.
 
-### Senast avslutat
-- V2-03.7: GitHub PASS, Safari PASS 5/5, resa och dagbyte utan bekräftelse.
-- V2-03.8: förbättrad mobilvy, GitHub PASS, Safari PASS i visad omfattning.
-- V2-03.9: aktuell reseposition styr jordbruksarbete, GitHub PASS; Safari PASS i visad omfattning och bekräftad omladdningssparning.
-- **V2-04 KOMPLETT:** tre platsbundna NPC:er, deterministiska rutiner och behov, ett första möte och karaktärsbundet minne/förtroende. GitHub PASS. Safari PASS inom visad och användarrapporterad omfattning, inklusive omladdning och Edda i Dorneth. Dag 29 visade Edda ett minne från dag 27. Full karaktärsbytes- och felvägsregression återstår.
+## Bindande arbetsmetod
+`docs/ARBETSMETOD.md` v3.0: läs faktisk GitHub-kod och relevanta dokument; leverera sammanhängande ZIP med repo-relativa filer; en commit; GitHub PASS/FAIL och Safari PASS/FAIL var för sig; ingen tyst migration; samlad dokumentation vid kapitelavslut.
 
-### Arbetsmetod — bindande
-- `docs/ARBETSMETOD.md` **v3.0** gäller framför äldre instruktioner. Större logiskt sammanhängande ZIP-paket som standard; små paket bara vid motiverad teknisk risk.
-- Före paket: läs faktisk GitHub-kod och docs. Leverera verifierad ZIP med fullständiga repo-relativa filer, iPhone-vänlig installation, normalt en commit.
-- Efter commit: assistenten verifierar GitHub och anger PASS/FAIL. Användaren testar Safari och rapporterar PASS/FAIL. Dokumentationspaket behöver inte Safari-test.
-- Inga tysta återställningar, migrationer eller förändringar av orelaterade system. Spelkänsla, mobilscrollning och säker sparning ingår i kvaliteten.
-- Dokumentera samlat vid kapitelavslut; inte mikropaket för varje liten ändring.
+## START — nästa session
+1. Installera detta dokumentationspaket: fem `docs/`-filer, en commit, svara 'Klar'. Ingen spelkod och inget Safari-test.
+2. Assistenten läser de fem dokumenten från GitHub och rapporterar GitHub PASS/FAIL.
+3. Läs masterplanens resurs-/ekonomidel och äldre resursplaner innan V2-05. Redovisa vad som BEVARAS/ÄNDRAS; inget UTGÅR utan godkännande.
+4. Läs aktuell `src/v2-economy.js`, `src/v2-skills.js`, `src/v2-travel.js`, `src/v2-npc-life.js`, UI och tester. Designa en säker karaktärs-/plats-/dagbunden resurskedja med definierade felvägar och återhämtning.
+5. Leverera **ett större sammanhängande spelpaket V2-05**: NPC-behov ↔ lokala resurser ↔ arbete/marknad. Bevara `.economy-v1`, `.npc-life-v1` och `.npc-relations-v1` utan tyst migration.
+6. Efter commit: verifiera GitHub och sedan Safari. Dokumentera nästa kapitel samlat när det godkänts.
 
-### Dokumentansvar
-- `MASTERPLAN_V2.md`: enda aktuella produktvisionen (masterplan v3.0).
-- `ROADMAP.md`: prioriteringar och framtida beroenden.
-- `SYSTEMS.md`: faktiskt implementerat och begränsningar.
-- `DEVLOG.md`: verifierade leveranser och beslut.
-- `TESTS.md`: GitHub-/Safari-status och öppna tester.
-- `DAILY_LOG.md`: STOPP/START.
-- `ARBETSMETOD.md`: bindande arbetsflöde.
-
-### Nästa exakta START
-1. Ladda upp **KB-DOC-V204** med fem dokumentfiler i `docs/`, en commit, svara ”Klar”. Ingen spelkod ändras och inget Safari-test krävs.
-2. Assistenten hämtar alla fem filer från GitHub och rapporterar GitHub PASS/FAIL.
-3. Läs därefter senaste NPC-kod, kalender, resor, befintliga berättelsemöten, relevanta dokument och sparkontrakt. Utforma **ett större sammanhängande V2-04-paket** för återkommande möten, relationseffekter och bättre mobilflöde.
-4. Säkerställ kompatibilitet med befintliga `.npc-life-v1`-minnen utan tyst migration eller reset. Separata GitHub- och Safari-tester. Full ekonomiregression förblir öppen.
-
-## Historiskt arkiv
-Tidigare Sverige-utveckling (`KB-01`–`KB-03`, `IMP-023`–`IMP-025`, `J-H`–`J-L`, `A2`) finns i Git-historiken och är inte automatiskt godkända Dornmark-tester.
+## Ansvar
+`MASTERPLAN_V2.md`: vision/funktionsregister. `ROADMAP.md`: prioritet. `SYSTEMS.md`: faktisk kod. `DEVLOG.md`: verifierad historik. `TESTS.md`: evidens. `DAILY_LOG.md`: checkpoint. `ARBETSMETOD.md`: bindande arbetsprocess.
