@@ -1,0 +1,14 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const code=fs.readFileSync(__dirname+'/../src/v2-local-economy.js','utf8');
+let id='A',day=8,place='keldra',paid=[3,5,7];const store=new Map();
+const c={activeKey:()=> 'active',readCharacter:x=>({ok:x===id}),characterKey:x=>'character.'+x};
+const storage={getItem:k=>k==='active'?id:store.get(k)??null};
+const w={KB_V2_DATA_CONTRACT:c,KB_V2_CALENDAR:{getState:()=>({ok:true,id,elapsedDays:day,dayNumber:day+1})},KB_V2_TRAVEL:{getState:()=>({ok:true,id,placeId:place})},KB_V2_ECONOMY:{getState:()=>({ok:true,id,coins:3,grain:1})},KB_V2_NPC_LIFE:{getRelationships:()=>({ok:true,id,people:[{id:'mara'},{id:'edda'}]})}};
+const ctx={window:w,localStorage:storage};vm.createContext(ctx);vm.runInContext(code,ctx);const m=w.KB_V2_LOCAL_ECONOMY;
+store.set('character.A.economy-v1',JSON.stringify({version:1,ownerId:'A',paidDays:paid,pending:null}));
+let a=m.getState();assert(a.ok);assert.equal(a.recentWorkdays,3);assert.equal(a.production,6);
+assert.equal(m.getState().supply,a.supply,'repeatable, no writes');
+paid=[];store.set('character.A.economy-v1',JSON.stringify({version:1,ownerId:'A',paidDays:paid,pending:null}));assert(m.getState().supply<a.supply,'production affects supply');
+store.set('character.A.economy-v1','{broken');assert.equal(m.getState().ok,false,'corrupt data fails closed');
+store.delete('character.A.economy-v1');id='B';assert(m.getState().ok,'new character separate');
+console.log('PASS: work affects supply, deterministic, corrupt save blocks, character isolation');
