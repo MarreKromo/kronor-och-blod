@@ -20,3 +20,19 @@
 .map01-house{fill:#d0ba8e;stroke:#473e32;stroke-width:2}.map01-roof{fill:#644b3a;stroke:#e4ca96;stroke-width:1}.map01-castle{fill:#b2ad93;stroke:#423f35;stroke-width:2}.map01-mill-wheel{fill:#5a4733;stroke:#dfc58e;stroke-width:3}.map01-mill-spoke{stroke:#ddc18a;stroke-width:2;fill:none}
 .map01-dot{fill:#463a2b;stroke:#e8d4a4;stroke-width:4}.map01-current{fill:#718f79;stroke:#f8e2a4}.map01-place-name{font:bold 24px Georgia,serif;fill:#fff2ce;stroke:#24372d;stroke-width:5}
 .map01-controls{background:#25362b}.map01-caption{background:#25362b}
+
+/* MAP-01.4 — expanded landscape, legible dark-fantasy relief */
+.map014-uplands{fill:#657163;stroke:#89937b;stroke-width:3;opacity:.87}
+.map014-contour{fill:none;stroke:#d4d1af;stroke-width:2;opacity:.17}
+.map014-mountain-shadow{fill:#313f40;stroke:#b3b7a2;stroke-width:2;stroke-linejoin:round}
+.map014-mountain{fill:#79847c;stroke:#d0c7a9;stroke-width:2.5;stroke-linejoin:round}
+.map014-mountain-ridge{fill:#d2d2bf;opacity:.82}
+.map014-mountain-lines{fill:none;stroke:#344543;stroke-width:3;opacity:.65}
+.map014-stream-bank{fill:none;stroke:#344b4e;stroke-width:19;stroke-linecap:round}
+.map014-stream{fill:none;stroke:#91aba7;stroke-width:8;stroke-linecap:round;opacity:.9}
+.map014-woodland{fill:#294c3e;stroke:#45614b;stroke-width:6;opacity:.8}
+.map014-quarry{fill:#a9a18b;stroke:#e0d0a9;stroke-width:3}
+.map014-quarry-cut{fill:none;stroke:#51584f;stroke-width:3}
+.map014-region-label{fill:#f3e1b8;font:bold 25px Georgia,serif;letter-spacing:2px;paint-order:stroke;stroke:#344438;stroke-width:5}
+.map014-sub-label{fill:#ead8b2;font:17px Georgia,serif;paint-order:stroke;stroke:#344438;stroke-width:4}
+.map01-controls{flex-wrap:wrap}.map01-control{padding:0 11px}.map01-control:last-child{font-size:12px}
