@@ -6,7 +6,7 @@ const css=fs.readFileSync('src/map01-interactive.css','utf8');
 const html=fs.readFileSync('index.html','utf8');
 for(const token of ['map01-forest-mass','map01-settlement-art','map01-river-bank','map01-contour','map01-farm','roadShapes','map01-mill-wheel','map01-castle']) assert.ok(js.includes(token),token);
 for(const token of ['.map01-forest-mass','.map01-castle','.map01-house','.map01-river-bank','.map01-contour'])assert.ok(css.includes(token),token);
-assert.ok(html.includes('map014v1'));
+assert.ok(html.includes('map015v1'));
 assert.ok(!/localStorage|sessionStorage|setItem\s*\(/.test(js));
 assert.ok(!/advanceDay\s*\(|travel\.travel\s*\(/.test(js));
 assert.ok(js.includes('En geografisk världskarta kommer i ett senare kapitel.'));
