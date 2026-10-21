@@ -1,0 +1,13 @@
+const fs=require('fs'),assert=require('assert');
+const html=fs.readFileSync('index.html','utf8');
+const js=fs.readFileSync('src/map01-unified-terrain.js','utf8');
+const css=fs.readFileSync('src/map01-unified-terrain.css','utf8');
+assert(html.includes('map01-unified-terrain.js?v=map018v1'));
+assert(html.includes('map01-unified-terrain.css?v=map018v1'));
+assert(js.includes('map018-massif-base')&&js.includes('map018-understory'));
+assert(js.includes("frame.dataset.map018='yes'"));
+assert(js.includes("g.insertBefore(root,g.firstChild)"));
+assert(js.includes("map01-road-outline"));
+assert(!/localStorage|sessionStorage|setItem|removeItem|advanceDay|travel\.travel/.test(js));
+assert(css.includes('min-height:44px'));
+console.log('MAP-01.8 static quality checks PASS');
