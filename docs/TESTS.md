@@ -1,29 +1,27 @@
 # KRONOR & BLOD — TESTS
-Uppdaterad 2026-10-21. **Aktiv testlogg för fantasyversionen Dornmark.** Historiska tester för ”SVERIGE: Kronor & Blod” är bevarade i Git-historiken för denna fil och ska inte tolkas som PASS för fantasyvärlden.
+Uppdaterad 2026-10-21. Fantasyvärlden Dornmark. Sverige-testhistorik finns i Git-historiken och är inte V2-testbevis.
 
-## Aktiva fantasytester
-| Paket | GitHub | Safari | Verifierad omfattning |
+## Aktiva testresultat
+| Paket | GitHub | Safari | Omfattning |
 |---|---|---|---|
 | V2-03.2L | PASS | PASS enligt användaren | NPC-samtal |
-| V2-03.3B | PASS | PASS enligt användaren | Jordbruksaktivitet, tidskostnad och XP |
-| V2-03.5 | PASS | PASS enligt användaren | Position, resor, platsbundet arbete |
-| V2-03.6 | PASS | Delvis | Försörjningskedja implementerad; full ekonomiregression ej formellt avslutad |
-| V2-03.6L | PASS | PASS inom visad omfattning | Språk och visning av pengar/varor; ej full regression |
-| **V2-03.7** | **PASS** | **PASS 5/5 enligt användaren** | Två bekräftelser borttagna utan regressionsfel i avgränsad kontroll |
+| V2-03.3B | PASS | PASS enligt användaren | Jordbruk, XP, tid |
+| V2-03.5 | PASS | PASS enligt användaren | Position och resa |
+| V2-03.6 | PASS | Delvis | Ekonomi; full regression öppen |
+| V2-03.6L | PASS | Begränsat PASS | Svenska etiketter, mynt |
+| V2-03.7 | PASS | PASS 5/5 | Direkt resa +1 dag; dagbyte +1 dag; omladdning; ekonomi/XP oförändrade; berättelse/dagbok/karaktärsbyte |
+| V2-03.8 | PASS | PASS i visad omfattning | Mobil platshantering, arbete och handel |
+| V2-03.9 | PASS | PASS i visad omfattning | Jordbruk använder aktuell plats, pengar/spannmål och position kvar efter omladdning |
+| **V2-04 KOMPLETT** | **PASS** | **PASS i bekräftad omfattning** | Mara/Toren i Keldra, Edda i Dorneth, mötesval och förtroende, minnen efter omladdning |
 
-### V2-03.7 — fem godkända Safari-kontroller
-1. Dorneth → Keldra: ingen resebekräftelse, exakt +1 dag.
-2. ”Fortsätt dagen”: ingen bekräftelse, exakt +1 dag.
-3. Omladdning: datum och position kvar.
-4. Pengar, spannmål och jordbruks-XP påverkas inte av resa eller vanlig dagframmatning.
-5. Berättelse, dagbok och karaktärsbyte fungerar fortsatt.
-
-**Källa för Safari-status:** användaren rapporterade uttryckligen ”V2-03.7 Safari PASS: Alla fem tester godkända.” GitHub-status grundas på separat filkontroll. Detta är inte en fullständig säkerhetsgranskning.
+## V2-04 — specifik evidens
+- GitHub: `index.html` och de tre nya `src/v2-npc-life*`-filerna hämtades och kontrollerades efter commit.
+- Safari: användarens skärmbilder visar Mara +2 och Toren +1 efter möten dag 26; Edda +2 efter möte dag 27 fortfarande synligt dag 29. Användaren bekräftar att NPC-minnen överlever omladdning och att Edda visas efter resa.
+- Eddas visade rutin dag 29 och bevarade minne är förenliga med avsedd modell. Full tre-dagars cykel är inte separat verifierad.
+- Inga bevis ännu för karaktärsbyte mellan två separata NPC-minnesjournaler, trasiga sparningar, nekade skrivningar eller långvarig spelbalans. Dessa får inte markeras PASS.
 
 ## Öppna tester
-- V2-03.6: komplett ekonomi- och arbetsregression, inklusive otillräckligt saldo, avbrott, dubbelbelöningsskydd, ägarseparation och felaktig lagring.
-- Bred regression av alla berättelsegrenar, NPC-val och olika bakgrunder.
-- Backup/import och felhantering i den nya fantasyversionens sparformat.
-
-## Historiskt arkiv — tidigare projekt
-Föregående version av denna fil dokumenterade `KB-01`–`KB-03.6`, `IMP-025`, `J-H`–`J-L` och `A2.1`–`A2.6` för historiska Sverige-projektet. De detaljerade gamla testresultaten finns kvar i **Git-historiken för `docs/TESTS.md`**, inklusive begränsningar och ursprungliga PASS/FAIL. De är **inte** omklassificerade till Dornmark-tester. Historisk backup- och återställningsverifiering gäller inte automatiskt V2-sparningar.
+1. Full V2-03.6 ekonomiregression: otillräckligt saldo, dubbelbelöningsskydd, avbrott, pending-återhämtning, ägarseparation, korrupt lagring.
+2. V2-04: karaktärsbyte och NPC-minnesseparation, rutincykel över flera dagar, felvägar och återladdning efter flera val.
+3. Bred regression av berättelsegrenar, Eddas äldre separata berättelsemöte och nya vardagsmöte.
+4. V2-backup/export/import och felhantering.

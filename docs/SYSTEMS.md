@@ -1,22 +1,28 @@
 # KRONOR & BLOD — SYSTEMS
-Aktuell teknisk översikt 2026-10-21 för fantasyversionen Dornmark. Detta dokument skiljer verifierad kod från planerad funktion.
+Teknisk nulägesbeskrivning 2026-10-21. Dornmark. Detta är faktiskt implementerade system, inte hela produktvisionen.
 
 ## Befintliga system
-- Karaktärsseparering, berättelse, dagbok och NPC-samtal från V2-03.2-serien.
-- V2-03.3B: jordbruksaktivitet med +10 jordbruks-XP och +1 dag. Karaktärsägd aktivitetsjournal med pending; nivågräns 50 XP i första prototypen.
-- V2-03.5: faktisk position separat från startplatsen `character.placeId`; Keldra och Dorneth förbundna med resa som kostar en dag. Varnhold ännu stängd.
-- V2-03.6: karaktärsbunden `kronor-och-blod.fantasy.v2.character.<uuid>.economy-v1` med `{version:1,ownerId,coins,grain,paidDays,pending}`. Betalt jordbruk i Keldra ger +1 dag, +10 XP, +3 kopparmynt och +1 spannmål. I Dorneth kostar ett spannmål 2 kopparmynt. Äldre arbetsdagar ger ingen retroaktiv lön.
-- Arbets- och ekonomijournal ligger i olika localStorage-nycklar. `pending` är återhämtning, inte en atomär databastransaktion. Skadade data får inte tyst skrivas över.
-- V2-03.6L: UI-orden ”Dina pengar”, ”Din väska”, ”Spannmål”. `grain` är oförändrat lagringsfält. Koppar aktiv valuta; silver/guld visas som noll, kan inte användas, ingen växelkurs beslutad.
+- Karaktärsseparerad berättelse, dagbok och NPC-samtal från V2-03.2-serien.
+- Jordbruk i Keldra: +1 dag, +10 jordbruks-XP, +3 koppar och +1 spannmål. Karaktärsägd aktivitetsjournal och pending-skydd; 50 XP för första nivån.
+- Position i `.travel-v1` är skild från oföränderlig startplats `character.placeId`. Keldra–Dorneth tar en dag. Varnhold är ännu inte resbar.
+- Ekonomi i `kronor-och-blod.fantasy.v2.character.<uuid>.economy-v1` med `{version:1,ownerId,coins,grain,paidDays,pending}`. Köp av ett spannmål i Dorneth kostar två koppar. Ingen retroaktiv lön för äldre arbete.
+- `pending` för arbete/ekonomi ger återhämtningsmekanism, inte atomär databastransaktion. Ogiltiga sparningar får inte tyst ersättas.
+- UI visar koppar, silver och guld; endast koppar fungerar. Ingen beslutad växelkurs. `grain` förblir lagringsfältet för spannmål.
+- V2-03.7 tog bort bekräftelser för resa och Fortsätt dagen; arbete och köp har fortfarande sina tidigare bekräftelser.
+- V2-03.8 förbättrade mobilflödet för plats, arbete och handel.
+- V2-03.9 korrigerade jordbrukets platskontroll till `KB_V2_TRAVEL.getState().placeId`.
 
-## V2-03.7 — bekräftelseflöden
-- `src/v2-travel-ui.js`: resor sker direkt via befintligt rese-API utan `window.confirm` före resa. Arbets- och köpbekräftelser är kvar.
-- `src/v2-calendar-ui.js`: ”Fortsätt dagen” anropar befintlig `calendar.advanceDay()` utan `window.confirm`.
-- `index.html`: cacheversion `v=2037` för dessa två skript.
-- Inga avsiktliga ändringar av reskostnad, XP, mynt, spannmål, lagringsnycklar eller sparmotor.
-- GitHub PASS genom filkontroll. Safari PASS 5/5 enligt användaren: direkt resa +1 dag, direkt dagbyte +1 dag, position/datum kvar efter omladdning, ekonomi/XP oförändrade av dessa handlingar och berättelse/dagbok/karaktärsbyte fungerar.
+## V2-04 KOMPLETT — första NPC-vardagsmodellen
+- `src/v2-npc-life.js` deklarerar tre NPC:er: Mara (`keldra`), Toren (`keldra`) och Edda (`dorneth`). Varje person har tre förutbestämda rutiner och tre behov som väljs deterministiskt utifrån dagnummer.
+- `getState()` jämför kalenderns och resans karaktärs-ID och använder faktisk position för vilka NPC:er som är tillgängliga.
+- Varje spelarkaraktär får separat `.npc-life-v1` med `{version:1,ownerId,memories:{npcId:{choice,day}}}`. Endast ett första möte per NPC kan sparas. Valet `help` ger visat förtroende +2, `listen` +1. Det är ett härlett visningsvärde, inte ett separat ackumulerande relationskonto.
+- `decide()` validerar ägare, schema, val, plats, dag och förväntat råvärde före verifierad skrivning. Inga befintliga ekonomi-, kalender-, berättelse- eller reseformat ändras.
+- `src/v2-npc-life-ui.js` visar ett kompakt personval i Berättelsefliken; `src/v2-npc-life.css` stylar det för mobil.
+- Det nya Edda-vardagsmötet är **separat från** tidigare berättelsemötet med Edda i `src/v2-npc.js`; dessa två sparningar och konsekvenser är inte sammankopplade.
 
-## Begränsningar
-- Fullständig separat ekonomiregression för V2-03.6 är inte formellt avslutad. Tester av nekad/full lagring, alla felvägar och verklig V2-backup/import är inte automatiskt godkända.
-- Autonoma NPC:er, egendom, dynamiska priser, skuld, silver/guld, familjer, följen och politik är planerade system, inte färdig implementation.
-- Äldre Sverige-projektets systemtester är historiska och kan inte användas som bevis för Dornmarks nya system.
+## Kända begränsningar
+- Rutiner och behov är schemalagda textvarianter, inte autonom NPC-simulering. NPC:er förbrukar ännu inte varor eller driver produktion.
+- Möten kan inte upprepas; relationstal kan inte växa över tid och påverkar ännu inte nya handlingar.
+- Berättelsefliken har fortfarande flera sektioner och mycket scrollning. Kommande fördjupning ska integrera möten bättre, inte stapla fler paneler.
+- Full ekonomiregression, ägarseparation vid karaktärsbyte för senaste NPC-tillägget, felaktiga lagringsdata, full kalendercykel och V2-backup/import är inte formellt testade.
+- Egendom, dynamiska priser, skuld, familjer, följen, politik och fulla hushåll är framtida funktioner.
