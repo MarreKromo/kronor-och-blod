@@ -14,10 +14,31 @@ function context(){const d=cal?.getState(),t=travel?.getState();if(!d?.ok)return
 function getState(){const a=context();if(!a.ok)return a;const r=read(a.id);if(!r.ok)return r;const people=Object.entries(NPCS).map(([id,n])=>{const phase=(a.day-1+({mara:0,edda:1,toren:2}[id]))%3;const memory=r.value.memories[id]||null;return {id,name:n.name,role:n.role,place:n.place,available:n.place===a.place,routine:n.routines[phase],need:n.needs[phase],memory,trust:memory?NPCS[id].actions[memory.choice].trust:0,actions:n.actions};});return {ok:true,id:a.id,day:a.day,place:a.place,people};}
 /* V2-04R: additive relationship journal. The original .npc-life-v1 remains read-only and intact. */
 const relSuffix='.npc-relations-v1',MAX_VISITS=500;
+const ADVICE=Object.freeze({
+ mara:{label:'Fråga Mara om skörden',reply:'Mara berättar vilka åkrar som klarat regnet bäst. Hon delar sådant hon annars håller för sig själv.'},
+ edda:{label:'Be Edda berätta om handeln',reply:'Edda berättar att kvarnens leveranser ofta avgör vilka varor som når marknaden först.'},
+ toren:{label:'Fråga Toren om hantverkarnas arbete',reply:'Toren visar vilka redskap som behöver lagas först och berättar hur verkstaden får sina beställningar.'}
+});
+function choiceAllowed(npc,choice){return Object.hasOwn(NPCS[npc].actions,choice)||choice==='advice';}
+function trustFor(npc,choice){return choice==='advice'?0:NPCS[npc].actions[choice].trust;}
+function dialogue(npc,choice,day,trust,visit){
+ if(choice==='advice')return ADVICE[npc].reply;
+ const n=NPCS[npc],phase=(day-1+({mara:0,edda:1,toren:2}[npc]))%3;
+ const shared={
+ mara:{help:['Mara låter dig hjälpa till med utsädet. Hon verkar lättad över att inte stå ensam.','Ni bär vatten tillsammans. Mara frågar om du tänker stanna i byn.','Mara ger dig ett redskap att laga. Hon berättar om gårdens bekymmer.'],listen:['Mara berättar om åkrarna och regnet.','Mara beskriver hur tungt det är att sköta gården själv.','Mara berättar vad hon hoppas kunna så till våren.']},
+ edda:{help:['Edda ber dig kontrollera leveranserna. Hon märker att du arbetar noggrant.','Du hjälper Edda att gå igenom dagens handel. Hon tackar utan stora ord.','Ni går igenom kvarnens räkenskaper. Edda litar på att du håller ordning.'],listen:['Edda förklarar varför kvarnens skulder oroar henne.','Edda berättar om handlare som dröjer med betalningen.','Edda berättar hur svårt det är att hålla kvarnen i gång.']},
+ toren:{help:['Toren visar hur hjulet ska lagas. Ni får arbetet gjort tillsammans.','Du hjälper Toren att sortera virket. Han uppskattar ditt tålamod.','Ni vässar verktygen. Toren visar dig ett knep från verkstaden.'],listen:['Toren berättar om det trasiga hjulet.','Toren beskriver hur svårt det är att hitta bra virke.','Toren berättar vilka beställningar som väntar i verkstaden.']}
+ };
+ const base=shared[npc][choice][phase];
+ if(visit>=3&&trust>=5)return base+' '+n.name+' talar öppnare med dig nu än vid ert första möte.';
+ if(visit>=2)return base+' '+n.name+' känner igen dig och hälsar först.';
+ return base;
+}
+
 function relKey(id){return c.characterKey(id)+relSuffix;}
 function validRelations(v,id){
  if(!v||Array.isArray(v)||typeof v!=='object'||Object.keys(v).sort().join(',')!=='ownerId,people,version'||v.version!==1||v.ownerId!==id||!v.people||Array.isArray(v.people)||typeof v.people!=='object')return false;
- return Object.entries(v.people).every(([npc,entries])=>Object.hasOwn(NPCS,npc)&&Array.isArray(entries)&&entries.length<=MAX_VISITS&&entries.every((e,i)=>e&&!Array.isArray(e)&&Object.keys(e).sort().join(',')==='choice,day'&&Object.hasOwn(NPCS[npc].actions,e.choice)&&Number.isSafeInteger(e.day)&&e.day>=1&&e.day<=LIMIT+1&&(i===0||e.day>entries[i-1].day)));
+ return Object.entries(v.people).every(([npc,entries])=>Object.hasOwn(NPCS,npc)&&Array.isArray(entries)&&entries.length<=MAX_VISITS&&entries.every((e,i)=>e&&!Array.isArray(e)&&Object.keys(e).sort().join(',')==='choice,day'&&choiceAllowed(npc,e.choice)&&Number.isSafeInteger(e.day)&&e.day>=1&&e.day<=LIMIT+1&&(i===0||e.day>entries[i-1].day)));
 }
 function readRelations(id){
  try{const raw=localStorage.getItem(relKey(id));if(raw===null)return {ok:true,raw,value:{version:1,ownerId:id,people:{}}};
@@ -30,22 +51,25 @@ function getRelationships(){
  const people=Object.entries(NPCS).map(([id,n])=>{
  const initial=first.value.memories[id],visits=later.value.people[id]||[];
  const history=[...(initial?[{...initial,first:true}]:[]),...visits.map(v=>({...v,first:false}))];
- const last=history.at(-1)||null,trust=history.reduce((sum,v)=>sum+n.actions[v.choice].trust,0);
+ const last=history.at(-1)||null,trust=history.reduce((sum,v)=>sum+trustFor(id,v.choice),0);
  const available=n.place===a.place;
- return {id,name:n.name,role:n.role,place:n.place,available,routine:n.routines[(a.day-1+({mara:0,edda:1,toren:2}[id]))%3],need:n.needs[(a.day-1+({mara:0,edda:1,toren:2}[id]))%3],trust,history,last,canMeet:available&&(!last||a.day>last.day),actions:n.actions,standing:trust>=10?'Pålitlig vän':trust>=5?'Bekant':trust>=2?'Vänligt inställd':'Främling'};
+ return {id,name:n.name,role:n.role,place:n.place,available,routine:n.routines[(a.day-1+({mara:0,edda:1,toren:2}[id]))%3],need:n.needs[(a.day-1+({mara:0,edda:1,toren:2}[id]))%3],trust,history,last,canMeet:available&&(!last||a.day>last.day),actions:n.actions,adviceUnlocked:trust>=5,standing:trust>=10?'Pålitlig vän':trust>=5?'Bekant':trust>=2?'Vänligt inställd':'Främling'};
  });
  return {ok:true,id:a.id,day:a.day,place:a.place,people};
 }
 let relationBusy=false;
 function meetAgain(npc,choice){
  if(relationBusy)return {ok:false,error:'Ett möte sparas redan.'};
- if(!Object.hasOwn(NPCS,npc)||!Object.hasOwn(NPCS[npc].actions,choice))return {ok:false,error:'Ogiltigt samtalsval.'};
+ if(!Object.hasOwn(NPCS,npc)||!choiceAllowed(npc,choice))return {ok:false,error:'Ogiltigt samtalsval.'};
  relationBusy=true;
  try{
  const a=context();if(!a.ok)return a;
  if(a.place!==NPCS[npc].place)return {ok:false,error:'Personen finns inte här.'};
  const first=read(a.id),later=readRelations(a.id);if(!first.ok)return first;if(!later.ok)return later;
  const initial=first.value.memories[npc],visits=later.value.people[npc]||[];
+ const earned=NPCS[npc].actions[initial?.choice]?.trust||0;
+ const trust=earned+visits.reduce((sum,v)=>sum+trustFor(npc,v.choice),0);
+ if(choice==='advice'&&trust<5)return {ok:false,error:'Lär känna personen bättre innan du ber om ett förtroende.'};
  if(!initial)return {ok:false,error:'Börja med ert första möte.'};
  const last=visits.at(-1)||initial;
  if(a.day<=last.day)return {ok:false,error:'Ni har redan träffats idag. Återkom en annan dag.'};
@@ -63,5 +87,5 @@ function meetAgain(npc,choice){
 }
 let busy=false;
 function decide(npc,choice){if(busy)return {ok:false,error:'Ett möte sparas redan.'};if(!Object.hasOwn(NPCS,npc)||!Object.hasOwn(NPCS[npc].actions,choice))return {ok:false,error:'Ogiltigt samtalsval.'};busy=true;try{const a=context();if(!a.ok)return a;if(a.place!==NPCS[npc].place)return {ok:false,error:'Personen finns inte på din aktuella plats.'};const r=read(a.id);if(!r.ok)return r;if(r.value.memories[npc])return {ok:false,error:'Det här första mötet är redan sparat.'};const next={...r.value,memories:{...r.value.memories,[npc]:{choice,day:a.day}}};if(!valid(next,a.id))return {ok:false,error:'Mötet kunde inte valideras.'};const again=context();if(!again.ok||again.id!==a.id||again.day!==a.day||again.place!==a.place)return {ok:false,error:'Karaktär, tid eller plats ändrades.'};try{if(localStorage.getItem(key(a.id))!==r.raw)return {ok:false,error:'Mötet ändrades under sparningen.'};const raw=JSON.stringify(next);localStorage.setItem(key(a.id),raw);if(localStorage.getItem(key(a.id))!==raw)return {ok:false,error:'Mötet kunde inte verifieras.'};}catch(_){return {ok:false,error:'Mötet kunde inte sparas. Ingen äldre data raderades.'};}window.dispatchEvent(new Event('kb:npc-life-changed'));return {ok:true};}finally{busy=false;}}
-window.KB_V2_NPC_LIFE=Object.freeze({getState,decide,getRelationships,meetAgain});
+window.KB_V2_NPC_LIFE=Object.freeze({getState,decide,getRelationships,meetAgain,dialogue,ADVICE});
 })();
