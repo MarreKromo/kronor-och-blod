@@ -1,13 +1,14 @@
-/* MAP-01.7 — presentation-only, iPhone-first cartography. */
-.map017-upper{fill:#748a75;opacity:.36}.map017-valley{fill:#b6b397;opacity:.3}.map017-contour{fill:none;stroke:#e6dabb;stroke-width:1.5;opacity:.12}.map017-grass{fill:#607d65;opacity:.065}.map017-grass-light{fill:#d5d1aa;opacity:.095}
-.map017-massif{fill:#5e756e;opacity:.66}.map017-massif-front{fill:#617a6e;opacity:.48}.map017-ridge-dark{fill:#3c5553;stroke:#536960;stroke-width:2;stroke-linejoin:round}.map017-ridge-light{fill:#87958a;stroke:#a7ac96;stroke-width:1.5;stroke-linejoin:round}.map017-ridge-cap{fill:#c5c9b5;opacity:.72}.map017-ridge-scratches{fill:none;stroke:#3d5955;stroke-width:2.5;stroke-linecap:round;opacity:.5}
-.map017-river-edge{fill:none;stroke:#425f5b;stroke-width:22;stroke-linecap:round;stroke-linejoin:round}.map017-river-water{fill:none;stroke:#78a4a2;stroke-width:15;stroke-linecap:round}.map017-river-sheen{fill:none;stroke:#c8d6c5;stroke-width:2;opacity:.52;stroke-linecap:round}.map017-stream{fill:none;stroke:#91b0a7;stroke-width:7;opacity:.72;stroke-linecap:round}
-.map017-woodland-floor{fill:#42634d;stroke:#55755b;stroke-width:3;opacity:.67}.map017-crown{fill:#2e5340;stroke:#476c50;stroke-width:1;opacity:.79}.map017-crown-sun{fill:#688367;stroke:#7c9574;stroke-width:1;opacity:.6}.map017-crown-detail{fill:none;stroke:#a5b393;stroke-width:1.2;opacity:.32}
-.map017-field{fill:#c3b992;stroke:#d5c8a0;stroke-width:1;opacity:.55}.map017-furrow{fill:none;stroke:#8e936c;stroke-width:1.2;opacity:.36}.map017-label{fill:#eadbb5;font:bold 21px Georgia,serif;letter-spacing:1px;paint-order:stroke;stroke:#374d3d;stroke-width:4}
-/* Wider map surface: escape only the mobile story padding, not the whole page. */
-.map01-frame[data-map017=yes]{width:calc(100% + 28px);max-width:none;margin:12px -14px 20px;border-radius:12px}
-.map01-frame[data-map017=yes] .map01-viewport{aspect-ratio:1/1.18;min-height:350px}
-.map01-frame[data-map017=yes] .map01-heading{padding:11px 13px}.map01-frame[data-map017=yes] .map01-controls{padding:8px 9px;gap:6px}
-.map01-frame[data-map017=yes] .map01-control{min-height:43px;min-width:42px}.map01-frame[data-map017=yes] .map01-caption{padding:0 11px 10px;font-size:11px!important}
-@media(min-width:720px){.map01-frame[data-map017=yes]{width:100%;margin:12px 0 20px}.map01-frame[data-map017=yes] .map01-viewport{aspect-ratio:5/4}}
-@media(max-width:370px){.map01-frame[data-map017=yes]{width:calc(100% + 20px);margin-left:-10px;margin-right:-10px}.map01-frame[data-map017=yes] .map01-control{min-width:35px;padding:0 7px}}
+/* MAP-01.8 — illustrated highlands and woodland; display-only. */
+.map018-upper{fill:#778f78;opacity:.34}.map018-valley{fill:#c0b69a;opacity:.25}.map018-contour{fill:none;stroke:#e5d9b8;stroke-width:1.5;opacity:.105}.map018-grass{fill:#58715c;opacity:.085}.map018-grass-light{fill:#d0c8a1;opacity:.12}
+.map018-massif-base{fill:#53695f;stroke:#66786b;stroke-width:6}.map018-shelf-back{fill:#7b8b7d;stroke:#53675d;stroke-width:3;stroke-linejoin:round}.map018-shelf-front{fill:#64796e;stroke:#56695f;stroke-width:3;stroke-linejoin:round}.map018-facet-light{fill:#a2a899;opacity:.7}.map018-facet-dark{fill:#344e4b;opacity:.78}.map018-fracture{fill:none;stroke:#314c47;stroke-width:3.1;stroke-linecap:round;stroke-linejoin:round;opacity:.58}.map018-talus{fill:none;stroke:#b8b9a3;stroke-width:2;stroke-linecap:round;opacity:.29}.map018-scree{fill:#526c5b;opacity:.48}
+.map018-river-edge{fill:none;stroke:#425b57;stroke-width:23;stroke-linecap:round;stroke-linejoin:round}.map018-river-water{fill:none;stroke:#79a3a0;stroke-width:15;stroke-linecap:round;stroke-linejoin:round}.map018-river-sheen{fill:none;stroke:#c5d4c1;stroke-width:2;stroke-linecap:round;opacity:.65}.map018-stream{fill:none;stroke:#96b3a8;stroke-width:7;stroke-linecap:round;opacity:.65}
+.map018-understory{fill:#4c7057;opacity:.48;stroke:#4e745a;stroke-width:3;stroke-linejoin:round}.map018-canopy{fill:#315a46;stroke:#3e664d;stroke-width:.9;opacity:.85}.map018-canopy-mid{fill:#4d7655;stroke:#658768;stroke-width:.8;opacity:.83}.map018-canopy-highlight{fill:#6f8e6c;stroke:#8fa584;stroke-width:.7;opacity:.69}.map018-canopy-etch{fill:none;stroke:#a5b598;stroke-width:1.1;opacity:.34}
+.map018-field{fill:#c8b991;stroke:#e2cda0;stroke-width:1;opacity:.62}.map018-furrow{fill:none;stroke:#a99c7c;stroke-width:1.3;opacity:.4}.map018-label{fill:#e8d6af;font:bold 20px Georgia,serif;letter-spacing:1.1px;paint-order:stroke;stroke:#34473b;stroke-width:4}
+/* The viewport fills the mobile story column, retaining its own controls and 44px tap targets. */
+.map01-frame[data-map018=yes]{width:calc(100% + 28px);max-width:none;margin-left:-14px;margin-right:-14px;border-radius:13px}
+.map01-frame[data-map018=yes] .map01-viewport{aspect-ratio:1/1.17;background:#8a967d}
+.map01-frame[data-map018=yes] .map01-heading{padding:11px 13px}
+.map01-frame[data-map018=yes] .map01-controls{padding:9px 9px;gap:5px}
+.map01-frame[data-map018=yes] .map01-control{min-height:44px;min-width:44px;padding:0 8px}
+.map01-frame[data-map018=yes] .map01-caption{padding:0 10px 11px;font-size:11px!important}
+@media(max-width:390px){.map01-frame[data-map018=yes]{width:calc(100% + 22px);margin-left:-11px;margin-right:-11px}.map01-frame[data-map018=yes] .map01-control{min-width:42px;padding:0 5px}.map01-frame[data-map018=yes] .map01-control:last-child{font-size:10px}}
