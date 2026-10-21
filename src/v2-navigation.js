@@ -1,4 +1,4 @@
-/* NAV-01: Overview + character-owned tab restoration; existing game models unchanged. */
+/* NAV-04: focused overview; character-owned navigation and game models preserved. */
 (function(){'use strict';
 const contract=window.KB_V2_DATA_CONTRACT, travel=window.KB_V2_TRAVEL, economy=window.KB_V2_ECONOMY, calendar=window.KB_V2_CALENDAR;
 const panel=document.getElementById('overviewPanel'),story=document.querySelector('.story'),character=document.getElementById('characterPanel'),calendarPanel=document.getElementById('calendarPanel');
@@ -33,7 +33,7 @@ function draw(){panel.replaceChildren();const head=add(panel,'div','','overview-
   draw();
  });
  add(panel,'h3','Fortsätt ditt liv');add(panel,'p','Välj vad du vill göra härnäst. Översikten förbrukar ingen speltid.','overview-help');
- const actions=add(panel,'div','','overview-actions');for(const [tab,label,detail] of [['story','Fortsätt berättelsen','Händelser och människor'],['map','Utforska platser','Byar, marknader och resvägar'],['journal','Öppna dagboken','Dina tidigare val'],['character','Din karaktär','Bakgrund och karaktärsplatser']]){const b=add(actions,'button','','overview-link');b.type='button';add(b,'strong',label);add(b,'span',detail);b.addEventListener('click',()=>go(tab));}
+ const actions=add(panel,'div','','overview-actions');for(const [tab,label,detail] of [['story','Fortsätt berättelsen','Händelser och människor'],['map','Utforska platser','Byar, marknader och resvägar']]){const b=add(actions,'button','','overview-link');b.type='button';add(b,'strong',label);add(b,'span',detail);b.addEventListener('click',()=>go(tab));}
 }
 function displayOverview(){draw();story.hidden=true;character.hidden=true;calendarPanel.hidden=true;panel.hidden=false;document.querySelectorAll('.bottom .nav-btn').forEach(b=>b.classList.toggle('active',b.id===ids.overview));}
 function hideOverview(){panel.hidden=true;}
