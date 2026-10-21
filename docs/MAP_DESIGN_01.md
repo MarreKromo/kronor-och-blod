@@ -24,4 +24,7 @@
 - Bevara den långsiktiga arkitekturen i `docs/WORLD_ARCHITECTURE.md`: geografiska regioner och politiska riken är separata.
 - Om ett förslag avviker från den godkända visuella riktningen ska avvikelsen uttryckligen förklaras och godkännas.
 
+## Koppling till genomförandet
+För mobilbeteende, skalberoende detaljnivå och geografisk datamodell, se [MAP-01 godkända förbättringar](MAP_01_APPROVED_IMPROVEMENTS.md). Detta ändrar inte den godkända 70/30-estetiken eller kanonskyddet.
+
 **Status:** Visuell riktning GODKÄND. Spelkod EJ påbörjad genom detta paket. GitHub/Safari-verifiering görs enligt arbetsmetoden.

@@ -42,6 +42,10 @@ Beslutad 2026-10-21. Gäller MAP-01 och alla senare världskartor, regioner, ort
 6. Befintlig Keldra–Dorneth-ekonomi, karaktärsägda sparningar, tid och NPC-system får inte brytas. MAP-01 kräver inte en färdig politisk simulation.
 7. Mobilförst: begriplig karta, tillgängliga tryckytor, möjlighet att öppna individuell platsvy och tydlig skillnad mellan Visa plats och Res hit.
 
+## E.1 Kompletterande MAP-01-krav (godkända 2026-10-21)
+Samtliga åtta förbättringar och deras säkerhetsgränser finns i [MAP-01 godkända förbättringar](MAP_01_APPROVED_IMPROVEMENTS.md).
+Förgrenade vägar, framtida terrängegenskaper, kartkunskap, alternativa rutter, politiska lager och smart mobilzoom förbereds som separata geografiska funktioner. Geografiskt avstånd är inte samma sak som restid. Inga nya spelmekaniker eller sparfält aktiveras genom dokumentbeslutet.
+
 ## F. Acceptanskriterier och skydd mot oavsiktlig avvikelse
 - Testscenario 1: Två politiska riken kan kontrollera olika territorier inom **samma** region.
 - Testscenario 2: Ett rike kan kontrollera territorier i **två** regioner.

@@ -36,6 +36,10 @@ Uppdaterad 2026-10-21. Aktiv värld: Dornmark. `MASTERPLAN_V2.md` är överordna
 7. Före MAP-01-commit: verifiera att kartmodellen kan representera **flera riken i samma region, ett rike i flera regioner, och ett territorium som byter härskare utan att dess geografiska ID ändras**.
 8. Kartan ska fungera på iPhone och undvika en enda lång platslista. Terräng, vägar, kartkunskap och regionala vyer ska kunna byggas ut senare.
 
+## MAP-01 — godkända förbättringar (2026-10-21)
+Samtliga åtta förbättringar är godkända. Bindande detaljspecifikation: [MAP-01 godkända förbättringar](MAP_01_APPROVED_IMPROVEMENTS.md).
+Nästa planerade leverans är MAP-01.2A (skrivskyddat kartdatakontrakt och isolerade tester). Ingen befintlig spelmekanik, restid eller sparning ändras av detta beslut.
+
 ## Bevarad framtida kapitelordning
 - **V2-06:** följeslagare, lärlingar och resesällskap — reserverat, ej omnumrerat.
 - **V2-07:** familj, barn, åldrande, arv och generationer.
