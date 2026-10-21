@@ -1,0 +1,12 @@
+const fs=require('fs'),assert=require('assert');
+const html=fs.readFileSync('index.html','utf8');
+const js=fs.readFileSync('src/map01-living-landscape.js','utf8');
+const css=fs.readFileSync('src/map01-living-landscape.css','utf8');
+assert(html.includes('map01-living-landscape.js?v=map0110v1'));
+assert(html.includes('map01-living-landscape.css?v=map0110v1'));
+assert(html.indexOf('map01-settlement-art.js')<html.indexOf('map01-living-landscape.js'));
+assert(js.includes('map0110-keldra-fields')&&js.includes('map0110-dorneth-grounds')&&js.includes('map0110-varnhold-grounds'));
+assert(js.includes('map0110-roadside')&&js.includes('map0110-plot'));
+assert(css.includes('.map018-field,.map018-furrow,.map019-field{display:none}'));
+for(const forbidden of ['localStorage','sessionStorage','setItem(','travel.travel(','advanceDay(','replaceChildren('])assert(!js.includes(forbidden),'unexpected game mutation: '+forbidden);
+console.log('MAP-01.10 static PASS');
