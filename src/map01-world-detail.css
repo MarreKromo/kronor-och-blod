@@ -1,0 +1,30 @@
+/* MAP-01.11: illustrated landscape layer, no interaction changes. */
+.map0110-plot,.map0110-furrow,.map0110-field-path,.map0110-keldra-fields>.map0110-fence,.map0110-keldra-fields>.map0110-post,.map0110-keldra-fields>.map0110-haystack,.map0110-keldra-fields>.map0110-haybase{display:none}
+.m11-field-gold{fill:#b4aa78}.m11-field-brown{fill:#988b70}.m11-field-green{fill:#829474}
+.m11-field-gold,.m11-field-brown,.m11-field-green{stroke:#788369;stroke-width:2;stroke-linejoin:round;opacity:.9}
+.m11-furrow{fill:none;stroke:#657054;stroke-width:1.3;opacity:.55}
+.m11-farm-track,.m11-side-track,.m11-lane{fill:none;stroke:#c8b18b;stroke-width:6;stroke-linecap:round;opacity:.86}
+.m11-ditch{fill:none;stroke:#6d9994;stroke-width:3.4;stroke-linecap:round;opacity:.65}
+.m11-hedge{fill:none;stroke:#527154;stroke-width:7;stroke-linecap:round;stroke-dasharray:13 5;opacity:.75}
+.m11-hay{fill:#c5b278;stroke:#7d744d;stroke-width:1.7}
+.m11-highway-bed{fill:none;stroke:#75674f;stroke-width:26;stroke-linecap:round;opacity:.87}
+.m11-highway-gravel{fill:none;stroke:#c2ae86;stroke-width:19;stroke-linecap:round;opacity:.98}
+.m11-rut{fill:none;stroke:#897958;stroke-width:1.8;stroke-linecap:round;stroke-dasharray:17 9;opacity:.8}
+.m11-yard,.m11-castle-forecourt{fill:#b7aa87;stroke:#8e876d;stroke-width:2}
+.m11-shadow{fill:#3c5243;opacity:.28}
+.m11-wall,.m11-mill-wall{fill:#c2b298;stroke:#645746;stroke-width:1.5}
+.m11-roof{fill:#715b46;stroke:#d3ba93;stroke-width:1.6}
+.m11-inn-roof{fill:#855742;stroke:#dfc6a0;stroke-width:1.8}
+.m11-door{fill:#4c3c2e}.m11-window{fill:#e2c89c;stroke:#765d44;stroke-width:1}
+.m11-inn-sign{fill:#ac8b58;stroke:#5c4735;stroke-width:2.2}
+.m11-sign-detail{fill:none;stroke:#e5d3a5;stroke-width:2}
+.m11-stone{fill:#aaa991;stroke:#6d715e;stroke-width:1.4}
+.m11-bridge{fill:none;stroke:#6b5542;stroke-width:4.5;stroke-linecap:round}
+.m11-bridge-post{fill:none;stroke:#65503d;stroke-width:3}
+.m11-signpost{fill:none;stroke:#786246;stroke-width:3}
+.m11-millrace{fill:none;stroke:#79a7a4;stroke-width:6;stroke-linecap:round}
+.m11-stall{fill:#b89c73;stroke:#6a5642;stroke-width:1.2}
+.m11-awning{fill:#a36750;stroke:#e1c6a0;stroke-width:1.3}
+.m11-fence{fill:none;stroke:#685d46;stroke-width:2.5}
+.m11-merlon{fill:#b9b8a6;stroke:#50564d;stroke-width:1}
+.m11-stone-course,.m11-slit,.m11-gate-detail{fill:none;stroke:#4a5047;stroke-width:2}
