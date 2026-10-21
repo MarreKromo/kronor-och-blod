@@ -1,0 +1,11 @@
+const fs=require('fs'),assert=require('assert');
+const html=fs.readFileSync('index.html','utf8');
+const js=fs.readFileSync('src/map01-world-detail.js','utf8');
+const css=fs.readFileSync('src/map01-world-detail.css','utf8');
+assert(html.includes('map01-world-detail.js?v=map0111v1'));
+assert(html.includes('map01-world-detail.css?v=map0111v1'));
+assert(html.indexOf('map01-living-landscape.js')<html.indexOf('map01-world-detail.js'));
+assert(js.includes('map0111')&&js.includes('map01-road-outline'));
+for(const name of ['m11-highway-bed','m11-inn-roof','m11-field-gold','m11-millrace','m11-merlon'])assert(js.includes(name)&&css.includes(name));
+for(const forbidden of ['localStorage','sessionStorage','setItem(','advanceDay(','travel.travel(','replaceChildren(','innerHTML='])assert(!js.includes(forbidden),forbidden);
+console.log('MAP-01.11 static checks PASS');
