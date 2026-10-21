@@ -1,0 +1,14 @@
+const fs=require('fs'),assert=require('assert');
+const html=fs.readFileSync('index.html','utf8');
+const js=fs.readFileSync('src/map01-unified-terrain.js','utf8');
+const css=fs.readFileSync('src/map01-unified-terrain.css','utf8');
+assert(html.includes('map01-unified-terrain.js?v=map017v1'));
+assert(html.includes('map01-unified-terrain.css?v=map017v1'));
+assert(!html.includes('map016bv1'));
+assert(js.includes("class:'map017-landscape'"));
+assert(js.includes("n.classList.contains('map01-road-outline')"));
+assert(js.includes('frame.dataset.map017'));
+assert(!/localStorage|sessionStorage|\.travel\(|advanceDay|setItem\(/.test(js));
+assert(css.includes('.map01-frame[data-map017=yes]'));
+assert(css.includes('aspect-ratio:1/1.18'));
+console.log('MAP-01.7 static checks PASS');
