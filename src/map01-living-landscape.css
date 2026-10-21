@@ -1,0 +1,27 @@
+/* MAP-01.10: detailed living roads, organic field systems and settlement grounds. */
+.map018-field,.map018-furrow,.map019-field{display:none}
+.map0110-plot{stroke:#716f51;stroke-width:2.3;stroke-linejoin:round;opacity:.85}
+.map0110-ploughed{fill:#98866b}.map0110-rye{fill:#b6ae7c}.map0110-pasture{fill:#89976e}
+.map0110-furrow{fill:none;stroke:#5e694e;stroke-width:1.25;opacity:.52}
+.map0110-grass-tuft{fill:#5c7752;opacity:.7}
+.map0110-field-path,.map0110-town-track{fill:none;stroke:#c9b998;stroke-width:7;stroke-linecap:round;stroke-dasharray:13 4;opacity:.73}
+.map0110-fence{fill:none;stroke:#665a43;stroke-width:2.2;stroke-linecap:round;opacity:.83}
+.map0110-post{fill:none;stroke:#554e3b;stroke-width:2.6}
+.map0110-cottage-wall{fill:#c5b69a;stroke:#645949;stroke-width:1.3}
+.map0110-thatch{fill:#6c5b43;stroke:#b8a47e;stroke-width:1.3}
+.map0110-door{fill:#493d31}.map0110-chimney{fill:none;stroke:#544a3e;stroke-width:2}
+.map0110-shadow{fill:#344a3b;opacity:.21}
+.map0110-orchard{fill:#4d7254;stroke:#315640;stroke-width:1.4}.map0110-orchard-light{fill:#8aa178;opacity:.66}
+.map0110-haystack{fill:#c4b17b;stroke:#786d49;stroke-width:1.4}.map0110-haybase{fill:none;stroke:#64563f;stroke-width:2}
+.map0110-town-clearance{fill:#aa9e7f;opacity:.34}
+.map0110-crate{fill:#987952;stroke:#604d38;stroke-width:1.3}.map0110-crate-cross{fill:none;stroke:#604d38;stroke-width:1}
+.map0110-millrace{fill:none;stroke:#6c9993;stroke-width:6;stroke-linecap:round;opacity:.8}
+.map0110-castle-clearing{fill:#a3a17e;stroke:#858d70;stroke-width:4;opacity:.85}
+.map0110-castle-road{fill:none;stroke:#bba780;stroke-width:10;stroke-linecap:round;opacity:.8}
+.map0110-rampart-earth{fill:none;stroke:#6e8068;stroke-width:3;opacity:.5}
+.map0110-verge{fill:none;stroke:#c6b28b;stroke-width:3;stroke-dasharray:11 9;opacity:.34}
+.map0110-scrub{fill:none;stroke:#486b4d;stroke-width:3;stroke-linecap:round;opacity:.5}
+.map0110-stone{fill:#a9a98f;stroke:#667366;stroke-width:.8;opacity:.8}
+.map0110-milestone{fill:#a9a68f;stroke:#5b6254;stroke-width:1.5}
+.map0110-woodpile{fill:#7b6345;stroke:#514536;stroke-width:1.5}
+.map0110-log{fill:none;stroke:#b19a73;stroke-width:2}
