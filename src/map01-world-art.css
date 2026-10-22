@@ -1,0 +1,30 @@
+/* MAP-01.12 unified world art. Three superseded add-ons are no longer loaded. */
+.map01-frame[data-map0112=yes] .map018-field,.map01-frame[data-map0112=yes] .map018-furrow{display:none}
+.m12-grain{fill:#b5a776}.m12-earth{fill:#94876c}.m12-pasture{fill:#829476}
+.m12-grain,.m12-earth,.m12-pasture{stroke:#727b62;stroke-width:2;stroke-linejoin:round;opacity:.92}
+.m12-furrow{fill:none;stroke:#657051;stroke-width:1.4;opacity:.58}
+.m12-farm-lane,.m12-lane{fill:none;stroke:#c8b18c;stroke-width:6;stroke-linecap:round;opacity:.88}
+.m12-irrigation,.m12-millrace{fill:none;stroke:#7ba5a0;stroke-width:5;stroke-linecap:round;opacity:.85}
+.m12-hedge{fill:none;stroke:#4f7053;stroke-width:7;stroke-dasharray:12 5;stroke-linecap:round}
+.m12-hay{fill:#c7b079;stroke:#776c4d;stroke-width:1.6}
+.m12-highway-outline{stroke:#5d503e!important;stroke-width:29!important;opacity:1!important}
+.m12-highway-road{stroke:#c9b18a!important;stroke-width:21!important;stroke-dasharray:none!important;opacity:1!important}
+.m12-inn-yard,.m12-town-ground,.m12-castle-hill,.m12-village-yard,.m12-market-yard{fill:#b4ad8b;stroke:#879078;stroke-width:2;opacity:.86}
+.m12-market-square,.m12-courtyard{fill:#d0bc94;stroke:#817963;stroke-width:1.6}
+.m12-shadow{fill:#344a3c;opacity:.29}
+.m12-wall,.m12-mill-wall{fill:#c9b99b;stroke:#665747;stroke-width:1.5}
+.m12-roof{fill:#705543;stroke:#dfc398;stroke-width:1.5}.m12-inn-roof{fill:#995d45;stroke:#e6c9a2;stroke-width:1.8}
+.m12-door{fill:#4e3b2c}.m12-window{fill:#dfc48d;stroke:#69513e;stroke-width:.8}
+.m12-sign{fill:#9e774a;stroke:#564635;stroke-width:2}.m12-sign-mark{fill:none;stroke:#f1dcad;stroke-width:2}
+.m12-fence,.m12-fence-post,.m12-bridge,.m12-bridge-post,.m12-signpost{fill:none;stroke:#6c5941;stroke-width:3;stroke-linecap:round}
+.m12-bridge{stroke-width:5}.m12-waystone{fill:#aaa994;stroke:#626657;stroke-width:1.5}
+.m12-stall{fill:#bd9d73;stroke:#65503c;stroke-width:1}.m12-awning{fill:#a16c53;stroke:#e1c7a3;stroke-width:1.5}
+.m12-wheel{fill:#6b4b36;stroke:#e1c58f;stroke-width:3}.m12-wheel-spoke{fill:none;stroke:#e3c995;stroke-width:2}
+.m12-well{fill:#8aa7a1;stroke:#d7c49a;stroke-width:2}
+.m12-castle-earth{fill:#7d8b77;stroke:#647261;stroke-width:3}
+.m12-outer-wall{fill:#7c8376;stroke:#d3c9a9;stroke-width:6;stroke-linejoin:round}
+.m12-tower,.m12-keep,.m12-gatehouse{fill:#b5b5a2;stroke:#46534e;stroke-width:2}
+.m12-tower-roof{fill:#8c8170;stroke:#d7c8a6;stroke-width:2}.m12-keep-roof{fill:#85897b;stroke:#d6c9aa;stroke-width:2}
+.m12-crenel{fill:#d0ccb7;stroke:#4a5750;stroke-width:1}.m12-slit{fill:none;stroke:#3e4a46;stroke-width:3}
+.m12-gate{fill:#343f37;stroke:#d6c7a4;stroke-width:2}.m12-gate-road{fill:none;stroke:#cbb18a;stroke-width:6}
+.m12-banner{fill:#a75246;stroke:#d7ba88;stroke-width:2}
