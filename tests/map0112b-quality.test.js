@@ -1,0 +1,12 @@
+const fs=require('fs'),assert=require('assert');
+const js=fs.readFileSync('src/map01-world-art.js','utf8');
+const css=fs.readFileSync('src/map01-world-art.css','utf8');
+const html=fs.readFileSync('index.html','utf8');
+assert(html.includes('map01-world-art.js?v=map0112bv1'));
+assert(html.includes('map01-world-art.css?v=map0112bv1'));
+assert(js.includes('bridge(layer,500,395')&&js.includes('bridge(layer,808,361')&&js.includes('bridge(layer,128,650'));
+assert(js.includes('root.insertBefore(crossingsLayer,arts[0])'));
+assert(css.includes('stroke-width:14!important')&&css.includes('stroke-width:9!important'));
+for(const x of ['m12b-deck','m12b-plank','m12b-rail','m12b-reeds'])assert(css.includes(x)&&js.includes(x));
+for(const bad of ['localStorage','sessionStorage','advanceDay(','travel.travel('])assert(!js.includes(bad));
+console.log('MAP-01.12B static checks PASS');
