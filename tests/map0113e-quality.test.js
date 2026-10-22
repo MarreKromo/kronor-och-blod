@@ -1,0 +1,11 @@
+const fs=require('fs'),assert=require('assert');
+const js=fs.readFileSync('src/map01-geometry-fix.js','utf8');
+const css=fs.readFileSync('src/map01-geometry-fix.css','utf8');
+const html=fs.readFileSync('index.html','utf8');
+assert(js.includes('m12b-crossing-holder')&&js.includes('n.remove()'),'obsolete bridges removed');
+assert(js.includes('m13e-crossings')&&js.includes('m13e-hill-base'),'coordinated crossings and terrain');
+assert(!js.includes('m13d-water-bank')&&!js.includes("'m13d-water'"),'no false water overlays');
+for(const forbidden of ['localStorage','sessionStorage','advanceDay','travel.travel','setItem('])assert(!js.includes(forbidden),forbidden);
+assert(css.includes('m13e-bridge-deck'));
+assert(html.includes('map01-geometry-fix.css?v=map0113ev1')&&html.includes('map01-geometry-fix.js?v=map0113ev1'));
+console.log('MAP-01.13E static checks PASS');
