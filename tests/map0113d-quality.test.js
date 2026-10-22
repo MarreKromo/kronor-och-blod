@@ -1,0 +1,10 @@
+const fs=require('fs'),assert=require('assert');
+const js=fs.readFileSync('src/map01-geometry-fix.js','utf8');
+const css=fs.readFileSync('src/map01-geometry-fix.css','utf8');
+const html=fs.readFileSync('index.html','utf8');
+for(const name of ['m12b-crossing-holder','m13c-world','m13d-back-ridge','m13d-bridge-crossings'])assert(js.includes(name),name);
+assert(!/localStorage|sessionStorage|setItem|advanceDay|travel\.travel/.test(js));
+assert(css.includes('-webkit-touch-callout:none'));
+assert(html.includes('map01-geometry-fix.js?v=map0113dv1'));
+assert(html.includes('map01-geometry-fix.css?v=map0113dv1'));
+console.log('MAP-01.13D static checks PASS');
