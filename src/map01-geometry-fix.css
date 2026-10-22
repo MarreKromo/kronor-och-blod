@@ -1,30 +1,20 @@
-/* MAP-01.13D — remove overlapping decorative linework, correct road hierarchy */
-.map01-frame[data-map0113d=yes] .m12-highway-outline{stroke-width:18!important;stroke:#69594a!important;stroke-linecap:round}
-.map01-frame[data-map0113d=yes] .m12-highway-road{stroke-width:13!important;stroke:#c5ac84!important;stroke-linecap:round}
-.map01-frame[data-map0113d=yes] .m12-furrow{opacity:.16}
-.map01-frame[data-map0113d=yes] .m12-lane{opacity:.48;stroke-width:3}
-.map01-frame[data-map0113d=yes] .m12-castle-earth{stroke:none}
-.map01-frame[data-map0113d=yes] .m12-courtyard{stroke:none}
-.map01-frame[data-map0113d=yes] .m12-outer-wall{stroke-width:2}
-.map01-frame[data-map0113d=yes] .m12-castle-hill{stroke:none}
-.map01-frame[data-map0113d=yes] .m13c-field-margin,.map01-frame[data-map0113d=yes] .m13c-crop{display:none}
-.m13d-back-ridge{fill:#687c6b;stroke:#617467;stroke-width:2}
-.m13d-back-slope{fill:#81907b;opacity:.85}
-.m13d-back-contour{fill:none;stroke:#a7ad92;stroke-width:2;opacity:.5}
-.m13d-back-tree{fill:#355e4d;opacity:.78}.m13d-back-tree-light{fill:#587c61;opacity:.82}
-.m13d-castle-shadow{fill:#4b6054;opacity:.5}
-.m13d-water-bank{fill:none;stroke:#526c70;stroke-width:24;stroke-linecap:round}
-.m13d-water{fill:none;stroke:#85aeb0;stroke-width:17;stroke-linecap:round}
-.m13d-bridge-shadow{fill:#5b4d3d;stroke:#3c3c34;stroke-width:2}
-.m13d-bridge-deck{fill:#95724e;stroke:#d4ad7a;stroke-width:2}
-.m13d-bridge-plank{fill:none;stroke:#654832;stroke-width:1.4;opacity:.8}
-.m13d-bridge-rail{fill:none;stroke:#493b2c;stroke-width:3;stroke-linecap:round}
-.m13d-bridge-post{fill:none;stroke:#58412f;stroke-width:2}
-.m13d-shoulder{fill:none;stroke:#9e8665;stroke-width:2;stroke-dasharray:8 11;opacity:.45}
-.m13d-castle-base-fill{fill:#607063;stroke:#475a51;stroke-width:2}
-.m13d-outer-approach{fill:none;stroke:#c9b38d;stroke-width:5}
-.m13d-wall{fill:#c9bba0;stroke:#655f53;stroke-width:1.5}
-.m13d-roof{fill:#8e614c;stroke:#dec69e;stroke-width:1.5}
-.m13d-door{fill:#594b3a}
-/* Preserve the confirmed Safari long-press fix. */
+/* MAP-01.13E — replaces 13D styling; no extra water painted around bridges. */
+.map01-frame[data-map0113e=yes] .m13e-suppress{display:none!important}
+.map01-frame[data-map0113e=yes] .m12-highway-outline{stroke:#796a52!important;stroke-width:12!important;stroke-linecap:round;stroke-linejoin:round}
+.map01-frame[data-map0113e=yes] .m12-highway-road{stroke:#c9b38a!important;stroke-width:9!important;stroke-linecap:round;stroke-linejoin:round}
+.map01-frame[data-map0113e=yes] .map01-road:not(.m12-highway-road){stroke-linecap:round;stroke-linejoin:round}
+.map01-frame[data-map0113e=yes] .m12-castle-earth,.map01-frame[data-map0113e=yes] .m12-castle-hill{stroke:none!important;opacity:.58}
+.map01-frame[data-map0113e=yes] .m12-outer-wall{stroke-width:1.5!important}
+.map01-frame[data-map0113e=yes] .m12-courtyard{stroke:none!important}
+.map01-frame[data-map0113e=yes] .m12-furrow{opacity:.2}
+.map01-frame[data-map0113e=yes] .m13c-field-margin,.map01-frame[data-map0113e=yes] .m13c-crop{display:none!important}
+.m13e-ridge-far{fill:#738675;opacity:.85}.m13e-ridge-near{fill:#83947d;opacity:.9}
+.m13e-ridge-contour{fill:none;stroke:#a8b49b;stroke-width:1.6;opacity:.4}
+.m13e-tree{fill:#426a52;opacity:.85}.m13e-tree-light{fill:#6a8867;opacity:.85}
+.m13e-hill-base{fill:#687f6a;opacity:.75}.m13e-hill-contour{fill:none;stroke:#a4ae91;stroke-width:3;opacity:.6}.m13e-hill-contour-soft{opacity:.34}
+.m13e-bridge-shadow{fill:#5a4c3b;stroke:#423a30;stroke-width:1.2}
+.m13e-bridge-deck{fill:#b38e64;stroke:#e0bf8c;stroke-width:1.6}
+.m13e-bridge-timber{fill:none;stroke:#8b6949;stroke-width:1.2;opacity:.85}
+.m13e-bridge-rail{fill:none;stroke:#6d4b33;stroke-width:2.2;stroke-linecap:round}
+.m13e-bridge-post{fill:none;stroke:#6d4b33;stroke-width:1.8}
 .map01-frame .map01-viewport,.map01-frame .map01-viewport svg,.map01-frame .map01-viewport svg *, .map01-frame .map01-controls{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
