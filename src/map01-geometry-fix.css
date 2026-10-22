@@ -1,0 +1,30 @@
+/* MAP-01.13D — remove overlapping decorative linework, correct road hierarchy */
+.map01-frame[data-map0113d=yes] .m12-highway-outline{stroke-width:18!important;stroke:#69594a!important;stroke-linecap:round}
+.map01-frame[data-map0113d=yes] .m12-highway-road{stroke-width:13!important;stroke:#c5ac84!important;stroke-linecap:round}
+.map01-frame[data-map0113d=yes] .m12-furrow{opacity:.16}
+.map01-frame[data-map0113d=yes] .m12-lane{opacity:.48;stroke-width:3}
+.map01-frame[data-map0113d=yes] .m12-castle-earth{stroke:none}
+.map01-frame[data-map0113d=yes] .m12-courtyard{stroke:none}
+.map01-frame[data-map0113d=yes] .m12-outer-wall{stroke-width:2}
+.map01-frame[data-map0113d=yes] .m12-castle-hill{stroke:none}
+.map01-frame[data-map0113d=yes] .m13c-field-margin,.map01-frame[data-map0113d=yes] .m13c-crop{display:none}
+.m13d-back-ridge{fill:#687c6b;stroke:#617467;stroke-width:2}
+.m13d-back-slope{fill:#81907b;opacity:.85}
+.m13d-back-contour{fill:none;stroke:#a7ad92;stroke-width:2;opacity:.5}
+.m13d-back-tree{fill:#355e4d;opacity:.78}.m13d-back-tree-light{fill:#587c61;opacity:.82}
+.m13d-castle-shadow{fill:#4b6054;opacity:.5}
+.m13d-water-bank{fill:none;stroke:#526c70;stroke-width:24;stroke-linecap:round}
+.m13d-water{fill:none;stroke:#85aeb0;stroke-width:17;stroke-linecap:round}
+.m13d-bridge-shadow{fill:#5b4d3d;stroke:#3c3c34;stroke-width:2}
+.m13d-bridge-deck{fill:#95724e;stroke:#d4ad7a;stroke-width:2}
+.m13d-bridge-plank{fill:none;stroke:#654832;stroke-width:1.4;opacity:.8}
+.m13d-bridge-rail{fill:none;stroke:#493b2c;stroke-width:3;stroke-linecap:round}
+.m13d-bridge-post{fill:none;stroke:#58412f;stroke-width:2}
+.m13d-shoulder{fill:none;stroke:#9e8665;stroke-width:2;stroke-dasharray:8 11;opacity:.45}
+.m13d-castle-base-fill{fill:#607063;stroke:#475a51;stroke-width:2}
+.m13d-outer-approach{fill:none;stroke:#c9b38d;stroke-width:5}
+.m13d-wall{fill:#c9bba0;stroke:#655f53;stroke-width:1.5}
+.m13d-roof{fill:#8e614c;stroke:#dec69e;stroke-width:1.5}
+.m13d-door{fill:#594b3a}
+/* Preserve the confirmed Safari long-press fix. */
+.map01-frame .map01-viewport,.map01-frame .map01-viewport svg,.map01-frame .map01-viewport svg *, .map01-frame .map01-controls{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
