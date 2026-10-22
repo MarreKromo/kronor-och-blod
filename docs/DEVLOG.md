@@ -1,5 +1,5 @@
 # KRONOR & BLOD — DEVLOG
-Uppdaterad 2026-10-22. Status skiljer kodexistens, GitHub och Safari.
+Uppdaterad 2026-10-22. Kodexistens, GitHub-kontroll och Safari-resultat redovisas separat.
 
 ## Tidigare V2-milstolpar
 | Version | GitHub | Safari | Omfattning |
@@ -11,26 +11,28 @@ Uppdaterad 2026-10-22. Status skiljer kodexistens, GitHub och Safari.
 | V2-03.7 | PASS | PASS 5/5 | Resa/dagbyte utan bekräftelser |
 | V2-03.8–.9 | PASS | PASS i visad omfattning | Mobilvy, arbetsplats, omladdning |
 | V2-04/R/S | PASS | PASS i rapporterad omfattning | NPC-möten, förtroende, dialog, råd vid +5 |
-| V2-05A–D | PASS enligt tidigare kontroller | PASS i tidigare rapporterad omfattning | Produktion, leveranser, marknad och bakgrundsproduktion |
+| V2-05A–D | PASS enligt tidigare kontroller | PASS i tidigare omfattning | Produktion, leveranser, marknad, bakgrundsproduktion |
 | V2-05E | PASS | PASS för UI | Lagerkort och hopfällbar försörjningsvy |
-| V2-05F | PASS | PASS i visad omfattning | Separata ortsvyer, inspektion och resa |
-| NAV-01–04 | Tidigare levererat | Visuell Safari-granskning i rapporterad omfattning | Mobilnavigation |
+| V2-05F | PASS | PASS i visad omfattning | Separata ortsvyer |
+| NAV-01–04 | Tidigare levererat | Tidigare visuell granskning | Mobilnavigation |
 
-## MAP-01 — kartkapitel och kvalitetsarbete
-| Version | GitHub | Safari | Resultat |
+## MAP-01 historik
+| Version | GitHub | Safari | Bedömning |
 |---|---|---|---|
-| MAP-01.3–01.4 | Tidigare levererat | Bilder i tidigare chattar | Geografisk Dornmarkkarta, större terräng och Berg-knapp |
-| MAP-01.5 | Filkontroll PASS tidigare | Visuellt ej slutgodkänd | Cartography Quality Pass; skarvar och bergproblem |
-| MAP-01.6 | Filkontroll PASS tidigare | Bilder visade kvalitetsbrister | Unified Terrain Renderer |
-| MAP-01.6B | **PASS**: JS, CSS, testfil och cachefix `index.html` lästa från GitHub | **Begränsat PASS**: användaren säger att allt verkar fungera; två skärmbilder visar normal vy och Berg-vy | Bättre berg/skogsdetaljer, men karta upplevs mindre, geometriska berg och skogar, brist på terrängvariation. Ingen full regression |
+| MAP-01.3–01.4 | Tidigare levererat | Bilder i tidigare chattar | Dornmarkkarta, större terräng, Berg |
+| MAP-01.5–01.6 | Tidigare filkontroll PASS | Visuella brister | Kartterräng och berg |
+| MAP-01.6B | PASS inklusive cachefix | Begränsat PASS | Bättre terräng, ej slutgodkänd |
+| MAP-01.7–01.13C | Tidigare paket levererade | Bilder visar utveckling | Ortgrafik, huvudborg, åkrar, vägar, broar; flera brister |
+| MAP-01.13D | Tidigare GitHub PASS | **FAIL** | Felaktiga broar, blå ovaler, platt borg, vägproblem |
+| MAP-01.13E | **PASS** för `index.html`, JS, CSS och testfil | **FAIL** 2026-10-22, tre bilder | Gamla hus syns igenom, borgmurar och kringhus försämrade/försvunna, väg- och broproblem kvar |
 
-**Viktig cachelärdom:** MAP-01.6B:s första ZIP saknade uppdaterade JS/CSS-versioner i `index.html`; separat cachefix behövdes. Från och med ARBETSMETOD v4 ska cacheversionering alltid ingå i samma kodpaket.
+## Beslut efter Safari FAIL 13E
+- **STOPP.** Ingen ny kartfunktion före visuell återställning.
+- Nästa kodpaket: `MAP-01.13F – Visual Recovery & Layer Cleanup`, ännu ej implementerat.
+- Orsaksanalys och jämförelse med tidigare fungerande kartfiler krävs före ny ZIP. Undvik nya grafiska överlägg som maskerar problem.
+- Varnhold ska återfå sin huvudborg och omgivande bebyggelse; Dorneth och Keldra ska bevara sin ortidentitet.
+- Bergsby, gruva och naturresurser är fortfarande planerade, ej byggda.
+- `MAP-01.4 – World Locations & Travel Encounters` bevaras som separat planerat kapitel med ID-konflikt att lösa.
 
-## Produktbeslut och återstående arbete
-- MAP-01.7 är nästa planerade **visuella** redesign; inga nya resmekaniker i detta paket.
-- Den äldre idén `MAP-01.4 – World Locations & Travel Encounters` kvarstår som **planerat, inte byggt**. Nummerkonflikt med redan använd MAP-01.4 kartutbyggnad ska lösas före implementation.
-- V2-06 förblir reserverat för följeslagare. Inga tidigare system stryks.
-- Full regression, säker backup/export/import och långtidstester kvarstår.
-
-## Dokumentationstillfälle KB-DOC-02, 2026-10-22
-Helhetsuppdatering av befintliga dokument, inklusive bindande arbetsmetod v4.0. Detta paket ändrar endast `docs/`. **Lokal paketkontroll är inte GitHub PASS.** GitHub-kontroll görs efter användarens commit; inget Safari-test behövs för docs.
+## KB-DOC-02 — STOPP 2026-10-22
+Helhetsdokumentation för nattstopp. Endast `docs/` ändras. Lokal ZIP-kontroll är inte GitHub PASS; kontroll sker efter commit. Inget Safari-test krävs för dokumentationspaket.

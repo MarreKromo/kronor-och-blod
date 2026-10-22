@@ -1,39 +1,35 @@
-# KRONOR & BLOD — ROADMAP v3.7
-Uppdaterad 2026-10-22. Aktiv värld: Dornmark. Masterplanen är överordnad; ARBETSMETOD v4.0 gäller.
+# KRONOR & BLOD — ROADMAP v3.8
+Uppdaterad 2026-10-22. Aktiv värld: Dornmark. `MASTERPLAN_V2.md` är överordnad. `ARBETSMETOD.md` v4.1 gäller.
 
-## Verifierade spelbara grunder
-- V2-03: karaktärer, berättelse, kalender, jordbruks-XP, resor och grundekonomi. Full regression ej avslutad.
-- V2-04/R/S: NPC-rutiner, möten, relationer, dialog och råd. GitHub/Safari PASS i tidigare rapporterad omfattning.
-- V2-05A–F: produktion, lokala lager, leveranser, marknad, autonom bakgrundsproduktion, försörjningsvy och individuella ortsvyer. Prototypkedjan avslutad, full ekonomivision återstår.
-- NAV-01–04: navigation och mobilvyer; huvudfliken Översikt är inte spelarens bostad. Karaktärsbunden aktiv flik är ett designkrav.
+## Tidigare spelbara grundkapitel — BEVARAS
+- V2-03: karaktärer, berättelse, kalender, jordbruks-XP, resor och grundekonomi. Full regression ej utförd.
+- V2-04/R/S: NPC-rutiner, möten, relationer, dialog och råd. Tidigare begränsade GitHub/Safari PASS.
+- V2-05A–F: produktion, lokala lager, leveranser, marknad, autonom bakgrundsproduktion, försörjningsvy och ortsvyer. Full ekonomivision återstår.
+- NAV-01–04: mobilnavigation och karaktärsbunden vy.
 
-## MAP-01 — status efter MAP-01.6B
-- MAP-01.2A–01.3: geografisk kartmodell, interaktiv karta och orter Keldra, Dorneth, Varnhold.
-- MAP-01.4 (tidigare kartutbyggnad): större utforskbar Dornmarkkarta, Bergstrakten, Södra dalen, skog och framtida jakt-/gruvzoner. **Detta är INTE samma sak som det ännu planerade `MAP-01.4 – World Locations & Travel Encounters`.** Bevara den senare som separat produkt-/funktionsarbetsström; ID-kollision måste lösas före kodpaket, utan att något glöms.
-- MAP-01.5–01.6: sammanhängande kartterräng och kvalitetsarbete.
-- MAP-01.6B: förbättrad visuell berg-/skog-/flodrendering; JS och CSS i GitHub samt `index.html` cacheversion `map016bv1` verifierade. Safari-bilder visar kartan och Berg-vyn. Användaren säger att allt verkar fungera, men full interaktions-/sparregression är ej utförd. Visuell kvalitet ej godkänd för kommersiell nivå.
+## MAP-01 — aktivt kvalitetsarbete
+- MAP-01.2A–01.4: geografisk kartmodell, interaktiv karta, Keldra/Dorneth/Varnhold, utbyggd terräng och Berg-vy.
+- MAP-01.5–01.7: kartgrafik, skog, berg, floder, mobilstorlek och terräng.
+- MAP-01.8–01.13C: successiv ortillustration, Varnholds huvudborg, Dorneth, Keldras jordbruk, huvudväg, broar och vattendetaljer. Flera visuella problem kvarstår.
+- MAP-01.13D: korrigering av vägar/broar/terräng. **Safari FAIL**: broar felplacerade, blå ovaler, platt borg och dåliga vägövergångar.
+- MAP-01.13E: geometrisk ombyggnad. **GitHub PASS** för fyra filer; **Safari FAIL** enligt tre skärmbilder 2026-10-22: äldre hus syns under terräng, Varnholds murar och hus runtom försämrade/försvunna, vägarna fortfarande fel, Dorneths högra bro felplacerad. **Ej godkänd som kartbas.**
 
-## Nästa aktiva paket: MAP-01.7 – World Map Redesign (VISUELLT)
-- Gör kartan större och mer uppslukande på iPhone; minska onödiga marginaler utan att försämra tillgänglighet.
-- Ersätt geometriska triangeltoppar med sammanhängande naturtrogen bergsrelief, skogskanter med organiska övergångar och mer varierad mark.
-- Förbättra geografisk logik: floder ska följa dalar, inte se ut att korsa bergstoppar.
-- Bevara orter, vägval, inspektion utan tidskostnad, zoom/panorering, kalender, NPC, ekonomi och samtliga sparningar.
-- Inga nya jakt-, gruv- eller resehändelsemekaniker i detta grafikpaket.
-- Före kod: läs WORLD_ARCHITECTURE, MAP_01_APPROVED_IMPROVEMENTS och verklig kartkod. Bedöm mobilskärmbilder mot kommersiell kvalitetsgrind.
+## Nästa paket: MAP-01.13F — Visual Recovery & Layer Cleanup
+**PLANERAT, EJ PÅBÖRJAT.** Först läs aktuell kod, jämför tidigare fungerande versioner med 13D/13E, kartlägg ritordning och verkliga flod-/vägkorsningar.
+1. Återställ fungerande borgmurar, torn, borggård, värdshus och hus kring Varnhold; behåll fungerande förbättringar.
+2. Ta bort dubbla SVG-objekt och ogenomskinliga lager som täcker äldre bebyggelse. Lös problemet i ursprunglig renderer, inte genom nytt överlägg.
+3. Rita broar vid faktiska vattenövergångar, utan artificiella vattenovaler.
+4. Rätta huvudvägens bredd, vägkorsningar och anslutningar; bevara spelvärldens rutt-ID:n.
+5. Kontrollera Keldras åkrar och skog, Dorneths kvarn och marknadsbebyggelse, översiktszoom och inzoomning.
+6. Leverera EN ZIP med kompletta filer, tester och cacheversioner. GitHub PASS/FAIL följt av Safari PASS/FAIL. Visuell kvalitet måste godkännas innan ny kartfunktion.
 
-## Bevarad framtida arbetsström: World Locations & Travel Encounters
-**Status: PLANERAD, EJ IMPLEMENTERAD.** Tidigare omnämnd som `MAP-01.4 – World Locations & Travel Encounters`, men MAP-01.4 används redan för kartans geografiska utbyggnad. Välj ett ledigt nytt leverans-ID före implementation och behåll ursprungsnamnet som alias.
-- Fler upptäckbara platser och världspunkter, mindre bosättningar, jaktmarker, gruvor, intressanta vägskäl och regioner.
-- Resemöten/händelser med val, risker, möjligheter och konsekvenser; aktiv kontra simulerad resa är separat designfråga.
-- Kartkunskap, upptäckter, alternativa rutter, färdsätt, terräng och framtida politiska lager enligt redan godkända kartprinciper.
-- Skilj utforskning/inspektion från faktisk resa. Definiera tidskostnad, ägarskap, save-format, testgrindar och hur spelaren kan undvika repetitiva händelser före implementation.
+## Efter återställd kartbas — planerat
+- Naturligare bergsrelief, skog, terräng och vatten; bergsby, gruva och framtida resurser. **Bergsby/gruva är inte implementerade.**
+- `MAP-01.4 – World Locations & Travel Encounters` är en **separat tidigare planerad mekanik**, ej samma som geografiska MAP-01.4. Behåll namnet som alias och ge ett ledigt nytt ID vid implementation. Upptäckbara världspunkter, vägval och resehändelser med risker/val/konsekvenser; ingen ny sparning eller tid förrän design och tester godkänts.
+- WORLD-02: regional variation i geografi, klimat, resurser, samhällen och historia; region ≠ rike.
+- V2-05 framtid: priser, förädling, jobb, skulder, skatter, transport, egendom.
+- V2-06 följeslagare; V2-07 familj/arv; V2-08 grupper; V2-09 politik; V2-10 borgar/arméer/krig/rikesbildning.
+- Backup/export/import, full regression, långtidsimulering och kommersiell kvalitet återstår.
 
-## Värld och system som inte får tappas bort
-- WORLD-02: regional variation i klimat, kultur, ekonomi, historia och resurser. Regioner är inte riken; geografi, territoriell kontroll, titlar och ägande är separata lager.
-- Karta och datamodell måste kunna stödja flera riken i en region, ett rike i flera regioner och härskarbyte utan ändrade geografiska ID:n.
-- V2-05 kvar: dynamiska priser, förädling, fler jobb/löner, skuld, skatt, transporter, egendom och hushållsekonomi.
-- V2-06 följeslagare/lärlingar/resesällskap; V2-07 familj, barn, åldrande, arv; V2-08 grupper/kompanier; V2-09 politik/titlar/diplomati; V2-10 borgar/arméer/krig/rikesbildning.
-- Backup/export/import, sparsäkerhet, långtidssimulering och full regression är öppna.
-
-## Styrregler
-`MASTERPLAN_V2.md` = vision och funktionsregister; `ROADMAP.md` = ordning; `SYSTEMS.md` = faktisk kod; `DEVLOG.md` = historik; `TESTS.md` = evidens; `DAILY_LOG.md` = checkpoint. BEVARAS: alla tidigare godkända kärnsystem. ÄNDRAS: kartans nästa kvalitetsgrind och tydlig resehändelsebacklogg. UTGÅR: ingenting. Helhetsdokumentation enligt KB-DOC-02 vid kapitelavslut/chattbyte.
+## Styrning
+`MASTERPLAN_V2.md` = vision; `ROADMAP.md` = prioritet; `SYSTEMS.md` = faktisk implementation; `DEVLOG.md` = historik; `TESTS.md` = evidens; `DAILY_LOG.md` = STOPP/START. KB-DOC-02 vid avslut.

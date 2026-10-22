@@ -1,32 +1,51 @@
 # KRONOR & BLOD — DAILY LOG / STOPP & START
 
-## HELHETS-CHECKPOINT — MAP-01.6B → MAP-01.7 (2026-10-22)
-**Repo:** `MarreKromo/kronor-och-blod` · `main`  
-**Spel:** https://marrekromo.github.io/kronor-och-blod/
+## STOPP — 2026-10-22, efter MAP-01.13E
+**Repo:** `MarreKromo/kronor-och-blod` · branch `main`  
+**Live:** https://marrekromo.github.io/kronor-och-blod/
 
-### STOPP — bekräftat läge
-- V2-03–05 och NAV-01–04 är tidigare spelbara grundkapitel i rapporterad omfattning. Ingen full ekonomiregression är gjord.
-- MAP-01.6B är uppladdad. GitHub PASS för terräng-JS, CSS, testfil och `index.html` med cacheversion `map016bv1`.
-- Safari-bilder från användaren visar normal Dornmarkkarta och Bergstrakten; användaren upplever att allt verkar fungera. Full interaktions-/sparregression är inte bevisad.
-- Designbedömning: tydlig förbättring men **inte slutgodkänd**. Karta känns mindre på iPhone; berg för triangulära, skogar för runda, mark för tom och flodens förhållande till berg orimligt. Nästa kvalitetsgrind är en större, mer uppslukande karta.
+### SENASTE FAKTISKA STATUS
+- MAP-01.13E är committad och **GitHub PASS** för `index.html`, `src/map01-geometry-fix.js`, `src/map01-geometry-fix.css` och `tests/map0113e-quality.test.js`.
+- **Safari FAIL**: användarens tre senaste skärmbilder visar äldre hus som syns genom Varnholds nya terräng, försämrade borgmurar och bortfallna hus runt huvudborgen. Broarna och vägarna är fortfarande visuellt felaktiga.
+- MAP-01.13D var också **Safari FAIL** med felplacerade broar, konstgjorda vattenovaler, för breda vägar och platt borg.
+- **Inget nytt kodpaket har påbörjats.** Användaren vill sova och har begärt obligatoriskt helhetsdokumentationstillfälle och STOPP innan fortsatt utveckling.
+- Den senaste fungerande *fullständigt visuellt godkända* kartversionen är **inte fastställd**. Tidigare paket innehöll fler detaljer kring Varnhold och bättre murar; jämför Git-historiken före återställning.
+- Ingen fullständig regression av sparningar, NPC, ekonomi eller reseflöde är gjord.
 
-### BEVARAT FRÅN TIDIGARE CHATT — FÅR INTE GLÖMMAS
-**`MAP-01.4 – World Locations & Travel Encounters`** är en tidigare namngiven framtida idé för upptäckbara världspunkter, nya orter, vägval och resehändelser med risk/val/konsekvens. Den är **INTE IMPLEMENTERAD**. MAP-01.4 används redan av kartans geografiska utbyggnad; ge framtida mekanik ett nytt ledigt ID men behåll ursprungsnamnet som alias. Besluta aktiv kontra simulerad resa separat. Inga nya save-format eller tidskostnader förrän design och tester godkänts.
+### BESLUTAT NÄSTA KODPAKET — MAP-01.13F
+**Visual Recovery & Layer Cleanup** — **PLANERAT, EJ IMPLEMENTERAT**.
+1. Läs aktuella styrdokument och kartkod i GitHub.
+2. Jämför tidigare fungerande illustrationer med 13D/13E. Identifiera original-SVG-lager, ritordning, dubbletter och varför äldre hus syns genom terräng.
+3. Återställ huvudborgens murar, torn, borggård och hus runt Varnhold. Bevara värdshus och naturlig sluttning där det fungerar.
+4. Placera broar på faktiska flodövergångar och rätta väggeometri utan blå ovaler eller nya maskeringslager.
+5. Kontrollera Dorneths kvarn/marknad och Keldras hus/åkrar, skog och terräng.
+6. Leverera EN ZIP med kompletta filer, tester och cacheversioner i `index.html`; användaren committar via iPhone.
+7. GitHub PASS/FAIL efter commit; därefter Safari PASS/FAIL med översikt, broar och Varnhold inzoomat. **Ingen visuell godkänning i förväg.**
 
-### NÄSTA STEG
-1. Användaren installerar detta **helhetsdokumentationspaket** med kompletta ersättningsfiler i `docs/`, gör en commit och svarar `Klar`.
-2. Assistenten läser samtliga ändrade filer från GitHub och rapporterar GitHub PASS/FAIL. Inget Safari-test för enbart docs.
-3. Vid ny chatt: läs `MASTERPLAN_V2.md`, `ROADMAP.md`, `SYSTEMS.md`, `DEVLOG.md`, `TESTS.md`, `DAILY_LOG.md`, `ARBETSMETOD.md`, `WORLD_ARCHITECTURE.md`, `MAP_01_APPROVED_IMPROVEMENTS.md`, kartkod och reskod.
-4. Nästa kodpaket **MAP-01.7 – World Map Redesign**: förbättra mobilkartans yta, sammanhängande bergsrelief, organiska skogar, markvariation och flodernas geografi. Bevara orter, vägar, inspektion, resor, sparningar, NPC, ekonomi och kalender.
-5. Skicka EN riktig ZIP med komplett kod, tester och uppdaterade cacheversioner i `index.html`. En commit, GitHub PASS/FAIL, därefter Safari PASS/FAIL.
-6. World Locations & Travel Encounters följer som separat senare arbetsström; försvinner inte ur roadmap eller masterplan.
+### BEVARAT FRÅN TIDIGARE CHATT
+- Berg, träd och terräng ska förbättras. **Bergsby, gruva och naturresurser** är viktiga planerade tillägg men ska inte läggas ovanpå defekt kartbas.
+- `MAP-01.4 – World Locations & Travel Encounters` är en separat tidigare beslutad **framtida** arbetsström; inte implementerad. MAP-01.4-ID används även för äldre geografisk kartutbyggnad: ge resehändelsekapitlet ett nytt ID utan att tappa idéerna.
+- Varnhold = regionens huvudborg; Dorneth = handels-/kvarnort; Keldra = jordbruksby.
+- Inspektion är inte resa; befintliga sparningar, karaktärer, ekonomi, NPC och kalender måste bevaras.
+- Användaren arbetar **endast med iPhone**, vill ha riktiga ZIP-filer, en commit, GitHub PASS/FAIL och Safari PASS/FAIL. **Generera inte bilder i stället för kod.**
 
-### OBLIGATORISK ARBETSMETOD
-`ARBETSMETOD.md` v4.0 / KB-DOC-02: assistenten initierar själv ett helhetsdokumentationstillfälle vid större kapitelavslut eller chattbyte. Aldrig bara en ny separat handoff-fil. Samla ändringar i befintliga styrdokument och leverera en ZIP med fullständiga ersättningsfiler. Ingen tyst reset eller bortprioritering av godkända kärnsystem.
+### START — vid nästa arbetspass / ny chatt
+Läs i GitHub:
+`docs/MASTERPLAN_V2.md`, `docs/ROADMAP.md`, `docs/SYSTEMS.md`, `docs/DEVLOG.md`, `docs/TESTS.md`, `docs/DAILY_LOG.md`, `docs/ARBETSMETOD.md`, `docs/WORLD_ARCHITECTURE.md`, `docs/MAP_01_APPROVED_IMPROVEMENTS.md`, samt aktuell kartkod och tidigare fungerande versioner i Git-historiken.
+
+**Första uppgift:** analysera 13D/13E:s SVG-lager och planera exakt riktad återställning för MAP-01.13F. Börja inte med bergsby/gruva och skriv inte ett nytt överlägg innan orsaken hittats.
+
+### Dokumentationens installationsstatus
+Detta är ett **lokalt förberett helhetsdokumentationspaket**, inte GitHub PASS. Efter användarens commit: verifiera alla sex ersatta dokument. Inget Safari-test för enbart docs.
 
 ---
 
-## HISTORISK CHECKPOINT — V2-05 (2026-10-21)
-- V2-05A–F: lokal resurskedja, lager, leveranser, marknad, försörjningsvy och individuella ortsvyer; GitHub/Safari PASS i tidigare rapporterad omfattning.
+## Historisk checkpoint — 2026-10-22, MAP-01.6B
+- MAP-01.6B GitHub PASS för terräng-JS/CSS/test och cachefix. Safari-bilder av normal karta och Berg-vy; grafik inte slutgodkänd.
+- Nästa planerade MAP-01.7 genomfördes därefter som del av senare kartutveckling; aktuell status återges ovan.
+- World Locations & Travel Encounters bevaras som separat framtida funktion.
+
+## Historisk checkpoint — V2-05, 2026-10-21
+- V2-05A–F: lokal resurskedja, lager, leveranser, marknad, försörjningsvy och ortsvyer.
 - Översikt är inte bostad; kartinspektion är inte resa; V2-06 reserverat för följeslagare.
-- Fortsatt öppet: ekonomi, full regression, backup/export/import och kommande världsutbyggnad.
+- Full regression, backup/export/import och fortsatt ekonomivision återstår.
