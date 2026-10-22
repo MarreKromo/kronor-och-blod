@@ -33,14 +33,71 @@ function crossings(root){
  bridge(layer,500,395,-67,56,true);
  // Dorneth's eastern river crossing on the cart road.
  bridge(layer,808,361,24,41,false);
- // Small farm irrigation footbridge in Keldra's agricultural valley.
- bridge(layer,128,650,-13,27,false);
+ // Keldra: shallow irrigation ditch only; NO bridge here.
  // Stone reinforcements and reeds at bridgeheads.
- for(const [x,y] of [[468,423],[523,366],[779,349],[840,379],[108,646],[147,654]]){
+ for(const [x,y] of [[468,423],[523,366],[779,349],[840,379]]){
   E(layer,'ellipse',{cx:x,cy:y,rx:7,ry:3,class:'m12b-shore-stone'});
   P(layer,`M${x+7} ${y+2} q-1 -9 3 -15 M${x+9} ${y+2} q4 -10 8 -13`,'m12b-reeds');
  }
 }
 
-function enhance(frame){if(frame.dataset.map0112==='yes'||frame.dataset.map018!=='yes')return;const root=frame.querySelector('.map01-viewport svg > g');if(!root)return;const arts=[...root.querySelectorAll('.map01-settlement-art')];if(arts.length!==3)return;const road=[...root.children].find(n=>n.classList&&n.classList.contains('map01-road-outline'));if(!road)return;const layer=G(root,'m12-world');farms(layer);roads(layer);grounds(layer);root.insertBefore(layer,road);[...root.children].filter(n=>n.classList&&n.classList.contains('map01-road-outline')).forEach(n=>{const d=n.getAttribute('d')||'';if(d.startsWith('M500 395 C485 340')||d.startsWith('M580 225 C630 194')){n.classList.add('m12-highway-outline');const line=n.nextElementSibling;if(line&&line.classList.contains('map01-road'))line.classList.add('m12-highway-road');}});const crossingsLayer=G(root,'m12b-crossing-holder');crossings(crossingsLayer);root.insertBefore(crossingsLayer,arts[0]);arts.forEach((a,i)=>{a.replaceChildren();[village,market,castle][i](a);});frame.dataset.map0112='yes';frame.dataset.map0112b='yes';}
+
+/* MAP-01.13 – finishing details within the consolidated renderer. */
+function landscapePolish(root){
+ const g=G(root,'m13-landscape');const firstRoad=[...root.children].find(n=>n.classList&&n.classList.contains('map01-road-outline'));if(firstRoad)root.insertBefore(g,firstRoad);
+ // Natural Keldra field margins, varying seed textures and hedgerows.
+ const borders=[
+  'M-30 595 Q15 577 62 588','M78 590 Q127 571 170 592',
+  'M191 602 Q235 589 270 612','M-17 653 Q31 639 88 654',
+  'M106 657 Q160 642 204 660','M220 679 Q263 663 304 684',
+  'M86 743 Q139 729 190 747','M211 751 Q262 739 313 756',
+  'M135 816 Q191 803 245 817','M307 832 Q359 816 410 833'];
+ borders.forEach((d,i)=>P(g,d,i%3===0?'m13-field-hedge':'m13-field-edge'));
+ // Small shrubs at field boundaries; uneven, not repeating across whole region.
+ for(const [x,y,r] of [[12,640,4],[84,646,3],[174,645,4],[198,714,3],[300,738,4],[91,799,3],[239,806,4],[320,884,3]]){
+  E(g,'ellipse',{cx:x,cy:y,rx:r+2,ry:r,class:'m13-field-bush'});
+  E(g,'ellipse',{cx:x+5,cy:y-2,rx:r,ry:r-1,class:'m13-field-bush-light'});
+ }
+ // Keldra's former footbridge site: a low, naturally eroded shallow ditch crossing.
+ P(g,'M106 650 Q126 643 146 650','m13-ford-water');
+ for(const [x,y] of [[112,647],[123,652],[139,650]])E(g,'ellipse',{cx:x,cy:y,rx:4,ry:2,class:'m13-ford-stone'});
+ // Reeds, river stones and riverbank shadows around Dorneth's bridge and the main bridge.
+ for(const [x,y] of [[471,428],[482,430],[523,365],[532,368],[785,342],[794,347],[833,381],[848,389]]){
+  E(g,'ellipse',{cx:x,cy:y,rx:7,ry:3,class:'m13-bank-stone'});
+  P(g,`M${x+5} ${y+2} q-4 -10 0 -16 M${x+8} ${y+2} q3 -9 9 -13`,'m13-bank-reed');
+ }
+ // Dorneth's bridge is connected to a short cart track, leading into its trading quarter.
+ P(g,'M770 344 Q783 350 797 357 M822 367 Q847 373 878 380','m13-bridge-track');
+ P(g,'M747 362 Q759 369 768 376','m13-mill-access');
+ // Mill leat is a channel with a little sluice gate.
+ P(g,'M753 391 Q774 400 791 399','m13-mill-channel');
+ P(g,'M774 390 l-2 14 M781 391 l-2 13','m13-mill-sluice');
+ // Varnhold: a believable outer approach with a guard hut and roadside yard.
+ P(g,'M602 214 Q624 215 643 229','m13-inn-approach');
+ P(g,'M695 229 Q726 248 753 247','m13-inn-approach');
+ house(g,635,248,.49);
+ P(g,'M618 260 l21 -2 l3 12 l-24 2Z','m13-stable-yard');
+}
+function settlementPolish(arts){
+ const [keldra,dorneth,varnhold]=arts;
+ const k=G(keldra,'m13-keldra-details');
+ P(k,'M-77 71 Q-41 81 3 72 T87 69','m13-hamlet-path');
+ for(const [x,y] of [[-66,69],[-27,77],[49,73]])P(k,`M${x} ${y} v-8 m-5 4 h10`,'m13-fence');
+ const d=G(dorneth,'m13-dorneth-details');
+ P(d,'M-85 76 Q-46 86 -7 76 T81 80','m13-hamlet-path');
+ for(const [x,y] of [[-42,76],[15,78],[58,75]]){
+  E(d,'rect',{x,y,width:12,height:6,class:'m13-crate'});
+  P(d,`M${x} ${y} l12 6 M${x+12} ${y} l-12 6`,'m13-crate-mark');
+ }
+ // Castle: inner courtyard, uneven roofs, stone seams and arrow slits.
+ const c=G(varnhold,'m13-varnhold-details');
+ P(c,'M-44 38 Q-18 27 5 35 T46 34','m13-courtyard-path');
+ for(const [x,y] of [[-51,10],[-51,25],[51,10],[51,26],[-7,-7],[12,-2]])P(c,`M${x} ${y} h5`,'m13-stone-seam');
+ for(const [x,y] of [[-57,12],[52,12],[-48,43],[48,45]])P(c,`M${x} ${y} v8`,'m13-arrow-slit');
+ P(c,'M-18 43 Q-9 36 0 43 Q10 36 19 43','m13-gate-arch');
+ for(const [x,y] of [[-31,26],[27,23]])P(c,`M${x-8} ${y} l9 -13 l11 13Z`,'m13-inner-roof');
+ E(c,'circle',{cx:19,cy:31,r:3,class:'m13-well'});
+}
+
+function enhance(frame){if(frame.dataset.map0112==='yes'||frame.dataset.map018!=='yes')return;const root=frame.querySelector('.map01-viewport svg > g');if(!root)return;const arts=[...root.querySelectorAll('.map01-settlement-art')];if(arts.length!==3)return;const road=[...root.children].find(n=>n.classList&&n.classList.contains('map01-road-outline'));if(!road)return;const layer=G(root,'m12-world');farms(layer);roads(layer);grounds(layer);root.insertBefore(layer,road);[...root.children].filter(n=>n.classList&&n.classList.contains('map01-road-outline')).forEach(n=>{const d=n.getAttribute('d')||'';if(d.startsWith('M500 395 C485 340')||d.startsWith('M580 225 C630 194')){n.classList.add('m12-highway-outline');const line=n.nextElementSibling;if(line&&line.classList.contains('map01-road'))line.classList.add('m12-highway-road');}});const crossingsLayer=G(root,'m12b-crossing-holder');crossings(crossingsLayer);root.insertBefore(crossingsLayer,arts[0]);landscapePolish(root);arts.forEach((a,i)=>{a.replaceChildren();[village,market,castle][i](a);});settlementPolish(arts);frame.dataset.map0112='yes';frame.dataset.map0112b='yes';frame.dataset.map0113='yes';}
 function scan(){document.querySelectorAll('.map01-frame').forEach(enhance);}new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});scan();})();
