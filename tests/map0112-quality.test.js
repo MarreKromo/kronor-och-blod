@@ -1,0 +1,10 @@
+const fs=require('fs'),assert=require('assert');
+const html=fs.readFileSync('index.html','utf8'),js=fs.readFileSync('src/map01-world-art.js','utf8'),css=fs.readFileSync('src/map01-world-art.css','utf8');
+assert(html.includes('map01-world-art.js?v=map0112v1'));assert(html.includes('map01-world-art.css?v=map0112v1'));
+for(const n of ['map01-settlement-art.js','map01-living-landscape.js','map01-world-detail.js','map01-settlement-art.css','map01-living-landscape.css','map01-world-detail.css'])assert(!html.includes(n),'old addon '+n);
+assert(html.includes('map01-unified-terrain.js?v=map018v1'));
+assert(js.includes('map01-road-outline')&&js.includes('map01-settlement-art'));
+assert(js.includes('m12-highway-road')&&css.includes('m12-highway-road'));
+assert(!js.includes('M500 395 Q532 316'),'duplicate highway route');
+for(const s of ['localStorage','sessionStorage','setItem(','advanceDay(','travel.travel('])assert(!js.includes(s),'state mutation '+s);
+console.log('MAP-01.12 static PASS');
